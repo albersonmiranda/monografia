@@ -1,0 +1,241 @@
+---
+title:
+header-includes:
+ - \usepackage{bbm}
+ - \usepackage{times}
+ - \usepackage{setspace}
+ - \onehalfspacing
+ - \usepackage{lscape}
+ - \usepackage{indentfirst}
+ - \usepackage[brazil]{babel}
+ - \usepackage{graphicx,psfrag}
+ - \usepackage[T1]{fontenc}
+ - \usepackage{times, amsmath, amsfonts, amssymb, amsthm}
+ - \usepackage{xcolor}
+ - \usepackage{url}
+ - \usepackage[skip=2pt,size=normalsize]{caption}
+ - \captionsetup{labelsep=endash, format=hang, width=\textwidth} 
+ - \usepackage{placeins}
+ - \usepackage[labelfont=bf]{caption}
+ - \usepackage{sectsty}
+ - \sectionfont{\fontsize{12}{15}\selectfont}
+ - \subsectionfont{\fontsize{12}{15}\selectfont}
+ - \usepackage{enumitem}
+ - \usepackage{float}
+ - \floatplacement{figure}{H}
+ - \floatplacement{table}{H}
+ - \linespread{1.5}
+ - \usepackage{fancyhdr}
+ - \pagestyle{fancy}
+ - \lhead{}
+ - \chead{}
+ - \rhead{\thepage}
+ - \lfoot{}
+ - \cfoot{}
+ - \rfoot{}
+ - \renewcommand{\headrulewidth}{0pt}
+ - \addto\captionsbrazil{\renewcommand{\contentsname}{}}
+ - \addto\captionsbrazil{\renewcommand{\listfigurename}{}}
+ - \addto\captionsbrazil{\renewcommand{\listtablename}{}}
+ - \addto\captionsbrazil{\renewcommand{\bibname}{}}
+
+output: pdf_document
+keep_tex: true
+fontsize: 12pt
+geometry: margin=1in
+spacing: onehalfspacing 
+bibliography: bib.bib
+endnote: no
+csl: abnt.csl
+---
+
+<!-- capa -->
+
+\thispagestyle{empty}
+\begin{center}
+{\Large \uppercase{INSTITUTO FEDERAL DO ESPÍRITO SANTO\\ CAMPUS VITÓRIA\\ CURSO DE LICENCIATURA EM MATEMÁTICA}}
+\end{center}
+\vspace{1cm}
+\begin{center}
+{\Large \uppercase{ALBERSON DA SILVA MIRANDA}}
+\end{center}
+\vspace{5cm}
+\begin{center}
+\Large \MakeUppercase{\textbf{RELAÇÕES ESCOLARIDADE-RENDA NO ESPÍRITO SANTO}}
+\end{center}
+\vspace{5cm}
+
+\begin{center}
+VITÓRIA\\ 2022
+\end{center}
+
+<!-- folha de rosto -->
+
+\newpage
+\thispagestyle{empty}
+\setcounter{page}{1}
+
+\begin{center}
+{\Large \uppercase{ALBERSON DA SILVA MIRANDA}}
+
+\vspace{6cm}
+
+\Large \MakeUppercase{\textbf{RELAÇÕES ESCOLARIDADE-RENDA NO ESPÍRITO SANTO}}
+
+\normalsize
+
+\vspace{3cm}
+\end{center}
+
+\hspace{7cm}{\begin{minipage}{8.5cm}{
+Monografia apresentada à coordenadoria do curso de Lictenciatura em Matemática do Instituto Federal do Espírito Santo, Campus Vitória, como requisito parcial para a obtenção do título de Licenciado em Matemática.\\
+
+Orientador: \parbox[t]{6.0cm}{Prof. Me. Diogueira}}
+\end{minipage}}
+
+\vspace{3cm}
+
+\begin{center}
+Vitória\\
+2022
+\end{center}
+
+<!-- folha de aprovação -->
+
+\newpage
+\thispagestyle{empty}
+
+\begin{center}
+{\large \uppercase{ALBERSON DA SILVA MIRANDA}}
+
+\vspace{1cm}
+
+\Large \MakeUppercase{\textbf{RELAÇÕES ESCOLARIDADE-RENDA NO ESPÍRITO SANTO}}
+
+\normalsize
+
+\vspace{1cm}
+\end{center}
+
+\hspace{7.5cm}{\begin{minipage}{8.5cm}{
+Monografia apresentada à coordenadoria do curso de Lictenciatura em Matemática do Instituto Federal do Espírito Santo, Campus Vitória, como requisito parcial para a obtenção do título de Licenciado em Matemática.\\}
+\end{minipage}}
+
+\vspace{1cm}
+
+\hspace{9cm} {\uppercase{\textbf{Banca Examinadora}}}
+
+\vspace{1cm}
+\begin{center}
+
+\hspace{7cm}{\underline{\hspace{7cm}} \\}
+\hspace{7cm}{Orientador Prof. Me. Diogueira\\}
+\hspace{7cm}{Instituto Federal do Espírito Santo}
+
+\hspace{7cm}{\underline{\hspace{7cm}} \\}
+\hspace{7cm}{Prof. Dr. Componente da Banca\\}
+\hspace{7cm}{Instituto Federal do Espírito Santo}
+
+\hspace{7cm}{\underline{\hspace{7cm}} \\}
+\hspace{7cm}{Prof. Dr. Componente da Banca\\}
+\hspace{7cm}{Instituto Federal do Espírito Santo}
+
+
+Vitória, xx de xxx de 2022.
+\end{center}
+
+<!-- resumo -->
+
+\newpage
+\thispagestyle{empty}
+\begin{singlespace}
+\noindent \uppercase{Miranda}, Alberson da Silva. \textbf{RELAÇÕES ESCOLARIDADE-RENDA NO ESPÍRITO SANTO}. 2022. xx folhas. Monografia (Licenciatura em Matemática) -- Instituto Federal do Espírito Santo, Vitória, 2022.
+
+\vspace{1pc}
+\begin{center}
+\uppercase{\bf RESUMO}
+\end{center}
+\vspace{1pc}
+
+\noindent
+No máximo 500 palavaras em espaço simples e sem parágrafos. Deve apresentar de forma concisa os objetivos, metodologia e os resultado alcançados, utilizar o verbo na voz ativa. Espaçamento simples, sem recuo de parágrafos.
+
+\vspace{2pc}
+\noindent
+{\bf Palavras-chave:}  Palavra 1. Palavra 2. Palavra 3. Palavra 4. Palavra 5.
+
+\end{singlespace}
+
+<!-- abstract -->
+
+\newpage
+\thispagestyle{empty}
+
+\begin{singlespace}
+\noindent \uppercase{Miranda}, Alberson da Silva. Education-Income Relations in Espírito Santo. 2022. xx folhas. Monografia (Licenciatura em Matemática) -- Instituto Federal do Espírito Santo, Vitória, 2022.
+
+\vspace{1pc}
+\begin{center}
+\uppercase{\bf ABSTRACT}
+\end{center}
+\vspace{1pc}
+
+\noindent 
+Tradução do resumo.
+
+\vspace{2pc}
+\noindent
+{\bf Keywords:}  Tradução das palavras chave.
+\end{singlespace}
+
+<!-- página em branco -->
+
+\newpage
+\thispagestyle{empty}
+\begin{flushleft}
+\begingroup
+\let\clearpage\relax
+
+
+\newpage
+<!-- sumário -->
+\begin{center}
+ \MakeUppercase{\bf{Sumário}}
+\end{center}
+\begin{center}
+\tableofcontents
+\end{center}
+\end{flushleft}
+
+<!-- lista de figuras -->
+
+\newpage
+\thispagestyle{empty}
+\begin{center}
+\MakeUppercase{\bf{LISTA DE FIGURAS}}
+\end{center}
+\begin{center}
+\listoffigures
+\end{center}
+
+<!-- lista de tabelas -->
+
+\newpage
+\begin{center}
+ \MakeUppercase{\bf{LISTA DE TABELAS}}
+\end{center}
+\begin{center}
+\listoftables
+\end{center}
+\thispagestyle{empty}
+\endgroup
+
+<!-- elementos textuais -->
+
+\newpage
+# INTRODUÇÃO
+
+
+\newpage
+# REFERÊNCIAS
+
