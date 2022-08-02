@@ -1,16 +1,13 @@
 ---
 title: ""
-output:
-    pdf_document:
-        includes:
-            in_header: config/preamble.tex
-keep_tex: true
+format:
+    pdf:
+        include-in-header: config/preamble.tex
+csl: config/abnt.csl
+bibliography: config/bib.bib
 fontsize: 12pt
 geometry: margin=1in
-spacing: onehalfspacing 
-bibliography: config/bib.bib
-endnote: no
-csl: config/abnt.csl
+spacing: onehalfspacing
 ---
 
 <!-- capa -->
