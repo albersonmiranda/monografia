@@ -8,6 +8,9 @@ bibliography: config/bib.bib
 fontsize: 12pt
 geometry: margin=1in
 spacing: onehalfspacing
+crossref: 
+  lot-title: ""
+  lof-title: ""
 ---
 
 <!-- capa -->
