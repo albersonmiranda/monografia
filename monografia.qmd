@@ -8,9 +8,6 @@ bibliography: config/bib.bib
 fontsize: 12pt
 geometry: margin=1in
 spacing: onehalfspacing
-crossref: 
-  lot-title: ""
-  lof-title: ""
 ---
 
 <!-- capa -->
@@ -136,7 +133,7 @@ No máximo 500 palavaras em espaço simples e sem parágrafos. Deve apresentar d
 \thispagestyle{empty}
 
 \begin{singlespace}
-\noindent \MakeUppercase{\sobrenome}, \nome. \tituloingles. \ano. xx folhas. Monografia (\curso) -- \universidade, \cidade, \ano.
+\noindent \MakeUppercase{\sobrenome}, \nome. \textbf{\tituloingles}. \ano. xx folhas. Monografia (\curso) -- \universidade, \cidade, \ano.
 
 \vspace{1pc}
 \begin{center}
@@ -197,6 +194,7 @@ Tradução do resumo.
 \newpage
 # INTRODUÇÃO
 
+Em seu artigo 
 
 \newpage
 # REFERÊNCIAS
