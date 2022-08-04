@@ -21,13 +21,19 @@
 \usepackage{times, amsmath, amsfonts, amssymb, amsthm}
 \usepackage{xcolor, url, placeins, sectsty, enumitem}
 \usepackage[T1]{fontenc}
-\usepackage[brazil]{babel}
+\usepackage{polyglossia}
 \usepackage[skip = 2pt, size = normalsize]{caption}
 \usepackage[labelfont = bf]{caption}
 
 % fontes
 \sectionfont{\fontsize{12}{15}\selectfont}
 \subsectionfont{\fontsize{12}{15}\selectfont}
+
+% linguagem
+\setdefaultlanguage[variant=brazilian]{portuguese}
+\deftocheading{toc}{}%
+\deftocheading{lot}{}%
+\deftocheading{lof}{}%
 
 % cabeçalho e rodapé
 \lhead{}
@@ -55,9 +61,6 @@
 % legenda
 \captionsetup[figure]{font=scriptsize}
 \captionsetup{labelsep = endash, format = hang, width = \textwidth}
-
-\deftocheading{toc}{}%
-
 
 % posição das figuras
 \floatplacement{figure}{H}
