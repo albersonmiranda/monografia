@@ -3,8 +3,9 @@ title: ""
 format:
     pdf:
         include-in-header: config/preamble.tex
-csl: config/abnt.csl
-bibliography: config/bib.bib
+#bibliography: config/bib.bib
+cite-method: natbib
+biblio-style: apalike
 fontsize: 12pt
 geometry: margin=1in
 spacing: onehalfspacing
@@ -192,10 +193,24 @@ Tradução do resumo.
 <!-- elementos textuais -->
 
 \newpage
-# INTRODUÇÃO
+# INTRODUÇÃO {-}
 
-Em seu artigo 
+Ao longo das décadas, o incremento nos ganhos médios do trabalhador a cada ciclo completo de escolaridade vem diminuindo consistentemente. Neste trabalho, 
 
-\newpage
 # REFERÊNCIAS
 
+\bibliography{config/bib.bib}
+
+\newpage
+# APÊNDICE A: A ESCOLA COMO INSTITUIÇÃO PANÓPTICA {-}
+
+Em seu texto acerca dos Parâmetros Curriculares Nacionais, o professor Rômulo Lins abre da seguinte forma:
+
+\begin{citacao}
+Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas 
+atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de 
+professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior
+problema é a resistência do sistema em mudar. \citep{lins}
+\end{citacao}
+
+Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o que ele chamou de micro, não é suficiente para colocar o sistema educacional em rota de mudança. 
