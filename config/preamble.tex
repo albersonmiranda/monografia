@@ -20,8 +20,8 @@
 \usepackage{indentfirst, float, graphicx, psfrag, fancyhdr}
 \usepackage{times, amsmath, amsfonts, amssymb, amsthm}
 \usepackage{xcolor, url, placeins, sectsty, enumitem}
+\usepackage{polyglossia, natbib}
 \usepackage[T1]{fontenc}
-\usepackage{polyglossia}
 \usepackage[skip = 2pt, size = normalsize]{caption}
 \usepackage[labelfont = bf]{caption}
 
@@ -30,7 +30,7 @@
 \subsectionfont{\fontsize{12}{15}\selectfont}
 
 % linguagem
-\setdefaultlanguage[variant=brazilian]{portuguese}
+\setdefaultlanguage{portuguese}
 \deftocheading{toc}{}%
 \deftocheading{lot}{}%
 \deftocheading{lof}{}%
@@ -68,3 +68,6 @@
 
 % estilo
 \pagestyle{fancy}
+
+% bibliografia
+\renewcommand{\bibsection}{}
