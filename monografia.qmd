@@ -214,3 +214,8 @@ problema é a resistência do sistema em mudar. \citep{lins}
 \end{citacao}
 
 Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o que ele chamou de micro, não é suficiente para colocar o sistema educacional em rota de mudança. 
+
+\newpage
+# APÊNDICE C: DERIVAÇÃO DOS ESTIMADORES VIA MQO
+
+Partindo de um modelo de regressão linear simples, $y_i = \beta_0 + \beta_1x_i + u_i$, em que $u_i$ é o termo de erro estocástico, 
