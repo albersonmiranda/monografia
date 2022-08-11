@@ -16,7 +16,8 @@ spacing: onehalfspacing
 
 # opções
 knitr::opts_chunk$set(
-    echo = FALSE
+    echo = FALSE,
+    out.width = "70%"
 )
 
 # reproducibilidade
@@ -281,3 +282,9 @@ Y_i = \hat{\beta}_0 + \hat{\beta}_iX_i + \hat{e}_i
 \begin{equation}
 \hat{e}_i = Y_i - \hat{Y}_i
 \end{equation}
+
+```{r appendix_b_1}
+#| fig-cap: "Resíduo de ajuste"
+
+knitr::include_graphics("img/appendix_b_1.excalidraw.png")
+```
