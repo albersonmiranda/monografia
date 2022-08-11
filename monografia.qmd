@@ -11,6 +11,23 @@ geometry: margin=1in
 spacing: onehalfspacing
 ---
 
+```{r config}
+#| echo: false
+
+# opções
+knitr::opts_chunk$set(
+    echo = FALSE
+)
+
+# reproducibilidade
+set.seed(1)
+
+# pacotes
+
+# funções
+
+```
+
 <!-- capa -->
 
 \thispagestyle{empty}
@@ -204,18 +221,63 @@ Ao longo das décadas, o incremento nos ganhos médios do trabalhador a cada cic
 \newpage
 # APÊNDICE A: A ESCOLA COMO INSTITUIÇÃO PANÓPTICA {-}
 
-Em seu texto acerca dos Parâmetros Curriculares Nacionais, o professor Rômulo Lins abre da seguinte forma:
+Em seu texto acerca dos Parâmetros Curriculares Nacionais --- PCN, o professor Rômulo Lins abre da seguinte forma:
 
 \begin{citacao}
-Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas 
-atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de 
-professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior
+Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior
 problema é a resistência do sistema em mudar. \citep{lins}
 \end{citacao}
 
-Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o que ele chamou de micro, não é suficiente para colocar o sistema educacional em rota de mudança. 
+Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o que ele chamou de *micro*, não é suficiente para colocar o sistema educacional em rota de mudança. Paralelamente, deve ser realizado um trabalho estrutural na esfera *macro* --- aqui, principalmente, o MEC --- que possibilite uma mudança do educar *pela* matemática para o educar *para* a matemática. Essa diferença é ilustrada por Lins da seguinte forma:
+
+\begin{citacao}
+A diferença fica bastante mais clara se pensamos no caso da Educação Física. Será que alguém concebe que o papel das aulas de Educação Física é preparar todas as crianças (todas, eu disse) para o esporte competitivo? Claro que não. Se assim fosse as aulas de Educação Física não representariam, na formação das crianças, a educação para a saúde, para o desenvolvimento motor, para a socialização e o respeito a regras, para a colaboração. E os que quiserem ser atletas e jogadores vão buscar esta formação específica em outros espaços (possivelmente dentro dos times competitivos de suas escolas ou em clubes). Podemos dizer que a Educação Física escolar se concentra em modos de ser, promovendo aquela educação POR MEIO de esportes e exercícios físicos, enquanto o Treinamento Esportivo se concentra em potencializar habilidades, fazendo isso por meio da aquisição de técnicas específicas. \citep{lins}
+\end{citacao}
+
+A mudança, então, deixa de ter como meio apenas a sala de aula; o problema norteador da educação matemática como disciplina deixa de ser apenas, por exemplo, se o aluno deve ou não estudar geometrias não euclidianas no ensino médio, ou seja, unicamente conteúdos, e se expande para questionar o próprio objetivo do ensino da matemática, ou melhor, *através* da matemática.
+
+Quando o autor propõe uma educação "formativa e com o objetivo de permitir que todos que passem por ela participem de forma plena em suas sociedades", podemos nos perguntar: o que é essa participação plena? Ou ainda, por que é tão difícil realizar mudanças estruturais na educação ou, como Lins diz, fazer com que o sistema se coloque em rota de mudança? Podemos analisar essas perguntas sob a ótica da Sociologia da Educação.
+
+Em *Sistemas de Ensino e Sistemas de Pensamento*, Pierre Bourdieu coloca o sistema educacional como um dos instrumentos mais eficazes de integração moral e lógica da sociedade, que tem como produto o indivíduo "programado" — homogêneo em percepção, pensamento e ação:
+
+\begin{citacao}
+Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua qualidade de código comum é o que permite a todos os detentores deste código associar o mesmo sentido às mesmas obras e, de maneira recíproca, de exprimir a mesma intenção significante por intermédio das mesmas palavras, dos mesmos comportamentos e das mesmas obras, pode-se compreender por que \textbf{a Escola, incumbida de transmitir esta cultura, constitui o fator fundamental do consenso cultural} nos termos de uma participação de um senso comum entendido como condição da comunicação. \citep{bourdieu}
+\end{citacao}
+
+Podemos associar esse consenso cultural que Bourdieu trata ao tríplice aspecto das instituições panópticas na definição de Foucault, especificamente a *correção*. Na conferência V de *A Verdade e as Formas Jurídicas*, Foucault coloca a escola como um exemplo de instituição panóptica (ou de sequestro):
+
+\begin{citacao}
+Na época atual, todas essas instituições --- fábrica, escola, hospital psiquiátrico, hospital, prisão --- têm por finalidade não excluir, mas, ao contrário, fixar os indivíduos. A fábrica não exclui os indivíduos; liga-os a um aparelho de produção. \textbf{A escola não exclui os indivíduos; mesmo fechando-os; ela os fixa a um aparelho de transmissão do saber}. O hospital psiquiátrico não exclui os indivíduos; liga-os a um aparelho de correção, a um aparelho de normalização dos indivíduos. O mesmo acontece coma casa de correção ou com a prisão. Mesmo se os efeitos dessas instituições são a exclusão
+do indivíduo, elas têm como finalidade primeira fixar os indivíduos em um aparelho de normalização dos homens. A fábrica, \textbf{a escola}, a prisão ou os hospitais \textbf{têm por objetivo ligar o indivíduo a um processo de produção, de formação ou de correção dos produtores. Trata-se de garantir a produção ou os produtores em função de uma determinada norma}. \citep{foucault}
+\end{citacao}
+
+PAREI EM P. 118 Foucault: as funções da instituição panóptica
+
+que tem como principal função a "transformação dos homens em força produtiva".
+
+Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência. Penso que devemos de, além de pensar no que o autor define como micro e macro, avançar acerca da própria posição da educação na sociedade. Somente nesse momento, quando a escola não mais existir para normalizar os estudantes — uma imagem muito bem ilustrada pelo videoclipe de Another Brick in the Wall —, é que ela perde sua razão de ser numa sociedade panóptica capitalista e é livre para se tornar algo diferente.
+
+Tendemos, por conta da brevidade de nossas vidas, a limitar nossa ousadia em relação a essas estruturas. É fácil internalizar, inconscientemente, que essas instituições sempre existiram e sempre existirão da mesma forma que o são hoje. E talvez essa seja uma razão que contribua para que, como o autor apontou, a produção na educação matemática seja tão limitada à sala de aula — aliás, essa visão é incentivada aqui mesmo no IFES, onde somo direcionados a "trazer para a sala de aula" nossa pesquisa do TCC.
+
+Então, sim, o problema da educação é estrutural; sim, a mudança deve ocorrer nas esferas macro e micro, e; sim, os PCN, junto com outras ações federais, colocam o sistema em rota de mudança. Mas essa mudança é limitada e é, no máximo, reformista. Ela não muda a condição do homem e nem da escola enquanto instituição panóptica.
+
 
 \newpage
-# APÊNDICE C: DERIVAÇÃO DOS ESTIMADORES VIA MQO
+# APÊNDICE B: DERIVAÇÃO DOS ESTIMADORES DE MQO
 
-Partindo de um modelo de regressão linear simples, $y_i = \beta_0 + \beta_1x_i + u_i$, em que $u_i$ é o termo de erro estocástico, 
+Partindo de um modelo de regressão linear simples, $Y_i = \beta_0 + \beta_1X_i + e_i$, em que $e_i$ é o termo de erro estocástico, em uma amostra, a relação $Y$ e $X$ é dada por:
+
+1. Função de regressão amostral
+\begin{equation}
+Y_i = \hat{\beta}_0 + \hat{\beta}_iX_i + \hat{e}_i
+\end{equation}
+
+2. O valor $Y_i$ previsto pelo ajuste
+\begin{equation}
+\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_iX_i
+\end{equation}
+
+3. O resíduo $\hat{e}_i$ não previsto pelo ajuste
+\begin{equation}
+\hat{e}_i = Y_i - \hat{Y}_i
+\end{equation}
