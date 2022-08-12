@@ -245,23 +245,32 @@ Em *Sistemas de Ensino e Sistemas de Pensamento*, Pierre Bourdieu coloca o siste
 Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua qualidade de código comum é o que permite a todos os detentores deste código associar o mesmo sentido às mesmas obras e, de maneira recíproca, de exprimir a mesma intenção significante por intermédio das mesmas palavras, dos mesmos comportamentos e das mesmas obras, pode-se compreender por que \textbf{a Escola, incumbida de transmitir esta cultura, constitui o fator fundamental do consenso cultural} nos termos de uma participação de um senso comum entendido como condição da comunicação. \citep{bourdieu}
 \end{citacao}
 
-Podemos associar esse consenso cultural que Bourdieu trata ao tríplice aspecto das instituições panópticas na definição de Foucault, especificamente a *correção*. Na conferência V de *A Verdade e as Formas Jurídicas*, Foucault coloca a escola como um exemplo de instituição panóptica (ou de sequestro):
+Podemos associar esse consenso cultural que Bourdieu trata ao tríplice aspecto das instituições panópticas na definição de Foucault, especificamente a *correção*. Na conferência V de *A Verdade e as Formas Jurídicas*, Foucault coloca a escola como um exemplo de instituição panóptica (ou de sequestro). Esse tipo de instituição exerce poder sobre os indivíduos em uma sociedade de três formas características: *vigilância* individual e contínua; *controle* através de punição e recompensa e; formação e transformação dos indivíduos em função de certas normas, o que Foucault chamou de *correção*.
 
 \begin{citacao}
 Na época atual, todas essas instituições --- fábrica, escola, hospital psiquiátrico, hospital, prisão --- têm por finalidade não excluir, mas, ao contrário, fixar os indivíduos. A fábrica não exclui os indivíduos; liga-os a um aparelho de produção. \textbf{A escola não exclui os indivíduos; mesmo fechando-os; ela os fixa a um aparelho de transmissão do saber}. O hospital psiquiátrico não exclui os indivíduos; liga-os a um aparelho de correção, a um aparelho de normalização dos indivíduos. O mesmo acontece coma casa de correção ou com a prisão. Mesmo se os efeitos dessas instituições são a exclusão
-do indivíduo, elas têm como finalidade primeira fixar os indivíduos em um aparelho de normalização dos homens. A fábrica, \textbf{a escola}, a prisão ou os hospitais \textbf{têm por objetivo ligar o indivíduo a um processo de produção, de formação ou de correção dos produtores. Trata-se de garantir a produção ou os produtores em função de uma determinada norma}. \citep{foucault}
+do indivíduo, elas têm como finalidade primeira fixar os indivíduos em um aparelho de normalização dos homens. A fábrica, \textbf{a escola}, a prisão ou os hospitais \textbf{têm por objetivo ligar o indivíduo a um processo de produção, de formação ou de correção dos produtores. Trata-se de garantir a produção ou os produtores em função de uma determinada norma}. \citep[p.~114]{foucault}
 \end{citacao}
 
-PAREI EM P. 118 Foucault: as funções da instituição panóptica
+A primeira função da instituição panóptica é a extração da totalidade do tempo do indivíduo. É preciso que todo o tempo da existência humana esteja disponível ao trabalho, suas exigências ou sua preparação --- aí incluindo a educação, que os economistas chamam frequentemente de capital humano. Ao sequestrar o tempo do homem, ela transforma seu tempo de vida em tempo de trabalho. A segunda função é controlar seus corpos, fazendo com que o corpo do indivíduo se torne força de trabalho. Aqui o corpo humano deve ser formado, reformado, corrigido. Deve "adquirir aptidões, receber um certo número de qualidades, qualificar-se como um corpo capaz de trabalhar". 
 
-que tem como principal função a "transformação dos homens em força produtiva".
+A terceira função é a criação de um micro-poder político, econômico e judiciário. A instituição panóptica se outorga o direito de decidir, comandar, punir, recompensar e julgar. E a escola não passa desapercebida:
 
-Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência. Penso que devemos de, além de pensar no que o autor define como micro e macro, avançar acerca da própria posição da educação na sociedade. Somente nesse momento, quando a escola não mais existir para normalizar os estudantes — uma imagem muito bem ilustrada pelo videoclipe de Another Brick in the Wall —, é que ela perde sua razão de ser numa sociedade panóptica capitalista e é livre para se tornar algo diferente.
+\begin{citacao}
+O sistema escolar também é inteiramente baseado em uma espécie de poder judiciário. A todo poder se pune e recompensa, se avalia, se classifica, se diz quem é o melhor, quem é o pior. [...] Por que, para ensinar alguma coisa a alguém, se deve punir e recompensar? Esse sistema parece evidente, mas, se refletirmos, vemos que a evidência se dissolve. \citep[p.~120]{foucault}
+\end{citacao}
 
-Tendemos, por conta da brevidade de nossas vidas, a limitar nossa ousadia em relação a essas estruturas. É fácil internalizar, inconscientemente, que essas instituições sempre existiram e sempre existirão da mesma forma que o são hoje. E talvez essa seja uma razão que contribua para que, como o autor apontou, a produção na educação matemática seja tão limitada à sala de aula — aliás, essa visão é incentivada aqui mesmo no IFES, onde somo direcionados a "trazer para a sala de aula" nossa pesquisa do TCC.
+Por fim, a quarta função é a extração do saber, tanto a partir da apropriação do conhecimento técnico e tecnológico produzido durante o labor, quanto da observação do comportamento dos indivíduos vigiados e controlados. Da mesma forma que as anteriores, essa função não é restrita às relações sociais do capitalismo moderno:
 
-Então, sim, o problema da educação é estrutural; sim, a mudança deve ocorrer nas esferas macro e micro, e; sim, os PCN, junto com outras ações federais, colocam o sistema em rota de mudança. Mas essa mudança é limitada e é, no máximo, reformista. Ela não muda a condição do homem e nem da escola enquanto instituição panóptica.
+\begin{citacao}
+A pedagogia se formou a partir das próprias adaptações da criança às tarefas escolares, adaptações observadas e extraídas do seu comportamento para tornarem-se em seguida leis de funcionamento das instituições e forma de poder exercido sobre a criança. \citep[p.~122]{foucault}
+\end{citacao}
 
+Esse conjunto de características tem como objetivo principal a *transformação dos homens em força produtiva*. É através desse micro-poder entranhado nas relações sociais de uma sociedade panóptica que o indivíduo é fixado ao aparelho de produção, e a escola é um instrumento essencial para a formação desse micro-poder.
+
+Tendemos, por conta da brevidade de nossas vidas, a limitar nossa ousadia em relação a essas estruturas. É fácil internalizar, inconscientemente, que essas instituições sempre existiram e sempre existirão da mesma forma que o são hoje. E talvez essa seja uma razão que contribua para que, como aponta Lins, a produção na educação matemática seja tão limitada à sala de aula --- aliás, essa visão é incentivada aqui mesmo no IFES, onde somos direcionados a "trazer para a sala de aula" nossa pesquisa do TCC.
+
+Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência. Portanto, além de pensar no que Lins define como micro e macro, devemos avançar acerca da própria posição da educação na sociedade. Apenas no momento em que a escola não mais existir para normalizar o indivíduo é que ela perderá sua razão de ser numa sociedade panóptica capitalista e será livre para se tornar algo diferente --- e de fato libertadora.
 
 \newpage
 # APÊNDICE B: DERIVAÇÃO DOS ESTIMADORES DE MQO
