@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
     out.width = "70%"
 )
 
-# reproducibilidade
+# reprodutibilidade
 set.seed(1)
 
 # pacotes
@@ -138,7 +138,7 @@ Monografia apresentada à coordenadoria do curso de \curso\>do \universidade, Ca
 \vspace{1pc}
 
 \noindent
-No máximo 500 palavaras em espaço simples e sem parágrafos. Deve apresentar de forma concisa os objetivos, metodologia e os resultado alcançados, utilizar o verbo na voz ativa. Espaçamento simples, sem recuo de parágrafos.
+No máximo 500 palavras em espaço simples e sem parágrafos. Deve apresentar de forma concisa os objetivos, metodologia e os resultado alcançados, utilizar o verbo na voz ativa. Espaçamento simples, sem recuo de parágrafos.
 
 \vspace{2pc}
 \noindent
@@ -245,10 +245,10 @@ Em *Sistemas de Ensino e Sistemas de Pensamento*, Pierre Bourdieu coloca o siste
 Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua qualidade de código comum é o que permite a todos os detentores deste código associar o mesmo sentido às mesmas obras e, de maneira recíproca, de exprimir a mesma intenção significante por intermédio das mesmas palavras, dos mesmos comportamentos e das mesmas obras, pode-se compreender por que \textbf{a Escola, incumbida de transmitir esta cultura, constitui o fator fundamental do consenso cultural} nos termos de uma participação de um senso comum entendido como condição da comunicação. \citep{bourdieu}
 \end{citacao}
 
-Podemos associar esse consenso cultural que Bourdieu trata ao tríplice aspecto das instituições panópticas na definição de Foucault, especificamente a *correção*. Na conferência V de *A Verdade e as Formas Jurídicas*, Foucault coloca a escola como um exemplo de instituição panóptica (ou de sequestro). Esse tipo de instituição exerce poder sobre os indivíduos em uma sociedade de três formas características: *vigilância* individual e contínua; *controle* através de punição e recompensa e; formação e transformação dos indivíduos em função de certas normas, o que Foucault chamou de *correção*.
+Na conferência V de *A Verdade e as Formas Jurídicas*, Foucault coloca a escola como um exemplo de instituição panóptica (ou de sequestro). Esse tipo de instituição exerce poder sobre os indivíduos em uma sociedade de três formas características: *vigilância* individual e contínua; *controle* através de punição e recompensa e; formação e transformação dos indivíduos em função de certas normas, o que Foucault chamou de *correção*. Podemos associar esse consenso cultural que Bourdieu trata ao tríplice aspecto das instituições panópticas na definição de Foucault, especificamente a *correção*.
 
 \begin{citacao}
-Na época atual, todas essas instituições --- fábrica, escola, hospital psiquiátrico, hospital, prisão --- têm por finalidade não excluir, mas, ao contrário, fixar os indivíduos. A fábrica não exclui os indivíduos; liga-os a um aparelho de produção. \textbf{A escola não exclui os indivíduos; mesmo fechando-os; ela os fixa a um aparelho de transmissão do saber}. O hospital psiquiátrico não exclui os indivíduos; liga-os a um aparelho de correção, a um aparelho de normalização dos indivíduos. O mesmo acontece coma casa de correção ou com a prisão. Mesmo se os efeitos dessas instituições são a exclusão
+Na época atual, todas essas instituições --- fábrica, escola, hospital psiquiátrico, hospital, prisão --- têm por finalidade não excluir, mas, ao contrário, fixar os indivíduos. A fábrica não exclui os indivíduos; liga-os a um aparelho de produção. \textbf{A escola não exclui os indivíduos; mesmo fechando-os; ela os fixa a um aparelho de transmissão do saber}. O hospital psiquiátrico não exclui os indivíduos; liga-os a um aparelho de correção, a um aparelho de normalização dos indivíduos. O mesmo acontece com a casa de correção ou com a prisão. Mesmo se os efeitos dessas instituições são a exclusão
 do indivíduo, elas têm como finalidade primeira fixar os indivíduos em um aparelho de normalização dos homens. A fábrica, \textbf{a escola}, a prisão ou os hospitais \textbf{têm por objetivo ligar o indivíduo a um processo de produção, de formação ou de correção dos produtores. Trata-se de garantir a produção ou os produtores em função de uma determinada norma}. \citep[p.~114]{foucault}
 \end{citacao}
 
@@ -297,3 +297,14 @@ Y_i = \hat{\beta}_0 + \hat{\beta}_iX_i + \hat{e}_i
 
 knitr::include_graphics("img/appendix_b_1.excalidraw.png")
 ```
+
+O objetivo é, portanto, estimar os coeficientes linear e angular que representam a reta que minimiza os resíduos. Para essa função a ser minimizada, posso utilizar tanto o erro absoluto $\mid \hat{e}_i \mid$ quanto o erro quadrático $\hat{e}_i^2$. Por parcimônia, opto pelo erro quadrático total.
+
+\begin{equation}
+\begin{aligned}
+\text{EQT} & = \hat{e}^2_1 + \hat{e}^2_2 + ... + \hat{e}^2_n \\
+& = (Y_1 - \hat{Y}_1)^2 + (Y_2 - \hat{Y}_2)^2 + ... + (Y_n - \hat{Y}_1)^2 \\
+& = \sum_{i=1}^{n}(Y_i - \hat{Y}_i)^2 \\
+& = \sum_{i=1}^{n}[Y_i - (\hat{\beta}_0 + \hat{\beta}_iX_i)]^2
+\end{aligned}
+\end{equation}
