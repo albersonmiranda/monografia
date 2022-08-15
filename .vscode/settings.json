@@ -2,5 +2,37 @@
     "cSpell.language": "en,pt,pt-BR",
     "cSpell.enableFiletypes": [
         "quarto"
+    ],
+    "cSpell.words": [
+        "apalike",
+        "bancap",
+        "begingroup",
+        "bourdieu",
+        "citacao",
+        "citep",
+        "clearpage",
+        "endgroup",
+        "excalidraw",
+        "flushleft",
+        "fontsize",
+        "foucault",
+        "knitr",
+        "listoffigures",
+        "listoftables",
+        "minipage",
+        "natbib",
+        "newpage",
+        "noindent",
+        "normalsize",
+        "onehalfspacing",
+        "panóptica",
+        "panópticas",
+        "parbox",
+        "setcounter",
+        "singlespace",
+        "tableofcontents",
+        "textbf",
+        "thispagestyle",
+        "tituloingles"
     ]
 }
