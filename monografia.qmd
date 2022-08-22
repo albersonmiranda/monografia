@@ -3,21 +3,25 @@ title: ""
 format:
     pdf:
         include-in-header: config/preamble.tex
-#bibliography: config/bib.bib
+        df-print: kable
+        highlight-style: zenburn
 cite-method: natbib
 biblio-style: apalike
 fontsize: 12pt
 geometry: margin=1in
-spacing: onehalfspacing
 ---
 
 ```{r config}
-#| echo: false
+#| include = FALSE
 
 # opções
 knitr::opts_chunk$set(
-    echo = FALSE,
     out.width = "70%"
+)
+
+options(
+    scipen = 1,
+    digits = 2
 )
 
 # reprodutibilidade
@@ -103,7 +107,7 @@ Monografia apresentada à coordenadoria do curso de \curso\>do \universidade, Ca
 
 \vspace{1cm}
 
-\hspace{9cm} {\uppercase{\textbf{Banca Examinadora}}}
+\hspace{9cm} \uppercase{\textbf{Banca Examinadora}}
 
 \vspace{1cm}
 \begin{center}
@@ -213,7 +217,36 @@ Tradução do resumo.
 \newpage
 # INTRODUÇÃO {-}
 
-Ao longo das décadas, o incremento nos ganhos médios do trabalhador a cada ciclo completo de escolaridade vem diminuindo consistentemente. Neste trabalho, 
+Neste trabalho, mostro que
+
+Ao longo das décadas, o incremento nos ganhos médios do trabalhador a cada ciclo completo de escolaridade vem diminuindo consistentemente. 
+
+# RESULTADOS
+
+```{r data}
+
+
+rais = readRDS("data/rais.RDS")
+
+```
+
+
+```{r modelo 2020}
+
+m2020 = lm(
+    # variável dependente
+    log(valor_remuneracao_media) ~
+    # variáveis dependentes
+    grau_instrucao + sexo + raca_cor + idade + idade^2 +
+    # interação
+    sexo * raca_cor,
+    # dataset
+    data = rais
+)
+
+# parâmetros
+parameters::model_parameters(m2020, exponentiate = TRUE)
+```
 
 # REFERÊNCIAS
 
@@ -294,8 +327,9 @@ Y_i = \hat{\beta}_0 + \hat{\beta}_iX_i + \hat{e}_i
 
 ```{r appendix_b_1}
 #| fig-cap: "Resíduo de ajuste"
+#| echo: false
 
-knitr::include_graphics("img/appendix_b_1.excalidraw.png")
+knitr::include_graphics("img/appendix_b_1.png")
 ```
 
 O objetivo é, portanto, estimar os coeficientes linear e angular que representam a reta que minimiza os resíduos. Para essa função a ser minimizada, posso utilizar tanto o erro absoluto $\mid \hat{e}_i \mid$ quanto o erro quadrático $\hat{e}_i^2$. Por simplicidade, opto pelo erro quadrático total.
