@@ -232,6 +232,7 @@ rais = readRDS("data/rais.RDS")
 
 
 ```{r modelo 2020}
+#| tbl-cap: "Estimação"
 
 m2020 = lm(
     # variável dependente
