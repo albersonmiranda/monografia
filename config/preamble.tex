@@ -30,6 +30,14 @@
 \setmonofont[Scale=0.9, Scale=MatchLowercase]{Consolas}
 \sectionfont{\fontsize{12}{15}\selectfont}
 \subsectionfont{\fontsize{12}{15}\selectfont}
+\renewenvironment{Shaded}
+    {\begin{snugshade}
+    \begin{singlespace}
+    \linespread{1}
+    }
+    {\end{singlespace}
+    \end{snugshade}
+}
 
 % linguagem
 \setdefaultlanguage{portuguese}
