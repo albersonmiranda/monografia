@@ -5,6 +5,7 @@ format:
         include-in-header: config/preamble.tex
         df-print: kable
         highlight-style: zenburn
+        keep-tex: false
 cite-method: natbib
 biblio-style: apalike
 fontsize: 12pt
@@ -225,43 +226,26 @@ Ao longo das décadas, o incremento nos ganhos médios do trabalhador a cada cic
 
 
 ```{r data}
-#
-#
-#rais = readRDS("data/rais.RDS")
-#
+rais = readRDS("data/rais.RDS")
 ```
 
 
 ```{r modelo 2020}
 #| tbl-cap: "Estimação"
-#
-#m2020 = lm(
-#    # variável dependente
-#    log(valor_remuneracao_media) ~
-#    # variáveis dependentes
-#    grau_instrucao + sexo + raca_cor + idade + idade^2 +
-#    # interação
-#    sexo * raca_cor,
-#    # dataset
-#    data = rais
-#)
-#
-## parâmetros
-#parameters::model_parameters(m2020, exponentiate = TRUE)
-```
 
-```{r reprex}
-
-# a comment
-model = lm(
-    # response variable
-    mpg ~
-    # features
-    hp + qsec + gear,
-    # data
-    mtcars
+m2020 = lm(
+    # variável dependente
+    log(valor_remuneracao_media) ~
+    # variáveis dependentes
+    grau_instrucao + sexo + raca_cor + idade + idade^2 +
+    # interação
+    sexo * raca_cor,
+    # dataset
+    data = rais
 )
 
+# parâmetros
+parameters::model_parameters(m2020, exponentiate = TRUE)
 ```
 
 # REFERÊNCIAS
