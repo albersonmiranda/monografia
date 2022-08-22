@@ -5,6 +5,7 @@ format:
         include-in-header: config/preamble.tex
         df-print: kable
         highlight-style: zenburn
+        keep-tex: false
 cite-method: natbib
 biblio-style: apalike
 fontsize: 12pt
@@ -223,11 +224,9 @@ Ao longo das décadas, o incremento nos ganhos médios do trabalhador a cada cic
 
 # RESULTADOS
 
+
 ```{r data}
-
-
 rais = readRDS("data/rais.RDS")
-
 ```
 
 
