@@ -5,7 +5,7 @@ format:
         include-in-header: config/preamble.tex
         df-print: kable
         highlight-style: zenburn
-        keep-tex: false
+        keep-tex: true
 cite-method: natbib
 biblio-style: apalike
 fontsize: 12pt
@@ -218,34 +218,46 @@ Tradução do resumo.
 \newpage
 # INTRODUÇÃO {-}
 
-Neste trabalho, mostro que
-
-Ao longo das décadas, o incremento nos ganhos médios do trabalhador a cada ciclo completo de escolaridade vem diminuindo consistentemente. 
+...
 
 # RESULTADOS
 
-
-```{r data}
-rais = readRDS("data/rais.RDS")
-```
-
-
-```{r modelo 2020}
+```{r estimação}
 #| tbl-cap: "Estimação"
+#| echo: false
+#| output: asis
 
-m2020 = lm(
-    # variável dependente
-    log(valor_remuneracao_media) ~
-    # variáveis dependentes
-    grau_instrucao + sexo + raca_cor + idade + idade^2 +
-    # interação
-    sexo * raca_cor,
-    # dataset
-    data = rais
-)
+# load data
+rais = readRDS("data/rais.RDS")
+
+# anos selecionados
+anos = c(2019, 2006)
+
+# estimação
+modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
+    lm(
+        # variável dependente
+        log(valor_remuneracao_media) ~
+        # variáveis dependentes
+        grau + sexo + raca_cor + idade + idade^2 +
+        # interação
+        sexo * raca_cor,
+        # dataset
+        data = rais[rais$ano == ano, ]
+    )
+})
 
 # parâmetros
-parameters::model_parameters(m2020, exponentiate = TRUE)
+stargazer::stargazer(
+    modelos$m2019,
+    modelos$m2006,
+    header = FALSE,
+    align = TRUE,
+    single.row = TRUE,
+    font.size = "footnotesize",
+    dep.var.labels = "log(remuneração)",
+    column.labels = c("2019", "2006")
+)
 ```
 
 # REFERÊNCIAS
