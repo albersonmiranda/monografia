@@ -45,17 +45,18 @@ rais = basedosdados::bdplyr("br_me_rais.microdados_vinculos") %>%
 
 # dicionário Rais
 rais = within(rais, {
-    grau_instrucao = ifelse(grau_instrucao == "1", "analfabeto", grau_instrucao)
-    grau_instrucao = ifelse(grau_instrucao == "2", "fund_I_incompleto", grau_instrucao)
-    grau_instrucao = ifelse(grau_instrucao == "3", "fund_I_completo", grau_instrucao)
-    grau_instrucao = ifelse(grau_instrucao == "4", "fund_II_incompleto", grau_instrucao)
-    grau_instrucao = ifelse(grau_instrucao == "5", "fund_II_completo", grau_instrucao)
-    grau_instrucao = ifelse(grau_instrucao == "6", "medio_incompleto", grau_instrucao)
-    grau_instrucao = ifelse(grau_instrucao == "7", "medio_completo", grau_instrucao)
-    grau_instrucao = ifelse(grau_instrucao == "8", "superior_incompleto", grau_instrucao)
-    grau_instrucao = ifelse(grau_instrucao == "9", "superior_completo", grau_instrucao)
-    grau_instrucao = ifelse(grau_instrucao == "10", "mestrado", grau_instrucao)
-    grau_instrucao = ifelse(grau_instrucao == "11", "doutorado", grau_instrucao)
+    grau = ifelse(grau_instrucao == "1", "analfabeto", grau_instrucao)
+    grau = ifelse(grau_instrucao == "2", "fund_I_incompleto", grau_instrucao)
+    grau = ifelse(grau_instrucao == "3", "fund_I_completo", grau_instrucao)
+    grau = ifelse(grau_instrucao == "4", "fund_II_incompleto", grau_instrucao)
+    grau = ifelse(grau_instrucao == "5", "fund_II_completo", grau_instrucao)
+    grau = ifelse(grau_instrucao == "6", "medio_incompleto", grau_instrucao)
+    grau = ifelse(grau_instrucao == "7", "medio_completo", grau_instrucao)
+    grau = ifelse(grau_instrucao == "8", "superior_incompleto", grau_instrucao)
+    grau = ifelse(grau_instrucao == "9", "superior_completo", grau_instrucao)
+    grau = ifelse(grau_instrucao == "10", "mestrado", grau_instrucao)
+    grau = ifelse(grau_instrucao == "11", "doutorado", grau_instrucao)
+    grau_instrucao = NULL
     sexo = ifelse(sexo == "1", "masculino", sexo)
     sexo = ifelse(sexo == "2", "feminino", sexo)
     raca_cor = ifelse(raca_cor == "1", "indigena", raca_cor)
@@ -64,6 +65,8 @@ rais = within(rais, {
     raca_cor = ifelse(raca_cor == "6", "amarela", raca_cor)
     raca_cor = ifelse(raca_cor == "8", "parda", raca_cor)
     raca_cor = ifelse(raca_cor == "9", "nao_informado", raca_cor)
+    sexo = relevel(as.factor(sexo), "masculino")
+    raca_cor = relevel(as.factor(raca_cor), "branca")
 })
 
 saveRDS(rais, "data/rais.RDS", compress = FALSE)
