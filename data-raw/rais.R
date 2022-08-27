@@ -1,4 +1,4 @@
-## code to prepare `rais` dataset goes here
+## code to prepare `rais` dataset
 
 # pacotes
 library(magrittr, include.only = "%>%")

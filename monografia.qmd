@@ -20,18 +20,16 @@ knitr::opts_chunk$set(
     out.width = "70%"
 )
 
-options(
-    scipen = 1,
-    digits = 2
-)
-
 # reprodutibilidade
 set.seed(1)
 
 # pacotes
 
 # funções
+source("data-raw/helper.R")
 
+# dados
+rais = readRDS("data/rais.RDS")
 ```
 
 <!-- capa -->
@@ -220,6 +218,10 @@ Tradução do resumo.
 
 ...
 
+## METODOLOGIA
+
+O presente trabalho, de ordem quantitativa
+
 # RESULTADOS
 
 ```{r estimação}
@@ -227,8 +229,26 @@ Tradução do resumo.
 #| echo: false
 #| output: asis
 
-# load data
-rais = readRDS("data/rais.RDS")
+# adicionando resíduos ao dataframe
+rais = by(rais, rais$ano, function(ano) {
+    # modelo
+    residuos = lm(
+        # variável dependente
+        log(valor_remuneracao_media) ~
+        # variáveis dependentes
+        grau + sexo + raca_cor + idade + idade^2 +
+        # interação
+        sexo * raca_cor,
+        # dataset
+        ano
+    )$resid
+
+    # adicionando resíduos
+    ano[names(residuos), "residuos"] = residuos
+    # retorno
+    ano
+}) |> do.call(what = rbind)
+
 
 # anos selecionados
 anos = c(2019, 2006)
@@ -247,6 +267,9 @@ modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
     )
 })
 
+```
+
+```{r}
 # parâmetros
 stargazer::stargazer(
     modelos$m2019,
@@ -259,6 +282,8 @@ stargazer::stargazer(
     column.labels = c("2019", "2006")
 )
 ```
+
+
 
 # REFERÊNCIAS
 
