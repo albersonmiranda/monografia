@@ -17,7 +17,8 @@ geometry: margin=1in
 
 # opções
 knitr::opts_chunk$set(
-    out.width = "70%"
+    out.width = "70%",
+    echo = FALSE
 )
 
 # reprodutibilidade
@@ -220,15 +221,30 @@ Tradução do resumo.
 
 ## METODOLOGIA
 
-O presente trabalho, de ordem quantitativa
+Neste trabalho, de ordem quantitativa, utilizo os dados de:
+
+1. renda média nominal
+2. ciclos completos de escolaridade
+3. idade
+4. raça/cor
+5. sexo
+
+da Relação Anual de Informações Sociais — Rais de 2006 a 2020 para estimar os efeitos da escolaridade sobre a renda dos trabalhadores do estado do Espírito Santo.
+
+O primeiro modelo
+
+No segundo modelo, analiso os efeitos da educação superior, restringindo a escolaridade a uma variável binária
+$$
+\text{superior}=
+\begin{cases}
+    =1 & \text{se possui ao menos ensino superior} \\
+    =0 & \text{se não possui ao menos ensino superior} \\
+\end{cases}
+$$
 
 # RESULTADOS
 
 ```{r estimação}
-#| tbl-cap: "Estimação"
-#| echo: false
-#| output: asis
-
 # adicionando resíduos ao dataframe
 rais = by(rais, rais$ano, function(ano) {
     # modelo
@@ -270,6 +286,9 @@ modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
 ```
 
 ```{r}
+#| output: asis
+#| tbl-cap: "Estimação"
+
 # parâmetros
 stargazer::stargazer(
     modelos$m2019,
@@ -290,7 +309,9 @@ stargazer::stargazer(
 \bibliography{config/bib.bib}
 
 \newpage
-# APÊNDICE A: A ESCOLA COMO INSTITUIÇÃO PANÓPTICA {-}
+# APÊNDICE {-}
+
+## A ESCOLA COMO INSTITUIÇÃO PANÓPTICA
 
 Em seu texto acerca dos Parâmetros Curriculares Nacionais --- PCN, o professor Rômulo Lins abre da seguinte forma:
 
@@ -343,7 +364,7 @@ Tendemos, por conta da brevidade de nossas vidas, a limitar nossa ousadia em rel
 Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência. Portanto, além de pensar no que Lins define como micro e macro, devemos avançar acerca da própria posição da educação na sociedade. Apenas no momento em que a escola não mais existir para normalizar o indivíduo é que ela perderá sua razão de ser numa sociedade panóptica capitalista e será livre para se tornar algo diferente --- e de fato libertadora.
 
 \newpage
-# APÊNDICE B: DERIVAÇÃO DOS ESTIMADORES DE MQO
+## DERIVAÇÃO DOS ESTIMADORES DE MQO
 
 Partindo de um modelo de regressão linear simples, $Y_i = \beta_0 + \beta_1X_i + e_i$, em que $e_i$ é o termo de erro estocástico, em uma amostra, a relação $Y$ e $X$ é dada por:
 
