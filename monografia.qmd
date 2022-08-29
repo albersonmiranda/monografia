@@ -3,13 +3,13 @@ title: ""
 format:
     pdf:
         include-in-header: config/preamble.tex
-        df-print: kable
         highlight-style: zenburn
         keep-tex: true
 cite-method: natbib
 biblio-style: apalike
 fontsize: 12pt
 geometry: margin=1in
+number-sections: true
 ---
 
 ```{r config}
@@ -25,6 +25,8 @@ knitr::opts_chunk$set(
 set.seed(1)
 
 # pacotes
+library(kableExtra)
+library(ggplot2)
 
 # funções
 source("data-raw/helper.R")
@@ -219,17 +221,50 @@ Tradução do resumo.
 
 ...
 
-## METODOLOGIA
+# PROCEDIMENTOS METODOLÓGICOS
 
-Neste trabalho, de ordem quantitativa, utilizo os dados de:
+Neste trabalho, de ordem quantitativa, utilizo os dados da Relação Anual de Informações Sociais (Rais) de 2006 a 2020 para estimar os efeitos da escolaridade sobre a renda dos trabalhadores do estado do Espírito Santo. Para tanto, utilizo o *datalake* tratado e disponibilizado gratuitamente pelo projeto Base dos Dados [@basedosdados]. O acesso, manipulação dos dados e a análise foram realizados com o *software* R [@r] e o repositório com todo o código realizado aqui está disponível publicamente e pode ser reproduzido em sua totalidade\footnote{https://github.com/albersonmiranda/monografia.}.
 
-1. renda média nominal
-2. ciclos completos de escolaridade
+As variáveis de interesse extraídas da Rais foram:
+
+1. renda média nominal naquele ano
+2. ciclo de escolaridade
 3. idade
 4. raça/cor
 5. sexo
 
-da Relação Anual de Informações Sociais — Rais de 2006 a 2020 para estimar os efeitos da escolaridade sobre a renda dos trabalhadores do estado do Espírito Santo.
+Após selecionadas, apliquei condições às variáveis para obter amostra completa, ou seja, sem valores faltantes e coerente. Essas condições estão resumidas na tabela a seguir. Elas implicam na restrição às entradas com renda média positiva não nula; na exclusão de menores aprendizes; na exclusão de entradas sem quaisquer dos campos escolaridade, raça/cor ou sexo preenchidos. 
+
+Além das condições de interesse do pesquisador, é necessário atentar que a Rais trata do mercado de trabalho formal, o que exclui trabalhadores informais e profissionais autônomos. Portanto, o presente trabalho mira estimar as relações escolaridade-renda no mercado de trabalho formal do Espírito Santo, destacando o impacto de substratos marginalizados da sociedade na determinação da renda do trabalhador.
+
+```{r rais}
+#| tbl-cap: Possíveis valores para as variáveis selecionadas da Rais
+kbl(
+    data.frame(
+        Variável = c(
+            "Sigla UF",
+            "Renda Média Nominal",
+            "Ciclo de Escolaridade",
+            "Idade",
+            "Raça/Cor",
+            "Sexo"
+        ),
+        Valores = c(
+            "ES",
+            "Núméricos, não negativos",
+            "Analfabeto, Ensino Fundamental (I/II, completo/incompleto),  Ensino Médio (completo/incompleto), Ensino Superior (completo/incompleto), Mestrado ou Doutorado",
+            "$>18$",
+            "Branco, Preto, Pardo, Indígena ou Amarelo",
+            "Masculino ou Feminino"
+        )
+    ),
+    booktabs = TRUE,
+    escape = FALSE) |>
+kable_styling(latex_options = "striped") |>
+column_spec(2, width = "30em")
+```
+
+O primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. 
 
 O primeiro modelo
 
@@ -245,6 +280,13 @@ $$
 # RESULTADOS
 
 ```{r estimação}
+
+# anos selecionados
+anos = c(2019, 2006)
+
+# subset
+rais = rais[rais$ano %in% anos, ]
+
 # adicionando resíduos ao dataframe
 rais = by(rais, rais$ano, function(ano) {
     # modelo
@@ -264,10 +306,6 @@ rais = by(rais, rais$ano, function(ano) {
     # retorno
     ano
 }) |> do.call(what = rbind)
-
-
-# anos selecionados
-anos = c(2019, 2006)
 
 # estimação
 modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
@@ -296,7 +334,7 @@ stargazer::stargazer(
     header = FALSE,
     align = TRUE,
     single.row = TRUE,
-    font.size = "footnotesize",
+    font.size = "scriptsize",
     dep.var.labels = "log(remuneração)",
     column.labels = c("2019", "2006")
 )
@@ -311,7 +349,7 @@ stargazer::stargazer(
 \newpage
 # APÊNDICE {-}
 
-## A ESCOLA COMO INSTITUIÇÃO PANÓPTICA
+## A ESCOLA COMO INSTITUIÇÃO PANÓPTICA {-}
 
 Em seu texto acerca dos Parâmetros Curriculares Nacionais --- PCN, o professor Rômulo Lins abre da seguinte forma:
 
@@ -364,7 +402,7 @@ Tendemos, por conta da brevidade de nossas vidas, a limitar nossa ousadia em rel
 Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência. Portanto, além de pensar no que Lins define como micro e macro, devemos avançar acerca da própria posição da educação na sociedade. Apenas no momento em que a escola não mais existir para normalizar o indivíduo é que ela perderá sua razão de ser numa sociedade panóptica capitalista e será livre para se tornar algo diferente --- e de fato libertadora.
 
 \newpage
-## DERIVAÇÃO DOS ESTIMADORES DE MQO
+## DERIVAÇÃO DOS ESTIMADORES DE MQO {-}
 
 Partindo de um modelo de regressão linear simples, $Y_i = \beta_0 + \beta_1X_i + e_i$, em que $e_i$ é o termo de erro estocástico, em uma amostra, a relação $Y$ e $X$ é dada por:
 

@@ -40,7 +40,7 @@
 \usepackage{xcolor}
 \usepackage[margin=1in]{geometry}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
@@ -160,6 +160,20 @@
 
 % bibliografia
 \renewcommand{\bibsection}{}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \KOMAoption{captions}{tableheading}
 \makeatletter
 \makeatother
@@ -399,18 +413,29 @@ Tradução do resumo.
 
 \ldots{}
 
-\hypertarget{metodologia}{%
-\subsection{METODOLOGIA}\label{metodologia}}
+\hypertarget{procedimentos-metodoluxf3gicos}{%
+\section{PROCEDIMENTOS
+METODOLÓGICOS}\label{procedimentos-metodoluxf3gicos}}
 
-Neste trabalho, de ordem quantitativa, utilizo os dados de:
+Neste trabalho, de ordem quantitativa, utilizo os dados da Relação Anual
+de Informações Sociais (Rais) de 2006 a 2020 para estimar os efeitos da
+escolaridade sobre a renda dos trabalhadores do estado do Espírito
+Santo. Para tanto, utilizo o \emph{datalake} tratado e disponibilizado
+gratuitamente pelo projeto Base dos Dados \citep{basedosdados}. O
+acesso, manipulação dos dados e a análise foram realizados com o
+\emph{software} R \citep{r} e o repositório com todo o código realizado
+aqui está disponível publicamente e pode ser reproduzido em sua
+totalidade\footnote{https://github.com/albersonmiranda/monografia.}.
+
+As variáveis de interesse extraídas da Rais foram:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  renda média nominal
+  renda média nominal naquele ano
 \item
-  ciclos completos de escolaridade
+  ciclo de escolaridade
 \item
   idade
 \item
@@ -419,9 +444,38 @@ Neste trabalho, de ordem quantitativa, utilizo os dados de:
   sexo
 \end{enumerate}
 
-da Relação Anual de Informações Sociais --- Rais de 2006 a 2020 para
-estimar os efeitos da escolaridade sobre a renda dos trabalhadores do
-estado do Espírito Santo.
+Após selecionadas, apliquei condições às variáveis para obter amostra
+completa, ou seja, sem valores faltantes e coerente. Essas condições
+estão resumidas na tabela a seguir. Elas implicam na restrição às
+entradas com renda média positiva não nula; na exclusão de menores
+aprendizes; na exclusão de entradas sem quaisquer dos campos
+escolaridade, raça/cor ou sexo preenchidos.
+
+Além das condições de interesse do pesquisador, é necessário atentar que
+a Rais trata do mercado de trabalho formal, o que exclui trabalhadores
+informais e profissionais autônomos. Portanto, o presente trabalho mira
+estimar as relações escolaridade-renda no mercado de trabalho formal do
+Espírito Santo, destacando o impacto de substratos marginalizados da
+sociedade na determinação da renda do trabalhador.
+
+\begin{table}
+\caption{Possíveis valores para as variáveis selecionadas da Rais}\tabularnewline
+
+\centering
+\begin{tabular}[t]{l>{\raggedright\arraybackslash}p{30em}}
+\toprule
+Variável & Valores\\
+\midrule
+\cellcolor{gray!6}{Sigla UF} & \cellcolor{gray!6}{ES}\\
+Renda Média Nominal & Núméricos, não negativos\\
+\cellcolor{gray!6}{Ciclo de Escolaridade} & \cellcolor{gray!6}{Analfabeto, Ensino Fundamental (I/II, completo/incompleto),  Ensino Médio (completo/incompleto), Ensino Superior (completo/incompleto), Mestrado ou Doutorado}\\
+Idade & $>18$\\
+\cellcolor{gray!6}{Raça/Cor} & \cellcolor{gray!6}{Branco, Preto, Pardo, Indígena ou Amarelo}\\
+\addlinespace
+Sexo & Masculino ou Feminino\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 O primeiro modelo
 
@@ -442,7 +496,7 @@ a escolaridade a uma variável binária
 \begin{table}[!htbp] \centering 
   \caption{Estimação} 
   \label{} 
-\footnotesize 
+\scriptsize 
 \begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} } 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
@@ -452,123 +506,33 @@ a escolaridade a uma variável binária
  & \multicolumn{1}{c}{2019} & \multicolumn{1}{c}{2006} \\ 
 \\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)}\\ 
 \hline \\[-1.8ex] 
- graudoutorado & 1.749^{***}$ $(0.051) & 1.592^{***}$ $(0.077) \\ 
-  graufund\_I\_completo & 0.319^{***}$ $(0.043) & 0.303^{***}$ $(0.022) \\ 
-  graufund\_I\_incompleto & 0.252^{***}$ $(0.043) & 0.221^{***}$ $(0.023) \\ 
-  graufund\_II\_completo & 0.346^{***}$ $(0.041) & 0.334^{***}$ $(0.021) \\ 
-  graufund\_II\_incompleto & 0.311^{***}$ $(0.041) & 0.284^{***}$ $(0.021) \\ 
-  graumedio\_completo & 0.558^{***}$ $(0.040) & 0.564^{***}$ $(0.021) \\ 
-  graumedio\_incompleto & 0.335^{***}$ $(0.041) & 0.373^{***}$ $(0.021) \\ 
-  graumestrado & 1.643^{***}$ $(0.044) & 1.521^{***}$ $(0.043) \\ 
-  grausuperior\_completo & 1.411^{***}$ $(0.040) & 1.487^{***}$ $(0.021) \\ 
-  grausuperior\_incompleto & 0.806^{***}$ $(0.041) & 0.968^{***}$ $(0.022) \\ 
-  sexofeminino & -0.094$ $(0.075) & -0.280^{***}$ $(0.050) \\ 
-  raca\_coramarela & -0.096$ $(0.251) & 0.036$ $(0.185) \\ 
-  raca\_corindigena & 0.177$ $(0.497) & 0.114$ $(0.209) \\ 
-  raca\_corparda & 0.098^{**}$ $(0.047) & 0.002$ $(0.030) \\ 
-  raca\_corpreta & 0.043$ $(0.064) & -0.052$ $(0.042) \\ 
-  idade & 0.014^{***}$ $(0.0001) & 0.017^{***}$ $(0.0001) \\ 
-  sexofeminino:raca\_coramarela & 0.374$ $(0.341) & 0.212^{*}$ $(0.109) \\ 
-  sexofeminino:raca\_corindigena & 0.664$ $(0.705) & -0.051$ $(0.282) \\ 
-  sexofeminino:raca\_corparda & 0.014$ $(0.088) & 0.003$ $(0.068) \\ 
-  sexofeminino:raca\_corpreta & -0.096$ $(0.124) & -0.078$ $(0.098) \\ 
-  graudoutorado:sexofeminino & -0.083$ $(0.088) & 0.400^{***}$ $(0.125) \\ 
-  graufund\_I\_completo:sexofeminino & -0.318^{***}$ $(0.080) & -0.199^{***}$ $(0.053) \\ 
-  graufund\_I\_incompleto:sexofeminino & -0.234^{***}$ $(0.081) & -0.087$ $(0.055) \\ 
-  graufund\_II\_completo:sexofeminino & -0.222^{***}$ $(0.076) & -0.081$ $(0.050) \\ 
-  graufund\_II\_incompleto:sexofeminino & -0.211^{***}$ $(0.077) & -0.113^{**}$ $(0.051) \\ 
-  graumedio\_completo:sexofeminino & -0.180^{**}$ $(0.075) & 0.002$ $(0.050) \\ 
-  graumedio\_incompleto:sexofeminino & -0.177^{**}$ $(0.076) & -0.021$ $(0.051) \\ 
-  graumestrado:sexofeminino & -0.215^{***}$ $(0.079) & 0.368^{***}$ $(0.073) \\ 
-  grausuperior\_completo:sexofeminino & -0.341^{***}$ $(0.075) & -0.094^{*}$ $(0.051) \\ 
-  grausuperior\_incompleto:sexofeminino & -0.164^{**}$ $(0.076) & -0.030$ $(0.051) \\ 
-  graudoutorado:raca\_coramarela & -0.198$ $(0.324) &  \\ 
-  graufund\_I\_completo:raca\_coramarela & -0.009$ $(0.261) & -0.203$ $(0.190) \\ 
-  graufund\_I\_incompleto:raca\_coramarela & 0.013$ $(0.258) & -0.168$ $(0.194) \\ 
-  graufund\_II\_completo:raca\_coramarela & 0.039$ $(0.254) & -0.139$ $(0.186) \\ 
-  graufund\_II\_incompleto:raca\_coramarela & 0.043$ $(0.255) & -0.092$ $(0.187) \\ 
-  graumedio\_completo:raca\_coramarela & 0.045$ $(0.251) & -0.128$ $(0.186) \\ 
-  graumedio\_incompleto:raca\_coramarela & 0.023$ $(0.253) & -0.189$ $(0.187) \\ 
-  graumestrado:raca\_coramarela & -0.871^{***}$ $(0.287) & 0.133$ $(0.582) \\ 
-  grausuperior\_completo:raca\_coramarela & 0.007$ $(0.254) & -0.242$ $(0.193) \\ 
-  grausuperior\_incompleto:raca\_coramarela & 0.109$ $(0.259) & -0.320$ $(0.202) \\ 
-  graudoutorado:raca\_corindigena & -0.508$ $(0.702) & -0.963$ $(0.593) \\ 
-  graufund\_I\_completo:raca\_corindigena & -0.087$ $(0.517) & 0.283$ $(0.220) \\ 
-  graufund\_I\_incompleto:raca\_corindigena & -0.196$ $(0.508) & -0.245$ $(0.232) \\ 
-  graufund\_II\_completo:raca\_corindigena & -0.165$ $(0.499) & -0.102$ $(0.211) \\ 
-  graufund\_II\_incompleto:raca\_corindigena & -0.170$ $(0.505) & -0.236$ $(0.215) \\ 
-  graumedio\_completo:raca\_corindigena & -0.216$ $(0.498) & -0.193$ $(0.211) \\ 
-  graumedio\_incompleto:raca\_corindigena & -0.043$ $(0.503) & -0.166$ $(0.214) \\ 
-  graumestrado:raca\_corindigena & -0.683$ $(0.544) & -0.122$ $(0.443) \\ 
-  grausuperior\_completo:raca\_corindigena & -0.258$ $(0.501) & -0.490^{**}$ $(0.228) \\ 
-  grausuperior\_incompleto:raca\_corindigena & -0.411$ $(0.507) & -0.212$ $(0.232) \\ 
-  graudoutorado:raca\_corparda & -0.496^{***}$ $(0.078) & -0.239$ $(0.200) \\ 
-  graufund\_I\_completo:raca\_corparda & -0.074$ $(0.050) & 0.031$ $(0.031) \\ 
-  graufund\_I\_incompleto:raca\_corparda & -0.098^{*}$ $(0.050) & -0.003$ $(0.032) \\ 
-  graufund\_II\_completo:raca\_corparda & -0.115^{**}$ $(0.048) & -0.046$ $(0.030) \\ 
-  graufund\_II\_incompleto:raca\_corparda & -0.116^{**}$ $(0.048) & -0.023$ $(0.030) \\ 
-  graumedio\_completo:raca\_corparda & -0.146^{***}$ $(0.047) & -0.036$ $(0.030) \\ 
-  graumedio\_incompleto:raca\_corparda & -0.127^{***}$ $(0.048) & -0.033$ $(0.030) \\ 
-  graumestrado:raca\_corparda & -0.411^{***}$ $(0.057) & -0.210^{***}$ $(0.079) \\ 
-  grausuperior\_completo:raca\_corparda & -0.346^{***}$ $(0.047) & -0.079^{**}$ $(0.031) \\ 
-  grausuperior\_incompleto:raca\_corparda & -0.216^{***}$ $(0.048) & -0.196^{***}$ $(0.032) \\ 
-  graudoutorado:raca\_corpreta & -0.418^{*}$ $(0.214) & -0.178$ $(0.398) \\ 
-  graufund\_I\_completo:raca\_corpreta & 0.023$ $(0.068) & 0.073$ $(0.045) \\ 
-  graufund\_I\_incompleto:raca\_corpreta & -0.055$ $(0.067) & 0.018$ $(0.046) \\ 
-  graufund\_II\_completo:raca\_corpreta & -0.094$ $(0.065) & -0.007$ $(0.043) \\ 
-  graufund\_II\_incompleto:raca\_corpreta & -0.089$ $(0.065) & 0.034$ $(0.043) \\ 
-  graumedio\_completo:raca\_corpreta & -0.106^{*}$ $(0.064) & -0.043$ $(0.043) \\ 
-  graumedio\_incompleto:raca\_corpreta & -0.091$ $(0.065) & 0.039$ $(0.044) \\ 
-  graumestrado:raca\_corpreta & -0.461^{***}$ $(0.109) & -0.231$ $(0.158) \\ 
-  grausuperior\_completo:raca\_corpreta & -0.407^{***}$ $(0.065) & -0.184^{***}$ $(0.052) \\ 
-  grausuperior\_incompleto:raca\_corpreta & -0.232^{***}$ $(0.067) & -0.187^{***}$ $(0.055) \\ 
-  graudoutorado:sexofeminino:raca\_coramarela & -0.295$ $(0.491) &  \\ 
-  graufund\_I\_completo:sexofeminino:raca\_coramarela & -0.232$ $(0.386) & 0.039$ $(0.173) \\ 
-  graufund\_I\_incompleto:sexofeminino:raca\_coramarela & -0.265$ $(0.375) & 0.106$ $(0.176) \\ 
-  graufund\_II\_completo:sexofeminino:raca\_coramarela & -0.325$ $(0.348) & -0.146$ $(0.121) \\ 
-  graufund\_II\_incompleto:sexofeminino:raca\_coramarela & -0.269$ $(0.351) & -0.123$ $(0.134) \\ 
-  graumedio\_completo:sexofeminino:raca\_coramarela & -0.311$ $(0.341) & -0.152$ $(0.114) \\ 
-  graumedio\_incompleto:sexofeminino:raca\_coramarela & -0.241$ $(0.345) & -0.087$ $(0.122) \\ 
-  graumestrado:sexofeminino:raca\_coramarela & 0.321$ $(0.393) & 0.453$ $(0.685) \\ 
-  grausuperior\_completo:sexofeminino:raca\_coramarela & -0.356$ $(0.344) & -0.112$ $(0.135) \\ 
-  grausuperior\_incompleto:sexofeminino:raca\_coramarela & -0.368$ $(0.350) &  \\ 
-  graudoutorado:sexofeminino:raca\_corindigena & -0.983$ $(0.995) &  \\ 
-  graufund\_I\_completo:sexofeminino:raca\_corindigena & -0.804$ $(0.740) & -0.183$ $(0.322) \\ 
-  graufund\_I\_incompleto:sexofeminino:raca\_corindigena & -0.721$ $(0.737) & 0.419$ $(0.339) \\ 
-  graufund\_II\_completo:sexofeminino:raca\_corindigena & -0.630$ $(0.707) & 0.026$ $(0.287) \\ 
-  graufund\_II\_incompleto:sexofeminino:raca\_corindigena & -0.623$ $(0.726) & 0.222$ $(0.294) \\ 
-  graumedio\_completo:sexofeminino:raca\_corindigena & -0.767$ $(0.706) & 0.127$ $(0.284) \\ 
-  graumedio\_incompleto:sexofeminino:raca\_corindigena & -0.926$ $(0.717) & 0.155$ $(0.290) \\ 
-  graumestrado:sexofeminino:raca\_corindigena & -0.687$ $(0.818) & 0.029$ $(0.732) \\ 
-  grausuperior\_completo:sexofeminino:raca\_corindigena & -0.599$ $(0.711) & 0.236$ $(0.307) \\ 
-  grausuperior\_incompleto:sexofeminino:raca\_corindigena & -0.360$ $(0.720) & -0.162$ $(0.316) \\ 
-  graudoutorado:sexofeminino:raca\_corparda & -0.035$ $(0.126) & 0.304$ $(0.286) \\ 
-  graufund\_I\_completo:sexofeminino:raca\_corparda & 0.013$ $(0.094) & -0.078$ $(0.072) \\ 
-  graufund\_I\_incompleto:sexofeminino:raca\_corparda & 0.007$ $(0.095) & -0.013$ $(0.075) \\ 
-  graufund\_II\_completo:sexofeminino:raca\_corparda & 0.030$ $(0.089) & 0.004$ $(0.069) \\ 
-  graufund\_II\_incompleto:sexofeminino:raca\_corparda & 0.029$ $(0.090) & -0.026$ $(0.070) \\ 
-  graumedio\_completo:sexofeminino:raca\_corparda & 0.014$ $(0.088) & -0.016$ $(0.069) \\ 
-  graumedio\_incompleto:sexofeminino:raca\_corparda & 0.015$ $(0.089) & 0.011$ $(0.069) \\ 
-  graumestrado:sexofeminino:raca\_corparda & 0.003$ $(0.100) & -0.121$ $(0.122) \\ 
-  grausuperior\_completo:sexofeminino:raca\_corparda & 0.072$ $(0.089) & -0.047$ $(0.069) \\ 
-  grausuperior\_incompleto:sexofeminino:raca\_corparda & 0.037$ $(0.090) & 0.032$ $(0.071) \\ 
-  graudoutorado:sexofeminino:raca\_corpreta & 0.355$ $(0.293) &  \\ 
-  graufund\_I\_completo:sexofeminino:raca\_corpreta & 0.060$ $(0.133) & 0.035$ $(0.105) \\ 
-  graufund\_I\_incompleto:sexofeminino:raca\_corpreta & 0.138$ $(0.133) & 0.019$ $(0.109) \\ 
-  graufund\_II\_completo:sexofeminino:raca\_corpreta & 0.139$ $(0.125) & 0.089$ $(0.100) \\ 
-  graufund\_II\_incompleto:sexofeminino:raca\_corpreta & 0.198$ $(0.126) & 0.060$ $(0.101) \\ 
-  graumedio\_completo:sexofeminino:raca\_corpreta & 0.133$ $(0.124) & 0.114$ $(0.099) \\ 
-  graumedio\_incompleto:sexofeminino:raca\_corpreta & 0.141$ $(0.125) & 0.072$ $(0.101) \\ 
-  graumestrado:sexofeminino:raca\_corpreta & -0.044$ $(0.172) & 0.133$ $(0.236) \\ 
-  grausuperior\_completo:sexofeminino:raca\_corpreta & 0.214^{*}$ $(0.125) & 0.110$ $(0.108) \\ 
-  grausuperior\_incompleto:sexofeminino:raca\_corpreta & 0.158$ $(0.127) & 0.137$ $(0.111) \\ 
-  Constant & 6.556^{***}$ $(0.040) & 5.552^{***}$ $(0.021) \\ 
+ graudoutorado & 1.285^{***}$ $(0.015) & 1.819^{***}$ $(0.039) \\ 
+  graufund\_I\_completo & 0.193^{***}$ $(0.008) & 0.209^{***}$ $(0.006) \\ 
+  graufund\_I\_incompleto & 0.119^{***}$ $(0.008) & 0.150^{***}$ $(0.006) \\ 
+  graufund\_II\_completo & 0.271^{***}$ $(0.008) & 0.327^{***}$ $(0.006) \\ 
+  graufund\_II\_incompleto & 0.241^{***}$ $(0.008) & 0.271^{***}$ $(0.006) \\ 
+  graumedio\_completo & 0.456^{***}$ $(0.008) & 0.557^{***}$ $(0.006) \\ 
+  graumedio\_incompleto & 0.279^{***}$ $(0.008) & 0.368^{***}$ $(0.006) \\ 
+  graumestrado & 1.339^{***}$ $(0.011) & 1.706^{***}$ $(0.017) \\ 
+  grausuperior\_completo & 1.087^{***}$ $(0.008) & 1.394^{***}$ $(0.006) \\ 
+  grausuperior\_incompleto & 0.652^{***}$ $(0.008) & 0.871^{***}$ $(0.007) \\ 
+  sexofeminino & -0.287^{***}$ $(0.002) & -0.323^{***}$ $(0.002) \\ 
+  raca\_coramarela & -0.032^{***}$ $(0.008) & -0.031^{***}$ $(0.008) \\ 
+  raca\_corindigena & -0.018$ $(0.014) & -0.031^{***}$ $(0.011) \\ 
+  raca\_corparda & -0.035^{***}$ $(0.001) & -0.023^{***}$ $(0.001) \\ 
+  raca\_corpreta & -0.072^{***}$ $(0.002) & -0.052^{***}$ $(0.003) \\ 
+  idade & 0.012^{***}$ $(0.00005) & 0.015^{***}$ $(0.0001) \\ 
+  sexofeminino:raca\_coramarela & 0.055^{***}$ $(0.013) & 0.033^{**}$ $(0.014) \\ 
+  sexofeminino:raca\_corindigena & -0.038^{*}$ $(0.021) & 0.059^{***}$ $(0.019) \\ 
+  sexofeminino:raca\_corparda & 0.018^{***}$ $(0.002) & -0.007^{**}$ $(0.003) \\ 
+  sexofeminino:raca\_corpreta & 0.036^{***}$ $(0.004) & 0.007$ $(0.005) \\ 
+  Constant & 6.660^{***}$ $(0.008) & 5.588^{***}$ $(0.006) \\ 
  \hline \\[-1.8ex] 
-Observations & \multicolumn{1}{c}{505,253} & \multicolumn{1}{c}{463,720} \\ 
-R$^{2}$ & \multicolumn{1}{c}{0.325} & \multicolumn{1}{c}{0.314} \\ 
-Adjusted R$^{2}$ & \multicolumn{1}{c}{0.324} & \multicolumn{1}{c}{0.313} \\ 
-Residual Std. Error & \multicolumn{1}{c}{0.495 (df = 505142)} & \multicolumn{1}{c}{0.550 (df = 463614)} \\ 
-F Statistic & \multicolumn{1}{c}{2,206.960$^{***}$ (df = 110; 505142)} & \multicolumn{1}{c}{2,016.464$^{***}$ (df = 105; 463614)} \\ 
+Observations & \multicolumn{1}{c}{940,850} & \multicolumn{1}{c}{835,214} \\ 
+R$^{2}$ & \multicolumn{1}{c}{0.289} & \multicolumn{1}{c}{0.293} \\ 
+Adjusted R$^{2}$ & \multicolumn{1}{c}{0.289} & \multicolumn{1}{c}{0.293} \\ 
+Residual Std. Error & \multicolumn{1}{c}{0.476 (df = 940829)} & \multicolumn{1}{c}{0.529 (df = 835193)} \\ 
+F Statistic & \multicolumn{1}{c}{19,091.920$^{***}$ (df = 20; 940829)} & \multicolumn{1}{c}{17,277.370$^{***}$ (df = 20; 835193)} \\ 
 \hline 
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
@@ -587,8 +551,9 @@ F Statistic & \multicolumn{1}{c}{2,206.960$^{***}$ (df = 110; 505142)} & \multic
 \addcontentsline{toc}{section}{APÊNDICE}
 
 \hypertarget{a-escola-como-instituiuxe7uxe3o-panuxf3ptica}{%
-\subsection{A ESCOLA COMO INSTITUIÇÃO
+\subsection*{A ESCOLA COMO INSTITUIÇÃO
 PANÓPTICA}\label{a-escola-como-instituiuxe7uxe3o-panuxf3ptica}}
+\addcontentsline{toc}{subsection}{A ESCOLA COMO INSTITUIÇÃO PANÓPTICA}
 
 Em seu texto acerca dos Parâmetros Curriculares Nacionais --- PCN, o
 professor Rômulo Lins abre da seguinte forma:
@@ -705,8 +670,9 @@ de fato libertadora.
 \newpage
 
 \hypertarget{derivauxe7uxe3o-dos-estimadores-de-mqo}{%
-\subsection{DERIVAÇÃO DOS ESTIMADORES DE
+\subsection*{DERIVAÇÃO DOS ESTIMADORES DE
 MQO}\label{derivauxe7uxe3o-dos-estimadores-de-mqo}}
+\addcontentsline{toc}{subsection}{DERIVAÇÃO DOS ESTIMADORES DE MQO}
 
 Partindo de um modelo de regressão linear simples,
 \(Y_i = \beta_0 + \beta_1X_i + e_i\), em que \(e_i\) é o termo de erro

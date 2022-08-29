@@ -12,8 +12,6 @@ rais = basedosdados::bdplyr("br_me_rais.microdados_vinculos") %>%
     dplyr::filter(
         # Espírito Santo
         sigla_uf == "ES" &
-        # muicípios de Vitória, Vila Velha, Serra e Cariacica
-        id_municipio %in% c("3205309", "3205200", "3205002", "3201308") &
         # maiores de 18 anos
         idade >= 18 &
         # sem vazios em remuneração
@@ -45,17 +43,18 @@ rais = basedosdados::bdplyr("br_me_rais.microdados_vinculos") %>%
 
 # dicionário Rais
 rais = within(rais, {
-    grau = ifelse(grau_instrucao == "1", "analfabeto", grau_instrucao)
-    grau = ifelse(grau_instrucao == "2", "fund_I_incompleto", grau_instrucao)
-    grau = ifelse(grau_instrucao == "3", "fund_I_completo", grau_instrucao)
-    grau = ifelse(grau_instrucao == "4", "fund_II_incompleto", grau_instrucao)
-    grau = ifelse(grau_instrucao == "5", "fund_II_completo", grau_instrucao)
-    grau = ifelse(grau_instrucao == "6", "medio_incompleto", grau_instrucao)
-    grau = ifelse(grau_instrucao == "7", "medio_completo", grau_instrucao)
-    grau = ifelse(grau_instrucao == "8", "superior_incompleto", grau_instrucao)
-    grau = ifelse(grau_instrucao == "9", "superior_completo", grau_instrucao)
-    grau = ifelse(grau_instrucao == "10", "mestrado", grau_instrucao)
-    grau = ifelse(grau_instrucao == "11", "doutorado", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao == "1", "analfabeto", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao == "2", "fund_I_incompleto", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao == "3", "fund_I_completo", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao == "4", "fund_II_incompleto", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao == "5", "fund_II_completo", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao == "6", "medio_incompleto", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao == "7", "medio_completo", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao == "8", "superior_incompleto", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao == "9", "superior_completo", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao == "10", "mestrado", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao == "11", "doutorado", grau_instrucao)
+    grau = grau_instrucao
     grau_instrucao = NULL
     sexo = ifelse(sexo == "1", "masculino", sexo)
     sexo = ifelse(sexo == "2", "feminino", sexo)
@@ -69,4 +68,14 @@ rais = within(rais, {
     raca_cor = relevel(as.factor(raca_cor), "branca")
 })
 
+# municípios de Vitória, Vila Velha, Serra e Cariacica
+grande_vitoria = c("3205309", "3205200", "3205002", "3201308")
+
+# deflacionando
+ipca = rbcb::get_series(
+    c(ipca = 433),
+    start_date = "2006-01-01"
+)
+
+# salvando dataframe
 saveRDS(rais, "data/rais.RDS", compress = FALSE)
