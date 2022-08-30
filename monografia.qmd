@@ -33,6 +33,12 @@ source("data-raw/helper.R")
 
 # dados
 rais = readRDS("data/rais.RDS")
+
+# tema ggplot
+tema = theme_classic() +
+    theme(
+        text = element_text(family = "serif")
+    )
 ```
 
 <!-- capa -->
@@ -198,9 +204,7 @@ Tradução do resumo.
 \begin{center}
 \MakeUppercase{\textbf{LISTA DE FIGURAS}}
 \end{center}
-\begin{center}
 \listoffigures
-\end{center}
 
 <!-- lista de tabelas -->
 
@@ -208,9 +212,7 @@ Tradução do resumo.
 \begin{center}
 \MakeUppercase{\textbf{LISTA DE TABELAS}}
 \end{center}
-\begin{center}
 \listoftables
-\end{center}
 \thispagestyle{empty}
 \endgroup
 
@@ -233,12 +235,13 @@ As variáveis de interesse extraídas da Rais foram:
 4. raça/cor
 5. sexo
 
-Após selecionadas, apliquei condições às variáveis para obter amostra completa, ou seja, sem valores faltantes e coerente. Essas condições estão resumidas na tabela a seguir. Elas implicam na restrição às entradas com renda média positiva não nula; na exclusão de menores aprendizes; na exclusão de entradas sem quaisquer dos campos escolaridade, raça/cor ou sexo preenchidos. 
+Importante destacar que, embora a profissão e a indústria na qual o trabalhador esteja inserido sejam importantes para determinar sua renda, essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração\footnote{"the whole point of getting an education is to help people move to better industries, not to move from assistant burger-flipper to chief burger-flipper" \citep{cochrane}.}. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
 
-Além das condições de interesse do pesquisador, é necessário atentar que a Rais trata do mercado de trabalho formal, o que exclui trabalhadores informais e profissionais autônomos. Portanto, o presente trabalho mira estimar as relações escolaridade-renda no mercado de trabalho formal do Espírito Santo, destacando o impacto de substratos marginalizados da sociedade na determinação da renda do trabalhador.
+Após selecionadas, apliquei condições às variáveis para obter amostra completa, ou seja, sem valores faltantes, e coerente. Essas condições estão resumidas na tabela a seguir. Elas implicam na restrição às entradas com renda média positiva não nula; na exclusão de menores aprendizes; na exclusão de entradas sem quaisquer dos campos escolaridade, raça/cor ou sexo preenchidos. 
 
-```{r rais}
+```{r possiveis valores rais}
 #| tbl-cap: Possíveis valores para as variáveis selecionadas da Rais
+
 kbl(
     data.frame(
         Variável = c(
@@ -260,11 +263,69 @@ kbl(
     ),
     booktabs = TRUE,
     escape = FALSE) |>
-kable_styling(latex_options = "striped") |>
+kable_styling(latex_options = "striped", font_size = 10) |>
 column_spec(2, width = "30em")
 ```
 
-O primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. 
+Além das condições de interesse do pesquisador, é necessário atentar que a Rais trata do mercado de trabalho formal, o que exclui trabalhadores informais e profissionais autônomos. Portanto, o presente trabalho mira estimar as relações escolaridade-renda no mercado de trabalho formal do Espírito Santo, destacando o impacto de substratos marginalizados da sociedade na determinação da renda do trabalhador.
+
+## ANÁLISE EXPLORATÓRIA DOS DADOS
+
+O primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::number(nrow(rais))` de entradas, de 2006 a 2020, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
+
+```{r tabela entradas por ano}
+#| tbl-cap: "Entradas por ano"
+
+kbl(
+    t(table(rais$ano)),
+    format.args = list(big.mark = ".", decimal.mark = ",")
+) |>
+kable_styling(latex_options = c("striped", "scale_down"))
+```
+
+```{r figura entradas por ano}
+#| fig-cap: "Entradas por ano"
+
+as.data.frame(table(rais$ano)) |>
+ggplot(aes(x = Var1, y = Freq)) +
+geom_col() +
+scale_y_continuous(labels = scales::number) +
+labs(x = "Ano", y = "Quantidade") +
+tema
+```
+
+Em termos de gênero no mercado de trabalho formal capixaba, as mulheres consquistaram espaço. Enquanto que em 2006 os homens ocupavam 116% a mais das vagas, em 2020 essa diferença caiu para 63%.
+
+```{r count sexo}
+#| fig-cap: "Entradas por sexo em 2020"
+
+rais[rais$ano %in% c(2006, 2020), c("ano", "sexo")] |>
+tidyr::pivot_longer(!ano) |>
+ggplot(aes(x = name, fill = value, label = scales::number(after_stat(count)))) +
+geom_bar() +
+geom_label(color = "white", stat = "count", show.legend = FALSE) +
+scale_y_continuous(labels = scales::number) +
+scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+facet_grid(~ ano, scales = "free") +
+labs(x = "Sexo", y = "Quantidade", fill = "Sexo") +
+tema
+```
+
+Adicionando a dimensão da raça/cor, vemos que a mulher preta é o substrato social mais empurrado à informalidade. Dos declarados pretos, apenas 32% são mulheres.
+
+```{r count raca e cor}
+#| fig-cap: "Entradas por raça/cor em 2020"
+
+rais[rais$ano %in% c(2006, 2020), c("ano", "sexo", "raca_cor")] |>
+ggplot(aes(x = raca_cor, fill = sexo, label = scales::number(after_stat(count)))) +
+geom_bar() +
+ggrepel::geom_label_repel(color = "white", stat = "count", show.legend = FALSE) +
+scale_y_continuous(labels = scales::number) +
+scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+facet_grid(~ ano, scales = "free") +
+labs(x = "Raça/Cor", y = "Quantidade", fill = "Sexo") +
+tema
+```
 
 O primeiro modelo
 
@@ -326,6 +387,7 @@ modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
 ```{r}
 #| output: asis
 #| tbl-cap: "Estimação"
+#| 
 
 # parâmetros
 stargazer::stargazer(
@@ -339,8 +401,6 @@ stargazer::stargazer(
     column.labels = c("2019", "2006")
 )
 ```
-
-
 
 # REFERÊNCIAS
 

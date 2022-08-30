@@ -54,7 +54,7 @@ rais = within(rais, {
     grau_instrucao = ifelse(grau_instrucao == "9", "superior_completo", grau_instrucao)
     grau_instrucao = ifelse(grau_instrucao == "10", "mestrado", grau_instrucao)
     grau_instrucao = ifelse(grau_instrucao == "11", "doutorado", grau_instrucao)
-    grau = grau_instrucao
+    grau = as.factor(grau_instrucao)
     grau_instrucao = NULL
     sexo = ifelse(sexo == "1", "masculino", sexo)
     sexo = ifelse(sexo == "2", "feminino", sexo)

@@ -391,17 +391,13 @@ Tradução do resumo.
 \begin{center}
 \MakeUppercase{\textbf{LISTA DE FIGURAS}}
 \end{center}
-\begin{center}
 \listoffigures
-\end{center}
 
 \newpage
 \begin{center}
 \MakeUppercase{\textbf{LISTA DE TABELAS}}
 \end{center}
-\begin{center}
 \listoftables
-\end{center}
 \thispagestyle{empty}
 \endgroup
 
@@ -444,24 +440,32 @@ As variáveis de interesse extraídas da Rais foram:
   sexo
 \end{enumerate}
 
+Importante destacar que, embora a profissão e a indústria na qual o
+trabalhador esteja inserido sejam importantes para determinar sua renda,
+essas variáveis não devem ser incluídas no modelo exatamente porque um
+dos objetivos da escolaridade é permitir aos trabalhadores moverem-se
+para indústrias de melhor
+remuneração\footnote{"the whole point of getting an education is to help people move to better industries, not to move from assistant burger-flipper to chief burger-flipper" \citep{cochrane}.}.
+Incluí-las significaria estimar os efeitos da escolaridade na mesma
+indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe
+em média a mais que um apenas graduado). Fosse o objetivo do trabalho
+prever com a maior precisão o possível a renda de um determinado
+indivíduo dadas suas características, essas variáveis deveriam ser
+inseridas. Entretanto, espera-se estimar isoladamente os efeitos da
+educação e das condições sociais escolhidas.
+
 Após selecionadas, apliquei condições às variáveis para obter amostra
-completa, ou seja, sem valores faltantes e coerente. Essas condições
+completa, ou seja, sem valores faltantes, e coerente. Essas condições
 estão resumidas na tabela a seguir. Elas implicam na restrição às
 entradas com renda média positiva não nula; na exclusão de menores
 aprendizes; na exclusão de entradas sem quaisquer dos campos
 escolaridade, raça/cor ou sexo preenchidos.
 
-Além das condições de interesse do pesquisador, é necessário atentar que
-a Rais trata do mercado de trabalho formal, o que exclui trabalhadores
-informais e profissionais autônomos. Portanto, o presente trabalho mira
-estimar as relações escolaridade-renda no mercado de trabalho formal do
-Espírito Santo, destacando o impacto de substratos marginalizados da
-sociedade na determinação da renda do trabalhador.
-
 \begin{table}
 \caption{Possíveis valores para as variáveis selecionadas da Rais}\tabularnewline
 
-\centering
+\centering\begingroup\fontsize{10}{12}\selectfont
+
 \begin{tabular}[t]{l>{\raggedright\arraybackslash}p{30em}}
 \toprule
 Variável & Valores\\
@@ -475,7 +479,76 @@ Idade & $>18$\\
 Sexo & Masculino ou Feminino\\
 \bottomrule
 \end{tabular}
+\endgroup{}
 \end{table}
+
+Além das condições de interesse do pesquisador, é necessário atentar que
+a Rais trata do mercado de trabalho formal, o que exclui trabalhadores
+informais e profissionais autônomos. Portanto, o presente trabalho mira
+estimar as relações escolaridade-renda no mercado de trabalho formal do
+Espírito Santo, destacando o impacto de substratos marginalizados da
+sociedade na determinação da renda do trabalhador.
+
+\hypertarget{anuxe1lise-exploratuxf3ria-dos-dados}{%
+\subsection{ANÁLISE EXPLORATÓRIA DOS
+DADOS}\label{anuxe1lise-exploratuxf3ria-dos-dados}}
+
+O primeira camada de entendimento em uma pesquisa deste tipo é a
+exploratória. Após a aplicação das condições mencionadas, a base de
+dados conta com expressivos 15 270 773 de entradas, de 2006 a 2020, e
+cobre todos os 78 municípios do Espírito Santo.
+
+\begin{table}
+\caption{Entradas por ano}\tabularnewline
+
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{r|r|r|r|r|r|r|r|r|r|r|r|r|r|r}
+\hline
+2006 & 2007 & 2008 & 2009 & 2010 & 2011 & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 & 2018 & 2019 & 2020\\
+\hline
+\cellcolor{gray!6}{835.214} & \cellcolor{gray!6}{898.643} & \cellcolor{gray!6}{988.194} & \cellcolor{gray!6}{986.978} & \cellcolor{gray!6}{1.057.117} & \cellcolor{gray!6}{1.118.179} & \cellcolor{gray!6}{1.153.519} & \cellcolor{gray!6}{1.187.423} & \cellcolor{gray!6}{1.191.462} & \cellcolor{gray!6}{1.108.131} & \cellcolor{gray!6}{983.922} & \cellcolor{gray!6}{942.820} & \cellcolor{gray!6}{959.703} & \cellcolor{gray!6}{940.850} & \cellcolor{gray!6}{918.618}\\
+\hline
+\end{tabular}}
+\end{table}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{monografia_files/figure-pdf/figura entradas por ano-1.pdf}
+
+}
+
+\caption{Entradas por ano}
+
+\end{figure}
+
+Em termos de gênero no mercado de trabalho formal capixaba, as mulheres
+consquistaram espaço. Enquanto que em 2006 os homens ocupavam 116\% a
+mais das vagas, em 2020 essa diferença caiu para 63\%.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{monografia_files/figure-pdf/count sexo-1.pdf}
+
+}
+
+\caption{Entradas por sexo em 2020}
+
+\end{figure}
+
+Adicionando a dimensão da raça/cor, vemos que a mulher preta é o
+substrato social mais empurrado à informalidade. Dos declarados pretos,
+apenas 32\% são mulheres.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{monografia_files/figure-pdf/count raca e cor-1.pdf}
+
+}
+
+\caption{Entradas por raça/cor em 2020}
+
+\end{figure}
 
 O primeiro modelo
 
