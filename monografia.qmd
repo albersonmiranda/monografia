@@ -294,10 +294,11 @@ labs(x = "Ano", y = "Quantidade") +
 tema
 ```
 
+
 Em termos de gênero no mercado de trabalho formal capixaba, as mulheres consquistaram espaço. Enquanto que em 2006 os homens ocupavam 116% a mais das vagas, em 2020 essa diferença caiu para 63%.
 
 ```{r count sexo}
-#| fig-cap: "Entradas por sexo em 2020"
+#| fig-cap: "Comparativo 2006-2020 por sexo"
 
 rais[rais$ano %in% c(2006, 2020), c("ano", "sexo")] |>
 tidyr::pivot_longer(!ano) |>
@@ -313,17 +314,35 @@ tema
 
 Adicionando a dimensão da raça/cor, vemos que a mulher preta é o substrato social mais empurrado à informalidade. Dos declarados pretos, apenas 32% são mulheres.
 
+```{r tabela entradas por ano sexo cor}
+#| tbl-cap: "Comparativo 2006-2020 por sexo/raça/cor"
+
+kbl(
+    as.data.frame(
+        ftable(table(
+            subset(rais, ano %in% c(2006, 2020), select = c("ano", "sexo", "raca_cor"))
+        ))
+    ) |> tidyr::pivot_wider(names_from = raca_cor, values_from = Freq),
+    format.args = list(big.mark = ".", decimal.mark = ",")
+) |>
+kable_styling(latex_options = c("striped"))
+```
+
 ```{r count raca e cor}
-#| fig-cap: "Entradas por raça/cor em 2020"
+#| fig-cap: "Comparativo 2006-2020 por sexo/raça/cor"
+#| out.width: "100%"
 
 rais[rais$ano %in% c(2006, 2020), c("ano", "sexo", "raca_cor")] |>
 ggplot(aes(x = raca_cor, fill = sexo, label = scales::number(after_stat(count)))) +
 geom_bar() +
-ggrepel::geom_label_repel(color = "white", stat = "count", show.legend = FALSE) +
+geom_label(
+    data = subset(rais, ano %in% c(2006, 2020) & raca_cor %in% c("branca", "parda", "preta")),
+    color = "white", stat = "count", show.legend = FALSE, size = 2, position = position_stack(vjust = 0.8)) +
 scale_y_continuous(labels = scales::number) +
 scale_fill_manual(values = c("#003f5c", "#bc5090")) +
 facet_grid(~ ano, scales = "free") +
 labs(x = "Raça/Cor", y = "Quantidade", fill = "Sexo") +
+guides(fill = "none") +
 tema
 ```
 
@@ -402,7 +421,7 @@ stargazer::stargazer(
 )
 ```
 
-# REFERÊNCIAS
+# REFERÊNCIAS {-}
 
 \bibliography{config/bib.bib}
 
