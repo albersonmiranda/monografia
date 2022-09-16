@@ -68,6 +68,15 @@ rais = within(rais, {
     raca_cor = relevel(as.factor(raca_cor), "branca")
 })
 
+# agregando em ciclos completos
+rais = within(rais, {
+    grau = ifelse(grau %in% c("analfabeto", "fund_I_incompleto"), "nenhum", grau)
+    grau = ifelse(grau %in% c("fund_II_incompleto", "fund_I_completo"), "fund_I", grau)
+    grau = ifelse(grau %in% c("fund_II_completo", "medio_incompleto"), "fund_II", grau)
+    grau = ifelse(grau %in% c("medio_completo", "superior_incompleto"), "medio", grau)
+    grau = ifelse(grau %in% c("superior_completo"), "superior", grau)
+})
+
 # municípios de Vitória, Vila Velha, Serra e Cariacica
 grande_vitoria = c("3205309", "3205200", "3205002", "3201308")
 

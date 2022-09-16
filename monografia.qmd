@@ -271,7 +271,7 @@ Além das condições de interesse do pesquisador, é necessário atentar que a 
 
 ## ANÁLISE EXPLORATÓRIA DOS DADOS
 
-O primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::number(nrow(rais))` de entradas, de 2006 a 2020, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
+O primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 a 2020, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
 
 ```{r tabela entradas por ano}
 #| tbl-cap: "Entradas por ano"
@@ -345,6 +345,41 @@ labs(x = "Raça/Cor", y = "Quantidade", fill = "Sexo") +
 guides(fill = "none") +
 tema
 ```
+
+Em relação à escolaridade,
+
+```{r tabela entradas por ano sexo cor escolaridade}
+#| tbl-cap: "Comparativo 2006-2020 por sexo/raça/cor"
+
+kbl(
+    as.data.frame(
+        ftable(table(
+            subset(rais, ano %in% c(2006, 2020), select = c("ano", "sexo", "raca_cor", "grau"))
+        ))
+    ) |> tidyr::pivot_wider(names_from = raca_cor, values_from = Freq),
+    format.args = list(big.mark = ".", decimal.mark = ",")
+) |>
+kable_styling(latex_options = c("striped"))
+```
+
+```{r}
+#| fig-cap: "Entradas por sexo/raça/cor/escolaridade"
+#| out.width: "100%"
+
+rais |>
+subset(subset = ano %in% c(2006) & !rais$raca_cor %in% c("indigena", "amarela"), select = c("ano", "sexo", "raca_cor", "grau")) |>
+ggplot(aes(x = raca_cor, fill = sexo)) +
+geom_bar() +
+scale_y_continuous(labels = scales::number) +
+scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+facet_wrap(~ ano + grau, scales = "free") +
+labs(x = "Raça/Cor", y = "Quantidade", fill = "Sexo") +
+guides(fill = "none") +
+tema
+```
+
+
+## MODELAGEM
 
 O primeiro modelo
 
