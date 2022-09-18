@@ -271,7 +271,9 @@ Além das condições de interesse do pesquisador, é necessário atentar que a 
 
 ## ANÁLISE EXPLORATÓRIA DOS DADOS
 
-O primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 a 2020, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
+Nesta seção,
+
+A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 a 2020, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
 
 ```{r tabela entradas por ano}
 #| tbl-cap: "Entradas por ano"
@@ -346,38 +348,112 @@ guides(fill = "none") +
 tema
 ```
 
-Em relação à escolaridade,
+Em relação à escolaridade, seja por uma mudança do perfil da população ou por requerimentos do mercado de trabalho, o fato é que a maior parte das vagas eram ocupadas por trabalhadores com até o ensino fundamental. Agora, a maior parte das vagas são ocupadas por trabalhadores com ensino médio. Destaca-se também que a maior fatia das vagas ocupadas por trabalhadores de escolaridade até o ensino fundamental são preenchidas por homens, implicando que as trabalhadores da mesma escolaridade estão na informalidade.
 
-```{r tabela entradas por ano sexo cor escolaridade}
-#| tbl-cap: "Comparativo 2006-2020 por sexo/raça/cor"
+```{r tabela entradas por escolaridade}
+#| tbl-cap: "Comparativo 2006-2020 por sexo/escolaridade"
 
 kbl(
     as.data.frame(
         ftable(table(
-            subset(rais, ano %in% c(2006, 2020), select = c("ano", "sexo", "raca_cor", "grau"))
+            subset(rais, ano %in% c(2006, 2020), select = c("ano", "sexo", "grau"))
         ))
-    ) |> tidyr::pivot_wider(names_from = raca_cor, values_from = Freq),
+    ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
     format.args = list(big.mark = ".", decimal.mark = ",")
 ) |>
 kable_styling(latex_options = c("striped"))
 ```
 
-```{r}
-#| fig-cap: "Entradas por sexo/raça/cor/escolaridade"
+```{r entradas por escolaridade}
+#| fig-cap: "Entradas por sexo/escolaridade"
 #| out.width: "100%"
+#| warning: false
 
-rais |>
-subset(subset = ano %in% c(2006) & !rais$raca_cor %in% c("indigena", "amarela"), select = c("ano", "sexo", "raca_cor", "grau")) |>
-ggplot(aes(x = raca_cor, fill = sexo)) +
+subset(rais, ano %in% c(2006, 2020)) |>
+ggplot(aes(x = grau, fill = sexo)) +
 geom_bar() +
 scale_y_continuous(labels = scales::number) +
 scale_fill_manual(values = c("#003f5c", "#bc5090")) +
-facet_wrap(~ ano + grau, scales = "free") +
-labs(x = "Raça/Cor", y = "Quantidade", fill = "Sexo") +
+facet_grid(~ ano, scales = "fixed") +
+labs(x = "Escolaridade", y = "Quantidade", fill = "Sexo") +
 guides(fill = "none") +
+coord_flip() +
 tema
 ```
 
+Adicionando a dimensão da raça/cor, percebemos que a ocupação de postos de trabalho de nível superior deixa de ser quase exclusividade de brancos. Entretanto, pardos e pretos ainda ocupam majoritariamente as vagas de trabalho de nível inferiores de escolaridade, além de, tanto proporcionalmente quanto absolutamente, ainda ocuparem menos vagas de ensino superior.
+
+```{r tabela entradas por sexo/escolaridade/raca}
+#| tbl-cap: "Comparativo 2006-2020 por sexo/raca/escolaridade"
+
+kbl(
+    as.data.frame(
+        ftable(table(
+            droplevels(subset(
+                rais,
+                ano %in% c(2006, 2020) & !raca_cor %in% c("indigena", "amarela"),
+                select = c("ano", "sexo", "grau", "raca_cor")
+            ))
+        ))
+    ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
+    format.args = list(big.mark = ".", decimal.mark = ",")
+) |>
+kable_styling(latex_options = c("striped"))
+```
+
+```{r entradas por sexo/escolaridade/raca}
+#| fig-cap: "Entradas por sexo/escolaridade/raça/cor"
+#| out.width: "100%"
+#| warning: false
+
+subset(rais, ano %in% c(2006, 2020) & !raca_cor %in% c("indigena", "amarela")) |>
+ggplot(aes(x = grau, fill = sexo)) +
+geom_bar() +
+scale_y_continuous(labels = scales::number_format(scale = 1/1000)) +
+scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+facet_grid(rows = vars(raca_cor), cols = vars(ano), scales = "fixed") +
+labs(x = "Escolaridade", y = "Quantidade (em milhares)", fill = "Sexo") +
+guides(fill = "none") +
+coord_flip() +
+tema
+```
+
+A tabela a seguir evidencia mais explicitamente um ponto alarmante: quanto menor o nível de escolaridade da vaga, maior é a proporção de pretos e pardos que a ocupa.
+
+```{r proporcao pretos e pardos}
+#| tbl-cap: "Comparativo 2006-2020 proporção de pretos e pardos por nível de escolaridade"
+
+prop_pp = data.frame(
+    grau = NA,
+    ano = NA,
+    prop  = NA
+)
+
+for(j in c(2006, 2010)) {
+    for(i in unique(rais$grau)) {
+        prop_pp = data.frame(
+            grau = c(prop_pp$grau, i),
+            ano = c(prop_pp$ano, j),
+            prop = c(
+                prop_pp$prop,
+                nrow(subset(rais, ano == j & raca_cor %in% c("preta", "parda") & grau == i)) / nrow(subset(rais, ano == j & grau == i))
+            )
+        )
+    }
+}
+
+remove(i, j)
+prop_pp = na.omit(prop_pp)
+
+prop_pp = dplyr::arrange(
+    prop_pp, prop_pp$ano, factor(prop_pp$grau, levels = c(
+        "nenhum", "fund_I", "fund_II", "medio", "superior", "mestrado", "doutorado"
+    ))
+)
+
+kbl(prop_pp) |>
+kable_styling(latex_options = c("striped"))
+```
 
 ## MODELAGEM
 
@@ -397,7 +473,7 @@ $$
 ```{r estimação}
 
 # anos selecionados
-anos = c(2019, 2006)
+anos = c(2020, 2006)
 
 # subset
 rais = rais[rais$ano %in% anos, ]
@@ -445,14 +521,14 @@ modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
 
 # parâmetros
 stargazer::stargazer(
-    modelos$m2019,
+    modelos$m2020,
     modelos$m2006,
     header = FALSE,
     align = TRUE,
     single.row = TRUE,
     font.size = "scriptsize",
     dep.var.labels = "log(remuneração)",
-    column.labels = c("2019", "2006")
+    column.labels = c("2020", "2006")
 )
 ```
 
