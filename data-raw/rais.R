@@ -75,6 +75,7 @@ rais = within(rais, {
     grau = ifelse(grau %in% c("fund_II_completo", "medio_incompleto"), "fund_II", grau)
     grau = ifelse(grau %in% c("medio_completo", "superior_incompleto"), "medio", grau)
     grau = ifelse(grau %in% c("superior_completo"), "superior", grau)
+    grau = factor(grau, levels = c("nenhum", "fund_I", "fund_II", "medio", "superior", "mestrado", "doutorado"))
 })
 
 # municípios de Vitória, Vila Velha, Serra e Cariacica
