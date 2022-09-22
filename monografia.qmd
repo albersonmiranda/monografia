@@ -429,7 +429,7 @@ prop_pp = data.frame(
     prop  = NA
 )
 
-for(j in c(2006, 2010)) {
+for(j in c(2006, 2020)) {
     for(i in unique(rais$grau)) {
         prop_pp = data.frame(
             grau = c(prop_pp$grau, i),
