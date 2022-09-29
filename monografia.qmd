@@ -457,16 +457,9 @@ kable_styling(latex_options = c("striped"))
 
 ## MODELAGEM
 
-O primeiro modelo
+O modelo...
 
-No segundo modelo, analiso os efeitos da educação superior, restringindo a escolaridade a uma variável binária
-$$
-\text{superior}=
-\begin{cases}
-    =1 & \text{se possui ao menos ensino superior} \\
-    =0 & \text{se não possui ao menos ensino superior} \\
-\end{cases}
-$$
+Devido à omissão da variável ocupação, há erro de especificação no modelo e espera-se autocorrelaãção heteroscedasticidade --- o que de fato ocorre APONTAR PARA O APÊNDICE COM O MODELO HETEROSCEDÁSTICO. Por essa razão, utilizarei o método de mínimos quadrados generalizados - MQG.
 
 # RESULTADOS
 
