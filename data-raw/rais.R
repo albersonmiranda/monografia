@@ -12,14 +12,16 @@ rais = basedosdados::bdplyr("br_me_rais.microdados_vinculos") %>%
     dplyr::filter(
         # Espírito Santo
         sigla_uf == "ES" &
-        # maiores de 18 anos
-        idade >= 18 &
+        # maiores de 25 anos
+        idade >= 25 &
         # sem vazios em remuneração
         !is.na(valor_remuneracao_media) &
         # sem vazios em raça/cor
         !is.na(raca_cor) & raca_cor != "9" &
         # sem vazios em sexo
         !is.na(sexo) &
+        # sem vazios em ocupação
+        !is.na(cbo_2002) &
         # valores positivos para remuneração
         valor_remuneracao_media > 0
     ) %>%
@@ -35,7 +37,8 @@ rais = basedosdados::bdplyr("br_me_rais.microdados_vinculos") %>%
         raca_cor,
         valor_remuneracao_media,
         idade,
-        grau_instrucao) %>%
+        grau_instrucao,
+        cbo_2002) %>%
     # grau de instrução preenchido
     dplyr::filter(!is.na(grau_instrucao)) %>%
     # coletando dados
@@ -54,8 +57,6 @@ rais = within(rais, {
     grau_instrucao = ifelse(grau_instrucao == "9", "superior_completo", grau_instrucao)
     grau_instrucao = ifelse(grau_instrucao == "10", "mestrado", grau_instrucao)
     grau_instrucao = ifelse(grau_instrucao == "11", "doutorado", grau_instrucao)
-    grau = as.factor(grau_instrucao)
-    grau_instrucao = NULL
     sexo = ifelse(sexo == "1", "masculino", sexo)
     sexo = ifelse(sexo == "2", "feminino", sexo)
     raca_cor = ifelse(raca_cor == "1", "indigena", raca_cor)
@@ -66,26 +67,26 @@ rais = within(rais, {
     raca_cor = ifelse(raca_cor == "9", "nao_informado", raca_cor)
     sexo = relevel(as.factor(sexo), "masculino")
     raca_cor = relevel(as.factor(raca_cor), "branca")
+    vlr_rem = valor_remuneracao_media
+    valor_remuneracao_media = NULL
+    gv = ifelse(
+        id_municipio %in% c("3205309", "3205200", "3205002", "3201308"),
+        "gv",
+        "interior"
+    )
 })
 
 # agregando em ciclos completos
 rais = within(rais, {
-    grau = ifelse(grau %in% c("analfabeto", "fund_I_incompleto"), "nenhum", grau)
-    grau = ifelse(grau %in% c("fund_II_incompleto", "fund_I_completo"), "fund_I", grau)
-    grau = ifelse(grau %in% c("fund_II_completo", "medio_incompleto"), "fund_II", grau)
-    grau = ifelse(grau %in% c("medio_completo", "superior_incompleto"), "medio", grau)
-    grau = ifelse(grau %in% c("superior_completo"), "superior", grau)
-    grau = factor(grau, levels = c("nenhum", "fund_I", "fund_II", "medio", "superior", "mestrado", "doutorado"))
+    grau_instrucao = ifelse(grau_instrucao %in% c("analfabeto", "fund_I_incompleto"), "nenhum", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao %in% c("fund_II_incompleto", "fund_I_completo"), "fund_I", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao %in% c("fund_II_completo", "medio_incompleto"), "fund_II", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao %in% c("medio_completo", "superior_incompleto"), "medio", grau_instrucao)
+    grau_instrucao = ifelse(grau_instrucao %in% c("superior_completo"), "superior", grau_instrucao)
+    grau = as.factor(grau_instrucao)
+    grau = relevel(grau, "nenhum")
+    grau_instrucao = NULL
 })
-
-# municípios de Vitória, Vila Velha, Serra e Cariacica
-grande_vitoria = c("3205309", "3205200", "3205002", "3201308")
-
-# deflacionando
-ipca = rbcb::get_series(
-    c(ipca = 433),
-    start_date = "2006-01-01"
-)
 
 # salvando dataframe
 saveRDS(rais, "data/rais.RDS", compress = FALSE)
