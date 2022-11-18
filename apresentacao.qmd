@@ -1,0 +1,329 @@
+---
+title: "Relações Escolaridade-Renda no ES"
+author: Alberson Miranda
+date: '`r format(Sys.Date(), "%B de %Y")`'
+navigation: horizontal
+format:
+    beamer:
+        theme: "Madrid"
+        include-in-header: config/preamble_apresentacao.tex
+        output-file: render/apresentacao.pdf
+        toc: true
+        toc-title: SUMÁRIO
+execute:
+    echo: false
+cite-method: biblatex
+---
+
+```{r config}
+#| include = FALSE
+
+# opções
+knitr::opts_chunk$set(
+    out.width = "100%",
+    echo = FALSE
+)
+
+# reprodutibilidade
+set.seed(1)
+
+# pacotes
+pacman::p_load(
+    kableExtra,
+    ggplot2
+)
+
+# dados
+rais = readRDS("data/rais.RDS")
+
+# tema ggplot
+tema = theme_classic() +
+    theme(
+        text = element_text(family = "serif")
+    )
+
+# gerar bibliografia de pacotes
+knitr::write_bib(file = "config/packages.bib")
+```
+
+### OBJETIVO
+
+Estimar as relações escolaridade-renda no mercado de trabalho formal do Espírito Santo, destacando o impacto de pertencer a substratos marginalizados da sociedade na determinação da renda do trabalhador
+
+# PROCEDIMENTOS METODOLÓGICOS
+
+## DADOS
+
+- Relação Anual das Informações Sociais (Rais)
+- 2020
+- Base dos Dados \cite{basedosdados}
+
+## DADOS
+
+Variáveis de interesse
+
+1. renda média nominal naquele ano
+2. ciclo de escolaridade
+3. idade
+4. raça/cor
+5. sexo
+
+## VIÉS DE VARIÁVEL OMITIDA
+
+::: {.incremental}
+
+- Omissão da ocupação
+
+"the whole point of getting an education is to help people move to better industries, not to move from assistant burger-flipper to chief burger-flipper \cite{cochrane}"
+
+- Correção com regressão auxiliar
+
+:::
+
+## DADOS
+
+- Possíveis valores para as variáveis selecionadas da Rais
+```{r possiveis valores rais}
+
+kbl(
+    data.frame(
+        Variável = c(
+            "Sigla UF",
+            "Renda Média Nominal",
+            "Ciclo de Escolaridade",
+            "Idade",
+            "Raça/Cor",
+            "Sexo"
+        ),
+        Valores = c(
+            "ES",
+            "Núméricos, não negativos",
+            "Analfabeto, Ensino Fundamental (I/II, completo/incompleto),  Ensino Médio (completo/incompleto), Ensino Superior (completo/incompleto), Mestrado ou Doutorado",
+            "$>25$",
+            "Branco, Preto, Pardo, Indígena ou Amarelo",
+            "Masculino ou Feminino"
+        )
+    ),
+    booktabs = TRUE,
+    escape = FALSE) |>
+kable_styling(latex_options = "striped", font_size = 8) |>
+column_spec(2, width = "30em")
+```
+
+# DIAGNÓSTICO E CORREÇÃO
+
+## VERIFICAÇÃO DO VIÉS
+
+```{r estimação 1}
+
+# anos selecionados
+anos = 2020
+
+# subset
+rais = rais[rais$ano %in% anos, ]
+
+# estimação
+modelo = lm(
+    # variável dependente
+    log(vlr_rem) ~
+    # variáveis dependentes
+    grau + sexo + raca_cor + idade + idade^2 +
+    # interação
+    sexo * raca_cor,
+    # dataset
+    data = rais
+)
+
+# adicionando resíduos ao dataframe
+rais = within(rais, {
+    residuos = modelo$residuals
+    fitted = modelo$fitted.values
+})
+```
+
+- Especificação inicial: log-linear
+
+$$log(\mathbfit{Y}) = \mathbfit{X\beta} + \mathbfit{u}$$
+
+- *Baseline variables*:
+
+    - grau: nenhum
+    - raca_cor: branca
+    - sexo: masculino
+
+## VERIFICAÇÃO DO VIÉS
+
+`r equatiomatic::extract_eq(modelo, wrap = TRUE, ital_vars = TRUE, terms_per_line = 2, intercept = "beta", font_size = "tiny")`
+
+## VERIFICAÇÃO DO VIÉS
+
+- Heteroscedasticidade
+
+```{r}
+#| out.width: 80%
+
+rais[sample(nrow(rais), 1000),] |> ggplot(aes(x = fitted, y = residuos)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
+```
+
+## VERIFICAÇÃO DO VIÉS
+
+- Heteroscedasticidade
+
+```{r}
+lmtest::bptest(modelo)
+```
+
+## VERIFICAÇÃO DO VIÉS
+
+- Alta correlação entre variável dependente e resíduos
+
+```{r}
+#| out.width: 80%
+
+rais[sample(nrow(rais), 1000),] |>
+ggplot(aes(x = log(vlr_rem), y = residuos)) +
+geom_point() +
+geom_smooth(method = "lm", se = FALSE) +
+annotate(
+    "text",
+    x = 9, y = -1,
+    label = paste(
+        "Pearson's Product-Moment Correlation",
+        round(
+            cor.test(rais$residuos, log(rais$vlr_rem))$estimate,
+            2
+        )
+    )
+)
+```
+
+## CORREÇÃO DO VIÉS
+
+- Especificação da regressão auxiliar
+
+$$
+log(\mathbfit{Y}) = \mathbfit{Z\theta} + \mathbfit{v}
+$$
+
+Em que:
+
+- $\mathbfit{Z}$ = vetor de 46 ocupações do segundo nível de agregação da Classificação Brasileira de Ocupações (CBO)
+- $\mathbfit{v}$ = termo do erro, que inclui todas as demais variáveis para a determinação da renda do trabalhador formal
+
+```{r}
+
+# estimação
+modelo_auxiliar = lm(
+    # variável dependente
+    log(vlr_rem) ~
+    # variáveis dependentes
+    grau + sexo + raca_cor + idade + idade^2 +
+    # interação
+    sexo * raca_cor +
+    # ocupações CBO
+    substr(cbo_2002, 1, 2),
+    # dataset
+    data = rais
+)
+
+# adicionando resíduos ao dataframe
+rais = within(rais, {
+    residuos_aux = modelo_auxiliar$residuals
+})
+```
+
+## CORREÇÃO DO VIÉS
+
+- Adição dos resíduos da regressão auxiliar ao modelo inicial
+
+$$
+log(\mathbfit{Y}) = \mathbfit{X\beta} + \mathbfit{v\gamma} + \mathbfit{u}
+$$
+
+Em que:
+
+- $\mathbfit{v}$ = vetor dos resíduos da regressão auxiliar
+- $\mathbfit{u}$ = termo do erro livre da influência de variável importante omitida. Espero que seja homoscedástico e não fortemente correlacionado com $log(\mathbfit{Y})$
+
+```{r}
+
+# estimação
+modelo_corrigido = lm(
+    # variável dependente
+    log(vlr_rem) ~
+    # variáveis dependentes
+    grau + sexo + raca_cor + idade + idade^2 +
+    # interação
+    sexo * raca_cor +
+    # instrumento
+    residuos_aux,
+    # dataset
+    data = rais
+)
+
+# adicionando resíduos ao dataframe
+rais = within(rais, {
+    residuos_corrigido = modelo_corrigido$residuals
+    fitted_corrigido = modelo_corrigido$fitted.values
+})
+```
+
+## CORREÇÃO DO VIÉS
+
+- Heteroscedasticidade?
+
+```{r}
+#| out.width: 80%
+
+rais[sample(nrow(rais), 1000),] |> ggplot(aes(x = fitted_corrigido, y = residuos_corrigido)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
+```
+
+## CORREÇÃO DO VIÉS
+
+- Heteroscedasticidade menos óbvia porém ainda presente
+
+```{r}
+lmtest::bptest(modelo_corrigido)
+```
+
+## CORREÇÃO DO VIÉS
+
+- Correlação moderada entre variável dependente e resíduos
+
+```{r}
+#| out.width: 80%
+
+rais[sample(nrow(rais), 1000),] |>
+ggplot(aes(x = log(vlr_rem), y = residuos_corrigido)) +
+geom_point() +
+geom_smooth(method = "lm", se = FALSE) +
+annotate(
+    "text",
+    x = 9, y = -1,
+    label = paste(
+        "Pearson's Product-Moment Correlation",
+        round(
+            cor.test(rais$residuos_corrigido, log(rais$vlr_rem))$estimate,
+            2
+        )
+    )
+)
+```
+
+# INTERPRETAÇÃO
+
+## ESTIMAÇÃO
+
+```{r}
+#| output: asis
+
+# parâmetros
+stargazer::stargazer(
+    modelo_corrigido,
+    header = FALSE,
+    single.row = TRUE,
+    font.size = "tiny"
+)
+```
+
+# REFERÊNCIAS
