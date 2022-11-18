@@ -1,0 +1,36 @@
+% pacotes
+\usepackage{quoting, setspace}
+\usepackage{ragged2e}
+\usepackage[backend=biber, style=abnt, ittitles, justify, indent]{biblatex}
+\usepackage{caption}
+
+% institute
+\institute[UFES] % (optional)
+{
+  %\inst{1}
+  Programa de Pós-Graduação em Economia\\
+  Universidade Federal do Espírito Santo
+}
+
+% fonte
+\justifying % justificar
+
+% bibliografia
+\addbibresource{config/bib.bib}
+\addbibresource{config/packages.bib}
+
+% linguagem
+\def\sectionname{Seção}
+
+% ambiente citação
+\newenvironment{citacao}
+    {\begin{quoting}[rightmargin=0cm,leftmargin=4cm]
+    \begin{singlespace}
+    \footnotesize
+    }
+    {\end{singlespace}
+    \end{quoting}
+}
+
+% tabelas
+\captionsetup[table]{labelformat=empty}
