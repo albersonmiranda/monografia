@@ -1,11 +1,14 @@
 % variáveis
 \newcommand{\nome}{Alberson da Silva}
 \newcommand{\sobrenome}{Miranda}
+\newcommand{\tipo}{Monografia}
+\newcommand{\tipoingles}{Thesis}
 \newcommand{\titulo}{Relações Escolaridade-Renda no Espírito Santo}
 \newcommand{\tituloingles}{Education-Income Relations in Espírito Santo}
 \newcommand{\universidade}{Instituto Federal do Espírito Santo}
 \newcommand{\campus}{Vitória}
 \newcommand{\curso}{Licenciatura em Matemática}
+\newcommand{\cursoingles}{Mathematics}
 \newcommand{\orientador}{Prof. Me. Diogo Oliveira}
 \newcommand{\cidade}{Vitória}
 \newcommand{\dia}{xx}
@@ -20,16 +23,18 @@
 \usepackage{indentfirst, float, graphicx, psfrag, fancyhdr}
 \usepackage{times, amsmath, amsfonts, amssymb, amsthm}
 \usepackage{xcolor, url, placeins, sectsty, enumitem}
-\usepackage{polyglossia, natbib, dcolumn}
+\usepackage{polyglossia, dcolumn, lastpage}
 \usepackage[T1]{fontenc}
 \usepackage[skip = 2pt, size = normalsize]{caption}
 \usepackage[labelfont = bf]{caption}
+\usepackage[backend=biber, style=abnt, ittitles, justify, indent]{biblatex}
 
 % fontes
 \setmainfont{Times New Roman}
 \setmonofont[Scale=0.9, Scale=MatchLowercase]{Consolas}
 \sectionfont{\fontsize{12}{15}\selectfont}
 \subsectionfont{\fontsize{12}{15}\selectfont}
+\setlength\parindent{1.5cm}
 %\renewenvironment{Shaded}
 %    {\begin{snugshade}
 %    \begin{singlespace}
@@ -80,4 +85,11 @@
 \pagestyle{fancy}
 
 % bibliografia
-\renewcommand{\bibsection}{}
+\addbibresource{config/bib.bib}
+\addbibresource{config/packages.bib}
+
+% matrizes
+\setcounter{MaxMatrixCols}{20}
+
+% equações
+\renewcommand{\theequation}{\arabic{equation}}

@@ -3,13 +3,17 @@ title: ""
 format:
     pdf:
         include-in-header: config/preamble.tex
-        highlight-style: zenburn
-        keep-tex: true
-cite-method: natbib
-biblio-style: apalike
+        keep-tex: false
+        output-file: render/monografia.pdf
+cite-method: biblatex
+suppress-bibliography: true
 fontsize: 12pt
 geometry: margin=1in
 number-sections: true
+crossref:
+  fig-prefix: "Figura"
+  tab-prefix: "Tabela"
+  eq-prefix: ""
 ---
 
 ```{r config}
@@ -25,8 +29,10 @@ knitr::opts_chunk$set(
 set.seed(1)
 
 # pacotes
-library(kableExtra)
-library(ggplot2)
+pacman::p_load(
+    kableExtra,
+    ggplot2
+)
 
 # funções
 source("data-raw/helper.R")
@@ -39,13 +45,16 @@ tema = theme_classic() +
     theme(
         text = element_text(family = "serif")
     )
+
+# gerar bibliografia de pacotes
+knitr::write_bib(file = "config/packages.bib")
 ```
 
 <!-- capa -->
 
 \thispagestyle{empty}
 \begin{center}
-{\Large \MakeUppercase{\universidade\\ campus \campus\\ curso de \curso}}
+{\Large \MakeUppercase{\universidade\\ \campus\\ curso de \curso}}
 \end{center}
 \vspace{1cm}
 \begin{center}
@@ -80,7 +89,7 @@ tema = theme_classic() +
 \end{center}
 
 \hspace{7cm}{\begin{minipage}{8.5cm}{
-Monografia apresentada à coordenadoria do curso de \curso\>do \universidade, Campus \campus, como requisito parcial para a obtenção do título de \grau.\\
+\tipo\>apresentada ao curso de \curso\>do \universidade, como requisito para a obtenção do título de \grau.\\
 
 Orientador: \parbox[t]{6.0cm}{\orientador}}
 \end{minipage}}
@@ -110,7 +119,7 @@ Orientador: \parbox[t]{6.0cm}{\orientador}}
 \end{center}
 
 \hspace{7.5cm}{\begin{minipage}{8.5cm}{
-Monografia apresentada à coordenadoria do curso de \curso\>do \universidade, Campus \campus, como requisito parcial para a obtenção do título de \grau.\\}
+\tipo\>apresentada ao curso de \curso\>do \universidade\>como requisito para a obtenção do título de \grau.\\}
 \end{minipage}}
 
 \vspace{1cm}
@@ -141,7 +150,7 @@ Monografia apresentada à coordenadoria do curso de \curso\>do \universidade, Ca
 \newpage
 \thispagestyle{empty}
 \begin{singlespace}
-\noindent \MakeUppercase{\sobrenome}, \nome. \textbf{\titulo}. \ano. xx folhas. Monografia (\curso) -- \universidade, \cidade, \ano.
+\noindent \MakeUppercase{\sobrenome}, \nome. \textbf{\titulo}. \ano. \pageref{LastPage} folhas. \tipo\>(\curso) -- \universidade, \cidade, \ano.
 
 \vspace{1pc}
 \begin{center}
@@ -150,11 +159,11 @@ Monografia apresentada à coordenadoria do curso de \curso\>do \universidade, Ca
 \vspace{1pc}
 
 \noindent
-No máximo 500 palavras em espaço simples e sem parágrafos. Deve apresentar de forma concisa os objetivos, metodologia e os resultado alcançados, utilizar o verbo na voz ativa. Espaçamento simples, sem recuo de parágrafos.
+No máximo 500 palavaras em espaço simples e sem parágrafos. Deve apresentar de forma concisa os objetivos, metodologia e os resultado alcançados, utilizar o verbo na voz ativa. Espaçamento simples, sem recuo de parágrafos.
 
 \vspace{2pc}
 \noindent
-{\textbf{Palavras-chave}:}  Palavra 1. Palavra 2. Palavra 3. Palavra 4. Palavra 5.
+{\textbf{Palavras-chave}:}  Séries temporais hierárquicas; Previsão; Reconciliação; Regressão quantílica
 
 \end{singlespace}
 
@@ -164,7 +173,7 @@ No máximo 500 palavras em espaço simples e sem parágrafos. Deve apresentar de
 \thispagestyle{empty}
 
 \begin{singlespace}
-\noindent \MakeUppercase{\sobrenome}, \nome. \textbf{\tituloingles}. \ano. xx folhas. Monografia (\curso) -- \universidade, \cidade, \ano.
+\noindent \MakeUppercase{\sobrenome}, \nome. \textbf{\tituloingles}. \ano. \pageref{LastPage} folhas. \tipoingles\>(\cursoingles) -- \universidade, \cidade, \ano.
 
 \vspace{1pc}
 \begin{center}
@@ -188,7 +197,6 @@ Tradução do resumo.
 \begingroup
 \let\clearpage\relax
 
-\newpage
 \begin{center}
 \MakeUppercase{\textbf{Sumário}}
 \end{center}
@@ -212,7 +220,9 @@ Tradução do resumo.
 \begin{center}
 \MakeUppercase{\textbf{LISTA DE TABELAS}}
 \end{center}
+\begin{center}
 \listoftables
+\end{center}
 \thispagestyle{empty}
 \endgroup
 
@@ -235,7 +245,7 @@ As variáveis de interesse extraídas da Rais foram:
 4. raça/cor
 5. sexo
 
-Importante destacar que, embora a profissão e a indústria na qual o trabalhador esteja inserido sejam importantes para determinar sua renda, essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração\footnote{"the whole point of getting an education is to help people move to better industries, not to move from assistant burger-flipper to chief burger-flipper" \citep{cochrane}.}. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
+Importante destacar que, embora a profissão e a indústria na qual o trabalhador esteja inserido sejam importantes para determinar sua renda, essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração\footnote{"the whole point of getting an education is to help people move to better industries, not to move from assistant burger-flipper to chief burger-flipper" \cite{cochrane}.}. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
 
 Após selecionadas, apliquei condições às variáveis para obter amostra completa, ou seja, sem valores faltantes, e coerente. Essas condições estão resumidas na tabela a seguir. Elas implicam na restrição às entradas com renda média positiva não nula; na exclusão de menores aprendizes; na exclusão de entradas sem quaisquer dos campos escolaridade, raça/cor ou sexo preenchidos. 
 
@@ -527,7 +537,7 @@ stargazer::stargazer(
 
 # REFERÊNCIAS {-}
 
-\bibliography{config/bib.bib}
+\printbibliography[heading=none]
 
 \newpage
 # APÊNDICE {-}
@@ -538,13 +548,13 @@ Em seu texto acerca dos Parâmetros Curriculares Nacionais --- PCN, o professor 
 
 \begin{citacao}
 Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior
-problema é a resistência do sistema em mudar. \citep{lins}
+problema é a resistência do sistema em mudar. \cite{lins}
 \end{citacao}
 
 Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o que ele chamou de *micro*, não é suficiente para colocar o sistema educacional em rota de mudança. Paralelamente, deve ser realizado um trabalho estrutural na esfera *macro* --- aqui, principalmente, o MEC --- que possibilite uma mudança do educar *pela* matemática para o educar *para* a matemática. Essa diferença é ilustrada por Lins da seguinte forma:
 
 \begin{citacao}
-A diferença fica bastante mais clara se pensamos no caso da Educação Física. Será que alguém concebe que o papel das aulas de Educação Física é preparar todas as crianças (todas, eu disse) para o esporte competitivo? Claro que não. Se assim fosse as aulas de Educação Física não representariam, na formação das crianças, a educação para a saúde, para o desenvolvimento motor, para a socialização e o respeito a regras, para a colaboração. E os que quiserem ser atletas e jogadores vão buscar esta formação específica em outros espaços (possivelmente dentro dos times competitivos de suas escolas ou em clubes). Podemos dizer que a Educação Física escolar se concentra em modos de ser, promovendo aquela educação POR MEIO de esportes e exercícios físicos, enquanto o Treinamento Esportivo se concentra em potencializar habilidades, fazendo isso por meio da aquisição de técnicas específicas. \citep{lins}
+A diferença fica bastante mais clara se pensamos no caso da Educação Física. Será que alguém concebe que o papel das aulas de Educação Física é preparar todas as crianças (todas, eu disse) para o esporte competitivo? Claro que não. Se assim fosse as aulas de Educação Física não representariam, na formação das crianças, a educação para a saúde, para o desenvolvimento motor, para a socialização e o respeito a regras, para a colaboração. E os que quiserem ser atletas e jogadores vão buscar esta formação específica em outros espaços (possivelmente dentro dos times competitivos de suas escolas ou em clubes). Podemos dizer que a Educação Física escolar se concentra em modos de ser, promovendo aquela educação POR MEIO de esportes e exercícios físicos, enquanto o Treinamento Esportivo se concentra em potencializar habilidades, fazendo isso por meio da aquisição de técnicas específicas. \cite{lins}
 \end{citacao}
 
 A mudança, então, deixa de ter como meio apenas a sala de aula; o problema norteador da educação matemática como disciplina deixa de ser apenas, por exemplo, se o aluno deve ou não estudar geometrias não euclidianas no ensino médio, ou seja, unicamente conteúdos, e se expande para questionar o próprio objetivo do ensino da matemática, ou melhor, *através* da matemática.
@@ -554,14 +564,14 @@ Quando o autor propõe uma educação "formativa e com o objetivo de permitir qu
 Em *Sistemas de Ensino e Sistemas de Pensamento*, Pierre Bourdieu coloca o sistema educacional como um dos instrumentos mais eficazes de integração moral e lógica da sociedade, que tem como produto o indivíduo "programado" — homogêneo em percepção, pensamento e ação:
 
 \begin{citacao}
-Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua qualidade de código comum é o que permite a todos os detentores deste código associar o mesmo sentido às mesmas obras e, de maneira recíproca, de exprimir a mesma intenção significante por intermédio das mesmas palavras, dos mesmos comportamentos e das mesmas obras, pode-se compreender por que \textbf{a Escola, incumbida de transmitir esta cultura, constitui o fator fundamental do consenso cultural} nos termos de uma participação de um senso comum entendido como condição da comunicação. \citep{bourdieu}
+Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua qualidade de código comum é o que permite a todos os detentores deste código associar o mesmo sentido às mesmas obras e, de maneira recíproca, de exprimir a mesma intenção significante por intermédio das mesmas palavras, dos mesmos comportamentos e das mesmas obras, pode-se compreender por que \textbf{a Escola, incumbida de transmitir esta cultura, constitui o fator fundamental do consenso cultural} nos termos de uma participação de um senso comum entendido como condição da comunicação. \cite{bourdieu}
 \end{citacao}
 
 Na conferência V de *A Verdade e as Formas Jurídicas*, Foucault coloca a escola como um exemplo de instituição panóptica (ou de sequestro). Esse tipo de instituição exerce poder sobre os indivíduos em uma sociedade de três formas características: *vigilância* individual e contínua; *controle* através de punição e recompensa e; formação e transformação dos indivíduos em função de certas normas, o que Foucault chamou de *correção*. Podemos associar esse consenso cultural que Bourdieu trata ao tríplice aspecto das instituições panópticas na definição de Foucault, especificamente a *correção*.
 
 \begin{citacao}
 Na época atual, todas essas instituições --- fábrica, escola, hospital psiquiátrico, hospital, prisão --- têm por finalidade não excluir, mas, ao contrário, fixar os indivíduos. A fábrica não exclui os indivíduos; liga-os a um aparelho de produção. \textbf{A escola não exclui os indivíduos; mesmo fechando-os; ela os fixa a um aparelho de transmissão do saber}. O hospital psiquiátrico não exclui os indivíduos; liga-os a um aparelho de correção, a um aparelho de normalização dos indivíduos. O mesmo acontece com a casa de correção ou com a prisão. Mesmo se os efeitos dessas instituições são a exclusão
-do indivíduo, elas têm como finalidade primeira fixar os indivíduos em um aparelho de normalização dos homens. A fábrica, \textbf{a escola}, a prisão ou os hospitais \textbf{têm por objetivo ligar o indivíduo a um processo de produção, de formação ou de correção dos produtores. Trata-se de garantir a produção ou os produtores em função de uma determinada norma}. \citep[p.~114]{foucault}
+do indivíduo, elas têm como finalidade primeira fixar os indivíduos em um aparelho de normalização dos homens. A fábrica, \textbf{a escola}, a prisão ou os hospitais \textbf{têm por objetivo ligar o indivíduo a um processo de produção, de formação ou de correção dos produtores. Trata-se de garantir a produção ou os produtores em função de uma determinada norma}. \cite[p.~114]{foucault}
 \end{citacao}
 
 A primeira função da instituição panóptica é a extração da totalidade do tempo do indivíduo. É preciso que todo o tempo da existência humana esteja disponível ao trabalho, suas exigências ou sua preparação --- aí incluindo a educação, que os economistas chamam frequentemente de capital humano. Ao sequestrar o tempo do homem, ela transforma seu tempo de vida em tempo de trabalho. A segunda função é controlar seus corpos, fazendo com que o corpo do indivíduo se torne força de trabalho. Aqui o corpo humano deve ser formado, reformado, corrigido. Deve "adquirir aptidões, receber um certo número de qualidades, qualificar-se como um corpo capaz de trabalhar". 
@@ -569,13 +579,13 @@ A primeira função da instituição panóptica é a extração da totalidade do
 A terceira função é a criação de um micro-poder político, econômico e judiciário. A instituição panóptica se outorga o direito de decidir, comandar, punir, recompensar e julgar. E a escola não passa desapercebida:
 
 \begin{citacao}
-O sistema escolar também é inteiramente baseado em uma espécie de poder judiciário. A todo poder se pune e recompensa, se avalia, se classifica, se diz quem é o melhor, quem é o pior. [...] Por que, para ensinar alguma coisa a alguém, se deve punir e recompensar? Esse sistema parece evidente, mas, se refletirmos, vemos que a evidência se dissolve. \citep[p.~120]{foucault}
+O sistema escolar também é inteiramente baseado em uma espécie de poder judiciário. A todo poder se pune e recompensa, se avalia, se classifica, se diz quem é o melhor, quem é o pior. [...] Por que, para ensinar alguma coisa a alguém, se deve punir e recompensar? Esse sistema parece evidente, mas, se refletirmos, vemos que a evidência se dissolve. \cite[p.~120]{foucault}
 \end{citacao}
 
 Por fim, a quarta função é a extração do saber, tanto a partir da apropriação do conhecimento técnico e tecnológico produzido durante o labor, quanto da observação do comportamento dos indivíduos vigiados e controlados. Da mesma forma que as anteriores, essa função não é restrita às relações sociais do capitalismo moderno:
 
 \begin{citacao}
-A pedagogia se formou a partir das próprias adaptações da criança às tarefas escolares, adaptações observadas e extraídas do seu comportamento para tornarem-se em seguida leis de funcionamento das instituições e forma de poder exercido sobre a criança. \citep[p.~122]{foucault}
+A pedagogia se formou a partir das próprias adaptações da criança às tarefas escolares, adaptações observadas e extraídas do seu comportamento para tornarem-se em seguida leis de funcionamento das instituições e forma de poder exercido sobre a criança. \cite[p.~122]{foucault}
 \end{citacao}
 
 Esse conjunto de características tem como objetivo principal a *transformação dos homens em força produtiva*. É através desse micro-poder entranhado nas relações sociais de uma sociedade panóptica que o indivíduo é fixado ao aparelho de produção, e a escola é um instrumento essencial para a formação desse micro-poder.
