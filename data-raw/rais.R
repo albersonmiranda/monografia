@@ -67,13 +67,17 @@ rais = within(rais, {
     raca_cor = ifelse(raca_cor == "9", "nao_informado", raca_cor)
     sexo = relevel(as.factor(sexo), "feminino")
     raca_cor = relevel(as.factor(raca_cor), "preta")
+    cbo = relevel(as.factor(substr(cbo_2002, 1, 2)), "76")
+    cbo = cbo_2002
+    cbo_2002 = NULL
     vlr_rem = valor_remuneracao_media
     valor_remuneracao_media = NULL
-    gv = ifelse(
+    regiao = ifelse(
         id_municipio %in% c("3205309", "3205200", "3205002", "3201308"),
         "gv",
         "interior"
     )
+    regiao = relevel(as.factor(regiao), "interior")
 })
 
 # agregando em ciclos completos
@@ -83,8 +87,7 @@ rais = within(rais, {
     grau_instrucao = ifelse(grau_instrucao %in% c("fund_II_completo", "medio_incompleto"), "fund_II", grau_instrucao)
     grau_instrucao = ifelse(grau_instrucao %in% c("medio_completo", "superior_incompleto"), "medio", grau_instrucao)
     grau_instrucao = ifelse(grau_instrucao %in% c("superior_completo"), "superior", grau_instrucao)
-    grau = as.factor(grau_instrucao)
-    grau = relevel(grau, "nenhum")
+    grau = relevel(as.factor(grau_instrucao), "nenhum")
     grau_instrucao = NULL
 })
 

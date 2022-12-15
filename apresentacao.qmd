@@ -55,7 +55,9 @@ Estimar as relações escolaridade-renda no mercado de trabalho formal do Espír
 ## DADOS
 
 - Relação Anual das Informações Sociais (Rais)
+- Trabalhador formal
 - 2020
+- 768 030 observações
 - Base dos Dados \cite{basedosdados}
 
 ## DADOS
@@ -72,14 +74,13 @@ Variáveis de interesse
 
 ::: {.incremental}
 
-- Omissão da ocupação
+- Omissão da ocupação, indústria, renda dos pais, escolaridade dos pais etc
 
 "the whole point of getting an education is to help people move to better industries, not to move from assistant burger-flipper to chief burger-flipper \cite{cochrane}"
 
-- três propostas (robustez):
-    - modelo sem ocupação
-    - modelo com ocupação
-    - correção do viés com regressão auxiliar
+- duas propostas (robustez):
+    - modelo apenas com variáveis de interesse
+    - modelo com ocupação e região
 
 :::
 
@@ -97,7 +98,8 @@ kbl(
             "Idade",
             "Raça/Cor",
             "Sexo",
-            "Ocupação"
+            "Ocupação",
+            "Região"
         ),
         Valores = c(
             "ES",
@@ -106,7 +108,8 @@ kbl(
             "$>25$",
             "Branco, Preto, Pardo, Indígena ou Amarelo",
             "Masculino ou Feminino",
-            "46 ocupações do segundo nível de agregação da Classificação Brasileira de Ocupações (CBO)"
+            "46 ocupações do segundo nível de agregação da Classificação Brasileira de Ocupações (CBO)",
+            "Grande Vitória (Vitória, Vila Velha, Cariacica e Serra) ou Interior"
         )
     ),
     booktabs = TRUE,
@@ -128,7 +131,7 @@ anos = 2020
 rais = rais[rais$ano %in% anos, ]
 
 # estimação
-modelo = lm(
+modelo_1 = lm(
     # variável dependente
     log(vlr_rem) ~
     # variáveis dependentes
@@ -141,8 +144,8 @@ modelo = lm(
 
 # adicionando resíduos ao dataframe
 rais = within(rais, {
-    residuos = modelo$residuals
-    fitted = modelo$fitted.values
+    residuos_1 = modelo_1$residuals
+    fitted_1 = modelo_1$fitted.values
 })
 ```
 
@@ -158,184 +161,239 @@ $$log(\mathbfit{Y}) = \mathbfit{X\beta} + \mathbfit{u}$$
 
 ## EQUAÇÃO DO MODELO
 
-`r equatiomatic::extract_eq(modelo, wrap = TRUE, ital_vars = TRUE, terms_per_line = 2, intercept = "beta", font_size = "tiny")`
+`r equatiomatic::extract_eq(modelo_1, wrap = TRUE, ital_vars = TRUE, terms_per_line = 2, intercept = "beta", font_size = "tiny")`
 
 ## DIAGNÓSTICO
 
 - Heteroscedasticidade
 
-```{r}
+```{r plot heteroscedasticidade modelo 1}
 #| out.width: 80%
 
-rais[sample(nrow(rais), 1000),] |> ggplot(aes(x = fitted, y = residuos)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
+rais[sample(nrow(rais), 2000),] |> ggplot(aes(x = fitted_1, y = residuos_1)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
 ```
 
 ## DIAGNÓSTICO
 
 - Heteroscedasticidade
 
-```{r}
-lmtest::bptest(modelo)
+```{r teste bp modelo 1}
+lmtest::bptest(modelo_1)
 ```
 
 - Correção de White
 
 ## DIAGNÓSTICO
 
-- Evidência de variável importante omitida: alta correlação entre variável dependente e resíduos
+- Modelo bem especificado em relação à sua forma funcional
+```{r teste reset modelo 1}
+lmtest::resettest(modelo_1, type = "regressor")
+```
 
-```{r}
-#| out.width: 80%
+## INTERPRETAÇÃO
 
-rais[sample(nrow(rais), 1000),] |>
-ggplot(aes(x = log(vlr_rem), y = residuos)) +
-geom_point() +
-geom_smooth(method = "lm", se = FALSE) +
-annotate(
-    "text",
-    x = 9, y = -1,
-    label = paste(
-        "Pearson's Product-Moment Correlation",
-        round(
-            cor.test(rais$residuos, log(rais$vlr_rem))$estimate,
-            2
-        )
+```{r interpretacao modelo 1}
+#| output: asis
+
+# parâmetros
+stargazer::stargazer(
+    modelo_1,
+    modelo_1,
+    header = FALSE,
+    single.row = TRUE,
+    font.size = "tiny",
+    column.labels = c("non-robust", "Robust"),
+    omit.stat = c("n", "ser"),
+    se = list(
+        NULL,
+        lmtest::coeftest(modelo_1, vcov. = sandwich::vcovHC)[, 2]
     )
 )
 ```
 
 ## INTERPRETAÇÃO
 
-```{r}
+- Variáveis contínuas:
+
+$$ln(Y) = \beta_0 + \beta_1X_1$$
+
+Derivando ambos lados em relação a $X_1$:
+
+$$\frac{d\;ln(Y)}{d\;X_1} = 0 + \beta_1$$
+
+Pela regra da cadeia:
+
+$$
+\begin{aligned}
+\frac{1}{Y}Y' &= \beta_1\\
+\frac{Y'}{Y} &= \beta_1
+\end{aligned}
+$$
+
+Ou seja, $\beta_1$ é a variação relativa em $Y$ dada a variação unitária em $X$
+
+## INTERPRETAÇÃO
+
+- Variáveis binárias:
+
+$$ln(Y) = \beta_0 + \beta_1X_1$$
+
+Posso tomar a base $e$ que mantenho a coerência da equação:
+
+$$
+\begin{aligned}
+e^{ln(Y)} &= e^{\beta_0 + \beta_1X_1} \\
+Y &= e^{\beta_0}e^{\beta_1X_1}
+\end{aligned}
+$$
+
+Então,
+
+$$
+Y = 
+\begin{cases}
+e^{\beta_0} & \text{se $X_1=0$} \\
+e^{\beta_0}e^{\beta_1} & \text{se $X_1=1$}
+\end{cases}
+$$
+
+O efeito de $X_1 = 1$ é relativo, com peso $e^{\beta_1}$
+
+## INTERPRETAÇÃO
+
+- Variável contínua: idade
+    - a cada ano de idade, a renda aumenta 0,95% ($\beta$)
+
+- Variáveis categóricas: escolaridade
+    - completar ciclo fundamental: efeito de 17% na renda
+    - médio (1.4) x fundamental (1.17): efeito 20% maior
+    - superior (2.65) x médio: efeito 89% maior
+    - mestrado (3.47) x superior: efeito 31% maior
+    - doutorado (3.5) x mestrado: efeito 0,9% maior
+
+## INTERPRETAÇÃO
+
+- Variáveis categóricas: sexo/cor
+    - mulher e branca: 5% na renda
+    - homem: efeito de 31% na renda
+    - homem e branco: efeito de 45% na renda
+$$
+e^{0.268+0.049+0.056}
+$$
+
+# ESTIMAÇÃO 2
+
+## MODELAGEM COM OCUPAÇÃO E REGIÃO
+
+```{r modelo 2}
+
+# estimação
+modelo_2 = lm(
+    # variável dependente
+    log(vlr_rem) ~
+    # variáveis dependentes
+    grau + sexo + raca_cor + idade + idade^2 +
+    # interação
+    sexo * raca_cor +
+    # região
+    regiao +
+    # ocupação
+    cbo,
+    # dataset
+    data = rais
+)
+
+# adicionando resíduos ao dataframe
+rais = within(rais, {
+    residuos_2 = modelo_2$residuals
+    fitted_2 = modelo_2$fitted.values
+})
+```
+
+- *Baseline variables*:
+
+    - grau: nenhum
+    - raca_cor: preta
+    - sexo: feminino
+    - região: interior
+    - ocupação: 76
+        - 7 (trabalhadores da produção de bens e serviços industriais)
+        - 6 (trabalhadores da indústria têxtil, do curtimento, do vestuário e das artes gráficas)
+
+## DIAGNÓSTICO
+
+- Heteroscedasticidade
+
+```{r plot heteroscedasticidade modelo 2}
+#| out.width: 80%
+
+rais[sample(nrow(rais), 2000),] |> ggplot(aes(x = fitted_2, y = residuos_2)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
+```
+
+## DIAGNÓSTICO
+
+- Heteroscedasticidade
+
+```{r teste bp modelo 2}
+lmtest::bptest(modelo_2)
+```
+
+- Correção de White
+
+## DIAGNÓSTICO
+
+- Modelo bem especificado em relação à sua forma funcional
+```{r teste reset modelo 2}
+lmtest::resettest(modelo_2, type = "regressor")
+```
+
+## INTERPRETAÇÃO
+
+```{r interepretacao modelo 2}
 #| output: asis
 
 # parâmetros
 stargazer::stargazer(
-    modelo_corrigido,
+    modelo_2,
+    modelo_2,
     header = FALSE,
     single.row = TRUE,
     font.size = "tiny",
-    se_robust = lmtest::coeftest(modelo, vcov. = vcovHC)[, 2]
-)
-```
-
-# ESTIMAÇÃO 2
-
-## MODELAGEM COM OCUPAÇÃO
-
-- 
-
-## CORREÇÃO DO VIÉS
-
-- Especificação da regressão auxiliar
-
-$$
-log(\mathbfit{Y}) = \mathbfit{Z\theta} + \mathbfit{v}
-$$
-
-Em que:
-
-- $\mathbfit{Z}$ = vetor de 46 ocupações do segundo nível de agregação da Classificação Brasileira de Ocupações (CBO)
-- $\mathbfit{v}$ = termo do erro, que inclui todas as demais variáveis para a determinação da renda do trabalhador formal
-
-```{r}
-
-# estimação
-modelo_auxiliar = lm(
-    # variável dependente
-    log(vlr_rem) ~
-    # variáveis dependentes
-    grau + sexo + raca_cor + idade + idade^2 +
-    # interação
-    sexo * raca_cor +
-    # ocupações CBO
-    substr(cbo_2002, 1, 2),
-    # dataset
-    data = rais
-)
-
-# adicionando resíduos ao dataframe
-rais = within(rais, {
-    residuos_aux = modelo_auxiliar$residuals
-})
-```
-
-## CORREÇÃO DO VIÉS
-
-- Adição dos resíduos da regressão auxiliar ao modelo inicial
-
-$$
-log(\mathbfit{Y}) = \mathbfit{X\beta} + \mathbfit{v\gamma} + \mathbfit{u}
-$$
-
-Em que:
-
-- $\mathbfit{v}$ = vetor dos resíduos da regressão auxiliar
-- $\mathbfit{u}$ = termo do erro livre da influência de variável importante omitida. Espero que seja homoscedástico e não fortemente correlacionado com $log(\mathbfit{Y})$
-
-```{r}
-
-# estimação
-modelo_corrigido = lm(
-    # variável dependente
-    log(vlr_rem) ~
-    # variáveis dependentes
-    grau + sexo + raca_cor + idade + idade^2 +
-    # interação
-    sexo * raca_cor +
-    # instrumento
-    residuos_aux,
-    # dataset
-    data = rais
-)
-
-# adicionando resíduos ao dataframe
-rais = within(rais, {
-    residuos_corrigido = modelo_corrigido$residuals
-    fitted_corrigido = modelo_corrigido$fitted.values
-})
-```
-
-## CORREÇÃO DO VIÉS
-
-- Heteroscedasticidade?
-
-```{r}
-#| out.width: 80%
-
-rais[sample(nrow(rais), 1000),] |> ggplot(aes(x = fitted_corrigido, y = residuos_corrigido)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
-```
-
-## CORREÇÃO DO VIÉS
-
-- Heteroscedasticidade menos óbvia porém ainda presente
-
-```{r}
-lmtest::bptest(modelo_corrigido)
-```
-
-## CORREÇÃO DO VIÉS
-
-- Correlação moderada entre variável dependente e resíduos
-
-```{r}
-#| out.width: 80%
-
-rais[sample(nrow(rais), 1000),] |>
-ggplot(aes(x = log(vlr_rem), y = residuos_corrigido)) +
-geom_point() +
-geom_smooth(method = "lm", se = FALSE) +
-annotate(
-    "text",
-    x = 9, y = -1,
-    label = paste(
-        "Pearson's Product-Moment Correlation",
-        round(
-            cor.test(rais$residuos_corrigido, log(rais$vlr_rem))$estimate,
-            2
-        )
+    omit = "cbo",
+    column.labels = c("non-robust", "Robust"),
+    omit.stat = c("n", "ser"),
+    se = list(
+        NULL,
+        lmtest::coeftest(modelo_2, vcov. = sandwich::vcovHC)[, 2]
     )
 )
 ```
+
+## INTERPRETAÇÃO
+
+- Variável contínua: idade
+    - a cada ano de idade, a renda aumenta 1% ($\beta$)
+
+- Variáveis categóricas: escolaridade
+    - completar ciclo fundamental: efeito de 8% na renda
+    - médio (1.18) x fundamental (1.08): efeito 10% maior
+    - superior (1.85) x médio: efeito 57% maior
+    - mestrado (2.73) x superior: efeito 48% maior
+    - doutorado (3.03) x mestrado: efeito 11% maior
+
+## INTERPRETAÇÃO
+
+- Variáveis categóricas: sexo/cor
+    - mulher e branca: 3% na renda
+    - homem: efeito de 19% na renda
+    - homem e branco: efeito de 30% na renda
+
+- Variáveis categóricas: região
+    - grande vitória: 10% na renda
+
+- Variáveis categóricas: ocupação
+    - Profissionais das ciências exatas, físicas e da engenharia: efeito de 187% na renda
+    - Trabalhadores de instalações e máquinas de celulose e papel: efeito de 178% na renda
+
 
 # REFERÊNCIAS
