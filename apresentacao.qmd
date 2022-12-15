@@ -76,7 +76,10 @@ Variáveis de interesse
 
 "the whole point of getting an education is to help people move to better industries, not to move from assistant burger-flipper to chief burger-flipper \cite{cochrane}"
 
-- Correção com regressão auxiliar
+- três propostas (robustez):
+    - modelo sem ocupação
+    - modelo com ocupação
+    - correção do viés com regressão auxiliar
 
 :::
 
@@ -93,7 +96,8 @@ kbl(
             "Ciclo de Escolaridade",
             "Idade",
             "Raça/Cor",
-            "Sexo"
+            "Sexo",
+            "Ocupação"
         ),
         Valores = c(
             "ES",
@@ -101,7 +105,8 @@ kbl(
             "Analfabeto, Ensino Fundamental (I/II, completo/incompleto),  Ensino Médio (completo/incompleto), Ensino Superior (completo/incompleto), Mestrado ou Doutorado",
             "$>25$",
             "Branco, Preto, Pardo, Indígena ou Amarelo",
-            "Masculino ou Feminino"
+            "Masculino ou Feminino",
+            "46 ocupações do segundo nível de agregação da Classificação Brasileira de Ocupações (CBO)"
         )
     ),
     booktabs = TRUE,
@@ -110,11 +115,11 @@ kable_styling(latex_options = "striped", font_size = 8) |>
 column_spec(2, width = "30em")
 ```
 
-# DIAGNÓSTICO E CORREÇÃO
+# ESTIMAÇÃO 1
 
-## VERIFICAÇÃO DO VIÉS
+## MODELO
 
-```{r estimação 1}
+```{r modelo 1}
 
 # anos selecionados
 anos = 2020
@@ -148,14 +153,14 @@ $$log(\mathbfit{Y}) = \mathbfit{X\beta} + \mathbfit{u}$$
 - *Baseline variables*:
 
     - grau: nenhum
-    - raca_cor: branca
-    - sexo: masculino
+    - raca_cor: preta
+    - sexo: feminino
 
-## VERIFICAÇÃO DO VIÉS
+## EQUAÇÃO DO MODELO
 
 `r equatiomatic::extract_eq(modelo, wrap = TRUE, ital_vars = TRUE, terms_per_line = 2, intercept = "beta", font_size = "tiny")`
 
-## VERIFICAÇÃO DO VIÉS
+## DIAGNÓSTICO
 
 - Heteroscedasticidade
 
@@ -165,7 +170,7 @@ $$log(\mathbfit{Y}) = \mathbfit{X\beta} + \mathbfit{u}$$
 rais[sample(nrow(rais), 1000),] |> ggplot(aes(x = fitted, y = residuos)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
 ```
 
-## VERIFICAÇÃO DO VIÉS
+## DIAGNÓSTICO
 
 - Heteroscedasticidade
 
@@ -173,9 +178,11 @@ rais[sample(nrow(rais), 1000),] |> ggplot(aes(x = fitted, y = residuos)) + geom_
 lmtest::bptest(modelo)
 ```
 
-## VERIFICAÇÃO DO VIÉS
+- Correção de White
 
-- Alta correlação entre variável dependente e resíduos
+## DIAGNÓSTICO
+
+- Evidência de variável importante omitida: alta correlação entre variável dependente e resíduos
 
 ```{r}
 #| out.width: 80%
@@ -196,6 +203,27 @@ annotate(
     )
 )
 ```
+
+## INTERPRETAÇÃO
+
+```{r}
+#| output: asis
+
+# parâmetros
+stargazer::stargazer(
+    modelo_corrigido,
+    header = FALSE,
+    single.row = TRUE,
+    font.size = "tiny",
+    se_robust = lmtest::coeftest(modelo, vcov. = vcovHC)[, 2]
+)
+```
+
+# ESTIMAÇÃO 2
+
+## MODELAGEM COM OCUPAÇÃO
+
+- 
 
 ## CORREÇÃO DO VIÉS
 
@@ -307,22 +335,6 @@ annotate(
             2
         )
     )
-)
-```
-
-# INTERPRETAÇÃO
-
-## ESTIMAÇÃO
-
-```{r}
-#| output: asis
-
-# parâmetros
-stargazer::stargazer(
-    modelo_corrigido,
-    header = FALSE,
-    single.row = TRUE,
-    font.size = "tiny"
 )
 ```
 
