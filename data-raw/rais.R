@@ -65,8 +65,8 @@ rais = within(rais, {
     raca_cor = ifelse(raca_cor == "6", "amarela", raca_cor)
     raca_cor = ifelse(raca_cor == "8", "parda", raca_cor)
     raca_cor = ifelse(raca_cor == "9", "nao_informado", raca_cor)
-    sexo = relevel(as.factor(sexo), "masculino")
-    raca_cor = relevel(as.factor(raca_cor), "branca")
+    sexo = relevel(as.factor(sexo), "feminino")
+    raca_cor = relevel(as.factor(raca_cor), "preta")
     vlr_rem = valor_remuneracao_media
     valor_remuneracao_media = NULL
     gv = ifelse(
