@@ -476,7 +476,7 @@ Devido à omissão da variável ocupação, há erro de especificação no model
 ```{r estimação}
 
 # anos selecionados
-anos = c(2020, 2006)
+anos = c(2021, 2006)
 
 # subset
 rais = rais[rais$ano %in% anos, ]
@@ -514,24 +514,22 @@ modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
         data = rais[rais$ano == ano, ]
     )
 })
-
 ```
 
 ```{r}
 #| output: asis
 #| tbl-cap: "Estimação"
-#| 
 
 # parâmetros
 stargazer::stargazer(
-    modelos$m2020,
+    modelos$m2021,
     modelos$m2006,
     header = FALSE,
     align = TRUE,
     single.row = TRUE,
     font.size = "scriptsize",
     dep.var.labels = "log(remuneração)",
-    column.labels = c("2020", "2006")
+    column.labels = c("2021", "2006")
 )
 ```
 
