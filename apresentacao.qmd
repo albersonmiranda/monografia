@@ -1,18 +1,16 @@
 ---
-title: "Relações Escolaridade-Renda no ES"
-author: Alberson Miranda
+title: RELAÇÕES ESCOLARIDADE-RENDA E O PAPEL DA ESCOLA EM UMA SOCIEDADE PANÓPTICA
+subtitle: RESULTADO PRELIMINAR DE MONOGRAFIA
+author: Alberson Miranda, LiMat/IFES
 date: '`r format(Sys.Date(), "%B de %Y")`'
-navigation: horizontal
 format:
     beamer:
-        theme: "Madrid"
-        include-in-header: config/preamble_apresentacao.tex
+        include-in-header: config/apresentacao/preamble.tex
+        include-after-body: config/apresentacao/backmatter.tex
         output-file: render/apresentacao.pdf
-        toc: true
-        toc-title: SUMÁRIO
+        keep-tex: false
 execute:
     echo: false
-cite-method: biblatex
 ---
 
 ```{r config}
@@ -46,17 +44,98 @@ tema = theme_classic() +
 knitr::write_bib(file = "config/packages.bib")
 ```
 
-### OBJETIVO
+# CONTEXTUALIZAÇÃO DA PESQUISA
 
-Estimar as relações escolaridade-renda no mercado de trabalho formal do Espírito Santo, destacando o impacto de pertencer a substratos marginalizados da sociedade na determinação da renda do trabalhador
+## PROBLEMA DE PESQUISA
 
-# PROCEDIMENTOS METODOLÓGICOS
+\begin{block}{LINS E OS PCN}
+\justifying
+"Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior problema é a resistência do sistema em mudar." \parencite{lins_os_2020}
+\end{block}
+
+\begin{center}
+\large
+\textit{Por que é tão difícil colocar o sistema educacional em rota de mudança?}
+\end{center}
+
+## MICRO X MACRO
+
+![microestrutura educacional](img/micro.excalidraw.png){width=70%}
+
+## MICRO X MACRO
+
+![macroestrutura educacional](img/macro.excalidraw.png){width=70%}
+
+## HIPÓTESE
+
+![relação de subordinação do sistema educacional com a superestrutura capitalista](img/super.excalidraw.png){width=70%}
+
+## HIPÓTESE
+
+### A ESCOLA COMO INSTRUMENTO DE REPRODUÇÃO DO STATUS QUO
+\justifying
+A superestrutura capitalista, caracterizada principalmente pelas relações de produção e relações de propriedade \parencite{marx_manifesto_2015}, ou seja, pela propriedade privada dos meios de produção e pela *exploração do homem pelo homem*, limitam e restringem o sistema educacional de forma que a ação de mudança, mesmo no nível macro, não é capaz de extinguir a *participação do sistema educacional na reprodução das relações sociais e de poder vigentes* \parencite{rodrigues_sociologia_2007}.
+
+# A ESCOLA COMO INSTITUIÇÃO PANÓPTICA
+
+## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
+
+### PAN-ÓPTICO: A PRISÃO PERFEITA — SOCIEDADE DISCIPLINAR
+\justifying
+
+Ao contrário das sociedades pré-capitalistas, em que o indivíduo diferente era excluído (pária), na sociedade panóptica o indivíduo é ligado a um processo de produção, formação ou correção de produtores, visando a perpetução das relações sociais e de poder.
+
+## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
+
+A instituição panóptica (ou de sequestro) tem como objetivo final a *transformação dos homens em força produtiva* e exerce poder sobre os indivíduos de três formas \parencite{foucault_verdade_2002}:
+
+1. *vigilância* individual e contínua
+2. *controle* através de punição e recompensa
+3. formação e transformação de indivíduos — *correção*
+
+## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
+
+- Fábricas-prisões do séc. XIX
+- Manicômios
+- Prisão
+- Escola (ex.: Escola de Aprendizes e Artífices)
+
+## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
+
+4 funções:
+
+1. extração da totalidade do tempo do indivíduo (sequestro do tempo)
+    - transformação do tempo de vida em tempo de trabalho
+    - é preciso que todo tempo da existência humana esteja disponível ao trabalho, suas exigências ou sua preparação (educação)
+
+## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
+
+4 funções:
+
+2. controle dos corpos (sequestro do corpo)
+    - transformação do corpo em força de trabalho
+    - o corpo humano deve ser formado, reformado e corrigido
+    - deve adquirir aptidões, receber um certo número de qualidade, qualificar-se como um corpo capaz de trabalhar
+
+## BOURDIEU E O CONSENSO CULTURAL
+
+Bourdieu coloca o sistema educacional como um dos instrumentos mais eficazes de integração moral e lógica da sociedade, que tem como produto o indivíduo "programado" — homogêneo em percepção, pensamento e ação.
+
+## BOURDIEU E O CONSENSO CULTURAL
+
+### O QUE SIGNIFICA SER HOMOGÊNEO EM PERCEPÇÃO E PENSAMENTO?
+"Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua qualidade de código comum é o que permite a todos os detentores deste código associar o mesmo sentido às mesmas obras e, de maneira recíproca, de exprimir a mesma intenção significante por intermédio das mesmas palavras, dos mesmos comportamentos e das mesmas obras, pode-se compreender por que \textbf{a Escola, incumbida de transmitir esta cultura, constitui o fator fundamental do consenso cultural} nos termos de uma participação de um senso comum entendido como condição da comunicação." \parencite{bourdieu_sistemas_2015}
+
+# RELAÇÕES ESCOLARIDADE-RENDA NO ES
+
+###
+Como os efeitos da função social do sistema educacional (transformar)
 
 ## DADOS
 
 - Relação Anual das Informações Sociais (Rais)
 - Trabalhador formal
-- 2020
+- 202
 - 768 030 observações
 - Base dos Dados \cite{basedosdados}
 
@@ -69,20 +148,6 @@ Variáveis de interesse
 3. idade
 4. raça/cor
 5. sexo
-
-## VIÉS DE VARIÁVEL OMITIDA
-
-::: {.incremental}
-
-- Omissão da ocupação, indústria, renda dos pais, escolaridade dos pais etc
-
-"the whole point of getting an education is to help people move to better industries, not to move from assistant burger-flipper to chief burger-flipper \cite{cochrane}"
-
-- duas propostas (robustez):
-    - modelo apenas com variáveis de interesse
-    - modelo com ocupação e região
-
-:::
 
 ## DADOS
 
@@ -158,37 +223,6 @@ $$log(\mathbfit{Y}) = \mathbfit{X\beta} + \mathbfit{u}$$
     - grau: nenhum
     - raca_cor: preta
     - sexo: feminino
-
-## EQUAÇÃO DO MODELO
-
-`r equatiomatic::extract_eq(modelo_1, wrap = TRUE, ital_vars = TRUE, terms_per_line = 2, intercept = "beta", font_size = "tiny")`
-
-## DIAGNÓSTICO
-
-- Heteroscedasticidade
-
-```{r plot heteroscedasticidade modelo 1}
-#| out.width: 80%
-
-rais[sample(nrow(rais), 2000),] |> ggplot(aes(x = fitted_1, y = residuos_1)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
-```
-
-## DIAGNÓSTICO
-
-- Heteroscedasticidade
-
-```{r teste bp modelo 1}
-lmtest::bptest(modelo_1)
-```
-
-- Correção de White
-
-## DIAGNÓSTICO
-
-- Modelo bem especificado em relação à sua forma funcional
-```{r teste reset modelo 1}
-lmtest::resettest(modelo_1, type = "regressor")
-```
 
 ## INTERPRETAÇÃO
 
@@ -281,119 +315,36 @@ $$
 e^{0.268+0.049+0.056}
 $$
 
-# ESTIMAÇÃO 2
+# CONSIDERAÇÕES FINAIS
 
-## MODELAGEM COM OCUPAÇÃO E REGIÃO
+## O PAPEL DA ESCOLA EM UMA SOCIEDADE PANÓPTICA
 
-```{r modelo 2}
+- Como a educação pode ser libertadora enquanto o sistema educacional tem o papel de preparar o indivíduo para abrir mão de seu tempo, corpo e mente?
 
-# estimação
-modelo_2 = lm(
-    # variável dependente
-    log(vlr_rem) ~
-    # variáveis dependentes
-    grau + sexo + raca_cor + idade + idade^2 +
-    # interação
-    sexo * raca_cor +
-    # região
-    regiao +
-    # ocupação
-    cbo,
-    # dataset
-    data = rais
-)
+- Como a ação macro pode ser construtivista ao mesmo tempo em que é incumbida de estabelecer o consenso cultural? — o aluno deve ser independente, resolver problemas, levantar questões, construir seu próprio conhecimento, *desde que chegue no mesmo lugar que os demais*
 
-# adicionando resíduos ao dataframe
-rais = within(rais, {
-    residuos_2 = modelo_2$residuals
-    fitted_2 = modelo_2$fitted.values
-})
-```
+## O PAPEL DA ESCOLA EM UMA SOCIEDADE PANÓPTICA
 
-- *Baseline variables*:
+- Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência
 
-    - grau: nenhum
-    - raca_cor: preta
-    - sexo: feminino
-    - região: interior
-    - ocupação: 76
-        - 7 (trabalhadores da produção de bens e serviços industriais)
-        - 6 (trabalhadores da indústria têxtil, do curtimento, do vestuário e das artes gráficas)
+- Apenas no momento em que a escola não mais existir para normalizar o indivíduo é que ela perderá sua razão de ser numa sociedade panóptica e será livre para se tornar algo diferente — e de fato libertadora
 
-## DIAGNÓSTICO
+## O PAPEL DO PROFESSOR NUMA SOCIEDADE PANÓPTICA
 
-- Heteroscedasticidade
-
-```{r plot heteroscedasticidade modelo 2}
-#| out.width: 80%
-
-rais[sample(nrow(rais), 2000),] |> ggplot(aes(x = fitted_2, y = residuos_2)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
-```
-
-## DIAGNÓSTICO
-
-- Heteroscedasticidade
-
-```{r teste bp modelo 2}
-lmtest::bptest(modelo_2)
-```
-
-- Correção de White
-
-## DIAGNÓSTICO
-
-- Modelo bem especificado em relação à sua forma funcional
-```{r teste reset modelo 2}
-lmtest::resettest(modelo_2, type = "regressor")
-```
-
-## INTERPRETAÇÃO
-
-```{r interepretacao modelo 2}
-#| output: asis
-
-# parâmetros
-stargazer::stargazer(
-    modelo_2,
-    modelo_2,
-    header = FALSE,
-    single.row = TRUE,
-    font.size = "tiny",
-    omit = "cbo",
-    column.labels = c("non-robust", "Robust"),
-    omit.stat = c("n", "ser"),
-    se = list(
-        NULL,
-        lmtest::coeftest(modelo_2, vcov. = sandwich::vcovHC)[, 2]
-    )
-)
-```
-
-## INTERPRETAÇÃO
-
-- Variável contínua: idade
-    - a cada ano de idade, a renda aumenta 1% ($\beta$)
-
-- Variáveis categóricas: escolaridade
-    - completar ciclo fundamental: efeito de 8% na renda
-    - médio (1.18) x fundamental (1.08): efeito 10% maior
-    - superior (1.85) x médio: efeito 57% maior
-    - mestrado (2.73) x superior: efeito 48% maior
-    - doutorado (3.03) x mestrado: efeito 11% maior
-
-## INTERPRETAÇÃO
-
-- Variáveis categóricas: sexo/cor
-    - mulher e branca: 3% na renda
-    - homem: efeito de 19% na renda
-    - homem e branco: efeito de 30% na renda
-
-- Variáveis categóricas: região
-    - grande vitória: 10% na renda
-
-- Variáveis categóricas: ocupação
-    - Profissionais das ciências exatas, físicas e da engenharia: efeito de 187% na renda
-    - Trabalhadores de instalações e máquinas de celulose e papel: efeito de 178% na renda
-
+### O QUE É SER UM BOM PROFESSOR?
+\justifying
+Enquanto a medida de sucesso do professor e da escola for ligar o indivíduo a um processo de produção, quanto mais eficiente for o professor, mais rápido ele irá transformar o indivíduo em força produtiva.
 
 # REFERÊNCIAS
+
+## BIBLIOGRAFIA
+
+BOURDIEU, P. Sistemas de Ensino e Sistemas de Pensamento. Em: A Economia das Trocas Simbólicas. 8. ed. São Paulo: Perspectiva, 2015.
+
+FOUCAULT, M. A Verdade e as Formas Jurídicas. 3. ed. [s.l.] NAU Editora, 2002.
+
+LINS, R. C. Os PCN e a Educação Matemática no Brasil. Em: O Modelo dos Campos Semânticos na Educação Básica. 1. ed. Curitiba, PR: Appris, 2020. 
+
+MARX, K.; ENGELS, F. Manifesto comunista. [s.l.] Boitempo Editorial, 2015. 
+
+RODRIGUES, A. T. Sociologia da Educação. [s.l.] LAMPARINA, 2007. 
