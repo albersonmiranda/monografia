@@ -87,7 +87,7 @@ Ao contrário das sociedades pré-capitalistas, em que o indivíduo diferente er
 
 ## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
 
-A instituição panóptica (ou de sequestro) tem como objetivo final a *transformação dos homens em força produtiva* e exerce poder sobre os indivíduos de três formas \parencite{foucault_verdade_2002}:
+A instituição panóptica (ou de sequestro) tem como objetivo final a *transformação dos homens em força produtiva* e exerce poder sobre os indivíduos de três formas \parencite{foucault_verdade_2013}:
 
 1. *vigilância* individual e contínua
 2. *controle* através de punição e recompensa
@@ -110,12 +110,28 @@ A instituição panóptica (ou de sequestro) tem como objetivo final a *transfor
 
 ## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
 
-4 funções:
-
 2. controle dos corpos (sequestro do corpo)
     - transformação do corpo em força de trabalho
     - o corpo humano deve ser formado, reformado e corrigido
     - deve adquirir aptidões, receber um certo número de qualidade, qualificar-se como um corpo capaz de trabalhar
+
+## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
+
+3. criação de um micro-poder político, econômico e judiciário
+
+> O sistema escolar também é inteiramente baseado em uma espécie de poder judiciário. A todo poder se pune e recompensa, se avalia, se classifica, se diz quem é o melhor, quem é o pior. [...] Por que, para ensinar alguma coisa a alguém, se deve punir e recompensar? Esse sistema parece evidente, mas, se refletirmos, vemos que a evidência se dissolve. \parencite{foucault_verdade_2013}
+
+- Lins: educação física *por meio* de esportes X educação física *para* esportes
+- Educar *pela* matemática X educar *para* a matemática
+
+## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
+
+4. extração do saber
+
+    - através da apropriação do conhecimento técnico e tecnológico produzido durante o labor, e;
+    - da observação do comportamento dos indivíduos controlados e vigiados
+
+> A pedagogia se formou a partir das próprias adaptações da criança às tarefas escolares, adaptações observadas e extraídas do seu comportamento para tornarem-se em seguida leis de funcionamento das instituições e forma de poder exercido sobre a criança. \parencite{foucault_verdade_2013}
 
 ## BOURDIEU E O CONSENSO CULTURAL
 
@@ -128,16 +144,19 @@ Bourdieu coloca o sistema educacional como um dos instrumentos mais eficazes de 
 
 # RELAÇÕES ESCOLARIDADE-RENDA NO ES
 
-###
-Como os efeitos da função social do sistema educacional (transformar)
+## PROBLEMA DE PESQUISA
+
+Como os efeitos da função social do sistema educacional (transformação do homem em força produtiva) se manifestam nas relações escolaridade-renda no ES?
+
+### TODA AÇÃO PEDAGÓGICA É UMA VIOLÊNCIA SIMBÓLICA
+Para Bordieu, "A instituição escolar dissimula por trás de sua aparente neutralidade a reprodução das relações sociais e de poder vigentes. Encobertos sob as aparências de critérios puramente escolares, estão critérios sociais de triagem e de seleção dos indivíduos para ocupar determinados postos na vida." \parencite{rodrigues_sociologia_2007}
 
 ## DADOS
 
 - Relação Anual das Informações Sociais (Rais)
 - Trabalhador formal
-- 202
+- 2021
 - 768 030 observações
-- Base dos Dados \cite{basedosdados}
 
 ## DADOS
 
@@ -151,8 +170,8 @@ Variáveis de interesse
 
 ## DADOS
 
-- Possíveis valores para as variáveis selecionadas da Rais
 ```{r possiveis valores rais}
+#| tbl-cap: Possíveis valores para as variáveis selecionadas da Rais
 
 kbl(
     data.frame(
@@ -183,35 +202,33 @@ kable_styling(latex_options = "striped", font_size = 8) |>
 column_spec(2, width = "30em")
 ```
 
-# ESTIMAÇÃO 1
-
 ## MODELO
 
 ```{r modelo 1}
 
-# anos selecionados
-anos = 2020
-
-# subset
-rais = rais[rais$ano %in% anos, ]
-
-# estimação
+# estimação 2008
 modelo_1 = lm(
     # variável dependente
     log(vlr_rem) ~
     # variáveis dependentes
     grau + sexo + raca_cor + idade + idade^2 +
     # interação
-    sexo * raca_cor,
+    sexo * raca_cor + sexo * grau + raca_cor * grau,
     # dataset
-    data = rais
+    data = rais[rais$ano == 2008, ]
 )
 
-# adicionando resíduos ao dataframe
-rais = within(rais, {
-    residuos_1 = modelo_1$residuals
-    fitted_1 = modelo_1$fitted.values
-})
+# estimação 2021
+modelo_2 = lm(
+    # variável dependente
+    log(vlr_rem) ~
+    # variáveis dependentes
+    grau + sexo + raca_cor + idade + idade^2 +
+    # interação
+    sexo * raca_cor + sexo * grau + raca_cor * grau,
+    # dataset
+    data = rais[rais$ano == 2021, ]
+)
 ```
 
 - Especificação inicial: log-linear
@@ -228,25 +245,41 @@ $$log(\mathbfit{Y}) = \mathbfit{X\beta} + \mathbfit{u}$$
 
 ```{r interpretacao modelo 1}
 #| output: asis
+#| tbl-cap: resultados
 
 # parâmetros
 stargazer::stargazer(
     modelo_1,
-    modelo_1,
+    modelo_2,
+    omit = c(
+        "graufund",
+        "amarela",
+        "indigena",
+        "parda",
+        "graumedio"
+    ),
+    omit.labels = c(
+        "graufund",
+        "amarela",
+        "indigena",
+        "parda",
+        "graumedio"
+    ),
     header = FALSE,
     single.row = TRUE,
     font.size = "tiny",
-    column.labels = c("non-robust", "Robust"),
+    column.labels = c("2008", "2021"),
     omit.stat = c("n", "ser"),
     se = list(
-        NULL,
-        lmtest::coeftest(modelo_1, vcov. = sandwich::vcovHC)[, 2]
+        lmtest::coeftest(modelo_1, vcov. = sandwich::vcovHC)[, 2],
+        lmtest::coeftest(modelo_2, vcov. = sandwich::vcovHC)[, 2]
     )
 )
 ```
 
 ## INTERPRETAÇÃO
 
+\footnotesize
 - Variáveis contínuas:
 
 $$ln(Y) = \beta_0 + \beta_1X_1$$
@@ -339,12 +372,13 @@ Enquanto a medida de sucesso do professor e da escola for ligar o indivíduo a u
 
 ## BIBLIOGRAFIA
 
-BOURDIEU, P. Sistemas de Ensino e Sistemas de Pensamento. Em: A Economia das Trocas Simbólicas. 8. ed. São Paulo: Perspectiva, 2015.
+BOURDIEU, P. Sistemas de Ensino e Sistemas de Pensamento. Em: A Economia das Trocas Simbólicas. 8. ed. São Paulo: Perspectiva, 2015. 
 
-FOUCAULT, M. A Verdade e as Formas Jurídicas. 3. ed. [s.l.] NAU Editora, 2002.
+FOUCAULT, M. A Verdade E As Formas Jurídicas. 4ª edição ed. Rio de Janeiro: NAU, 2013. 
 
 LINS, R. C. Os PCN e a Educação Matemática no Brasil. Em: O Modelo dos Campos Semânticos na Educação Básica. 1. ed. Curitiba, PR: Appris, 2020. 
 
-MARX, K.; ENGELS, F. Manifesto comunista. [s.l.] Boitempo Editorial, 2015. 
+MARX, K.; ENGELS, F. Manifesto comunista. São Paulo: Boitempo Editorial, 2015. 
 
-RODRIGUES, A. T. Sociologia da Educação. [s.l.] LAMPARINA, 2007. 
+RODRIGUES, A. T. Sociologia da Educação. Rio de Janeiro: Lamparina, 2007. 
+
