@@ -357,7 +357,7 @@ tibble::tribble(
 ### POR QUE É TÃO DIFÍCIL MUDAR O SISTEMA EDUCACIONAL?
 \justifying
 
-- Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência e memso a ação no nível macro é limitada
+- Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência e mesmo a ação no nível macro é limitada
 
 - Com a redução dos efeitos do sistema educacional na reprodução das relações sociais vigentes, aumenta a resposta da classe dominante (ex.: privatizações, sucateamento, novo ensino médio)
 
