@@ -58,6 +58,8 @@ knitr::write_bib(file = "config/packages.bib")
 \textit{Por que é tão difícil colocar o sistema educacional em rota de mudança?}
 \end{center}
 
+OBJETIVO: responder essa pergunta a partir de Marx, Bourdieu e Foucault, e gerar outras a partir dos dados de escolaridade e renda no ES
+
 ## MICRO X MACRO
 
 ![microestrutura educacional](img/micro.excalidraw.png){width=70%}
@@ -146,19 +148,19 @@ Bourdieu coloca o sistema educacional como um dos instrumentos mais eficazes de 
 
 ## PROBLEMA DE PESQUISA
 
-Como os efeitos da função social do sistema educacional (transformação do homem em força produtiva) se manifestam nas relações escolaridade-renda no ES?
+Como os efeitos da função social do sistema educacional (transformação do homem em força produtiva) se manifestam nas relações escolaridade-renda de diferentes substratos demográficos e como eles mudaram nos últimos 15 anos no ES?
 
 ### TODA AÇÃO PEDAGÓGICA É UMA VIOLÊNCIA SIMBÓLICA
 Para Bordieu, "A instituição escolar dissimula por trás de sua aparente neutralidade a reprodução das relações sociais e de poder vigentes. Encobertos sob as aparências de critérios puramente escolares, estão critérios sociais de triagem e de seleção dos indivíduos para ocupar determinados postos na vida." \parencite{rodrigues_sociologia_2007}
 
-## DADOS
+## METODOLOGIA
 
 - Relação Anual das Informações Sociais (Rais)
 - Trabalhador formal
-- 2021
-- 768 030 observações
+- 2006 e 2021
+- 1.424.464 observações
 
-## DADOS
+## METODOLOGIA
 
 Variáveis de interesse
 
@@ -206,7 +208,7 @@ column_spec(2, width = "30em")
 
 ```{r modelo 1}
 
-# estimação 2008
+# estimação 2006
 modelo_1 = lm(
     # variável dependente
     log(vlr_rem) ~
@@ -215,7 +217,7 @@ modelo_1 = lm(
     # interação
     sexo * raca_cor + sexo * grau + raca_cor * grau,
     # dataset
-    data = rais[rais$ano == 2008, ]
+    data = rais[rais$ano == 2006, ]
 )
 
 # estimação 2021
@@ -235,44 +237,37 @@ modelo_2 = lm(
 
 $$log(\mathbfit{Y}) = \mathbfit{X\beta} + \mathbfit{u}$$
 
-- *Baseline variables*:
+- Fatores de referência:
 
-    - grau: nenhum
+    - grau: sem escolaridade
     - raca_cor: preta
     - sexo: feminino
 
 ## INTERPRETAÇÃO
 
-```{r interpretacao modelo 1}
+```{r interpretacao 1}
 #| output: asis
-#| tbl-cap: resultados
+#| tbl-cap: resultados da regressão
 
 # parâmetros
 stargazer::stargazer(
     modelo_1,
     modelo_2,
-    omit = c(
-        "graufund",
-        "amarela",
-        "indigena",
-        "parda",
-        "graumedio"
-    ),
-    omit.labels = c(
-        "graufund",
-        "amarela",
-        "indigena",
-        "parda",
-        "graumedio"
-    ),
+    keep = 1:12,
     header = FALSE,
     single.row = TRUE,
     font.size = "tiny",
-    column.labels = c("2008", "2021"),
+    column.labels = c("2006", "2021"),
     omit.stat = c("n", "ser"),
     se = list(
-        lmtest::coeftest(modelo_1, vcov. = sandwich::vcovHC)[, 2],
-        lmtest::coeftest(modelo_2, vcov. = sandwich::vcovHC)[, 2]
+        lmtest::coeftest(
+            modelo_1,
+            vcov. = sandwich::vcovHC(modelo_1, type = "HC1")
+        )[, 2],
+        lmtest::coeftest(
+            modelo_2,
+            vcov. = sandwich::vcovHC(modelo_2, type = "HC1")
+        )[, 2]
     )
 )
 ```
@@ -328,45 +323,45 @@ O efeito de $X_1 = 1$ é relativo, com peso $e^{\beta_1}$
 
 ## INTERPRETAÇÃO
 
-- Variável contínua: idade
-    - a cada ano de idade, a renda aumenta 0,95% ($\beta$)
+```{r efeito medio educacao}
+#| tbl-cap: efeito médio da educação
 
-- Variáveis categóricas: escolaridade
-    - completar ciclo fundamental: efeito de 17% na renda
-    - médio (1.4) x fundamental (1.17): efeito 20% maior
-    - superior (2.65) x médio: efeito 89% maior
-    - mestrado (3.47) x superior: efeito 31% maior
-    - doutorado (3.5) x mestrado: efeito 0,9% maior
+tibble::tribble(
+    ~Variável, ~`2006`, ~`2021`,
+    "fundamental II", 1.22, 1.12,
+    "médio", 1.53, 1.36,
+    "graduação", 3, 2.08,
+    "mestrado", 4.99, 2.78,
+    "doutorado", 4.93, 2.17
+) |> kbl()
+```
 
 ## INTERPRETAÇÃO
 
-- Variáveis categóricas: sexo/cor
-    - mulher e branca: 5% na renda
-    - homem: efeito de 31% na renda
-    - homem e branco: efeito de 45% na renda
-$$
-e^{0.268+0.049+0.056}
-$$
+```{r efeito medio cor e genero}
+#| tbl-cap: efeito médio em substratos favorecidos
+
+tibble::tribble(
+    ~Variável, ~`2006`, ~`2021`,
+    "homem", 1.31, 1.19,
+    "homem branco", 1.39, 1.30,
+    "homem, branco, graduação", 5.68, 3.97,
+    "homem, branco, doutorado", 7.2, 5.35
+) |> kbl()
+```
 
 # CONSIDERAÇÕES FINAIS
 
 ## O PAPEL DA ESCOLA EM UMA SOCIEDADE PANÓPTICA
 
-- Como a educação pode ser libertadora enquanto o sistema educacional tem o papel de preparar o indivíduo para abrir mão de seu tempo, corpo e mente?
-
-- Como a ação macro pode ser construtivista ao mesmo tempo em que é incumbida de estabelecer o consenso cultural? — o aluno deve ser independente, resolver problemas, levantar questões, construir seu próprio conhecimento, *desde que chegue no mesmo lugar que os demais*
-
-## O PAPEL DA ESCOLA EM UMA SOCIEDADE PANÓPTICA
-
-- Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência
-
-- Apenas no momento em que a escola não mais existir para normalizar o indivíduo é que ela perderá sua razão de ser numa sociedade panóptica e será livre para se tornar algo diferente — e de fato libertadora
-
-## O PAPEL DO PROFESSOR NUMA SOCIEDADE PANÓPTICA
-
-### O QUE É SER UM BOM PROFESSOR?
+### POR QUE É TÃO DIFÍCIL MUDAR O SISTEMA EDUCACIONAL?
 \justifying
-Enquanto a medida de sucesso do professor e da escola for ligar o indivíduo a um processo de produção, quanto mais eficiente for o professor, mais rápido ele irá transformar o indivíduo em força produtiva.
+
+- Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência e memso a ação no nível macro é limitada
+
+- Com a redução dos efeitos do sistema educacional na reprodução das relações sociais vigentes, aumenta a resposta da classe dominante (ex.: privatizações, sucateamento, novo ensino médio)
+
+- Apenas no momento em que a escola não mais existir para normalizar o indivíduo e reproduzir as relações de poder vigentes é que ela perderá sua razão de ser numa sociedade panóptica e será livre para se tornar algo diferente — e de fato libertadora
 
 # REFERÊNCIAS
 
