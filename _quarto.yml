@@ -1,0 +1,21 @@
+project:
+  title: "monografia"
+  post-render:
+    - config/clean.r
+
+author: ALBERSON DA SILVA MIRANDA
+date: last-modified
+date-format: "YYYY"
+
+number-sections: true
+cite-method: biblatex
+biblio-title: REFERÊNCIAS
+link-citations: true
+crossref:
+  fig-prefix: Figura
+  tbl-prefix: Tabela
+  eq-prefix: Equação
+  lof-title: LISTA DE FIGURAS
+  lot-title: LISTA DE TABELAS
+execute:
+  echo: false
