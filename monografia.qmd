@@ -42,7 +42,7 @@ tema = theme_classic() +
     )
 
 # gerar bibliografia de pacotes
-knitr::write_bib(file = "config/packages.bib")
+knitr::write_bib(file = "config/elementos/packages.bib")
 ```
 
 # INTRODUÇÃO
@@ -55,13 +55,13 @@ Em seu texto acerca dos Parâmetros Curriculares Nacionais --- PCN, o professor 
 
 \begin{citacao}
 Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior
-problema é a resistência do sistema em mudar. \cite{lins}
+problema é a resistência do sistema em mudar. \cite{lins_os_2020}
 \end{citacao}
 
 Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o que ele chamou de *micro*, não é suficiente para colocar o sistema educacional em rota de mudança. Paralelamente, deve ser realizado um trabalho estrutural na esfera *macro* --- aqui, principalmente, o MEC --- que possibilite uma mudança do educar *pela* matemática para o educar *para* a matemática. Essa diferença é ilustrada por Lins da seguinte forma:
 
 \begin{citacao}
-A diferença fica bastante mais clara se pensamos no caso da Educação Física. Será que alguém concebe que o papel das aulas de Educação Física é preparar todas as crianças (todas, eu disse) para o esporte competitivo? Claro que não. Se assim fosse as aulas de Educação Física não representariam, na formação das crianças, a educação para a saúde, para o desenvolvimento motor, para a socialização e o respeito a regras, para a colaboração. E os que quiserem ser atletas e jogadores vão buscar esta formação específica em outros espaços (possivelmente dentro dos times competitivos de suas escolas ou em clubes). Podemos dizer que a Educação Física escolar se concentra em modos de ser, promovendo aquela educação POR MEIO de esportes e exercícios físicos, enquanto o Treinamento Esportivo se concentra em potencializar habilidades, fazendo isso por meio da aquisição de técnicas específicas. \cite{lins}
+A diferença fica bastante mais clara se pensamos no caso da Educação Física. Será que alguém concebe que o papel das aulas de Educação Física é preparar todas as crianças (todas, eu disse) para o esporte competitivo? Claro que não. Se assim fosse as aulas de Educação Física não representariam, na formação das crianças, a educação para a saúde, para o desenvolvimento motor, para a socialização e o respeito a regras, para a colaboração. E os que quiserem ser atletas e jogadores vão buscar esta formação específica em outros espaços (possivelmente dentro dos times competitivos de suas escolas ou em clubes). Podemos dizer que a Educação Física escolar se concentra em modos de ser, promovendo aquela educação POR MEIO de esportes e exercícios físicos, enquanto o Treinamento Esportivo se concentra em potencializar habilidades, fazendo isso por meio da aquisição de técnicas específicas. \cite{lins_os_2020}
 \end{citacao}
 
 A mudança, então, deixa de ter como meio apenas a sala de aula; o problema norteador da educação matemática como disciplina deixa de ser apenas, por exemplo, se o aluno deve ou não estudar geometrias não euclidianas no ensino médio, ou seja, unicamente conteúdos, e se expande para questionar o próprio objetivo do ensino da matemática, ou melhor, *através* da matemática.
@@ -71,14 +71,14 @@ Quando o autor propõe uma educação "formativa e com o objetivo de permitir qu
 Em *Sistemas de Ensino e Sistemas de Pensamento*, Pierre Bourdieu coloca o sistema educacional como um dos instrumentos mais eficazes de integração moral e lógica da sociedade, que tem como produto o indivíduo "programado" — homogêneo em percepção, pensamento e ação:
 
 \begin{citacao}
-Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua qualidade de código comum é o que permite a todos os detentores deste código associar o mesmo sentido às mesmas obras e, de maneira recíproca, de exprimir a mesma intenção significante por intermédio das mesmas palavras, dos mesmos comportamentos e das mesmas obras, pode-se compreender por que \textbf{a Escola, incumbida de transmitir esta cultura, constitui o fator fundamental do consenso cultural} nos termos de uma participação de um senso comum entendido como condição da comunicação. \cite{bourdieu}
+Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua qualidade de código comum é o que permite a todos os detentores deste código associar o mesmo sentido às mesmas obras e, de maneira recíproca, de exprimir a mesma intenção significante por intermédio das mesmas palavras, dos mesmos comportamentos e das mesmas obras, pode-se compreender por que \textbf{a Escola, incumbida de transmitir esta cultura, constitui o fator fundamental do consenso cultural} nos termos de uma participação de um senso comum entendido como condição da comunicação. \cite{bourdieu_sistemas_2015}
 \end{citacao}
 
 Na conferência V de *A Verdade e as Formas Jurídicas*, Foucault coloca a escola como um exemplo de instituição panóptica (ou de sequestro). Esse tipo de instituição exerce poder sobre os indivíduos em uma sociedade de três formas características: *vigilância* individual e contínua; *controle* através de punição e recompensa e; formação e transformação dos indivíduos em função de certas normas, o que Foucault chamou de *correção*. Podemos associar esse consenso cultural que Bourdieu trata ao tríplice aspecto das instituições panópticas na definição de Foucault, especificamente a *correção*.
 
 \begin{citacao}
 Na época atual, todas essas instituições --- fábrica, escola, hospital psiquiátrico, hospital, prisão --- têm por finalidade não excluir, mas, ao contrário, fixar os indivíduos. A fábrica não exclui os indivíduos; liga-os a um aparelho de produção. \textbf{A escola não exclui os indivíduos; mesmo fechando-os; ela os fixa a um aparelho de transmissão do saber}. O hospital psiquiátrico não exclui os indivíduos; liga-os a um aparelho de correção, a um aparelho de normalização dos indivíduos. O mesmo acontece com a casa de correção ou com a prisão. Mesmo se os efeitos dessas instituições são a exclusão
-do indivíduo, elas têm como finalidade primeira fixar os indivíduos em um aparelho de normalização dos homens. A fábrica, \textbf{a escola}, a prisão ou os hospitais \textbf{têm por objetivo ligar o indivíduo a um processo de produção, de formação ou de correção dos produtores. Trata-se de garantir a produção ou os produtores em função de uma determinada norma}. \cite[p.~114]{foucault}
+do indivíduo, elas têm como finalidade primeira fixar os indivíduos em um aparelho de normalização dos homens. A fábrica, \textbf{a escola}, a prisão ou os hospitais \textbf{têm por objetivo ligar o indivíduo a um processo de produção, de formação ou de correção dos produtores. Trata-se de garantir a produção ou os produtores em função de uma determinada norma}. \cite[p.~114]{foucault_verdade_2013}
 \end{citacao}
 
 A primeira função da instituição panóptica é a extração da totalidade do tempo do indivíduo. É preciso que todo o tempo da existência humana esteja disponível ao trabalho, suas exigências ou sua preparação --- aí incluindo a educação, que os economistas chamam frequentemente de capital humano. Ao sequestrar o tempo do homem, ela transforma seu tempo de vida em tempo de trabalho. A segunda função é controlar seus corpos, fazendo com que o corpo do indivíduo se torne força de trabalho. Aqui o corpo humano deve ser formado, reformado, corrigido. Deve "adquirir aptidões, receber um certo número de qualidades, qualificar-se como um corpo capaz de trabalhar". 
@@ -86,13 +86,13 @@ A primeira função da instituição panóptica é a extração da totalidade do
 A terceira função é a criação de um micro-poder político, econômico e judiciário. A instituição panóptica se outorga o direito de decidir, comandar, punir, recompensar e julgar. E a escola não passa desapercebida:
 
 \begin{citacao}
-O sistema escolar também é inteiramente baseado em uma espécie de poder judiciário. A todo poder se pune e recompensa, se avalia, se classifica, se diz quem é o melhor, quem é o pior. [...] Por que, para ensinar alguma coisa a alguém, se deve punir e recompensar? Esse sistema parece evidente, mas, se refletirmos, vemos que a evidência se dissolve. \cite[p.~120]{foucault}
+O sistema escolar também é inteiramente baseado em uma espécie de poder judiciário. A todo poder se pune e recompensa, se avalia, se classifica, se diz quem é o melhor, quem é o pior. [...] Por que, para ensinar alguma coisa a alguém, se deve punir e recompensar? Esse sistema parece evidente, mas, se refletirmos, vemos que a evidência se dissolve. \cite[p.~120]{foucault_verdade_2013}
 \end{citacao}
 
 Por fim, a quarta função é a extração do saber, tanto a partir da apropriação do conhecimento técnico e tecnológico produzido durante o labor, quanto da observação do comportamento dos indivíduos vigiados e controlados. Da mesma forma que as anteriores, essa função não é restrita às relações sociais do capitalismo moderno:
 
 \begin{citacao}
-A pedagogia se formou a partir das próprias adaptações da criança às tarefas escolares, adaptações observadas e extraídas do seu comportamento para tornarem-se em seguida leis de funcionamento das instituições e forma de poder exercido sobre a criança. \cite[p.~122]{foucault}
+A pedagogia se formou a partir das próprias adaptações da criança às tarefas escolares, adaptações observadas e extraídas do seu comportamento para tornarem-se em seguida leis de funcionamento das instituições e forma de poder exercido sobre a criança. \cite[p.~122]{foucault_verdade_2013}
 \end{citacao}
 
 Esse conjunto de características tem como objetivo principal a *transformação dos homens em força produtiva*. É através desse micro-poder entranhado nas relações sociais de uma sociedade panóptica que o indivíduo é fixado ao aparelho de produção, e a escola é um instrumento essencial para a formação desse micro-poder.
@@ -103,7 +103,7 @@ Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalte
 
 # METODOLOGIA
 
-Neste trabalho, de ordem quantitativa, utilizo os dados da Relação Anual de Informações Sociais (Rais) de 2006 a 2020 para estimar os efeitos da escolaridade sobre a renda dos trabalhadores do estado do Espírito Santo. Para tanto, utilizo o *datalake* tratado e disponibilizado gratuitamente pelo projeto Base dos Dados [@basedosdados]. O acesso, manipulação dos dados e a análise foram realizados com o *software* R [@r] e o repositório com todo o código realizado aqui está disponível publicamente e pode ser reproduzido em sua totalidade\footnote{https://github.com/albersonmiranda/monografia.}.
+Neste trabalho, de ordem quantitativa, utilizo os dados da Relação Anual de Informações Sociais (Rais) de 2006 a 2022 para estimar os efeitos da escolaridade sobre a renda dos trabalhadores do estado do Espírito Santo. Para tanto, utilizo o *datalake* tratado e disponibilizado gratuitamente pelo projeto Base dos Dados [@cavalcante_basedosdados_2022]. O acesso, manipulação dos dados e a análise foram realizados com o *software* R [@R-base] e o repositório com todo o código realizado aqui está disponível publicamente e pode ser reproduzido em sua totalidade\footnote{https://github.com/albersonmiranda/monografia.}.
 
 As variáveis de interesse extraídas da Rais foram:
 
@@ -113,7 +113,7 @@ As variáveis de interesse extraídas da Rais foram:
 4. raça/cor
 5. sexo
 
-Importante destacar que, embora a profissão e a indústria na qual o trabalhador esteja inserido sejam importantes para determinar sua renda, essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração\footnote{"the whole point of getting an education is to help people move to better industries, not to move from assistant burger-flipper to chief burger-flipper" \cite{cochrane}.}. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
+Importante destacar que, embora a profissão e a indústria na qual o trabalhador esteja inserido sejam importantes para determinar sua renda, essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração^["the whole point of getting an education is to help people move to better industries, not to move from assistant burger-flipper to chief burger-flipper" [@cochrane_writing_2005].]. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
 
 Após selecionadas, apliquei condições às variáveis para obter amostra completa, ou seja, sem valores faltantes, e coerente. Essas condições estão resumidas na tabela a seguir. Elas implicam na restrição às entradas com renda média positiva não nula; na exclusão de menores aprendizes; na exclusão de entradas sem quaisquer dos campos escolaridade, raça/cor ou sexo preenchidos. 
 
@@ -151,7 +151,7 @@ Além das condições de interesse do pesquisador, é necessário atentar que a 
 
 Nesta seção,
 
-A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 a 2020, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
+A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 a 2022, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
 
 ```{r tabela entradas por ano}
 #| tbl-cap: "Entradas por ano"
@@ -175,12 +175,12 @@ tema
 ```
 
 
-Em termos de gênero no mercado de trabalho formal capixaba, as mulheres consquistaram espaço. Enquanto que em 2006 os homens ocupavam 116% a mais das vagas, em 2020 essa diferença caiu para 63%.
+Em termos de gênero no mercado de trabalho formal capixaba, as mulheres consquistaram espaço. Enquanto que em 2006 os homens ocupavam 116% a mais das vagas, em 2022 essa diferença caiu para 63%.
 
 ```{r count sexo}
-#| fig-cap: "Comparativo 2006-2020 por sexo"
+#| fig-cap: "Comparativo 2006-2022 por sexo"
 
-rais[rais$ano %in% c(2006, 2020), c("ano", "sexo")] |>
+rais[rais$ano %in% c(2006, 2022), c("ano", "sexo")] |>
 tidyr::pivot_longer(!ano) |>
 ggplot(aes(x = name, fill = value, label = scales::number(after_stat(count)))) +
 geom_bar() +
@@ -195,12 +195,12 @@ tema
 Adicionando a dimensão da raça/cor, vemos que a mulher preta é o substrato social mais empurrado à informalidade. Dos declarados pretos, apenas 32% são mulheres.
 
 ```{r tabela entradas por ano sexo cor}
-#| tbl-cap: "Comparativo 2006-2020 por sexo/raça/cor"
+#| tbl-cap: "Comparativo 2006-2022 por sexo/raça/cor"
 
 kbl(
     as.data.frame(
         ftable(table(
-            subset(rais, ano %in% c(2006, 2020), select = c("ano", "sexo", "raca_cor"))
+            subset(rais, ano %in% c(2006, 2022), select = c("ano", "sexo", "raca_cor"))
         ))
     ) |> tidyr::pivot_wider(names_from = raca_cor, values_from = Freq),
     format.args = list(big.mark = ".", decimal.mark = ",")
@@ -209,14 +209,14 @@ kable_styling(latex_options = c("striped"))
 ```
 
 ```{r count raca e cor}
-#| fig-cap: "Comparativo 2006-2020 por sexo/raça/cor"
+#| fig-cap: "Comparativo 2006-2022 por sexo/raça/cor"
 #| out.width: "100%"
 
-rais[rais$ano %in% c(2006, 2020), c("ano", "sexo", "raca_cor")] |>
+rais[rais$ano %in% c(2006, 2022), c("ano", "sexo", "raca_cor")] |>
 ggplot(aes(x = raca_cor, fill = sexo, label = scales::number(after_stat(count)))) +
 geom_bar() +
 geom_label(
-    data = subset(rais, ano %in% c(2006, 2020) & raca_cor %in% c("branca", "parda", "preta")),
+    data = subset(rais, ano %in% c(2006, 2022) & raca_cor %in% c("branca", "parda", "preta")),
     color = "white", stat = "count", show.legend = FALSE, size = 2, position = position_stack(vjust = 0.8)) +
 scale_y_continuous(labels = scales::number) +
 scale_fill_manual(values = c("#003f5c", "#bc5090")) +
@@ -229,12 +229,12 @@ tema
 Em relação à escolaridade, seja por uma mudança do perfil da população ou por requerimentos do mercado de trabalho, o fato é que a maior parte das vagas eram ocupadas por trabalhadores com até o ensino fundamental. Agora, a maior parte das vagas são ocupadas por trabalhadores com ensino médio. Destaca-se também que a maior fatia das vagas ocupadas por trabalhadores de escolaridade até o ensino fundamental são preenchidas por homens, implicando que as trabalhadores da mesma escolaridade estão na informalidade.
 
 ```{r tabela entradas por escolaridade}
-#| tbl-cap: "Comparativo 2006-2020 por sexo/escolaridade"
+#| tbl-cap: "Comparativo 2006-2022 por sexo/escolaridade"
 
 kbl(
     as.data.frame(
         ftable(table(
-            subset(rais, ano %in% c(2006, 2020), select = c("ano", "sexo", "grau"))
+            subset(rais, ano %in% c(2006, 2022), select = c("ano", "sexo", "grau"))
         ))
     ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
     format.args = list(big.mark = ".", decimal.mark = ",")
@@ -247,7 +247,7 @@ kable_styling(latex_options = c("striped"))
 #| out.width: "100%"
 #| warning: false
 
-subset(rais, ano %in% c(2006, 2020)) |>
+subset(rais, ano %in% c(2006, 2022)) |>
 ggplot(aes(x = grau, fill = sexo)) +
 geom_bar() +
 scale_y_continuous(labels = scales::number) +
@@ -262,21 +262,21 @@ tema
 Adicionando a dimensão da raça/cor, percebemos que a ocupação de postos de trabalho de nível superior deixa de ser quase exclusividade de brancos. Entretanto, pardos e pretos ainda ocupam majoritariamente as vagas de trabalho de nível inferiores de escolaridade, além de, tanto proporcionalmente quanto absolutamente, ainda ocuparem menos vagas de ensino superior.
 
 ```{r tabela entradas por sexo/escolaridade/raca}
-#| tbl-cap: "Comparativo 2006-2020 por sexo/raca/escolaridade"
+#| tbl-cap: "Comparativo 2006-2022 por sexo/raca/escolaridade"
 
 kbl(
     as.data.frame(
         ftable(table(
             droplevels(subset(
                 rais,
-                ano %in% c(2006, 2020) & !raca_cor %in% c("indigena", "amarela"),
+                ano %in% c(2006, 2022) & !raca_cor %in% c("indigena", "amarela"),
                 select = c("ano", "sexo", "grau", "raca_cor")
             ))
         ))
     ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
     format.args = list(big.mark = ".", decimal.mark = ",")
 ) |>
-kable_styling(latex_options = c("striped"))
+kable_styling(latex_options = c("striped", "scale_down"))
 ```
 
 ```{r entradas por sexo/escolaridade/raca}
@@ -284,7 +284,7 @@ kable_styling(latex_options = c("striped"))
 #| out.width: "100%"
 #| warning: false
 
-subset(rais, ano %in% c(2006, 2020) & !raca_cor %in% c("indigena", "amarela")) |>
+subset(rais, ano %in% c(2006, 2022) & !raca_cor %in% c("indigena", "amarela")) |>
 ggplot(aes(x = grau, fill = sexo)) +
 geom_bar() +
 scale_y_continuous(labels = scales::number_format(scale = 1/1000)) +
@@ -299,7 +299,7 @@ tema
 A tabela a seguir evidencia mais explicitamente um ponto alarmante: quanto menor o nível de escolaridade da vaga, maior é a proporção de pretos e pardos que a ocupa.
 
 ```{r proporcao pretos e pardos}
-#| tbl-cap: "Comparativo 2006-2020 proporção de pretos e pardos por nível de escolaridade"
+#| tbl-cap: "Comparativo 2006-2022 proporção de pretos e pardos por nível de escolaridade"
 
 prop_pp = data.frame(
     grau = NA,
@@ -307,7 +307,7 @@ prop_pp = data.frame(
     prop  = NA
 )
 
-for(j in c(2006, 2020)) {
+for(j in c(2006, 2022)) {
     for(i in unique(rais$grau)) {
         prop_pp = data.frame(
             grau = c(prop_pp$grau, i),
@@ -330,7 +330,7 @@ prop_pp = dplyr::arrange(
 )
 
 kbl(prop_pp) |>
-kable_styling(latex_options = c("striped"))
+kable_styling(latex_options = c("striped", "scale_down"))
 ```
 
 ## MODELAGEM
@@ -344,7 +344,7 @@ Devido à omissão da variável ocupação, há erro de especificação no model
 ```{r estimação}
 
 # anos selecionados
-anos = c(2021, 2006)
+anos = c(2022, 2006)
 
 # subset
 rais = rais[rais$ano %in% anos, ]
@@ -390,13 +390,13 @@ modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
 
 # parâmetros
 stargazer::stargazer(
-    modelos$m2021,
+    modelos$m2022,
     modelos$m2006,
     header = FALSE,
     align = TRUE,
     single.row = TRUE,
     font.size = "scriptsize",
     dep.var.labels = "log(remuneração)",
-    column.labels = c("2021", "2006")
+    column.labels = c("2022", "2006")
 )
 ```
