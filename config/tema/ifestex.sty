@@ -17,10 +17,10 @@
 %%
 
 % ---
-% INICIO DAS CUSTOMIZACOES PARA O PPGEco/UFES
+% INICIO DAS CUSTOMIZACOES PARA O IFES
 % ---
 
-\ProvidesPackage{ppgecotex}[2023/02/01 Criacao desta customizacao do abnTeX2]
+\ProvidesPackage{ifestex}[2023/02/01 Criacao desta customizacao do abnTeX2]
 
 % alterando a capa
 \renewcommand{\imprimircapa}{%
@@ -71,13 +71,13 @@
   \imprimirpreambulo
   \vspace*{1cm}
   \\
-  {\large\imprimirorientadorRotulo~\imprimirorientador\par}
+  {\imprimirorientadorRotulo~\imprimirorientador\par}
+  \vspace*{0.2cm}
+  \abntex@ifnotempty{\imprimircoorientador}{%
+    {\imprimircoorientadorRotulo~\imprimircoorientador}%
+  }%
   \end{minipage}%
   \vspace*{\fill}
-}%
-
-\abntex@ifnotempty{\imprimircoorientador}{%
-  {\large\imprimircoorientadorRotulo~\imprimircoorientador}%
 }%
 
 \vspace*{\fill}

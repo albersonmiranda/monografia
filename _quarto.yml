@@ -1,7 +1,6 @@
 project:
   title: "monografia"
-  post-render:
-    - config/clean.r
+  output-dir: render/
 
 author: ALBERSON DA SILVA MIRANDA
 date: last-modified
