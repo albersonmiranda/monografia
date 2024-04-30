@@ -90,4 +90,8 @@ rais = within(rais, {
 })
 
 # salvando dataframe
-saveRDS(rais, "data/rais.RDS", compress = TRUE)
+if (!dir.exists("data")) {
+  dir.create("data")
+}
+
+saveRDS(rais, "data/rais.rds")
