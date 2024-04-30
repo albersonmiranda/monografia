@@ -1,12 +1,11 @@
 ---
 format:
   pdf:
-    include-in-header: [config/tema/preamble.tex, config/tema/customizacao.tex]
+    include-in-header: [config/elementos/preamble.tex, config/tema/customizacao.tex]
     include-before-body: config/elementos/pre_textuais.tex
     include-after-body: config/elementos/pos_textuais.tex
     documentclass: abntex2
     classoption: [12pt, oneside, a4paper, chapter=TITLE, section=TITLE, brazil]
-    keep-tex: false
     latex-max-runs: 4
     output-file: monografia.pdf
 ---
@@ -16,8 +15,8 @@ format:
 
 # opções
 knitr::opts_chunk$set(
-    out.width = "70%",
-    echo = FALSE
+  out.width = "70%",
+  echo = FALSE
 )
 
 # reprodutibilidade
@@ -25,21 +24,18 @@ set.seed(1)
 
 # pacotes
 pacman::p_load(
-    kableExtra,
-    ggplot2
+  kableExtra,
+  ggplot2
 )
-
-# funções
-source("data-raw/helper.R")
 
 # dados
 rais = readRDS("data/rais.RDS")
 
 # tema ggplot
 tema = theme_classic() +
-    theme(
-        text = element_text(family = "serif")
-    )
+  theme(
+    text = element_text(family = "serif")
+  )
 
 # gerar bibliografia de pacotes
 knitr::write_bib(file = "config/elementos/packages.bib")
@@ -47,26 +43,46 @@ knitr::write_bib(file = "config/elementos/packages.bib")
 
 # INTRODUÇÃO
 
-...
+## Contextualização da pesquisa
 
-# A ESCOLA COMO INSTITUIÇÃO PANÓPTICA
+Em uma sociedade capitalista, não se pode compreender a educação desassociada das relações de trabalho.
 
-Em seu texto acerca dos Parâmetros Curriculares Nacionais --- PCN, o professor Rômulo Lins abre da seguinte forma:
+Neste trabalho, apresento uma proposta de sistematização teórica dos mecanismos de reprodução do capitalismo na educação, começando pelo nível estrutural, partindo de Marx e Bourdieu; passando pelo nível institucional, com a visão de Foucault sobre a escola como instituição panóptica; e chegando ao nível pedagógico, discutindo os limites da educação matemática crítica como instrumento emancipador.
+
+Evidenciado o caráter inextricável da educação e trabalho, realizo uma análise estatística, a partir da análise dos dados de escolaridade, sexo, e rendimentos de diferentes substratos sociais no Espírito Santo, para demonstrar como esses mecanismos, que se manifestam na renda do trabalhador, estão se deteriorando ao longo dos anos.
+
+## Outline
+
+[...]
+
+# O PAPEL DA EDUCAÇÃO SOB A HEGEMONIA DO CAPITAL
+
+## Introdução
+
+Em seu texto acerca dos Parâmetros Curriculares Nacionais (PCN), o professor Rômulo Lins abre da seguinte forma:
 
 \begin{citacao}
 Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior
-problema é a resistência do sistema em mudar. \cite{lins_os_2020}
+problema é a resistência do sistema em mudar. \cite{oliveira_os_2021}
 \end{citacao}
 
-Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o que ele chamou de *micro*, não é suficiente para colocar o sistema educacional em rota de mudança. Paralelamente, deve ser realizado um trabalho estrutural na esfera *macro* --- aqui, principalmente, o MEC --- que possibilite uma mudança do educar *pela* matemática para o educar *para* a matemática. Essa diferença é ilustrada por Lins da seguinte forma:
+Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o que ele chamou de nível *micro*, não é suficiente para colocar o sistema educacional em rota de mudança. Paralelamente, deve ser realizado um trabalho estrutural na esfera *macro* — aqui, principalmente, o Ministério da Educação (MEC) — que possibilite uma mudança do educar *para* matemática para o educar *pela* a matemática. Essa diferença é ilustrada por Lins da seguinte forma:
 
 \begin{citacao}
-A diferença fica bastante mais clara se pensamos no caso da Educação Física. Será que alguém concebe que o papel das aulas de Educação Física é preparar todas as crianças (todas, eu disse) para o esporte competitivo? Claro que não. Se assim fosse as aulas de Educação Física não representariam, na formação das crianças, a educação para a saúde, para o desenvolvimento motor, para a socialização e o respeito a regras, para a colaboração. E os que quiserem ser atletas e jogadores vão buscar esta formação específica em outros espaços (possivelmente dentro dos times competitivos de suas escolas ou em clubes). Podemos dizer que a Educação Física escolar se concentra em modos de ser, promovendo aquela educação POR MEIO de esportes e exercícios físicos, enquanto o Treinamento Esportivo se concentra em potencializar habilidades, fazendo isso por meio da aquisição de técnicas específicas. \cite{lins_os_2020}
+A diferença fica bastante mais clara se pensamos no caso da Educação Física. Será que alguém concebe que o papel das aulas de Educação Física é preparar todas as crianças (todas, eu disse) para o esporte competitivo? Claro que não. Se assim fosse as aulas de Educação Física não representariam, na formação das crianças, a educação para a saúde, para o desenvolvimento motor, para a socialização e o respeito a regras, para a colaboração. E os que quiserem ser atletas e jogadores vão buscar esta formação específica em outros espaços (possivelmente dentro dos times competitivos de suas escolas ou em clubes). Podemos dizer que a Educação Física escolar se concentra em modos de ser, promovendo aquela educação POR MEIO de esportes e exercícios físicos, enquanto o Treinamento Esportivo se concentra em potencializar habilidades, fazendo isso por meio da aquisição de técnicas específicas. \cite{oliveira_os_2021}
 \end{citacao}
 
-A mudança, então, deixa de ter como meio apenas a sala de aula; o problema norteador da educação matemática como disciplina deixa de ser apenas, por exemplo, se o aluno deve ou não estudar geometrias não euclidianas no ensino médio, ou seja, unicamente conteúdos, e se expande para questionar o próprio objetivo do ensino da matemática, ou melhor, *através* da matemática.
+A mudança, então, deixa de ter como meio apenas o nível pedagógico, a sala de aula; o problema norteador da educação matemática como disciplina deixa de ser apenas, por exemplo, se o aluno deve ou não estudar geometrias não euclidianas no ensino médio, ou seja, unicamente conteúdos, e se expande para questionar o próprio objetivo do ensino da matemática, ou melhor, *através* da matemática.
 
-Quando o autor propõe uma educação "formativa e com o objetivo de permitir que todos que passem por ela participem de forma plena em suas sociedades", podemos nos perguntar: o que é essa participação plena? Ou ainda, por que é tão difícil realizar mudanças estruturais na educação ou, como Lins diz, fazer com que o sistema se coloque em rota de mudança? Podemos analisar essas perguntas sob a ótica da Sociologia da Educação.
+Quando o autor propõe uma educação "formativa e com o objetivo de permitir que todos que passem por ela participem de forma plena em suas sociedades", podemos nos perguntar: o que é essa participação plena? Ou ainda, por que é tão difícil realizar mudanças estruturais na educação ou, como Lins diz, fazer com que o sistema se coloque em rota de mudança?
+
+Para responder a essas perguntas, é necessário, primeiramente, definir conceitualmente essas esferas a que Lins se refere. A partir daí, pode-se entender com mais clareza os limites e possibilidades de mudança em cada uma delas.
+
+## A escola como instituição panóptica
+
+Para entender como os mecanismos estruturais do capitalismo restringem e direcionam as ações ao longo de todo o sistema educacional, deve-se enxergar o contexto sob a ótica da sociologia da educação.
+
+Pierre Bourdieu (1930-2002) define a escola como o instrumento do sistema capitalista para a transmissão cultural da desigualdade social
 
 Em *Sistemas de Ensino e Sistemas de Pensamento*, Pierre Bourdieu coloca o sistema educacional como um dos instrumentos mais eficazes de integração moral e lógica da sociedade, que tem como produto o indivíduo "programado" — homogêneo em percepção, pensamento e ação:
 
@@ -99,9 +115,39 @@ Esse conjunto de características tem como objetivo principal a *transformação
 
 Tendemos, por conta da brevidade de nossas vidas, a limitar nossa ousadia em relação a essas estruturas. É fácil internalizar, inconscientemente, que essas instituições sempre existiram e sempre existirão da mesma forma que o são hoje. E talvez essa seja uma razão que contribua para que, como aponta Lins, a produção na educação matemática seja tão limitada à sala de aula --- aliás, essa visão é incentivada aqui mesmo no IFES, onde somos direcionados a "trazer para a sala de aula" nossa pesquisa do TCC.
 
+A educação crítica é contraditória em sua essência. Por um lado, ela busca a emancipação do indivíduo, a formação de cidadãos críticos e conscientes de seu papel na sociedade. Por outro, ela busca seu objetivo a partir de uma instituição panóptica. E escola não pode ser, ao mesmo tempo, emancipadora e panóptica. Nesse sentido, o professor apenas pode ser um agente libertador a partir de uma posição de insubordinação.
+
+A consciência de sua dominaçãoAfinal, a gazela que está prestes a ser devorada pelo leão não será capaz de alterar o resultado final, independentemente se tiver consciência ou não .
+
 Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência. Portanto, além de pensar no que Lins define como micro e macro, devemos avançar acerca da própria posição da educação na sociedade. Apenas no momento em que a escola não mais existir para normalizar o indivíduo é que ela perderá sua razão de ser numa sociedade panóptica capitalista e será livre para se tornar algo diferente --- e de fato libertadora.
 
-# METODOLOGIA
+## A esfera micro
+
+É perfeitamente compreensível que a maior parte da produção acadêmica em educação matemática se concentre na esfera micro. Afinal, é nesse nível que se dá a interação direta entre professor e aluno, onde o conhecimento é transmitido e construído, onde as práticas pedagógicas são desenvolvidas e aprimoradas. É a ponta onde tudo acontece.
+
+Esse corpo de produção acadêmica é categorizado nas chamadas tendências em educação matemática. Essas categorizações buscam identificar e descrever as diferentes abordagens e perspectivas que norteiam a pesquisa e o ensino da matemática [@mello_tendencias_2007].
+
+Em uma discussão em sala, o professor afirma que a educação não é sobre apenas preparar para o mundo trabaho, mas para o indivíduo também entender, numa perspectiva Marxista, como está sendo explorado e sua posição na sociedade como trabalhador. 
+
+Agora, suponha uma sociedade (futurística, qual a palavra?) onde não exista trabalho como relação social. Robôs realizam toda a atividade laboral. Como seria a escola nessa sociedade? O que sobra de "puro" na educação pela educação? A resposta do professor é que essa sociedade não existe, pois sempre haverá relação social de trabalho (logo um professor de matemática negando um exercício de abstração? Pobres dos números complexos). Esse caminho pode ser correto numa perspectiva materialista, mas não escapa da filosofiana Descartiana. 
+
+Na verdade, pode-se afirmar o contrário, que o que não existe naquela sociedade é a escola como conhecemos. Quando perde sua função de triagem para selecionar indivíduos a ocupar determinados lugares na sociedade, ela não tem razão de ser. A busca do indivíduo pelo conhecimento teria a mesma condição da busca pela música, pela arte: o prazer individual. Não há profissão a ser aprendida para exercer um papel na sociedade, apenas a busca pela descoberta; pela transposição  (rompimento de barreira, quis dizer) da fronteira do conhecimento. Não há sentido em obrigar toda a humanidade durante 20% de sua existência na terra, numa sala de aula e disparar conteúdos. 
+
+Que indivíduo precisa de educação formal para amar e aproveitar a vida? Afinal, a maior parte dos humanos que pisaram na terra não o tiveram. 
+
+A resposta: omnilateralidade. Essa escola faz sentido como instituição pós-panóptica. A educação só será omnilateral quando não for mais instrumental. E para que deixe de ser instrumental, ela terá de, ou perder seu valor como instrumento em uma sociedade baseada na exploração do homem pelo homem, ou a superação desse modelo. 
+
+# EFEITOS DA ESCOLARIDADE EM DIFERENTES SUBSTRATOS SOCIAIS NO ESPÍRITO SANTO
+
+## Introdução
+
+[...]
+
+## Revisão de literatura
+
+[...]
+
+## Metodologia
 
 Neste trabalho, de ordem quantitativa, utilizo os dados da Relação Anual de Informações Sociais (Rais) de 2006 a 2022 para estimar os efeitos da escolaridade sobre a renda dos trabalhadores do estado do Espírito Santo. Para tanto, utilizo o *datalake* tratado e disponibilizado gratuitamente pelo projeto Base dos Dados [@cavalcante_basedosdados_2022]. O acesso, manipulação dos dados e a análise foram realizados com o *software* R [@R-base] e o repositório com todo o código realizado aqui está disponível publicamente e pode ser reproduzido em sua totalidade\footnote{https://github.com/albersonmiranda/monografia.}.
 
@@ -121,33 +167,32 @@ Após selecionadas, apliquei condições às variáveis para obter amostra compl
 #| tbl-cap: Possíveis valores para as variáveis selecionadas da Rais
 
 kbl(
-    data.frame(
-        Variável = c(
-            "Sigla UF",
-            "Renda Média Nominal",
-            "Ciclo de Escolaridade",
-            "Idade",
-            "Raça/Cor",
-            "Sexo"
-        ),
-        Valores = c(
-            "ES",
-            "Núméricos, não negativos",
-            "Analfabeto, Ensino Fundamental (I/II, completo/incompleto),  Ensino Médio (completo/incompleto), Ensino Superior (completo/incompleto), Mestrado ou Doutorado",
-            "$>18$",
-            "Branco, Preto, Pardo, Indígena ou Amarelo",
-            "Masculino ou Feminino"
-        )
+  data.frame(
+    Variável = c(
+      "Sigla UF",
+      "Renda Média Nominal",
+      "Ciclo de Escolaridade",
+      "Idade",
+      "Raça/Cor",
+      "Sexo"
     ),
-    booktabs = TRUE,
-    escape = FALSE) |>
-kable_styling(latex_options = "striped", font_size = 10) |>
-column_spec(2, width = "30em")
+    Valores = c(
+      "ES",
+      "Núméricos, não negativos",
+      "Analfabeto, Ensino Fundamental (I/II, completo/incompleto),  Ensino Médio (completo/incompleto), Ensino Superior (completo/incompleto), Mestrado ou Doutorado",
+      "$>18$",
+      "Branco, Preto, Pardo, Indígena ou Amarelo",
+      "Masculino ou Feminino"
+    )
+  ),
+  booktabs = TRUE,
+  escape = FALSE
+) |>
+  kable_styling(latex_options = "striped", font_size = 10) |>
+  column_spec(2, width = "30em")
 ```
 
 Além das condições de interesse do pesquisador, é necessário atentar que a Rais trata do mercado de trabalho formal, o que exclui trabalhadores informais e profissionais autônomos. Portanto, o presente trabalho mira estimar as relações escolaridade-renda no mercado de trabalho formal do Espírito Santo, destacando o impacto de substratos marginalizados da sociedade na determinação da renda do trabalhador.
-
-## ANÁLISE EXPLORATÓRIA DOS DADOS
 
 Nesta seção,
 
@@ -157,21 +202,21 @@ A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória.
 #| tbl-cap: "Entradas por ano"
 
 kbl(
-    t(table(rais$ano)),
-    format.args = list(big.mark = ".", decimal.mark = ",")
+  t(table(rais$ano)),
+  format.args = list(big.mark = ".", decimal.mark = ",")
 ) |>
-kable_styling(latex_options = c("striped", "scale_down"))
+  kable_styling(latex_options = c("striped", "scale_down"))
 ```
 
 ```{r figura entradas por ano}
 #| fig-cap: "Entradas por ano"
 
 as.data.frame(table(rais$ano)) |>
-ggplot(aes(x = Var1, y = Freq)) +
-geom_col() +
-scale_y_continuous(labels = scales::number) +
-labs(x = "Ano", y = "Quantidade") +
-tema
+  ggplot(aes(x = Var1, y = Freq)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::number) +
+  labs(x = "Ano", y = "Quantidade") +
+  tema
 ```
 
 
@@ -181,15 +226,15 @@ Em termos de gênero no mercado de trabalho formal capixaba, as mulheres consqui
 #| fig-cap: "Comparativo 2006-2022 por sexo"
 
 rais[rais$ano %in% c(2006, 2022), c("ano", "sexo")] |>
-tidyr::pivot_longer(!ano) |>
-ggplot(aes(x = name, fill = value, label = scales::number(after_stat(count)))) +
-geom_bar() +
-geom_label(color = "white", stat = "count", show.legend = FALSE) +
-scale_y_continuous(labels = scales::number) +
-scale_fill_manual(values = c("#003f5c", "#bc5090")) +
-facet_grid(~ ano, scales = "free") +
-labs(x = "Sexo", y = "Quantidade", fill = "Sexo") +
-tema
+  tidyr::pivot_longer(!ano) |>
+  ggplot(aes(x = name, fill = value, label = scales::number(after_stat(count)))) +
+  geom_bar() +
+  geom_label(color = "white", stat = "count", show.legend = FALSE) +
+  scale_y_continuous(labels = scales::number) +
+  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+  facet_grid(~ano, scales = "free") +
+  labs(x = "Sexo", y = "Quantidade", fill = "Sexo") +
+  tema
 ```
 
 Adicionando a dimensão da raça/cor, vemos que a mulher preta é o substrato social mais empurrado à informalidade. Dos declarados pretos, apenas 32% são mulheres.
@@ -198,14 +243,14 @@ Adicionando a dimensão da raça/cor, vemos que a mulher preta é o substrato so
 #| tbl-cap: "Comparativo 2006-2022 por sexo/raça/cor"
 
 kbl(
-    as.data.frame(
-        ftable(table(
-            subset(rais, ano %in% c(2006, 2022), select = c("ano", "sexo", "raca_cor"))
-        ))
-    ) |> tidyr::pivot_wider(names_from = raca_cor, values_from = Freq),
-    format.args = list(big.mark = ".", decimal.mark = ",")
+  as.data.frame(
+    ftable(table(
+      subset(rais, ano %in% c(2006, 2022), select = c("ano", "sexo", "raca_cor"))
+    ))
+  ) |> tidyr::pivot_wider(names_from = raca_cor, values_from = Freq),
+  format.args = list(big.mark = ".", decimal.mark = ",")
 ) |>
-kable_styling(latex_options = c("striped"))
+  kable_styling(latex_options = c("striped"))
 ```
 
 ```{r count raca e cor}
@@ -213,17 +258,18 @@ kable_styling(latex_options = c("striped"))
 #| out.width: "100%"
 
 rais[rais$ano %in% c(2006, 2022), c("ano", "sexo", "raca_cor")] |>
-ggplot(aes(x = raca_cor, fill = sexo, label = scales::number(after_stat(count)))) +
-geom_bar() +
-geom_label(
+  ggplot(aes(x = raca_cor, fill = sexo, label = scales::number(after_stat(count)))) +
+  geom_bar() +
+  geom_label(
     data = subset(rais, ano %in% c(2006, 2022) & raca_cor %in% c("branca", "parda", "preta")),
-    color = "white", stat = "count", show.legend = FALSE, size = 2, position = position_stack(vjust = 0.8)) +
-scale_y_continuous(labels = scales::number) +
-scale_fill_manual(values = c("#003f5c", "#bc5090")) +
-facet_grid(~ ano, scales = "free") +
-labs(x = "Raça/Cor", y = "Quantidade", fill = "Sexo") +
-guides(fill = "none") +
-tema
+    color = "white", stat = "count", show.legend = FALSE, size = 2, position = position_stack(vjust = 0.8)
+  ) +
+  scale_y_continuous(labels = scales::number) +
+  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+  facet_grid(~ano, scales = "free") +
+  labs(x = "Raça/Cor", y = "Quantidade", fill = "Sexo") +
+  guides(fill = "none") +
+  tema
 ```
 
 Em relação à escolaridade, seja por uma mudança do perfil da população ou por requerimentos do mercado de trabalho, o fato é que a maior parte das vagas eram ocupadas por trabalhadores com até o ensino fundamental. Agora, a maior parte das vagas são ocupadas por trabalhadores com ensino médio. Destaca-se também que a maior fatia das vagas ocupadas por trabalhadores de escolaridade até o ensino fundamental são preenchidas por homens, implicando que as trabalhadores da mesma escolaridade estão na informalidade.
@@ -232,14 +278,14 @@ Em relação à escolaridade, seja por uma mudança do perfil da população ou 
 #| tbl-cap: "Comparativo 2006-2022 por sexo/escolaridade"
 
 kbl(
-    as.data.frame(
-        ftable(table(
-            subset(rais, ano %in% c(2006, 2022), select = c("ano", "sexo", "grau"))
-        ))
-    ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
-    format.args = list(big.mark = ".", decimal.mark = ",")
+  as.data.frame(
+    ftable(table(
+      subset(rais, ano %in% c(2006, 2022), select = c("ano", "sexo", "grau"))
+    ))
+  ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
+  format.args = list(big.mark = ".", decimal.mark = ",")
 ) |>
-kable_styling(latex_options = c("striped"))
+  kable_styling(latex_options = c("striped"))
 ```
 
 ```{r entradas por escolaridade}
@@ -248,15 +294,15 @@ kable_styling(latex_options = c("striped"))
 #| warning: false
 
 subset(rais, ano %in% c(2006, 2022)) |>
-ggplot(aes(x = grau, fill = sexo)) +
-geom_bar() +
-scale_y_continuous(labels = scales::number) +
-scale_fill_manual(values = c("#003f5c", "#bc5090")) +
-facet_grid(~ ano, scales = "fixed") +
-labs(x = "Escolaridade", y = "Quantidade", fill = "Sexo") +
-guides(fill = "none") +
-coord_flip() +
-tema
+  ggplot(aes(x = grau, fill = sexo)) +
+  geom_bar() +
+  scale_y_continuous(labels = scales::number) +
+  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+  facet_grid(~ano, scales = "fixed") +
+  labs(x = "Escolaridade", y = "Quantidade", fill = "Sexo") +
+  guides(fill = "none") +
+  coord_flip() +
+  tema
 ```
 
 Adicionando a dimensão da raça/cor, percebemos que a ocupação de postos de trabalho de nível superior deixa de ser quase exclusividade de brancos. Entretanto, pardos e pretos ainda ocupam majoritariamente as vagas de trabalho de nível inferiores de escolaridade, além de, tanto proporcionalmente quanto absolutamente, ainda ocuparem menos vagas de ensino superior.
@@ -265,18 +311,18 @@ Adicionando a dimensão da raça/cor, percebemos que a ocupação de postos de t
 #| tbl-cap: "Comparativo 2006-2022 por sexo/raca/escolaridade"
 
 kbl(
-    as.data.frame(
-        ftable(table(
-            droplevels(subset(
-                rais,
-                ano %in% c(2006, 2022) & !raca_cor %in% c("indigena", "amarela"),
-                select = c("ano", "sexo", "grau", "raca_cor")
-            ))
-        ))
-    ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
-    format.args = list(big.mark = ".", decimal.mark = ",")
+  as.data.frame(
+    ftable(table(
+      droplevels(subset(
+        rais,
+        ano %in% c(2006, 2022) & !raca_cor %in% c("indigena", "amarela"),
+        select = c("ano", "sexo", "grau", "raca_cor")
+      ))
+    ))
+  ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
+  format.args = list(big.mark = ".", decimal.mark = ",")
 ) |>
-kable_styling(latex_options = c("striped", "scale_down"))
+  kable_styling(latex_options = c("striped", "scale_down"))
 ```
 
 ```{r entradas por sexo/escolaridade/raca}
@@ -285,15 +331,15 @@ kable_styling(latex_options = c("striped", "scale_down"))
 #| warning: false
 
 subset(rais, ano %in% c(2006, 2022) & !raca_cor %in% c("indigena", "amarela")) |>
-ggplot(aes(x = grau, fill = sexo)) +
-geom_bar() +
-scale_y_continuous(labels = scales::number_format(scale = 1/1000)) +
-scale_fill_manual(values = c("#003f5c", "#bc5090")) +
-facet_grid(rows = vars(raca_cor), cols = vars(ano), scales = "fixed") +
-labs(x = "Escolaridade", y = "Quantidade (em milhares)", fill = "Sexo") +
-guides(fill = "none") +
-coord_flip() +
-tema
+  ggplot(aes(x = grau, fill = sexo)) +
+  geom_bar() +
+  scale_y_continuous(labels = scales::number_format(scale = 1 / 1000)) +
+  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+  facet_grid(rows = vars(raca_cor), cols = vars(ano), scales = "fixed") +
+  labs(x = "Escolaridade", y = "Quantidade (em milhares)", fill = "Sexo") +
+  guides(fill = "none") +
+  coord_flip() +
+  tema
 ```
 
 A tabela a seguir evidencia mais explicitamente um ponto alarmante: quanto menor o nível de escolaridade da vaga, maior é a proporção de pretos e pardos que a ocupa.
@@ -302,44 +348,40 @@ A tabela a seguir evidencia mais explicitamente um ponto alarmante: quanto menor
 #| tbl-cap: "Comparativo 2006-2022 proporção de pretos e pardos por nível de escolaridade"
 
 prop_pp = data.frame(
-    grau = NA,
-    ano = NA,
-    prop  = NA
+  grau = NA,
+  ano = NA,
+  prop = NA
 )
 
-for(j in c(2006, 2022)) {
-    for(i in unique(rais$grau)) {
-        prop_pp = data.frame(
-            grau = c(prop_pp$grau, i),
-            ano = c(prop_pp$ano, j),
-            prop = c(
-                prop_pp$prop,
-                nrow(subset(rais, ano == j & raca_cor %in% c("preta", "parda") & grau == i)) / nrow(subset(rais, ano == j & grau == i))
-            )
-        )
-    }
+for (j in c(2006, 2022)) {
+  for (i in unique(rais$grau)) {
+    prop_pp = data.frame(
+      grau = c(prop_pp$grau, i),
+      ano = c(prop_pp$ano, j),
+      prop = c(
+        prop_pp$prop,
+        nrow(subset(rais, ano == j & raca_cor %in% c("preta", "parda") & grau == i)) / nrow(subset(rais, ano == j & grau == i))
+      )
+    )
+  }
 }
 
 remove(i, j)
 prop_pp = na.omit(prop_pp)
 
 prop_pp = dplyr::arrange(
-    prop_pp, prop_pp$ano, factor(prop_pp$grau, levels = c(
-        "nenhum", "fund_I", "fund_II", "medio", "superior", "mestrado", "doutorado"
-    ))
+  prop_pp, prop_pp$ano, factor(prop_pp$grau, levels = c(
+    "nenhum", "fund_I", "fund_II", "medio", "superior", "mestrado", "doutorado"
+  ))
 )
 
 kbl(prop_pp) |>
-kable_styling(latex_options = c("striped", "scale_down"))
+  kable_styling(latex_options = c("striped", "scale_down"))
 ```
-
-## MODELAGEM
-
-O modelo...
 
 Devido à omissão da variável ocupação, há erro de especificação no modelo e espera-se autocorrelaãção heteroscedasticidade --- o que de fato ocorre APONTAR PARA O APÊNDICE COM O MODELO HETEROSCEDÁSTICO. Por essa razão, utilizarei o método de mínimos quadrados generalizados - MQG.
 
-# RESULTADOS
+## Resultados
 
 ```{r estimação}
 
@@ -351,36 +393,36 @@ rais = rais[rais$ano %in% anos, ]
 
 # adicionando resíduos ao dataframe
 rais = by(rais, rais$ano, function(ano) {
-    # modelo
-    residuos = lm(
-        # variável dependente
-        log(vlr_rem) ~
-        # variáveis dependentes
-        grau + sexo + raca_cor + idade + idade^2 +
-        # interação
-        sexo * raca_cor,
-        # dataset
-        ano
-    )$resid
-
-    # adicionando resíduos
-    ano[names(residuos), "residuos"] = residuos
-    # retorno
+  # modelo
+  residuos = lm(
+    # variável dependente
+    log(vlr_rem) ~
+      # variáveis dependentes
+      grau + sexo + raca_cor + idade + idade^2 +
+      # interação
+      sexo * raca_cor,
+    # dataset
     ano
+  )$resid
+
+  # adicionando resíduos
+  ano[names(residuos), "residuos"] = residuos
+  # retorno
+  ano
 }) |> do.call(what = rbind)
 
 # estimação
 modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
-    lm(
-        # variável dependente
-        log(vlr_rem) ~
-        # variáveis dependentes
-        grau + sexo + raca_cor + idade + idade^2 +
-        # interação
-        sexo * raca_cor,
-        # dataset
-        data = rais[rais$ano == ano, ]
-    )
+  lm(
+    # variável dependente
+    log(vlr_rem) ~
+      # variáveis dependentes
+      grau + sexo + raca_cor + idade + idade^2 +
+      # interação
+      sexo * raca_cor,
+    # dataset
+    data = rais[rais$ano == ano, ]
+  )
 })
 ```
 
@@ -390,13 +432,27 @@ modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
 
 # parâmetros
 stargazer::stargazer(
-    modelos$m2022,
-    modelos$m2006,
-    header = FALSE,
-    align = TRUE,
-    single.row = TRUE,
-    font.size = "scriptsize",
-    dep.var.labels = "log(remuneração)",
-    column.labels = c("2022", "2006")
+  modelos$m2022,
+  modelos$m2006,
+  header = FALSE,
+  align = TRUE,
+  single.row = TRUE,
+  font.size = "scriptsize",
+  dep.var.labels = "log(remuneração)",
+  column.labels = c("2022", "2006")
 )
 ```
+
+## Conclusão
+
+[...]
+
+# CONCLUSÕES
+
+## Conclusões da monografia
+
+A relação de causalidade socialmente aceita de que escolaridade implica ascenção social é, em realidade, invertida. Por conta de apenas herdeiros de ricos terem acesso à escolaridade, foi construída a correlação entre escolaridade e rendimentos. Entretanto, os rendimentos vêem por causa da herância econômica e social, e não por conta da escolaridade. 
+
+## Pesquisa futura
+
+A evidência é que, conforme aumenta a democratização do ensino, os rendimentos oriundos de ciclos completos de escolaridade são reduzidos. Uma possível hipótese é de que, conforme o pobre adentra às classes escolarizadas, a média de rendimentos por ciclo de escolaridade completo é reduzido, porque a razão dele ser pobre é porque nasceu pobre, não porque não tinha escolaridade.
