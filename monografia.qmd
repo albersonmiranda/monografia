@@ -55,7 +55,7 @@ Evidenciado o caráter inextricável da educação e trabalho, realizo uma anál
 
 [...]
 
-# O PAPEL DA EDUCAÇÃO SOB A HEGEMONIA DO CAPITAL
+# O PAPEL DA EDUCAÇÃO MATEMÁTICA SOB A HEGEMONIA DO CAPITAL
 
 ## Introdução
 
@@ -77,6 +77,24 @@ A mudança, então, deixa de ter como meio apenas o nível pedagógico, a sala d
 Quando o autor propõe uma educação "formativa e com o objetivo de permitir que todos que passem por ela participem de forma plena em suas sociedades", podemos nos perguntar: o que é essa participação plena? Ou ainda, por que é tão difícil realizar mudanças estruturais na educação ou, como Lins diz, fazer com que o sistema se coloque em rota de mudança?
 
 Para responder a essas perguntas, é necessário, primeiramente, definir conceitualmente essas esferas a que Lins se refere. A partir daí, pode-se entender com mais clareza os limites e possibilidades de mudança em cada uma delas.
+
+Primeiramente, a esfera micro está delimitada pelas ações pedagógicas do professor em sala de aula. Aqui, entram as abordagens, técnicas e ferramentas utilizadas pelo professor. Já na esfera macro é onde se localiza a escola como instituição. A instituição escolar restringe e direciona as ações da esfera micro, pedagógica.
+
+O professor Rômulo, entretanto, deixa de fora ainda uma superestrutura, que é o próprio sistema capitalista, que, por sua vez, direciona e restringe as ações das instituições, aí, não apenas inclusive mas principalmente, a escola. A escola, como instituição, é direcionada e restringida de acordo com a agenda da superestrutura, 
+
+Neste capítulo, procuro sistematizar os mecanismos de reprodução do capitalismo na educação, mostrando evidenciar como a educação matemática, tanto na esfera micro quanto na macro, enquanto não rompe com seu papel na reprodução das relações sociais de poder, é ineficaz na promoção de mudanças estruturais na sociedade.
+
+## A educação matemática sob a superestrutura capitalista
+
+[Relações de exploração do homem pelo homem; interdisciplinaridade (ex.: Lovemore começou ensinando música, mas largou para focar no que era instrumental para a matemática. Houvesse um professor de música, poderiam trabalhar juntos e seria educação integral. No Brasil, há algum espaço para tal prática?); omnilateralidade; reprodução (Bourdieu)]
+
+Considere o seguinte exercício mental: Suponha uma sociedade hiperavançada onde não exista trabalho como relação social. Robôs realizam toda a atividade laboral. Como seria a escola nessa sociedade? O que sobra de "puro" na educação pela educação?
+
+Não existe naquela sociedade é a escola como conhecemos. Quando perde sua função de triagem para selecionar indivíduos a ocupar determinados lugares na sociedade, ela não tem razão de ser. A busca do indivíduo pelo conhecimento teria a mesma condição da busca pela música, pela arte: o prazer individual. Não há profissão a ser aprendida para exercer um papel na sociedade, apenas a busca pela descoberta; pela transposição  (rompimento de barreira, quis dizer) da fronteira do conhecimento. Não há sentido em obrigar toda a humanidade durante 20% de sua existência na terra, numa sala de aula e disparar conteúdos. 
+
+Que indivíduo precisa de educação formal para amar e aproveitar a vida? Afinal, a maior parte dos humanos que pisaram na terra não o tiveram. 
+
+A resposta: omnilateralidade. Essa escola faz sentido como instituição pós-panóptica. A educação só será omnilateral quando não for mais instrumental. E para que deixe de ser instrumental, ela terá de, ou perder seu valor como instrumento em uma sociedade baseada na exploração do homem pelo homem, ou a superação desse modelo.
 
 ## A escola como instituição panóptica
 
@@ -121,21 +139,47 @@ A consciência de sua dominaçãoAfinal, a gazela que está prestes a ser devora
 
 Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência. Portanto, além de pensar no que Lins define como micro e macro, devemos avançar acerca da própria posição da educação na sociedade. Apenas no momento em que a escola não mais existir para normalizar o indivíduo é que ela perderá sua razão de ser numa sociedade panóptica capitalista e será livre para se tornar algo diferente --- e de fato libertadora.
 
-## A esfera micro
+## Educação matemática em sala de aula
 
-É perfeitamente compreensível que a maior parte da produção acadêmica em educação matemática se concentre na esfera micro. Afinal, é nesse nível que se dá a interação direta entre professor e aluno, onde o conhecimento é transmitido e construído, onde as práticas pedagógicas são desenvolvidas e aprimoradas. É a ponta onde tudo acontece.
+É perfeitamente compreensível que a maior parte da produção acadêmica em educação matemática se concentre no que o professor Rômulo chamou de esfera micro. Afinal, é nesse nível que se dá a interação direta entre professor e aluno, onde o conhecimento é transmitido e construído, onde as práticas pedagógicas são desenvolvidas e aprimoradas. É a ponta onde tudo acontece.
 
 Esse corpo de produção acadêmica é categorizado nas chamadas tendências em educação matemática. Essas categorizações buscam identificar e descrever as diferentes abordagens e perspectivas que norteiam a pesquisa e o ensino da matemática [@mello_tendencias_2007].
 
-Em uma discussão em sala, o professor afirma que a educação não é sobre apenas preparar para o mundo trabaho, mas para o indivíduo também entender, numa perspectiva Marxista, como está sendo explorado e sua posição na sociedade como trabalhador. 
+Para ilustrar os limites e possibilidades dessas tendências, tomemos como exemplo a interdisciplinaridade. Esta é uma abordagem que visa a integração de diferentes áreas do conhecimento, com o objetivo de promover uma aprendizagem mais significativa e contextualizada. Esse conceito envolve ao mesmo tempo teoria e ação, uma vez que exige mais a atuação do professor em sala de aula do que a simples união de duas ou mais disciplinas ou áreas do saber em atividades [@mello_tendencias_2007].
 
-Agora, suponha uma sociedade (futurística, qual a palavra?) onde não exista trabalho como relação social. Robôs realizam toda a atividade laboral. Como seria a escola nessa sociedade? O que sobra de "puro" na educação pela educação? A resposta do professor é que essa sociedade não existe, pois sempre haverá relação social de trabalho (logo um professor de matemática negando um exercício de abstração? Pobres dos números complexos). Esse caminho pode ser correto numa perspectiva materialista, mas não escapa da filosofiana Descartiana. 
+Essa interdisciplinaridade é alcançada a partir do rompimento com o isolamento e a fragmentação dos conteúdos, possibilitando a transferência de aprendizagem de uma situação para a outra e a construção de significado em cima desse aprendizado transferido [@souto_interdisciplinaridade_2010]. Para que isso seja possível, @souto_interdisciplinaridade_2010 lista algumas condições que a atividade deve atender, como:
 
-Na verdade, pode-se afirmar o contrário, que o que não existe naquela sociedade é a escola como conhecemos. Quando perde sua função de triagem para selecionar indivíduos a ocupar determinados lugares na sociedade, ela não tem razão de ser. A busca do indivíduo pelo conhecimento teria a mesma condição da busca pela música, pela arte: o prazer individual. Não há profissão a ser aprendida para exercer um papel na sociedade, apenas a busca pela descoberta; pela transposição  (rompimento de barreira, quis dizer) da fronteira do conhecimento. Não há sentido em obrigar toda a humanidade durante 20% de sua existência na terra, numa sala de aula e disparar conteúdos. 
+1. O tema deve ser algo conhecido dos alunos;
+1. Ser de discussão possível;
+1. Ter valor em si mesmo;
+1. Ser capaz de criar conceitos matemáticos;
+1. desenvolver habilidades matemáticas;
+1. e privilegiar a concretude social.
 
-Que indivíduo precisa de educação formal para amar e aproveitar a vida? Afinal, a maior parte dos humanos que pisaram na terra não o tiveram. 
+Nesse sentido, a integração com a arte é uma das formas de promover a interdisciplinaridade, uma vez que ela é uma forma de expressão humana que permeia o indivíduo em toda cultura e sociedade. De acordo com @robinson_arts_2013, integração com artes pode ser definida a partir de três características que devem ser consideradas para que seja alcançada uma interdisciplinaridade de alta qualidade, são elas:
 
-A resposta: omnilateralidade. Essa escola faz sentido como instituição pós-panóptica. A educação só será omnilateral quando não for mais instrumental. E para que deixe de ser instrumental, ela terá de, ou perder seu valor como instrumento em uma sociedade baseada na exploração do homem pelo homem, ou a superação desse modelo. 
+1. Aprendizado *através* e *com* artes;
+1. Artes como processo de conexão curricular;
+1. Artes como engajamento colaborativo.
+
+@bresler_subservient_1995 realizou um estudo etnográfico em três escolas K-8 nos Estados Unidos^[K-8 é uma abreviação para *kindergarten* (pré-escola) até o 8º ano do ensino fundamental.], incluindo observações de aulas; entrevistas com professores, diretores e artistas residentes; e revisão de materiais curriculares. A partir desse estudo, a autora definiu quarto abordagens de integração com a arte, sintetizadas por @robinson_arts_2013, são elas:
+
+1. **Integração subserviente**: a arte é apenas um extra, usada para ilustrar ou reforçar conceitos de outras disciplinas;
+1. **Integração afetiva**: a integração se dá por meio da imersão e da consequente reação dos alunos à arte, como música e peças artísticas, complementando o currículo de outras disciplinas;
+1. **Integração social**: baseada em atividades, utilizando a arte para promover a interação entre os alunos e aumentar a participação parental, como em peças de teatro ou música em grupo;
+1. **Integração co-igual cognitiva**: a arte é integrada com outros aspectos do currículo e os alunos são exigidos a usar habilidades de pensamento de ordem superior e qualidades estéticas^[Na filosofia, a estética é uma área de conhecimento associada às artes e sensações. É a forma de conhecer o mundo através dos cinco sentidos.] para obter um entendimento mais aprofundado de um conceito acadêmico específico;
+
+As três primeiras abordagens utilizam a arte como uma ferramenta. Já a quarta abordagem, a integração co-igual cognitiva, é a mais exigente, demandando do professor não apenas o conhecimento, habilidade e confiança no seu conteúdo, mas também na forma de arte escolhida. Além disso, requer tempo para planejar e efetivamente preparar aulas que integrem a arte com o conteúdo acadêmico [@lovemore_enriching_2021].
+
+A essa altura, é importante destacar que a integração com a arte se localiza na esfera pedagógica (micro), estando associada mas não se confundindo com a educação omnilateral, que é um conceito melhor entendido na esfera macro. O objetivo da educação omnilateral é a formação integral do ser humano, que envolve o desenvolvimento de todas as suas potencialidades, incluindo a intelectual, a física, a artística, a moral e a ética. Esse objetivo é alcançado através do desenvolvimento de "processos pedagógicos que garantam, ao final do processo educativo, o acesso efetivamente democrático ao conhecimento na sua mais elevada universalidade", que se dão em oposição ao tipo de educação presente no seio das sociedades capitalistas [@maciel_educacao_2015; apud @frigotto_trabalho_2012].
+
+Não obstante não se tratar de atividades ao nível de uma educação omnilateral, a integração com a arte traz consigo potencial para facilitar o conhecimento mais profundo dos conceitos, realizar conexões entre diferentes áreas do conhecimento de forma mais significativa e destacar os relacionamentos entre as disciplinas e os temas culturais da sociedade. Além disso, há também evidências de benefícios comportamentais e de relacionamento, como redução de ansiedade e aumento da participação e colaboração, não apenas entre alunos, mas também entre professores [@lovemore_enriching_2021].
+
+## Conclusão
+
+>Onde quero chegar: a educação matemática no seu sentido estrito, como disciplina, mesmo utilizando diversas abordagens como interdisciplinaridade, educação matemática crítica e etnomatemática, é uma substituta pobre para a omnilateralidade. Argumentos:
+1. Ao estar inserida em uma instituição panóptica, ela não pode ser emancipadora. A educação matemática crítica, por exemplo, é contraditória em sua essência, porque o professor, mesmo que consciente de sua posição, não pode ser um agente de transformação a partir de uma posição de subordinação. Para que o seja, deve ser insubordinado, rebelde, e, muito provavelmente, ineficiente para a escola panóptica. Qual conteúdo matemático avaliado em um teste padronizado internacional o professor de matemática ousaria dar menor atenção para que sobre espaço no ano letivo para discutir um problema mais relevante para a realidade brasileira, como propõe a etnomatemática, ou para introduzir o processo de acumulação primitiva de Marx? Aliás, como fazê-lo com alguma profundidade que não seja meramente subserviente^[No sentido da interdisciplinaridade de Bresler.]?
+2. O professor de matemática não é, em geral, treinado em filosofia e sociologia, sendo, portanto, mal equipado para tratar com precisão e alguma profundidade as questões que são requeridas pela educação integral^["Integral" no sentido de omnilateralidade.]. Isso dificulta a tradução de abordagens como a matemática crítica e etnomatemática em ações relevantes em sala de aula.
 
 # EFEITOS DA ESCOLARIDADE EM DIFERENTES SUBSTRATOS SOCIAIS NO ESPÍRITO SANTO
 
@@ -159,7 +203,7 @@ As variáveis de interesse extraídas da Rais foram:
 4. raça/cor
 5. sexo
 
-Importante destacar que, embora a profissão e a indústria na qual o trabalhador esteja inserido sejam importantes para determinar sua renda, essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração^["the whole point of getting an education is to help people move to better industries, not to move from assistant burger-flipper to chief burger-flipper" [@cochrane_writing_2005].]. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
+Importante destacar que, embora a profissão e a indústria na qual o trabalhador esteja inserido sejam importantes para determinar sua renda, essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
 
 Após selecionadas, apliquei condições às variáveis para obter amostra completa, ou seja, sem valores faltantes, e coerente. Essas condições estão resumidas na tabela a seguir. Elas implicam na restrição às entradas com renda média positiva não nula; na exclusão de menores aprendizes; na exclusão de entradas sem quaisquer dos campos escolaridade, raça/cor ou sexo preenchidos. 
 
