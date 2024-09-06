@@ -96,6 +96,14 @@ Que indivíduo precisa de educação formal para amar e aproveitar a vida? Afina
 
 A resposta: omnilateralidade. Essa escola faz sentido como instituição pós-panóptica. A educação só será omnilateral quando não for mais instrumental. E para que deixe de ser instrumental, ela terá de, ou perder seu valor como instrumento em uma sociedade baseada na exploração do homem pelo homem, ou a superação desse modelo.
 
+Tópico 2: crítica à educação matemática crítica
+
+1. Poderia se razoável assumir que alunos destituídos de poder seriam capazes de se tornar atores mais críticos na sociedade se tivessem acesso à matemática. Mas, por outro lado, obter acesso à educação matmeática sem ser crítico da ideolia da certeza pode reforçar o *status quo* [@skovsmose_educacao_2001].
+1. A educação matemática tem se desenvolvido como uma questão democrática e a educação matemática pode seguir essa tnedência também. Entretanto, o desenvolvimento tecnológico revela aspectos antidemocráticos, como, por exemplo, quando causa situações críticas como catástrofes ecológicas. Essas consequências do desenvolvimento tecnológico têm também de ser tratadas como parte da educação matemática [@skovsmose_educacao_2001]. Por que?
+1. Não podemos explicar o que não é escopo da matemática a partir da matemática. Isso porque o que não é matemática é muito maior do que a matemática. Não se pode definir conceitos por exclusão, digo, a partir daquilo que ele não o é.
+1. Tomamos decisões baseados em modelos matemáticos e, dessa forma, a matemática molda a realidade. Devemos nos perguntar quais são as implicações sociais, políticas e ambientais dessas ações [@skovsmose_educacao_2001]? A economia é um exemplo disso (ver Krugman).
+1. Mas essas questões aparecem apenas na interação da matemática com o mundo. Que implicações devem nos preocupar quando estudamos as propriedades de hipercubos? Além disso, a matemática deve se preocupar com as questões sociais? Se é tecnicamente possível colocar seres humanos em uma caixa de metal e lançá-los ao espaço, é uma pergunta completamente diferente de se devemos fazê-lo. Cabe à matemática discutir tais coisas? O educador matmeática é o profissional mais preparado para trazer essa discussão para a sala de aula? 
+
 ## A escola como instituição panóptica
 
 Para entender como os mecanismos estruturais do capitalismo restringem e direcionam as ações ao longo de todo o sistema educacional, deve-se enxergar o contexto sob a ótica da sociologia da educação.
