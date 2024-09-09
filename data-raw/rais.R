@@ -94,4 +94,4 @@ if (!dir.exists("data")) {
   dir.create("data")
 }
 
-saveRDS(rais, "data/rais.rds")
+saveRDS(rais, "data/rais.rds", compress = "xz")
