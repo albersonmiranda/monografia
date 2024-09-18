@@ -45,9 +45,25 @@ knitr::write_bib(file = "config/elementos/packages.bib")
 
 ## Contextualização da pesquisa
 
-Em uma sociedade capitalista, não se pode compreender a educação desassociada das relações de trabalho.
+Em seu texto acerca dos Parâmetros Curriculares Nacionais (PCN), o professor Rômulo Lins abre da seguinte forma:
 
-Neste trabalho, apresento uma proposta de sistematização teórica dos mecanismos de reprodução do capitalismo na educação, começando pelo nível estrutural, partindo de Marx e Bourdieu; passando pelo nível institucional, com a visão de Foucault sobre a escola como instituição panóptica; e chegando ao nível pedagógico, discutindo os limites da educação matemática crítica como instrumento emancipador.
+\begin{citacao}
+Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior problema é a resistência do sistema em mudar. \cite{oliveira_os_2021}
+\end{citacao}
+
+Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o que ele chamou de nível *micro*, não é suficiente para colocar o sistema educacional em rota de mudança. Paralelamente, deve ser realizado um trabalho estrutural na esfera *macro* — aqui, principalmente, o Ministério da Educação (MEC) — que possibilite uma mudança do educar *para* matemática para o educar *pela* a matemática. Essa diferença é ilustrada por Lins da seguinte forma:
+
+\begin{citacao}
+A diferença fica bastante mais clara se pensamos no caso da Educação Física. Será que alguém concebe que o papel das aulas de Educação Física é preparar todas as crianças (todas, eu disse) para o esporte competitivo? Claro que não. Se assim fosse as aulas de Educação Física não representariam, na formação das crianças, a educação para a saúde, para o desenvolvimento motor, para a socialização e o respeito a regras, para a colaboração. E os que quiserem ser atletas e jogadores vão buscar esta formação específica em outros espaços (possivelmente dentro dos times competitivos de suas escolas ou em clubes). Podemos dizer que a Educação Física escolar se concentra em modos de ser, promovendo aquela educação POR MEIO de esportes e exercícios físicos, enquanto o Treinamento Esportivo se concentra em potencializar habilidades, fazendo isso por meio da aquisição de técnicas específicas. \cite{oliveira_os_2021}
+\end{citacao}
+
+A mudança, então, deixa de ter como meio apenas o nível pedagógico, a sala de aula; aqui ele se alia a outras correntes que procuram afastar o diagnóstico do problema central da educação matemática de questões curriculares, como, por exemplo, se o aluno deve ou não estudar geometrias não euclidianas no ensino médio, e se expande para questionar o próprio objetivo do ensino da matemática, ou melhor, *através* da matemática.
+
+Quando o autor propõe uma educação "formativa e com o objetivo de permitir que todos que passem por ela participem de forma plena em suas sociedades", podemos nos perguntar: o que é essa participação plena? Ou ainda, por que é tão difícil realizar mudanças estruturais na educação ou, como Lins diz, fazer com que o sistema se coloque em rota de mudança?
+
+Para procurar compreender essas questões, é vital ir a níveis ainda mais profundos do que o nível macro proposto pelo professor Lins. Isto é, analisar as relações e mecanismos que moldam a expressão cultural das formas e relações de produção, ou seja, a estrutura jurídico-política e a estrutura ideológica da sociedade -- o que Marx define como *superestrutura*.
+
+Neste trabalho, procuro apresentar uma sistematização dos mecanismos causais de transmissão dos efeitos da superestrutura capitalista, a partir de elementos de Marx e Bourdieu, passando pelo nível institucional, com a visão de Foucault sobre a escola como instituição panóptica, e chegando ao nível pedagógico, discutindo os limites da educação matemática crítica como instrumento emancipador. reprodução do capitalismo na educação, começando pelo nível estrutural, partindo de Marx e Bourdieu; 
 
 Evidenciado o caráter inextricável da educação e trabalho, realizo uma análise estatística, a partir da análise dos dados de escolaridade, sexo, e rendimentos de diferentes substratos sociais no Espírito Santo, para demonstrar como esses mecanismos, que se manifestam na renda do trabalhador, estão se deteriorando ao longo dos anos.
 
@@ -59,28 +75,12 @@ Evidenciado o caráter inextricável da educação e trabalho, realizo uma anál
 
 ## Introdução
 
-Em seu texto acerca dos Parâmetros Curriculares Nacionais (PCN), o professor Rômulo Lins abre da seguinte forma:
-
-\begin{citacao}
-Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior
-problema é a resistência do sistema em mudar. \cite{oliveira_os_2021}
-\end{citacao}
-
-Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o que ele chamou de nível *micro*, não é suficiente para colocar o sistema educacional em rota de mudança. Paralelamente, deve ser realizado um trabalho estrutural na esfera *macro* — aqui, principalmente, o Ministério da Educação (MEC) — que possibilite uma mudança do educar *para* matemática para o educar *pela* a matemática. Essa diferença é ilustrada por Lins da seguinte forma:
-
-\begin{citacao}
-A diferença fica bastante mais clara se pensamos no caso da Educação Física. Será que alguém concebe que o papel das aulas de Educação Física é preparar todas as crianças (todas, eu disse) para o esporte competitivo? Claro que não. Se assim fosse as aulas de Educação Física não representariam, na formação das crianças, a educação para a saúde, para o desenvolvimento motor, para a socialização e o respeito a regras, para a colaboração. E os que quiserem ser atletas e jogadores vão buscar esta formação específica em outros espaços (possivelmente dentro dos times competitivos de suas escolas ou em clubes). Podemos dizer que a Educação Física escolar se concentra em modos de ser, promovendo aquela educação POR MEIO de esportes e exercícios físicos, enquanto o Treinamento Esportivo se concentra em potencializar habilidades, fazendo isso por meio da aquisição de técnicas específicas. \cite{oliveira_os_2021}
-\end{citacao}
-
-A mudança, então, deixa de ter como meio apenas o nível pedagógico, a sala de aula; o problema norteador da educação matemática como disciplina deixa de ser apenas, por exemplo, se o aluno deve ou não estudar geometrias não euclidianas no ensino médio, ou seja, unicamente conteúdos, e se expande para questionar o próprio objetivo do ensino da matemática, ou melhor, *através* da matemática.
-
-Quando o autor propõe uma educação "formativa e com o objetivo de permitir que todos que passem por ela participem de forma plena em suas sociedades", podemos nos perguntar: o que é essa participação plena? Ou ainda, por que é tão difícil realizar mudanças estruturais na educação ou, como Lins diz, fazer com que o sistema se coloque em rota de mudança?
+Em uma sociedade capitalista, não se pode compreender a educação desassociada das relações de trabalho. Pois além das técnicas aplicadas à educação -- aí compreendidas a pedagogia em suas dimensões filosófica e sociológica --, as normas vigentes e valores compartilhados de uma determinada sociedade também são refletidas e moldam as ações educacionais
 
 Para responder a essas perguntas, é necessário, primeiramente, definir conceitualmente essas esferas a que Lins se refere. A partir daí, pode-se entender com mais clareza os limites e possibilidades de mudança em cada uma delas.
 
 Primeiramente, a esfera micro está delimitada pelas ações pedagógicas do professor em sala de aula. Aqui, entram as abordagens, técnicas e ferramentas utilizadas pelo professor. Já na esfera macro é onde se localiza a escola como instituição. A instituição escolar restringe e direciona as ações da esfera micro, pedagógica.
 
-O professor Rômulo, entretanto, deixa de fora ainda uma superestrutura, que é o próprio sistema capitalista, que, por sua vez, direciona e restringe as ações das instituições, aí, não apenas inclusive mas principalmente, a escola. A escola, como instituição, é direcionada e restringida de acordo com a agenda da superestrutura, 
 
 Neste capítulo, procuro sistematizar os mecanismos de reprodução do capitalismo na educação, mostrando evidenciar como a educação matemática, tanto na esfera micro quanto na macro, enquanto não rompe com seu papel na reprodução das relações sociais de poder, é ineficaz na promoção de mudanças estruturais na sociedade.
 
