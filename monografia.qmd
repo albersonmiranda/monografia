@@ -71,6 +71,388 @@ Evidenciado o caráter inextricável da educação e trabalho, realizo uma anál
 
 [...]
 
+# EFEITOS DA ESCOLARIDADE EM DIFERENTES SUBSTRATOS SOCIAIS NO ESPÍRITO SANTO
+
+## Introdução
+
+[...]
+
+## Revisão de literatura
+
+[...]
+
+## Metodologia
+
+Neste trabalho, de ordem quantitativa, utilizo os dados da Relação Anual de Informações Sociais (Rais) de 2006 a 2022 para estimar os efeitos da escolaridade sobre a renda dos trabalhadores do estado do Espírito Santo. Para tanto, utilizo o *datalake* tratado e disponibilizado gratuitamente pelo projeto Base dos Dados [@cavalcante_basedosdados_2022]. O acesso, manipulação dos dados e a análise foram realizados com o *software* R [@R-base] e o repositório com todo o código realizado aqui está disponível publicamente e pode ser reproduzido em sua totalidade\footnote{https://github.com/albersonmiranda/monografia.}.
+
+As variáveis de interesse extraídas da Rais foram:
+
+1. renda média nominal naquele ano
+2. ciclo de escolaridade
+3. idade
+4. raça/cor
+5. sexo
+
+Importante destacar que, embora a profissão e a indústria na qual o trabalhador esteja inserido sejam importantes para determinar sua renda, essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
+
+Após selecionadas, apliquei condições às variáveis para obter amostra completa, ou seja, sem valores faltantes, e coerente. Essas condições estão resumidas na tabela a seguir. Elas implicam na restrição às entradas com renda média positiva não nula; na exclusão de menores aprendizes; na exclusão de entradas sem quaisquer dos campos escolaridade, raça/cor ou sexo preenchidos. 
+
+```{r possiveis valores rais}
+#| tbl-cap: Possíveis valores para as variáveis selecionadas da Rais
+
+kbl(
+  data.frame(
+    Variável = c(
+      "Sigla UF",
+      "Renda Média Nominal",
+      "Ciclo de Escolaridade",
+      "Idade",
+      "Raça/Cor",
+      "Sexo"
+    ),
+    Valores = c(
+      "ES",
+      "Núméricos, não negativos",
+      "Analfabeto, Ensino Fundamental (I/II, completo/incompleto),  Ensino Médio (completo/incompleto), Ensino Superior (completo/incompleto), Mestrado ou Doutorado",
+      "$>18$",
+      "Branco, Preto, Pardo, Indígena ou Amarelo",
+      "Masculino ou Feminino"
+    )
+  ),
+  booktabs = TRUE,
+  escape = FALSE
+) |>
+  kable_styling(latex_options = "striped", font_size = 10) |>
+  column_spec(2, width = "30em")
+```
+
+Além das condições de interesse do pesquisador, é necessário atentar que a Rais trata do mercado de trabalho formal, o que exclui trabalhadores informais e profissionais autônomos. Portanto, o presente trabalho mira estimar as relações escolaridade-renda no mercado de trabalho formal do Espírito Santo, destacando o impacto de substratos marginalizados da sociedade na determinação da renda do trabalhador.
+
+A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 a 2022, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
+
+```{r tabela entradas por ano}
+#| tbl-cap: "Entradas por ano"
+
+kbl(
+  t(table(rais$ano)),
+  format.args = list(big.mark = ".", decimal.mark = ",")
+) |>
+  kable_styling(latex_options = c("striped", "scale_down"))
+```
+
+```{r figura entradas por ano}
+#| fig-cap: "Entradas por ano"
+
+as.data.frame(table(rais$ano)) |>
+  ggplot(aes(x = Var1, y = Freq)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::number) +
+  labs(x = "Ano", y = "Quantidade") +
+  tema
+```
+
+Em termos de gênero no mercado de trabalho formal capixaba, as mulheres consquistaram espaço. Enquanto que em 2006 os homens ocupavam 116% a mais das vagas, em 2022 essa diferença caiu para 63%.
+
+```{r count sexo}
+#| fig-cap: "Comparativo 2006-2022 por sexo"
+
+rais[rais$ano %in% c(2006, 2022), c("ano", "sexo")] |>
+  tidyr::pivot_longer(!ano) |>
+  ggplot(aes(x = name, fill = value, label = scales::number(after_stat(count)))) +
+  geom_bar() +
+  geom_label(color = "white", stat = "count", show.legend = FALSE) +
+  scale_y_continuous(labels = scales::number) +
+  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+  facet_grid(~ano, scales = "free") +
+  labs(x = "Sexo", y = "Quantidade", fill = "Sexo") +
+  tema
+```
+
+Adicionando a dimensão da raça/cor, vemos que a mulher preta é o substrato social mais empurrado à informalidade. Dos declarados pretos, apenas 32% são mulheres.
+
+```{r tabela entradas por ano sexo cor}
+#| tbl-cap: "Comparativo 2006-2022 por sexo/raça/cor"
+
+kbl(
+  as.data.frame(
+    ftable(table(
+      subset(rais, ano %in% c(2006, 2022), select = c("ano", "sexo", "raca_cor"))
+    ))
+  ) |> tidyr::pivot_wider(names_from = raca_cor, values_from = Freq),
+  format.args = list(big.mark = ".", decimal.mark = ",")
+) |>
+  kable_styling(latex_options = c("striped"))
+```
+
+```{r count raca e cor}
+#| fig-cap: "Comparativo 2006-2022 por sexo/raça/cor"
+#| out.width: "100%"
+
+rais[rais$ano %in% c(2006, 2022), c("ano", "sexo", "raca_cor")] |>
+  ggplot(aes(x = raca_cor, fill = sexo, label = scales::number(after_stat(count)))) +
+  geom_bar() +
+  geom_label(
+    data = subset(rais, ano %in% c(2006, 2022) & raca_cor %in% c("branca", "parda", "preta")),
+    color = "white", stat = "count", show.legend = FALSE, size = 2, position = position_stack(vjust = 0.8)
+  ) +
+  scale_y_continuous(labels = scales::number) +
+  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+  facet_grid(~ano, scales = "free") +
+  labs(x = "Raça/Cor", y = "Quantidade", fill = "Sexo") +
+  guides(fill = "none") +
+  tema
+```
+
+Em relação à escolaridade, seja por uma mudança do perfil da população ou por requerimentos do mercado de trabalho, o fato é que a maior parte das vagas eram ocupadas por trabalhadores com até o ensino fundamental. Agora, a maior parte das vagas são ocupadas por trabalhadores com ensino médio. Destaca-se também que a maior fatia das vagas ocupadas por trabalhadores de escolaridade até o ensino fundamental são preenchidas por homens, implicando que as trabalhadoras da mesma escolaridade estão na informalidade.
+
+```{r tabela entradas por escolaridade}
+#| tbl-cap: "Comparativo 2006-2022 por sexo/escolaridade"
+
+kbl(
+  as.data.frame(
+    ftable(table(
+      subset(rais, ano %in% c(2006, 2022), select = c("ano", "sexo", "grau"))
+    ))
+  ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
+  format.args = list(big.mark = ".", decimal.mark = ",")
+) |>
+  kable_styling(latex_options = c("striped"))
+```
+
+```{r entradas por escolaridade}
+#| fig-cap: "Entradas por sexo/escolaridade"
+#| out.width: "100%"
+#| warning: false
+
+subset(rais, ano %in% c(2006, 2022)) |>
+  ggplot(aes(x = grau, fill = sexo)) +
+  geom_bar() +
+  scale_y_continuous(labels = scales::number) +
+  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+  facet_grid(~ano, scales = "fixed") +
+  labs(x = "Escolaridade", y = "Quantidade", fill = "Sexo") +
+  guides(fill = "none") +
+  coord_flip() +
+  tema
+```
+
+Adicionando a dimensão da raça/cor, percebemos que a ocupação de postos de trabalho de nível superior deixa de ser quase exclusividade de brancos. Entretanto, pardos e pretos ainda ocupam majoritariamente as vagas de trabalho de nível inferiores de escolaridade, além de, tanto proporcionalmente quanto absolutamente, ainda ocuparem menos vagas de ensino superior.
+
+```{r tabela entradas por sexo/escolaridade/raca}
+#| tbl-cap: "Comparativo 2006-2022 por sexo/raca/escolaridade"
+
+kbl(
+  as.data.frame(
+    ftable(table(
+      droplevels(subset(
+        rais,
+        ano %in% c(2006, 2022) & !raca_cor %in% c("indigena", "amarela"),
+        select = c("ano", "sexo", "grau", "raca_cor")
+      ))
+    ))
+  ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
+  format.args = list(big.mark = ".", decimal.mark = ",")
+) |>
+  kable_styling(latex_options = c("striped", "scale_down"))
+```
+
+```{r entradas por sexo/escolaridade/raca}
+#| fig-cap: "Entradas por sexo/escolaridade/raça/cor"
+#| out.width: "100%"
+#| warning: false
+
+subset(rais, ano %in% c(2006, 2022) & !raca_cor %in% c("indigena", "amarela")) |>
+  ggplot(aes(x = grau, fill = sexo)) +
+  geom_bar() +
+  scale_y_continuous(labels = scales::number_format(scale = 1 / 1000)) +
+  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+  facet_grid(rows = vars(raca_cor), cols = vars(ano), scales = "fixed") +
+  labs(x = "Escolaridade", y = "Quantidade (em milhares)", fill = "Sexo") +
+  guides(fill = "none") +
+  coord_flip() +
+  tema
+```
+
+A tabela a seguir evidencia mais explicitamente um ponto alarmante: quanto menor o nível de escolaridade da vaga, maior é a proporção de pretos e pardos que a ocupa.
+
+```{r proporcao pretos e pardos}
+#| tbl-cap: "Comparativo 2006-2022 proporção de pretos e pardos por nível de escolaridade"
+
+prop_pp = data.frame(
+  grau = NA,
+  ano = NA,
+  prop = NA
+)
+
+for (j in c(2006, 2022)) {
+  for (i in unique(rais$grau)) {
+    prop_pp = data.frame(
+      grau = c(prop_pp$grau, i),
+      ano = c(prop_pp$ano, j),
+      prop = c(
+        prop_pp$prop,
+        nrow(subset(rais, ano == j & raca_cor %in% c("preta", "parda") & grau == i)) / nrow(subset(rais, ano == j & grau == i))
+      )
+    )
+  }
+}
+
+remove(i, j)
+prop_pp = na.omit(prop_pp)
+
+prop_pp = dplyr::arrange(
+  prop_pp, prop_pp$ano, factor(prop_pp$grau, levels = c(
+    "nenhum", "fund_I", "fund_II", "medio", "superior", "mestrado", "doutorado"
+  ))
+)
+
+kbl(prop_pp) |>
+  kable_styling(latex_options = c("striped", "scale_down"))
+```
+
+Devido à omissão da variável ocupação, há erro de especificação no modelo e espera-se autocorrelaãção heteroscedasticidade --- o que de fato ocorre APONTAR PARA O APÊNDICE COM O MODELO HETEROSCEDÁSTICO. Por essa razão, utilizarei o método de mínimos quadrados generalizados - MQG.
+
+## Resultados
+
+```{r estimação}
+
+# anos selecionados
+anos = c(2022, 2006)
+
+# subset
+rais = rais[rais$ano %in% anos, ]
+
+# estimação
+modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
+  lm(
+    # variável dependente
+    log(vlr_rem) ~
+      # variáveis dependentes
+      grau + sexo + raca_cor + idade + idade^2 +
+      # interação
+      sexo * raca_cor,
+    # dataset
+    data = rais[rais$ano == ano, ]
+  )
+})
+```
+
+```{r}
+# amostragem para diagnóstico
+indices <- sample(length(modelos$m2022$residuals), 1000)
+
+# gráfico de dispersão dos resíduos
+plot(modelos$m2022$fitted.values[indices], modelos$m2022$residuals[indices])
+
+# normal Q-Q plot
+qqnorm(modelos$m2022$residuals[indices])
+qqline(modelos$m2022$residuals[indices], col = "steelblue")
+
+# histograma dos resíduos e curva normal
+histograma <- hist(modelos$m2022$residuals)
+xfit <- seq(min(modelos$m2022$residuals), max(modelos$m2022$residuals), length = 40)
+yfit <- dnorm(xfit, mean = mean(modelos$m2022$residuals), sd = sd(modelos$m2022$residuals))
+yfit <- yfit * diff(histograma$mids[1:2]) * length(modelos$m2022$residuals)
+lines(xfit, yfit, col = "steelblue", lwd = 2)
+```
+
+```{r modelos ponderados}
+# estimação ponderada
+modelos_ponderados = lapply(setNames(anos, paste0("m", anos)), function(ano) {
+
+  # resíduos dos modelos sem ponderação
+  res <- modelos[[paste0("m", ano)]]$residuals
+  variancia <- res^2
+
+  # ponderação
+  lm(
+    # variável dependente
+    log(vlr_rem) ~
+      # variáveis dependentes
+      grau + sexo + raca_cor + idade + idade^2 +
+      # interação
+      sexo * raca_cor,
+    # dataset
+    data = rais[rais$ano == ano, ],
+    # ponderação
+    weights = 1 / variancia
+  )
+})
+
+# amostragem para diagnóstico
+indices <- sample(length(modelos_ponderados$m2022$residuals), 1000)
+
+# gráfico de dispersão dos resíduos
+plot(modelos_ponderados$m2022$fitted.values[indices], modelos_ponderados$m2022$residuals[indices])
+
+# normal Q-Q plot
+qqnorm(modelos_ponderados$m2022$residuals[indices])
+qqline(modelos_ponderados$m2022$residuals[indices], col = "steelblue")
+
+# histograma dos resíduos e curva normal
+histograma <- hist(modelos_ponderados$m2022$residuals)
+xfit <- seq(min(modelos_ponderados$m2022$residuals), max(modelos_ponderados$m2022$residuals), length = 40)
+yfit <- dnorm(xfit, mean = mean(modelos_ponderados$m2022$residuals), sd = sd(modelos_ponderados$m2022$residuals))
+yfit <- yfit * diff(histograma$mids[1:2]) * length(modelos_ponderados$m2022$residuals)
+lines(xfit, yfit, col = "steelblue", lwd = 2)
+```
+
+```{r}
+# modelos com regressão generalizada
+modelos_rg = lapply(setNames(anos, paste0("m", anos)), function(ano) {
+  glm(
+    # variável dependente
+    log(vlr_rem) ~
+      # variáveis dependentes
+      grau + sexo + raca_cor + idade + idade^2 +
+      # interação
+      sexo * raca_cor,
+    # dataset
+    data = rais[rais$ano == ano, ],
+    # família
+    family = gaussian(link = "log")
+  )
+})
+
+# amostragem para diagnóstico
+indices <- sample(length(modelos_rg$m2022$residuals), 1000)
+
+# gráfico de dispersão dos resíduos
+plot(modelos_rg$m2022$fitted.values[indices], modelos_rg$m2022$residuals[indices])
+
+# normal Q-Q plot
+qqnorm(modelos_rg$m2022$residuals[indices])
+qqline(modelos_rg$m2022$residuals[indices], col = "steelblue")
+
+# histograma dos resíduos e curva normal
+histograma <- hist(modelos_rg$m2022$residuals)
+xfit <- seq(min(modelos_rg$m2022$residuals), max(modelos_rg$m2022$residuals), length = 40)
+yfit <- dnorm(xfit, mean = mean(modelos_rg$m2022$residuals), sd = sd(modelos_rg$m2022$residuals))
+yfit <- yfit * diff(histograma$mids[1:2]) * length(modelos_rg$m2022$residuals)
+lines(xfit, yfit, col = "steelblue", lwd = 2)
+```
+
+```{r}
+#| output: asis
+#| tbl-cap: "Estimação"
+
+# parâmetros
+stargazer::stargazer(
+  modelos$m2022,
+  modelos$m2006,
+  header = FALSE,
+  align = TRUE,
+  single.row = TRUE,
+  font.size = "scriptsize",
+  dep.var.labels = "log(remuneração)",
+  column.labels = c("2022", "2006")
+)
+```
+
+## Conclusão
+
+[...]
+
 # O PAPEL DA EDUCAÇÃO MATEMÁTICA SOB A HEGEMONIA DO CAPITAL
 
 ## Introdução
@@ -216,316 +598,6 @@ Não obstante não se tratar de atividades ao nível de uma educação omnilater
 >Onde quero chegar: a educação matemática no seu sentido estrito, como disciplina, mesmo utilizando diversas abordagens como interdisciplinaridade, educação matemática crítica e etnomatemática, é uma substituta pobre para a omnilateralidade. Argumentos:
 1. Ao estar inserida em uma instituição panóptica, ela não pode ser emancipadora. A educação matemática crítica, por exemplo, é contraditória em sua essência, porque o professor, mesmo que consciente de sua posição, não pode ser um agente de transformação a partir de uma posição de subordinação. Para que o seja, deve ser insubordinado, rebelde, e, muito provavelmente, ineficiente para a escola panóptica. Qual conteúdo matemático avaliado em um teste padronizado internacional o professor de matemática ousaria dar menor atenção para que sobre espaço no ano letivo para discutir um problema mais relevante para a realidade brasileira, como propõe a etnomatemática, ou para introduzir o processo de acumulação primitiva de Marx? Aliás, como fazê-lo com alguma profundidade que não seja meramente subserviente^[No sentido da interdisciplinaridade de Bresler.]?
 2. O professor de matemática não é, em geral, treinado em filosofia e sociologia, sendo, portanto, mal equipado para tratar com precisão e alguma profundidade as questões que são requeridas pela educação integral^["Integral" no sentido de omnilateralidade.]. Isso dificulta a tradução de abordagens como a matemática crítica e etnomatemática em ações relevantes em sala de aula.
-
-# EFEITOS DA ESCOLARIDADE EM DIFERENTES SUBSTRATOS SOCIAIS NO ESPÍRITO SANTO
-
-## Introdução
-
-[...]
-
-## Revisão de literatura
-
-[...]
-
-## Metodologia
-
-Neste trabalho, de ordem quantitativa, utilizo os dados da Relação Anual de Informações Sociais (Rais) de 2006 a 2022 para estimar os efeitos da escolaridade sobre a renda dos trabalhadores do estado do Espírito Santo. Para tanto, utilizo o *datalake* tratado e disponibilizado gratuitamente pelo projeto Base dos Dados [@cavalcante_basedosdados_2022]. O acesso, manipulação dos dados e a análise foram realizados com o *software* R [@R-base] e o repositório com todo o código realizado aqui está disponível publicamente e pode ser reproduzido em sua totalidade\footnote{https://github.com/albersonmiranda/monografia.}.
-
-As variáveis de interesse extraídas da Rais foram:
-
-1. renda média nominal naquele ano
-2. ciclo de escolaridade
-3. idade
-4. raça/cor
-5. sexo
-
-Importante destacar que, embora a profissão e a indústria na qual o trabalhador esteja inserido sejam importantes para determinar sua renda, essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
-
-Após selecionadas, apliquei condições às variáveis para obter amostra completa, ou seja, sem valores faltantes, e coerente. Essas condições estão resumidas na tabela a seguir. Elas implicam na restrição às entradas com renda média positiva não nula; na exclusão de menores aprendizes; na exclusão de entradas sem quaisquer dos campos escolaridade, raça/cor ou sexo preenchidos. 
-
-```{r possiveis valores rais}
-#| tbl-cap: Possíveis valores para as variáveis selecionadas da Rais
-
-kbl(
-  data.frame(
-    Variável = c(
-      "Sigla UF",
-      "Renda Média Nominal",
-      "Ciclo de Escolaridade",
-      "Idade",
-      "Raça/Cor",
-      "Sexo"
-    ),
-    Valores = c(
-      "ES",
-      "Núméricos, não negativos",
-      "Analfabeto, Ensino Fundamental (I/II, completo/incompleto),  Ensino Médio (completo/incompleto), Ensino Superior (completo/incompleto), Mestrado ou Doutorado",
-      "$>18$",
-      "Branco, Preto, Pardo, Indígena ou Amarelo",
-      "Masculino ou Feminino"
-    )
-  ),
-  booktabs = TRUE,
-  escape = FALSE
-) |>
-  kable_styling(latex_options = "striped", font_size = 10) |>
-  column_spec(2, width = "30em")
-```
-
-Além das condições de interesse do pesquisador, é necessário atentar que a Rais trata do mercado de trabalho formal, o que exclui trabalhadores informais e profissionais autônomos. Portanto, o presente trabalho mira estimar as relações escolaridade-renda no mercado de trabalho formal do Espírito Santo, destacando o impacto de substratos marginalizados da sociedade na determinação da renda do trabalhador.
-
-Nesta seção,
-
-A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 a 2022, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
-
-```{r tabela entradas por ano}
-#| tbl-cap: "Entradas por ano"
-
-kbl(
-  t(table(rais$ano)),
-  format.args = list(big.mark = ".", decimal.mark = ",")
-) |>
-  kable_styling(latex_options = c("striped", "scale_down"))
-```
-
-```{r figura entradas por ano}
-#| fig-cap: "Entradas por ano"
-
-as.data.frame(table(rais$ano)) |>
-  ggplot(aes(x = Var1, y = Freq)) +
-  geom_col() +
-  scale_y_continuous(labels = scales::number) +
-  labs(x = "Ano", y = "Quantidade") +
-  tema
-```
-
-
-Em termos de gênero no mercado de trabalho formal capixaba, as mulheres consquistaram espaço. Enquanto que em 2006 os homens ocupavam 116% a mais das vagas, em 2022 essa diferença caiu para 63%.
-
-```{r count sexo}
-#| fig-cap: "Comparativo 2006-2022 por sexo"
-
-rais[rais$ano %in% c(2006, 2022), c("ano", "sexo")] |>
-  tidyr::pivot_longer(!ano) |>
-  ggplot(aes(x = name, fill = value, label = scales::number(after_stat(count)))) +
-  geom_bar() +
-  geom_label(color = "white", stat = "count", show.legend = FALSE) +
-  scale_y_continuous(labels = scales::number) +
-  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
-  facet_grid(~ano, scales = "free") +
-  labs(x = "Sexo", y = "Quantidade", fill = "Sexo") +
-  tema
-```
-
-Adicionando a dimensão da raça/cor, vemos que a mulher preta é o substrato social mais empurrado à informalidade. Dos declarados pretos, apenas 32% são mulheres.
-
-```{r tabela entradas por ano sexo cor}
-#| tbl-cap: "Comparativo 2006-2022 por sexo/raça/cor"
-
-kbl(
-  as.data.frame(
-    ftable(table(
-      subset(rais, ano %in% c(2006, 2022), select = c("ano", "sexo", "raca_cor"))
-    ))
-  ) |> tidyr::pivot_wider(names_from = raca_cor, values_from = Freq),
-  format.args = list(big.mark = ".", decimal.mark = ",")
-) |>
-  kable_styling(latex_options = c("striped"))
-```
-
-```{r count raca e cor}
-#| fig-cap: "Comparativo 2006-2022 por sexo/raça/cor"
-#| out.width: "100%"
-
-rais[rais$ano %in% c(2006, 2022), c("ano", "sexo", "raca_cor")] |>
-  ggplot(aes(x = raca_cor, fill = sexo, label = scales::number(after_stat(count)))) +
-  geom_bar() +
-  geom_label(
-    data = subset(rais, ano %in% c(2006, 2022) & raca_cor %in% c("branca", "parda", "preta")),
-    color = "white", stat = "count", show.legend = FALSE, size = 2, position = position_stack(vjust = 0.8)
-  ) +
-  scale_y_continuous(labels = scales::number) +
-  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
-  facet_grid(~ano, scales = "free") +
-  labs(x = "Raça/Cor", y = "Quantidade", fill = "Sexo") +
-  guides(fill = "none") +
-  tema
-```
-
-Em relação à escolaridade, seja por uma mudança do perfil da população ou por requerimentos do mercado de trabalho, o fato é que a maior parte das vagas eram ocupadas por trabalhadores com até o ensino fundamental. Agora, a maior parte das vagas são ocupadas por trabalhadores com ensino médio. Destaca-se também que a maior fatia das vagas ocupadas por trabalhadores de escolaridade até o ensino fundamental são preenchidas por homens, implicando que as trabalhadores da mesma escolaridade estão na informalidade.
-
-```{r tabela entradas por escolaridade}
-#| tbl-cap: "Comparativo 2006-2022 por sexo/escolaridade"
-
-kbl(
-  as.data.frame(
-    ftable(table(
-      subset(rais, ano %in% c(2006, 2022), select = c("ano", "sexo", "grau"))
-    ))
-  ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
-  format.args = list(big.mark = ".", decimal.mark = ",")
-) |>
-  kable_styling(latex_options = c("striped"))
-```
-
-```{r entradas por escolaridade}
-#| fig-cap: "Entradas por sexo/escolaridade"
-#| out.width: "100%"
-#| warning: false
-
-subset(rais, ano %in% c(2006, 2022)) |>
-  ggplot(aes(x = grau, fill = sexo)) +
-  geom_bar() +
-  scale_y_continuous(labels = scales::number) +
-  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
-  facet_grid(~ano, scales = "fixed") +
-  labs(x = "Escolaridade", y = "Quantidade", fill = "Sexo") +
-  guides(fill = "none") +
-  coord_flip() +
-  tema
-```
-
-Adicionando a dimensão da raça/cor, percebemos que a ocupação de postos de trabalho de nível superior deixa de ser quase exclusividade de brancos. Entretanto, pardos e pretos ainda ocupam majoritariamente as vagas de trabalho de nível inferiores de escolaridade, além de, tanto proporcionalmente quanto absolutamente, ainda ocuparem menos vagas de ensino superior.
-
-```{r tabela entradas por sexo/escolaridade/raca}
-#| tbl-cap: "Comparativo 2006-2022 por sexo/raca/escolaridade"
-
-kbl(
-  as.data.frame(
-    ftable(table(
-      droplevels(subset(
-        rais,
-        ano %in% c(2006, 2022) & !raca_cor %in% c("indigena", "amarela"),
-        select = c("ano", "sexo", "grau", "raca_cor")
-      ))
-    ))
-  ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
-  format.args = list(big.mark = ".", decimal.mark = ",")
-) |>
-  kable_styling(latex_options = c("striped", "scale_down"))
-```
-
-```{r entradas por sexo/escolaridade/raca}
-#| fig-cap: "Entradas por sexo/escolaridade/raça/cor"
-#| out.width: "100%"
-#| warning: false
-
-subset(rais, ano %in% c(2006, 2022) & !raca_cor %in% c("indigena", "amarela")) |>
-  ggplot(aes(x = grau, fill = sexo)) +
-  geom_bar() +
-  scale_y_continuous(labels = scales::number_format(scale = 1 / 1000)) +
-  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
-  facet_grid(rows = vars(raca_cor), cols = vars(ano), scales = "fixed") +
-  labs(x = "Escolaridade", y = "Quantidade (em milhares)", fill = "Sexo") +
-  guides(fill = "none") +
-  coord_flip() +
-  tema
-```
-
-A tabela a seguir evidencia mais explicitamente um ponto alarmante: quanto menor o nível de escolaridade da vaga, maior é a proporção de pretos e pardos que a ocupa.
-
-```{r proporcao pretos e pardos}
-#| tbl-cap: "Comparativo 2006-2022 proporção de pretos e pardos por nível de escolaridade"
-
-prop_pp = data.frame(
-  grau = NA,
-  ano = NA,
-  prop = NA
-)
-
-for (j in c(2006, 2022)) {
-  for (i in unique(rais$grau)) {
-    prop_pp = data.frame(
-      grau = c(prop_pp$grau, i),
-      ano = c(prop_pp$ano, j),
-      prop = c(
-        prop_pp$prop,
-        nrow(subset(rais, ano == j & raca_cor %in% c("preta", "parda") & grau == i)) / nrow(subset(rais, ano == j & grau == i))
-      )
-    )
-  }
-}
-
-remove(i, j)
-prop_pp = na.omit(prop_pp)
-
-prop_pp = dplyr::arrange(
-  prop_pp, prop_pp$ano, factor(prop_pp$grau, levels = c(
-    "nenhum", "fund_I", "fund_II", "medio", "superior", "mestrado", "doutorado"
-  ))
-)
-
-kbl(prop_pp) |>
-  kable_styling(latex_options = c("striped", "scale_down"))
-```
-
-Devido à omissão da variável ocupação, há erro de especificação no modelo e espera-se autocorrelaãção heteroscedasticidade --- o que de fato ocorre APONTAR PARA O APÊNDICE COM O MODELO HETEROSCEDÁSTICO. Por essa razão, utilizarei o método de mínimos quadrados generalizados - MQG.
-
-## Resultados
-
-```{r estimação}
-
-# anos selecionados
-anos = c(2022, 2006)
-
-# subset
-rais = rais[rais$ano %in% anos, ]
-
-# adicionando resíduos ao dataframe
-rais = by(rais, rais$ano, function(ano) {
-  # modelo
-  residuos = lm(
-    # variável dependente
-    log(vlr_rem) ~
-      # variáveis dependentes
-      grau + sexo + raca_cor + idade + idade^2 +
-      # interação
-      sexo * raca_cor,
-    # dataset
-    ano
-  )$resid
-
-  # adicionando resíduos
-  ano[names(residuos), "residuos"] = residuos
-  # retorno
-  ano
-}) |> do.call(what = rbind)
-
-# estimação
-modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
-  lm(
-    # variável dependente
-    log(vlr_rem) ~
-      # variáveis dependentes
-      grau + sexo + raca_cor + idade + idade^2 +
-      # interação
-      sexo * raca_cor,
-    # dataset
-    data = rais[rais$ano == ano, ]
-  )
-})
-```
-
-```{r}
-#| output: asis
-#| tbl-cap: "Estimação"
-
-# parâmetros
-stargazer::stargazer(
-  modelos$m2022,
-  modelos$m2006,
-  header = FALSE,
-  align = TRUE,
-  single.row = TRUE,
-  font.size = "scriptsize",
-  dep.var.labels = "log(remuneração)",
-  column.labels = c("2022", "2006")
-)
-```
-
-## Conclusão
-
-[...]
 
 # CONCLUSÕES
 
