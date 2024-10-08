@@ -93,8 +93,6 @@ As variáveis de interesse extraídas da Rais foram:
 4. raça/cor
 5. sexo
 
-Importante destacar que, embora a profissão e a indústria na qual o trabalhador esteja inserido sejam importantes para determinar sua renda, essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
-
 Após selecionadas, apliquei condições às variáveis para obter amostra completa, ou seja, sem valores faltantes, e coerente. Essas condições estão resumidas na tabela a seguir. Elas implicam na restrição às entradas com renda média positiva não nula; na exclusão de menores aprendizes; na exclusão de entradas sem quaisquer dos campos escolaridade, raça/cor ou sexo preenchidos. 
 
 ```{r possiveis valores rais}
@@ -310,7 +308,11 @@ kbl(prop_pp) |>
   kable_styling(latex_options = c("striped", "scale_down"))
 ```
 
-Devido à omissão da variável ocupação, há erro de especificação no modelo e espera-se autocorrelaãção heteroscedasticidade --- o que de fato ocorre APONTAR PARA O APÊNDICE COM O MODELO HETEROSCEDÁSTICO. Por essa razão, utilizarei o método de mínimos quadrados generalizados - MQG.
+## Notas sobre a estimação
+
+Embora a profissão e a indústria na qual o trabalhador esteja inserido sejam preditores importantes para determinar sua renda, essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
+
+Devido à omissão dessa variável, espera-se a introdução de heteroscedasticidade e, consequentemente, viés de variável omitida. Em relação ao problema da heteroscedasticidade, a intuição é que 
 
 ## Resultados
 
@@ -498,33 +500,17 @@ Nesse sentido, a educação cristã medieval era, em sua essência, um instrumen
 
 ## A educação matemática sob a superestrutura capitalista
 
-Não existe naquela sociedade é a escola como conhecemos. Quando perde sua função de triagem para selecionar indivíduos a ocupar determinados lugares na sociedade, ela não tem razão de ser. A busca do indivíduo pelo conhecimento teria a mesma condição da busca pela música, pela arte: o prazer individual. Não há profissão a ser aprendida para exercer um papel na sociedade, apenas a busca pela descoberta; pela transposição  (rompimento de barreira, quis dizer) da fronteira do conhecimento. Não há sentido em obrigar toda a humanidade durante 20% de sua existência na terra, numa sala de aula e disparar conteúdos. 
-
-Que indivíduo precisa de educação formal para amar e aproveitar a vida? Afinal, a maior parte dos humanos que pisaram na terra não o tiveram. 
-
-A resposta: omnilateralidade. Essa escola faz sentido como instituição pós-panóptica. A educação só será omnilateral quando não for mais instrumental. E para que deixe de ser instrumental, ela terá de, ou perder seu valor como instrumento em uma sociedade baseada na exploração do homem pelo homem, ou a superação desse modelo.
-
-Tópico 2: crítica à educação matemática crítica
-
-1. Poderia se razoável assumir que alunos destituídos de poder seriam capazes de se tornar atores mais críticos na sociedade se tivessem acesso à matemática. Mas, por outro lado, obter acesso à educação matmeática sem ser crítico da ideolia da certeza pode reforçar o *status quo* [@skovsmose_educacao_2001].
-1. A educação matemática tem se desenvolvido como uma questão democrática e a educação matemática pode seguir essa tnedência também. Entretanto, o desenvolvimento tecnológico revela aspectos antidemocráticos, como, por exemplo, quando causa situações críticas como catástrofes ecológicas. Essas consequências do desenvolvimento tecnológico têm também de ser tratadas como parte da educação matemática [@skovsmose_educacao_2001]. Por que?
-1. Não podemos explicar o que não é escopo da matemática a partir da matemática. Isso porque o que não é matemática é muito maior do que a matemática. Não se pode definir conceitos por exclusão, digo, a partir daquilo que ele não o é.
-1. Tomamos decisões baseados em modelos matemáticos e, dessa forma, a matemática molda a realidade. Devemos nos perguntar quais são as implicações sociais, políticas e ambientais dessas ações [@skovsmose_educacao_2001]? A economia é um exemplo disso (ver Krugman).
-1. Mas essas questões aparecem apenas na interação da matemática com o mundo. Que implicações devem nos preocupar quando estudamos as propriedades de hipercubos? Além disso, a matemática deve se preocupar com as questões sociais? Se é tecnicamente possível colocar seres humanos em uma caixa de metal e lançá-los ao espaço, é uma pergunta completamente diferente de se devemos fazê-lo. Cabe à matemática discutir tais coisas? O educador matmeática é o profissional mais preparado para trazer essa discussão para a sala de aula? 
+[...]
 
 ## A escola como instituição panóptica
 
-Para entender como os mecanismos estruturais do capitalismo restringem e direcionam as ações ao longo de todo o sistema educacional, deve-se enxergar o contexto sob a ótica da sociologia da educação.
-
-Pierre Bourdieu (1930-2002) define a escola como o instrumento do sistema capitalista para a transmissão cultural da desigualdade social
-
-Em *Sistemas de Ensino e Sistemas de Pensamento*, Pierre Bourdieu coloca o sistema educacional como um dos instrumentos mais eficazes de integração moral e lógica da sociedade, que tem como produto o indivíduo "programado" — homogêneo em percepção, pensamento e ação:
+@bourdieu_economia_2011 coloca o sistema educacional como um dos instrumentos mais eficazes de integração moral e lógica da sociedade, que tem como produto o indivíduo "programado" — homogêneo em percepção, pensamento e ação:
 
 \begin{citacao}
 Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua qualidade de código comum é o que permite a todos os detentores deste código associar o mesmo sentido às mesmas obras e, de maneira recíproca, de exprimir a mesma intenção significante por intermédio das mesmas palavras, dos mesmos comportamentos e das mesmas obras, pode-se compreender por que \textbf{a Escola, incumbida de transmitir esta cultura, constitui o fator fundamental do consenso cultural} nos termos de uma participação de um senso comum entendido como condição da comunicação. \cite{bourdieu_economia_2011}
 \end{citacao}
 
-Na conferência V de *A Verdade e as Formas Jurídicas*, Foucault coloca a escola como um exemplo de instituição panóptica (ou de sequestro). Esse tipo de instituição exerce poder sobre os indivíduos em uma sociedade de três formas características: *vigilância* individual e contínua; *controle* através de punição e recompensa e; formação e transformação dos indivíduos em função de certas normas, o que Foucault chamou de *correção*. Podemos associar esse consenso cultural que Bourdieu trata ao tríplice aspecto das instituições panópticas na definição de Foucault, especificamente a *correção*.
+A nível institucional, @foucault_verdade_2013 trabalha esse aspecto de normalização cultural e moral. Ele coloca a escola como um exemplo de instituição panóptica (ou de sequestro). Esse tipo de instituição exerce poder sobre os indivíduos em uma sociedade de três formas características: *vigilância* individual e contínua; *controle* através de punição e recompensa e; formação e transformação dos indivíduos em função de certas normas, o que Foucault chamou de *correção*. Podemos associar esse consenso cultural que Bourdieu trata ao tríplice aspecto das instituições panópticas na definição de Foucault, especificamente a *correção*.
 
 \begin{citacao}
 Na época atual, todas essas instituições --- fábrica, escola, hospital psiquiátrico, hospital, prisão --- têm por finalidade não excluir, mas, ao contrário, fixar os indivíduos. A fábrica não exclui os indivíduos; liga-os a um aparelho de produção. \textbf{A escola não exclui os indivíduos; mesmo fechando-os; ela os fixa a um aparelho de transmissão do saber}. O hospital psiquiátrico não exclui os indivíduos; liga-os a um aparelho de correção, a um aparelho de normalização dos indivíduos. O mesmo acontece com a casa de correção ou com a prisão. Mesmo se os efeitos dessas instituições são a exclusão
@@ -547,64 +533,24 @@ A pedagogia se formou a partir das próprias adaptações da criança às tarefa
 
 Esse conjunto de características tem como objetivo principal a *transformação dos homens em força produtiva*. É através desse micro-poder entranhado nas relações sociais de uma sociedade panóptica que o indivíduo é fixado ao aparelho de produção, e a escola é um instrumento essencial para a formação desse micro-poder.
 
-Tendemos, por conta da brevidade de nossas vidas, a limitar nossa ousadia em relação a essas estruturas. É fácil internalizar, inconscientemente, que essas instituições sempre existiram e sempre existirão da mesma forma que o são hoje. E talvez essa seja uma razão que contribua para que, como aponta Lins, a produção na educação matemática seja tão limitada à sala de aula --- aliás, essa visão é incentivada aqui mesmo no IFES, onde somos direcionados a "trazer para a sala de aula" nossa pesquisa do TCC.
+## Da insuficiência da educação matemática crítica
 
-A educação crítica é contraditória em sua essência. Por um lado, ela busca a emancipação do indivíduo, a formação de cidadãos críticos e conscientes de seu papel na sociedade. Por outro, ela busca seu objetivo a partir de uma instituição panóptica. E escola não pode ser, ao mesmo tempo, emancipadora e panóptica. Nesse sentido, o professor apenas pode ser um agente libertador a partir de uma posição de insubordinação.
+[...]
 
-A consciência de sua dominaçãoAfinal, a gazela que está prestes a ser devorada pelo leão não será capaz de alterar o resultado final, independentemente se tiver consciência ou não .
+## Omnilateralidade versus integração com artes
 
-Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência. Portanto, além de pensar no que Lins define como micro e macro, devemos avançar acerca da própria posição da educação na sociedade. Apenas no momento em que a escola não mais existir para normalizar o indivíduo é que ela perderá sua razão de ser numa sociedade panóptica capitalista e será livre para se tornar algo diferente --- e de fato libertadora.
-
-## Educação matemática em sala de aula
-
-[interdisciplinaridade (ex.: Lovemore começou ensinando música, mas largou para focar no que era instrumental para a matemática. Houvesse um professor de música, poderiam trabalhar juntos e seria educação integral. No Brasil, há algum espaço para tal prática?); omnilateralidade; reprodução (Bourdieu)]
-
-É perfeitamente compreensível que a maior parte da produção acadêmica em educação matemática se concentre no que o professor Rômulo chamou de esfera micro. Afinal, é nesse nível que se dá a interação direta entre professor e aluno, onde o conhecimento é transmitido e construído, onde as práticas pedagógicas são desenvolvidas e aprimoradas. É a ponta onde tudo acontece.
-
-Esse corpo de produção acadêmica é categorizado nas chamadas tendências em educação matemática. Essas categorizações buscam identificar e descrever as diferentes abordagens e perspectivas que norteiam a pesquisa e o ensino da matemática [@mello_tendencias_2007].
-
-Para ilustrar os limites e possibilidades dessas tendências, tomemos como exemplo a interdisciplinaridade. Esta é uma abordagem que visa a integração de diferentes áreas do conhecimento, com o objetivo de promover uma aprendizagem mais significativa e contextualizada. Esse conceito envolve ao mesmo tempo teoria e ação, uma vez que exige mais a atuação do professor em sala de aula do que a simples união de duas ou mais disciplinas ou áreas do saber em atividades [@mello_tendencias_2007].
-
-Essa interdisciplinaridade é alcançada a partir do rompimento com o isolamento e a fragmentação dos conteúdos, possibilitando a transferência de aprendizagem de uma situação para a outra e a construção de significado em cima desse aprendizado transferido [@souto_interdisciplinaridade_2010]. Para que isso seja possível, @souto_interdisciplinaridade_2010 lista algumas condições que a atividade deve atender, como:
-
-1. O tema deve ser algo conhecido dos alunos;
-1. Ser de discussão possível;
-1. Ter valor em si mesmo;
-1. Ser capaz de criar conceitos matemáticos;
-1. desenvolver habilidades matemáticas;
-1. e privilegiar a concretude social.
-
-Nesse sentido, a integração com a arte é uma das formas de promover a interdisciplinaridade, uma vez que ela é uma forma de expressão humana que permeia o indivíduo em toda cultura e sociedade. De acordo com @robinson_arts_2013, integração com artes pode ser definida a partir de três características que devem ser consideradas para que seja alcançada uma interdisciplinaridade de alta qualidade, são elas:
-
-1. Aprendizado *através* e *com* artes;
-1. Artes como processo de conexão curricular;
-1. Artes como engajamento colaborativo.
-
-@bresler_subservient_1995 realizou um estudo etnográfico em três escolas K-8 nos Estados Unidos^[K-8 é uma abreviação para *kindergarten* (pré-escola) até o 8º ano do ensino fundamental.], incluindo observações de aulas; entrevistas com professores, diretores e artistas residentes; e revisão de materiais curriculares. A partir desse estudo, a autora definiu quarto abordagens de integração com a arte, sintetizadas por @robinson_arts_2013, são elas:
-
-1. **Integração subserviente**: a arte é apenas um extra, usada para ilustrar ou reforçar conceitos de outras disciplinas;
-1. **Integração afetiva**: a integração se dá por meio da imersão e da consequente reação dos alunos à arte, como música e peças artísticas, complementando o currículo de outras disciplinas;
-1. **Integração social**: baseada em atividades, utilizando a arte para promover a interação entre os alunos e aumentar a participação parental, como em peças de teatro ou música em grupo;
-1. **Integração co-igual cognitiva**: a arte é integrada com outros aspectos do currículo e os alunos são exigidos a usar habilidades de pensamento de ordem superior e qualidades estéticas^[Na filosofia, a estética é uma área de conhecimento associada às artes e sensações. É a forma de conhecer o mundo através dos cinco sentidos.] para obter um entendimento mais aprofundado de um conceito acadêmico específico;
-
-As três primeiras abordagens utilizam a arte como uma ferramenta. Já a quarta abordagem, a integração co-igual cognitiva, é a mais exigente, demandando do professor não apenas o conhecimento, habilidade e confiança no seu conteúdo, mas também na forma de arte escolhida. Além disso, requer tempo para planejar e efetivamente preparar aulas que integrem a arte com o conteúdo acadêmico [@lovemore_enriching_2021].
-
-A essa altura, é importante destacar que a integração com a arte se localiza na esfera pedagógica (micro), estando associada mas não se confundindo com a educação omnilateral, que é um conceito melhor entendido na esfera macro. O objetivo da educação omnilateral é a formação integral do ser humano, que envolve o desenvolvimento de todas as suas potencialidades, incluindo a intelectual, a física, a artística, a moral e a ética. Esse objetivo é alcançado através do desenvolvimento de "processos pedagógicos que garantam, ao final do processo educativo, o acesso efetivamente democrático ao conhecimento na sua mais elevada universalidade", que se dão em oposição ao tipo de educação presente no seio das sociedades capitalistas [@maciel_educacao_2015; apud @frigotto_trabalho_2012].
-
-Não obstante não se tratar de atividades ao nível de uma educação omnilateral, a integração com a arte traz consigo potencial para facilitar o conhecimento mais profundo dos conceitos, realizar conexões entre diferentes áreas do conhecimento de forma mais significativa e destacar os relacionamentos entre as disciplinas e os temas culturais da sociedade. Além disso, há também evidências de benefícios comportamentais e de relacionamento, como redução de ansiedade e aumento da participação e colaboração, não apenas entre alunos, mas também entre professores [@lovemore_enriching_2021].
+[...]
 
 ## Conclusão
 
->Onde quero chegar: a educação matemática no seu sentido estrito, como disciplina, mesmo utilizando diversas abordagens como interdisciplinaridade, educação matemática crítica e etnomatemática, é uma substituta pobre para a omnilateralidade. Argumentos:
-1. Ao estar inserida em uma instituição panóptica, ela não pode ser emancipadora. A educação matemática crítica, por exemplo, é contraditória em sua essência, porque o professor, mesmo que consciente de sua posição, não pode ser um agente de transformação a partir de uma posição de subordinação. Para que o seja, deve ser insubordinado, rebelde, e, muito provavelmente, ineficiente para a escola panóptica. Qual conteúdo matemático avaliado em um teste padronizado internacional o professor de matemática ousaria dar menor atenção para que sobre espaço no ano letivo para discutir um problema mais relevante para a realidade brasileira, como propõe a etnomatemática, ou para introduzir o processo de acumulação primitiva de Marx? Aliás, como fazê-lo com alguma profundidade que não seja meramente subserviente^[No sentido da interdisciplinaridade de Bresler.]?
-2. O professor de matemática não é, em geral, treinado em filosofia e sociologia, sendo, portanto, mal equipado para tratar com precisão e alguma profundidade as questões que são requeridas pela educação integral^["Integral" no sentido de omnilateralidade.]. Isso dificulta a tradução de abordagens como a matemática crítica e etnomatemática em ações relevantes em sala de aula.
+[...]
 
 # CONCLUSÕES
 
 ## Conclusões da monografia
 
-A relação de causalidade socialmente aceita de que escolaridade implica ascenção social é, em realidade, invertida. Por conta de apenas herdeiros de ricos terem acesso à escolaridade, foi construída a correlação entre escolaridade e rendimentos. Entretanto, os rendimentos vêem por causa da herância econômica e social, e não por conta da escolaridade. 
+[...]
 
 ## Pesquisa futura
 
-A evidência é que, conforme aumenta a democratização do ensino, os rendimentos oriundos de ciclos completos de escolaridade são reduzidos. Uma possível hipótese é de que, conforme o pobre adentra às classes escolarizadas, a média de rendimentos por ciclo de escolaridade completo é reduzido, porque a razão dele ser pobre é porque nasceu pobre, não porque não tinha escolaridade.
+[...]
