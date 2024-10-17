@@ -194,7 +194,7 @@ rais[rais$ano %in% c(2006, 2022), c("ano", "sexo", "raca_cor")] |>
     color = "white", stat = "count", show.legend = FALSE, size = 2, position = position_stack(vjust = 0.8)
   ) +
   scale_y_continuous(labels = scales::number) +
-  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+  scale_fill_manual(values = c("#bc5090", "#003f5c")) +
   facet_grid(~ano, scales = "free") +
   labs(x = "Raça/Cor", y = "Quantidade", fill = "Sexo") +
   guides(fill = "none") +
@@ -225,10 +225,10 @@ kbl(
 subset(rais, ano %in% c(2006, 2022)) |>
   ggplot(aes(x = grau, fill = sexo)) +
   geom_bar() +
-  scale_y_continuous(labels = scales::number) +
-  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+  scale_y_continuous(labels = scales::number_format(scale = 1 / 1000)) +
+  scale_fill_manual(values = c("#bc5090", "#003f5c")) +
   facet_grid(~ano, scales = "fixed") +
-  labs(x = "Escolaridade", y = "Quantidade", fill = "Sexo") +
+  labs(x = "Escolaridade", y = "Quantidade (em milhares)", fill = "Sexo") +
   guides(fill = "none") +
   coord_flip() +
   tema
@@ -236,7 +236,7 @@ subset(rais, ano %in% c(2006, 2022)) |>
 
 Adicionando a dimensão da raça/cor, percebemos que a ocupação de postos de trabalho de nível superior deixa de ser quase exclusividade de brancos. Entretanto, pardos e pretos ainda ocupam majoritariamente as vagas de trabalho de nível inferiores de escolaridade, além de, tanto proporcionalmente quanto absolutamente, ainda ocuparem menos vagas de ensino superior.
 
-```{r tabela entradas por sexo/escolaridade/raca}
+```{r tabela entradas por sexo escolaridade raca}
 #| tbl-cap: "Comparativo 2006-2022 por sexo/raca/escolaridade"
 
 kbl(
@@ -254,7 +254,7 @@ kbl(
   kable_styling(latex_options = c("striped", "scale_down"))
 ```
 
-```{r entradas por sexo/escolaridade/raca}
+```{r entradas por sexo escolaridade raca}
 #| fig-cap: "Entradas por sexo/escolaridade/raça/cor"
 #| out.width: "100%"
 #| warning: false
@@ -263,7 +263,7 @@ subset(rais, ano %in% c(2006, 2022) & !raca_cor %in% c("indigena", "amarela")) |
   ggplot(aes(x = grau, fill = sexo)) +
   geom_bar() +
   scale_y_continuous(labels = scales::number_format(scale = 1 / 1000)) +
-  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+  scale_fill_manual(values = c("#bc5090", "#003f5c")) +
   facet_grid(rows = vars(raca_cor), cols = vars(ano), scales = "fixed") +
   labs(x = "Escolaridade", y = "Quantidade (em milhares)", fill = "Sexo") +
   guides(fill = "none") +
@@ -308,13 +308,19 @@ kbl(prop_pp) |>
   kable_styling(latex_options = c("striped", "scale_down"))
 ```
 
-## Notas sobre a estimação
+### Notas sobre a estimação
 
-Embora a profissão e a indústria na qual o trabalhador esteja inserido sejam preditores importantes para determinar sua renda, essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
+Embora a profissão e a indústria na qual o trabalhador esteja inserido sejam preditores importantes para determinar sua renda^[@altonji_heterogeneity_2012 aponta que a diferença média entre alguns cursos superiores, especificamente engenharia elétrica e pedagogia, é quase tão grande quanto a diferença média entre indivíduos com ensino médio e ensino superior.], essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
 
-Devido à omissão dessa variável, espera-se a introdução de heteroscedasticidade e, consequentemente, viés de variável omitida. Em relação ao problema da heteroscedasticidade, a intuição é que 
+Devido à omissão dessa variável, espera-se a inclusão de viés de variável omitida e, consequentemente, a introdução de heteroscedasticidade. Em relação a esta, a intuição é que profissões de alta remuneração, como juízes, médicos e engenheiros, se dão em menor frequência e são de maior remuneração, gerando resíduo $e_i$ positivo consistentemente, de forma que a variância dos resíduos não seja constante, ou homoscedástica.
 
-## Resultados
+![Viés de variável omitida.](img/vies_omissao.svg){#fig-vies fig-scap="Previsões base a serem reconciliadas" width=70%}
+
+## Estimação
+
+Para estimar os efeitos da escolaridade na determinação da renda do trabalhador formal no Espírito Santo, utilizo o modelo de regressão linear múltipla. A variável dependente é a renda média nominal do trabalhador, e as variáveis independentes são o ciclo de escolaridade, a idade, a raça/cor e o sexo do trabalhador. A escolha do modelo de regressão linear múltipla se dá por sua capacidade de interpretação e pela possibilidade de estimar os efeitos marginais de cada variável independente na variável dependente, bem como a possibilidade de incluir interações entre as variáveis independentes.
+
+
 
 ```{r estimação}
 
