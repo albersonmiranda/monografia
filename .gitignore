@@ -2,3 +2,4 @@
 nul
 /.quarto/
 render/img/
+.DS_Store
