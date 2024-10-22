@@ -9,8 +9,6 @@ rais = basedosdados::bdplyr("br_me_rais.microdados_vinculos") |>
   dplyr::filter(
     # Espírito Santo
     sigla_uf == "ES" &
-      # maiores de 25 anos
-      idade >= 25 &
       # sem vazios em remuneração
       !is.na(valor_remuneracao_media) &
       # sem vazios em raça/cor
@@ -87,6 +85,17 @@ rais = within(rais, {
   grau_instrucao = ifelse(grau_instrucao %in% c("superior_completo"), "superior", grau_instrucao)
   grau = relevel(as.factor(grau_instrucao), "nenhum")
   grau_instrucao = NULL
+})
+
+# adicionando experiência
+rais = within(rais, {
+  exp = ifelse(grau == "nenhum", idade - 6, NA)
+  exp = ifelse(grau == "fund_I", idade - 10, exp)
+  exp = ifelse(grau == "fund_II", idade - 14, exp)
+  exp = ifelse(grau == "medio", idade - 17, exp)
+  exp = ifelse(grau == "superior", idade - 21, exp)
+  exp = ifelse(grau == "mestrado", idade - 23, exp)
+  exp = ifelse(grau == "doutorado", idade - 27, exp)
 })
 
 # salvando dataframe

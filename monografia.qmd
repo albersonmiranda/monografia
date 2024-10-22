@@ -65,7 +65,7 @@ Para procurar compreender essas questões, é vital ir a níveis mais profundos 
 
 Neste trabalho, argumento que a resistência do sistema em mudar, como aponta Lins, é um sintoma de uma sociedade que historicamente reproduz, por meio do processo educativo, as relações sociais de poder que a constituem. Paralelamente, defendo que a violência simbólica que mascara essas relações, como aponta Bourdieu, está se deteriorando ao longo do século 21.
 
-Este trabalho está dividido em duas partes. Na primeira, evidencio os sintomas: a partir de uma análise estatística com dados de escolaridade, sexo, raça e rendimentos de diferentes substratos sociais do estado do Espírito Santo, demonstro que 1) a escolaridade é um preditor significativo para a determinação da renda do trabalhador capixaba; 2) substratos marginalizados da sociedade têm retornos menores mesmo com maior escolaridade que os mais favorecidos; 3) esse poder explicativo está se deteriorando consistentemente nos últimos 60, e; 4) políticas educacionais e ações afirmativas nos últimos 20 anos estão corroendo a violência simbólica e, portanto, escancarando os mecanismos de reprodução das relações sociais de poder.
+Este trabalho está dividido em duas partes. Na primeira, evidencio os sintomas: a partir de uma análise estatística com dados de escolaridade, sexo, raça e rendimentos de diferentes substratos sociais do estado do Espírito Santo, demonstro que 1) a escolaridade é um preditor significativo para a determinação da renda do trabalhador capixaba; 2) substratos marginalizados da sociedade têm retornos menores mesmo com maior escolaridade que os mais favorecidos; 3) esse poder explicativo está se deteriorando consistentemente nos últimos 60 anos, e; 4) políticas educacionais e ações afirmativas nos últimos 20 anos estão corroendo a violência simbólica e, portanto, escancarando os mecanismos de reprodução das relações sociais de poder.
 
 Na segunda parte, procuro explicar esses sintomas apresentando uma sistematização dos mecanismos causais de transmissão dos efeitos da superestrutura capitalista, a partir de elementos de Marx e Bourdieu, passando pelo nível institucional, com a visão de Foucault sobre a escola como instituição panóptica, e chegando ao nível pedagógico, discutindo interdisciplinaridade, omnilateralidade e os limites da educação matemática crítica como instrumento emancipador.
 
@@ -85,7 +85,9 @@ A primeira abordagem quantitativa para evidenciar o poder de explicação da esc
 
 Desde então, diversos estudos têm sido realizados para estimar os efeitos da escolaridade sobre a renda do trabalhador, cada um estendendo ou aplicando o modelo de Mincer em diferentes contextos. @psacharopoulos_returns_2004 estimam, em média, cerca de 10% de incremento de renda para cada ano de estudo. @colclough_changing_2010 mostram, a partir de dados de 34 países, que até a década de 1990 os retornos a cada nível de escolaridade eram descrescentes, mas que, a partir de então, o retorno a cada ano extra de estudo aumenta a cada incremento no nível de escolaridade. Neste mesmo trabalho, os autores demonstram que os retornos em todos os níveis de escolaridade (primário, secundário e terciário) estão reduzindo ao longo das décadas, mas que a redução é mais acentuada no nível primário.
 
+@ferreira_labor_2022 analisam a desigualdade salarial no Brasil no período entre 1995-2012 e mostram que os dois principais fatores que aumentam a desigualdade são 1) a maior disparidade de salários entre diferentes setores da economia, e; 2) o chamado "paradoxo do progresso", o efeito intensificador da desigualdade quando há aumento da educação da população em uma sociedade em que os retornos à educação são convexos, ou seja, aumentam exponencialmente a cada aumento do nível educacional.
 
+Nesse sentido, @altonji_heterogeneity_2012 aponta que a escolha do curso superior é de grande impacto na determinação da renda, destacando que a diferença no retorno médio entre alguns cursos superiores, como engenharia elétrica e pedagogia, é quase tão grande quanto a diferença média entre indivíduos com ensino médio e ensino superior. @van_ophem_educational_2024 reforçam essa ideia, mostrando que a escolha do curso superior é um dos principais elementos não apenas na renda inicial quanto também na progressão salarial ao longo da carreira.
 
 ## Metodologia
 
@@ -99,7 +101,7 @@ As variáveis de interesse extraídas da Rais foram:
 4. raça/cor
 5. sexo
 
-Após selecionadas, apliquei condições às variáveis para obter amostra completa, ou seja, sem valores faltantes, e coerente. Essas condições estão resumidas na tabela a seguir. Elas implicam na restrição às entradas com renda média positiva não nula; na exclusão de menores aprendizes; na exclusão de entradas sem quaisquer dos campos escolaridade, raça/cor ou sexo preenchidos. 
+Após selecionadas, apliquei condições às variáveis para obter amostra completa, ou seja, sem valores faltantes, e coerente. Essas condições estão resumidas na tabela a seguir. Elas implicam na restrição às entradas com renda média positiva não nula; na exclusão de entradas sem quaisquer dos campos escolaridade, raça/cor ou sexo preenchidos. 
 
 ```{r possiveis valores rais}
 #| tbl-cap: Possíveis valores para as variáveis selecionadas da Rais
@@ -118,7 +120,7 @@ kbl(
       "ES",
       "Núméricos, não negativos",
       "Analfabeto, Ensino Fundamental (I/II, completo/incompleto),  Ensino Médio (completo/incompleto), Ensino Superior (completo/incompleto), Mestrado ou Doutorado",
-      "$>18$",
+      "Sem restrições",
       "Branco, Preto, Pardo, Indígena ou Amarelo",
       "Masculino ou Feminino"
     )
@@ -131,6 +133,8 @@ kbl(
 ```
 
 Além das condições de interesse do pesquisador, é necessário atentar que a Rais trata do mercado de trabalho formal, o que exclui trabalhadores informais e profissionais autônomos. Portanto, o presente trabalho mira estimar as relações escolaridade-renda no mercado de trabalho formal do Espírito Santo, destacando o impacto de substratos marginalizados da sociedade na determinação da renda do trabalhador.
+
+### Análise exploratória dos dados
 
 A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 a 2022, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
 
@@ -155,7 +159,29 @@ as.data.frame(table(rais$ano)) |>
   tema
 ```
 
-Em termos de gênero no mercado de trabalho formal capixaba, as mulheres consquistaram espaço. Enquanto que em 2006 os homens ocupavam 116% a mais das vagas, em 2022 essa diferença caiu para 63%.
+```{r proporcoes por genero}
+proporcao_2006 <- subset(rais, ano == 2006) |>
+  (\(x) table(x$sexo))() |>
+  prop.table()
+
+proporcao_2022 <- subset(rais, ano == 2022) |>
+  (\(x) table(x$sexo))() |>
+  prop.table()
+
+proporcao_brancos_2006 <- subset(rais, ano == 2006 & raca_cor == "branca") |>
+  (\(x) table(x$sexo))() |>
+  prop.table()
+
+proporcao_brancos_2022 <- subset(rais, ano == 2022 & raca_cor == "branca") |>
+  (\(x) table(x$sexo))() |>
+  prop.table()
+
+proporcao_pretos_2022 <- subset(rais, ano == 2022 & raca_cor == "preta") |>
+  (\(x) table(x$sexo))() |>
+  prop.table()
+```
+
+Em termos de gênero no mercado de trabalho formal capixaba, a proporção se manteve praticamente a mesma, com as mulheres ocupando `r proporcao_2006["feminino"] |> scales::percent(accuracy = 0.1)` das vagas em 2006 e `r proporcao_2022["feminino"] |> scales::percent(accuracy = 0.1)` em 2022.
 
 ```{r count sexo}
 #| fig-cap: "Comparativo 2006-2022 por sexo"
@@ -172,7 +198,7 @@ rais[rais$ano %in% c(2006, 2022), c("ano", "sexo")] |>
   tema
 ```
 
-Adicionando a dimensão da raça/cor, vemos que a mulher preta é o substrato social mais empurrado à informalidade. Dos declarados pretos, apenas 32% são mulheres.
+Adicionando a dimensão da raça/cor, vemos que a mulher preta é o substrato social mais empurrado à informalidade. Dos declarados pretos, apenas `r proporcao_pretos_2022["feminino"] |> scales::percent(accuracy = 0.1)` são mulheres, enquanto dentre os brancos, as mulheres ocupam `r proporcao_brancos_2022["feminino"] |> scales::percent(accuracy = 0.1)`.
 
 ```{r tabela entradas por ano sexo cor}
 #| tbl-cap: "Comparativo 2006-2022 por sexo/raça/cor"
@@ -314,19 +340,59 @@ kbl(prop_pp) |>
   kable_styling(latex_options = c("striped", "scale_down"))
 ```
 
+Finalmente, em relação à renda,
+
+```{r boxplot renda}
+#| fig-cap: "Boxplot renda por sexo"
+#| out.width: "100%"
+
+rais |>
+  subset(ano == 2022) |>
+  ggplot(aes(x = sexo, y = vlr_rem, fill = sexo)) +
+  geom_boxplot(outlier = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_fill_manual(values = c("#bc5090", "#003f5c")) +
+  labs(x = "Sexo", y = "Renda (em R$)", fill = "Sexo") +
+  tema
+```
+
+```{r boxplot renda}
+#| fig-cap: "Boxplot renda por sexo/raça/cor"
+#| out.width: "100%"
+
+rais |>
+  subset(ano == 2022) |>
+  ggplot(aes(x = raca_cor, y = vlr_rem, fill = sexo)) +
+  geom_boxplot() +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_fill_manual(values = c("#bc5090", "#003f5c")) +
+  labs(x = "Raça/Cor", y = "Renda (em R$)", fill = "Sexo") +
+  tema
+```
+
 ### Notas sobre a estimação
 
-Embora a profissão e a indústria na qual o trabalhador esteja inserido sejam preditores importantes para determinar sua renda^[@altonji_heterogeneity_2012 aponta que a diferença média entre alguns cursos superiores, especificamente engenharia elétrica e pedagogia, é quase tão grande quanto a diferença média entre indivíduos com ensino médio e ensino superior.], assim como a escolha do curso superior pelo aluno influencie em sua renda[@van_ophem_educational_2024], essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação e das condições sociais escolhidas.
+Realizada a análise exploratória dos dados, fica evidente quais são os substratos menos favorecidos da sociedade capixaba. A partir daqui, é possível estabelecer as variáveis de linha de base, são elas:
+
+1. Grau de instrução: nenhum (analfabeto).
+2. Raça/cor: preta.
+3. Sexo: feminino.
+
+Isso quer dizer que todos os coeficientes a serem estimados serão em relação a essas variáveis de linha de base. Assim, espera-se que a direção dos coeficientes seja no sentido de aumentar a renda do trabalhador, ou seja, que a escolaridade, a idade e o sexo masculino aumentem a renda do trabalhador.
+
+Antes de iniciar a estimação do modelo de regressão linear, é importante justificar algumas escolhas. Embora a profissão e a indústria na qual o trabalhador esteja inserido sejam preditores importantes para determinar sua renda [@ferreira_labor_2022], assim como a escolha do curso superior pelo aluno influencie em sua renda [@altonji_heterogeneity_2012;@van_ophem_educational_2024], essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação em cada substrato da população capixaba.
 
 Devido à omissão dessa variável, espera-se a inclusão de viés de variável omitida e, consequentemente, a introdução de heteroscedasticidade. Em relação a esta, a intuição é que profissões de alta remuneração, como juízes, médicos e engenheiros, se dão em menor frequência e são de maior remuneração, gerando resíduo $e_i$ positivo consistentemente, de forma que a variância dos resíduos não seja constante, ou homoscedástica.
 
-![Viés de variável omitida.](img/vies_omissao.svg){#fig-vies fig-scap="Previsões base a serem reconciliadas" width=70%}
+![Heteroscedasticidade decorrente de omissão de variável importante.](img/vies_omissao.svg){#fig-vies fig-scap="Previsões base a serem reconciliadas" width=70%}
 
 ## Estimação
 
-Para estimar os efeitos da escolaridade na determinação da renda do trabalhador formal no Espírito Santo, utilizo o modelo de regressão linear múltipla. A variável dependente é a renda média nominal do trabalhador, e as variáveis independentes são o ciclo de escolaridade, a idade, a raça/cor e o sexo do trabalhador. A escolha do modelo de regressão linear múltipla se dá por sua capacidade de interpretação e pela possibilidade de estimar os efeitos marginais de cada variável independente na variável dependente, bem como a possibilidade de incluir interações entre as variáveis independentes.
+Para estimar os efeitos da escolaridade na determinação da renda do trabalhador formal no Espírito Santo, utilizo um modelo de regressão linear múltipla. A variável dependente é a renda média nominal do trabalhador, e as variáveis independentes são o ciclo de escolaridade, a idade, a raça/cor e o sexo do trabalhador. A escolha do modelo de regressão linear múltipla se dá por sua capacidade de interpretação e pela possibilidade de estimar os efeitos marginais de cada variável independente na variável dependente, bem como a possibilidade de incluir interações entre as variáveis independentes.
 
+A especificação do modelo é dada por:
 
+<!-- TODO: Readequar os dados baseado em Mincer (idade -6) -->
 
 ```{r estimação}
 
@@ -342,9 +408,9 @@ modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
     # variável dependente
     log(vlr_rem) ~
       # variáveis dependentes
-      grau + sexo + raca_cor + idade + idade^2 +
+      grau + sexo + raca_cor + exp + exp^2 +
       # interação
-      sexo * raca_cor,
+      sexo * raca_cor + sexo * grau,
     # dataset
     data = rais[rais$ano == ano, ]
   )
@@ -357,6 +423,7 @@ indices <- sample(length(modelos$m2022$residuals), 1000)
 
 # gráfico de dispersão dos resíduos
 plot(modelos$m2022$fitted.values[indices], modelos$m2022$residuals[indices])
+abline(h = 0, col = "steelblue")
 
 # normal Q-Q plot
 qqnorm(modelos$m2022$residuals[indices])
@@ -370,83 +437,7 @@ yfit <- yfit * diff(histograma$mids[1:2]) * length(modelos$m2022$residuals)
 lines(xfit, yfit, col = "steelblue", lwd = 2)
 ```
 
-```{r modelos ponderados}
-# estimação ponderada
-modelos_ponderados = lapply(setNames(anos, paste0("m", anos)), function(ano) {
-
-  # resíduos dos modelos sem ponderação
-  res <- modelos[[paste0("m", ano)]]$residuals
-  variancia <- res^2
-
-  # ponderação
-  lm(
-    # variável dependente
-    log(vlr_rem) ~
-      # variáveis dependentes
-      grau + sexo + raca_cor + idade + idade^2 +
-      # interação
-      sexo * raca_cor,
-    # dataset
-    data = rais[rais$ano == ano, ],
-    # ponderação
-    weights = 1 / variancia
-  )
-})
-
-# amostragem para diagnóstico
-indices <- sample(length(modelos_ponderados$m2022$residuals), 1000)
-
-# gráfico de dispersão dos resíduos
-plot(modelos_ponderados$m2022$fitted.values[indices], modelos_ponderados$m2022$residuals[indices])
-
-# normal Q-Q plot
-qqnorm(modelos_ponderados$m2022$residuals[indices])
-qqline(modelos_ponderados$m2022$residuals[indices], col = "steelblue")
-
-# histograma dos resíduos e curva normal
-histograma <- hist(modelos_ponderados$m2022$residuals)
-xfit <- seq(min(modelos_ponderados$m2022$residuals), max(modelos_ponderados$m2022$residuals), length = 40)
-yfit <- dnorm(xfit, mean = mean(modelos_ponderados$m2022$residuals), sd = sd(modelos_ponderados$m2022$residuals))
-yfit <- yfit * diff(histograma$mids[1:2]) * length(modelos_ponderados$m2022$residuals)
-lines(xfit, yfit, col = "steelblue", lwd = 2)
-```
-
-```{r}
-# modelos com regressão generalizada
-modelos_rg = lapply(setNames(anos, paste0("m", anos)), function(ano) {
-  glm(
-    # variável dependente
-    log(vlr_rem) ~
-      # variáveis dependentes
-      grau + sexo + raca_cor + idade + idade^2 +
-      # interação
-      sexo * raca_cor,
-    # dataset
-    data = rais[rais$ano == ano, ],
-    # família
-    family = gaussian(link = "log")
-  )
-})
-
-# amostragem para diagnóstico
-indices <- sample(length(modelos_rg$m2022$residuals), 1000)
-
-# gráfico de dispersão dos resíduos
-plot(modelos_rg$m2022$fitted.values[indices], modelos_rg$m2022$residuals[indices])
-
-# normal Q-Q plot
-qqnorm(modelos_rg$m2022$residuals[indices])
-qqline(modelos_rg$m2022$residuals[indices], col = "steelblue")
-
-# histograma dos resíduos e curva normal
-histograma <- hist(modelos_rg$m2022$residuals)
-xfit <- seq(min(modelos_rg$m2022$residuals), max(modelos_rg$m2022$residuals), length = 40)
-yfit <- dnorm(xfit, mean = mean(modelos_rg$m2022$residuals), sd = sd(modelos_rg$m2022$residuals))
-yfit <- yfit * diff(histograma$mids[1:2]) * length(modelos_rg$m2022$residuals)
-lines(xfit, yfit, col = "steelblue", lwd = 2)
-```
-
-```{r}
+```{r tabela modelos}
 #| output: asis
 #| tbl-cap: "Estimação"
 
