@@ -65,7 +65,7 @@ Para procurar compreender essas questões, é vital ir a níveis mais profundos 
 
 Neste trabalho, argumento que a resistência do sistema em mudar, como aponta Lins, é um sintoma de uma sociedade que historicamente reproduz, por meio do processo educativo, as relações sociais de poder que a constituem. Paralelamente, defendo que a violência simbólica que mascara essas relações, como aponta Bourdieu, está se deteriorando ao longo do século 21.
 
-Este trabalho está dividido em duas partes. Na primeira, evidencio os sintomas: a partir de uma análise estatística com dados de escolaridade, sexo, raça e rendimentos de diferentes substratos sociais do estado do Espírito Santo, demonstro que 1) a escolaridade é um preditor significativo para a determinação da renda do trabalhador capixaba; 2) substratos marginalizados da sociedade têm retornos menores mesmo com maior escolaridade que os mais favorecidos; 3) esse poder explicativo está se deteriorando consistentemente nos últimos 60 anos, e; 4) políticas educacionais e ações afirmativas nos últimos 20 anos estão corroendo a violência simbólica e, portanto, escancarando os mecanismos de reprodução das relações sociais de poder.
+Este trabalho está dividido em duas partes. Na primeira, evidencio os sintomas: a partir de uma análise estatística com dados de escolaridade, sexo, raça e rendimentos de diferentes substratos sociais do estado do Espírito Santo, demonstro que 1) a escolaridade é um preditor significativo para a determinação da renda do trabalhador capixaba; 2) substratos marginalizados da sociedade têm retornos menores mesmo com maior escolaridade que os mais favorecidos; 3) esse poder explicativo está se deteriorando consistentemente nos últimos 60 anos, e; 4) políticas educacionais e ações afirmativas nos últimos 20 anos estão corroendo a violência simbólica (no sentido de Bourdieu) e, portanto, escancarando os mecanismos de reprodução das relações sociais de poder.
 
 Na segunda parte, procuro explicar esses sintomas apresentando uma sistematização dos mecanismos causais de transmissão dos efeitos da superestrutura capitalista, a partir de elementos de Marx e Bourdieu, passando pelo nível institucional, com a visão de Foucault sobre a escola como instituição panóptica, e chegando ao nível pedagógico, discutindo interdisciplinaridade, omnilateralidade e os limites da educação matemática crítica como instrumento emancipador.
 
@@ -79,7 +79,7 @@ Na segunda parte, procuro explicar esses sintomas apresentando uma sistematizaç
 
 [...]
 
-## Revisão de literatura
+## Breve revisão de literatura
 
 A primeira abordagem quantitativa para evidenciar o poder de explicação da escolaridade sobre a renda do trabalhador foi realizada no trabalho seminal de @mincer_schooling_1974. O autor propôs um modelo de capital humano, onde a escolaridade é um dos principais determinantes da renda -- especificamente, do logarítmo da renda. A partir de dados do censo norte-americano, ele estimou que modelos baseados em  escolaridade e tempo de experiência foram capazes de explicar até 33% da variação da renda do trabalhador, a depender da equação, com o coeficiente de retorno médio de escolaridade de até 0.16, o que significa um incremento médio de 17,4% na renda^[Como o modelo utiliza o log da renda, para se computar o efeito em moeda deve-se realizar a operação inversa, resultando em $e^{0.16} = 1.1735$].
 
@@ -340,30 +340,45 @@ kbl(prop_pp) |>
   kable_styling(latex_options = c("striped", "scale_down"))
 ```
 
-Finalmente, em relação à renda,
+Finalmente, em relação à renda, tanto a mediana quanto o quartil superior da renda dos homens é superior à das mulheres em quase todos os casos. Além disso, fica evidente a progressão de renda com a escolaridade, principalmente em relação à pós-graduação.
 
-```{r boxplot renda}
+```{r boxplot renda sexo}
 #| fig-cap: "Boxplot renda por sexo"
 #| out.width: "100%"
 
 rais |>
   subset(ano == 2022) |>
   ggplot(aes(x = sexo, y = vlr_rem, fill = sexo)) +
-  geom_boxplot(outlier = FALSE) +
+  geom_boxplot(outliers = FALSE) +
   scale_y_continuous(labels = scales::dollar) +
   scale_fill_manual(values = c("#bc5090", "#003f5c")) +
   labs(x = "Sexo", y = "Renda (em R$)", fill = "Sexo") +
   tema
 ```
 
-```{r boxplot renda}
+```{r boxplot renda raca}
 #| fig-cap: "Boxplot renda por sexo/raça/cor"
 #| out.width: "100%"
 
 rais |>
   subset(ano == 2022) |>
   ggplot(aes(x = raca_cor, y = vlr_rem, fill = sexo)) +
-  geom_boxplot() +
+  geom_boxplot(outliers = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_fill_manual(values = c("#bc5090", "#003f5c")) +
+  labs(x = "Raça/Cor", y = "Renda (em R$)", fill = "Sexo") +
+  tema
+```
+
+```{r boxplot renda escolaridade}
+#| fig-cap: "Boxplot renda por sexo/raça/cor"
+#| out.width: "100%"
+
+rais |>
+  subset(ano == 2022) |>
+  ggplot(aes(x = raca_cor, y = vlr_rem, fill = sexo)) +
+  geom_boxplot(outliers = FALSE) +
+  facet_wrap(~grau, scales = "fixed") +
   scale_y_continuous(labels = scales::dollar) +
   scale_fill_manual(values = c("#bc5090", "#003f5c")) +
   labs(x = "Raça/Cor", y = "Renda (em R$)", fill = "Sexo") +
@@ -378,7 +393,7 @@ Realizada a análise exploratória dos dados, fica evidente quais são os substr
 2. Raça/cor: preta.
 3. Sexo: feminino.
 
-Isso quer dizer que todos os coeficientes a serem estimados serão em relação a essas variáveis de linha de base. Assim, espera-se que a direção dos coeficientes seja no sentido de aumentar a renda do trabalhador, ou seja, que a escolaridade, a idade e o sexo masculino aumentem a renda do trabalhador.
+Isso quer dizer que todos os coeficientes a serem estimados serão em relação a essas variáveis de linha de base. Assim, espera-se que a direção dos coeficientes seja no sentido de aumentar a renda do trabalhador, ou seja, que a escolaridade, a experiência e o sexo masculino adquiram coeficientes positivos.
 
 Antes de iniciar a estimação do modelo de regressão linear, é importante justificar algumas escolhas. Embora a profissão e a indústria na qual o trabalhador esteja inserido sejam preditores importantes para determinar sua renda [@ferreira_labor_2022], assim como a escolha do curso superior pelo aluno influencie em sua renda [@altonji_heterogeneity_2012;@van_ophem_educational_2024], essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação em cada substrato da população capixaba.
 
@@ -388,7 +403,7 @@ Devido à omissão dessa variável, espera-se a inclusão de viés de variável 
 
 ## Estimação
 
-Para estimar os efeitos da escolaridade na determinação da renda do trabalhador formal no Espírito Santo, utilizo um modelo de regressão linear múltipla. A variável dependente é a renda média nominal do trabalhador, e as variáveis independentes são o ciclo de escolaridade, a idade, a raça/cor e o sexo do trabalhador. A escolha do modelo de regressão linear múltipla se dá por sua capacidade de interpretação e pela possibilidade de estimar os efeitos marginais de cada variável independente na variável dependente, bem como a possibilidade de incluir interações entre as variáveis independentes.
+Para estimar os efeitos da escolaridade na determinação da renda do trabalhador formal no Espírito Santo, utilizo um modelo de regressão linear múltipla. A variável dependente é a renda média nominal do trabalhador, e as variáveis independentes são o ciclo de escolaridade, estimativa de experiência, a raça/cor e o sexo do trabalhador. A escolha do modelo de regressão linear múltipla se dá por sua capacidade de interpretação e pela possibilidade de estimar os efeitos marginais de cada variável independente na variável dependente, bem como a possibilidade de incluir interações entre as variáveis independentes.
 
 A especificação do modelo é dada por:
 
