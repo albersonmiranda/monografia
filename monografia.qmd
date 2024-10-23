@@ -134,6 +134,24 @@ kbl(
 
 Além das condições de interesse do pesquisador, é necessário atentar que a Rais trata do mercado de trabalho formal, o que exclui trabalhadores informais e profissionais autônomos. Portanto, o presente trabalho mira estimar as relações escolaridade-renda no mercado de trabalho formal do Espírito Santo, destacando o impacto de substratos marginalizados da sociedade na determinação da renda do trabalhador.
 
+Seguindo @mincer_schooling_1974, aproximaremos a experiência de cada indivíduos a partir da seguinte fórmula:
+
+$$
+\text{exp} = \text{idade} - \text{anos de formação} - 5
+$$ {#eq-exp}
+
+Em que supõe-se:
+
+- Idade de 6 anos para ingresso no ensino fundamental
+- 5 anos para o fundamental I
+- 4 anos para o fundamental II
+- 3 anos para o ensino médio
+- 4 anos para o superior
+- 2 anos para o mestrado
+- 4 anos par ao doutorado
+
+Assim, supõe-se para um indivíduo de 30 anos com mestrado $30-18-5=7$ anos de experiência.
+
 ### Análise exploratória dos dados
 
 A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 a 2022, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
@@ -407,6 +425,31 @@ Para estimar os efeitos da escolaridade na determinação da renda do trabalhado
 
 A especificação do modelo é dada por:
 
+$$
+log(Y) = X\beta + \mu
+$$ {#eq-especificacao}
+
+Como a escolaridade, raça/cor e sexo são variáveis qualitativas, cada estado recebe uma variável e coeficiente, exceto os estados definidos como linha de base. Dessa forma, temos:
+
+- $X_1$: escolaridade (grau) = fundamental I
+- $X_2$: escolaridade (grau) = fundamental II
+- $X_3$: escolaridade (grau) = médio
+- $X_4$: escolaridade (grau) = superior
+- $X_5$: escolaridade (grau) = mestrado
+- $X_6$: escolaridade (grau) = doutorado
+- $X_7$: sexo = masculino
+- $X_8$: raça/cor (raca_cor) = amarela
+- $X_9$: raça/cor (raca_cor) = branca
+- $X_{10}$: raça/cor (raca_cor) = parda
+- $X_{11}$: experiência (exp)
+
+E também serão utilizadas variáveis de interação, que estimam o efeito em pares de estados possíveis (por brevidade, escrevo apenas a interação entre as variáveis `sexo` e `raca_cor`):
+
+- $X_{12}$: sexo = masculino * raça/cor (raca_cor) = amarela
+- $X_{13}$: sexo = masculino * raça/cor (raca_cor) = branca
+- $X_{14}$: sexo = masculino * raça/cor (raca_cor) = indígena
+- $X_{15}$: sexo = masculino * raça/cor (raca_cor) = parda
+
 <!-- TODO: Readequar os dados baseado em Mincer (idade -6) -->
 
 ```{r estimação}
@@ -425,7 +468,7 @@ modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
       # variáveis dependentes
       grau + sexo + raca_cor + exp + exp^2 +
       # interação
-      sexo * raca_cor + sexo * grau,
+      sexo * raca_cor + sexo * grau + grau * raca_cor,
     # dataset
     data = rais[rais$ano == ano, ]
   )
