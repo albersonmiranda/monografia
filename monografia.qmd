@@ -134,7 +134,7 @@ kbl(
 
 Além das condições de interesse do pesquisador, é necessário atentar que a Rais trata do mercado de trabalho formal, o que exclui trabalhadores informais e profissionais autônomos. Portanto, o presente trabalho mira estimar as relações escolaridade-renda no mercado de trabalho formal do Espírito Santo, destacando o impacto de substratos marginalizados da sociedade na determinação da renda do trabalhador.
 
-Seguindo @mincer_schooling_1974, aproximaremos a experiência de cada indivíduos a partir da seguinte fórmula:
+Seguindo @mincer_schooling_1974, mas adaptando à nossa Lei de Diretrizes e Bases da Educação Nacional (LDB), faremos uma aproximação para o tempo de experiência de cada indivíduo a partir da seguinte fórmula:
 
 $$
 \text{exp} = \text{idade} - \text{anos de formação} - 5
@@ -150,7 +150,7 @@ Em que supõe-se:
 - 2 anos para o mestrado
 - 4 anos par ao doutorado
 
-Assim, supõe-se para um indivíduo de 30 anos com mestrado $30-18-5=7$ anos de experiência.
+Assim, por exemplo, para um indivíduo de 30 anos com mestrado, temos $30-18-5=7$ anos de experiência.
 
 ### Análise exploratória dos dados
 
@@ -251,6 +251,13 @@ rais[rais$ano %in% c(2006, 2022), c("ano", "sexo", "raca_cor")] |>
   tema
 ```
 
+Dada a baixa representatividade de indígenas e amarelos, optou-se por excluí-los da análise. A partir deste ponto, a análise contará apenas com brancos, pretos e pardos.
+
+```{r subset raca cor}
+
+rais = subset(rais, raca_cor %in% c("branca", "preta", "parda"))
+```
+
 Em relação à escolaridade, seja por uma mudança do perfil da população ou por requerimentos do mercado de trabalho, o fato é que a maior parte das vagas eram ocupadas por trabalhadores com até o ensino fundamental. Agora, a maior parte das vagas são ocupadas por trabalhadores com ensino médio. Destaca-se também que a maior fatia das vagas ocupadas por trabalhadores de escolaridade até o ensino fundamental são preenchidas por homens, implicando que as trabalhadoras da mesma escolaridade estão na informalidade.
 
 ```{r tabela entradas por escolaridade}
@@ -294,7 +301,7 @@ kbl(
     ftable(table(
       droplevels(subset(
         rais,
-        ano %in% c(2006, 2022) & !raca_cor %in% c("indigena", "amarela"),
+        ano %in% c(2006, 2022),
         select = c("ano", "sexo", "grau", "raca_cor")
       ))
     ))
@@ -309,7 +316,7 @@ kbl(
 #| out.width: "100%"
 #| warning: false
 
-subset(rais, ano %in% c(2006, 2022) & !raca_cor %in% c("indigena", "amarela")) |>
+subset(rais, ano %in% c(2006, 2022)) |>
   ggplot(aes(x = grau, fill = sexo)) +
   geom_bar() +
   scale_y_continuous(labels = scales::number_format(scale = 1 / 1000)) +
@@ -400,7 +407,8 @@ rais |>
   scale_y_continuous(labels = scales::dollar) +
   scale_fill_manual(values = c("#bc5090", "#003f5c")) +
   labs(x = "Raça/Cor", y = "Renda (em R$)", fill = "Sexo") +
-  tema
+  tema +
+  theme(legend.position = "none")
 ```
 
 ### Notas sobre a estimação
@@ -413,7 +421,7 @@ Realizada a análise exploratória dos dados, fica evidente quais são os substr
 
 Isso quer dizer que todos os coeficientes a serem estimados serão em relação a essas variáveis de linha de base. Assim, espera-se que a direção dos coeficientes seja no sentido de aumentar a renda do trabalhador, ou seja, que a escolaridade, a experiência e o sexo masculino adquiram coeficientes positivos.
 
-Antes de iniciar a estimação do modelo de regressão linear, é importante justificar algumas escolhas. Embora a profissão e a indústria na qual o trabalhador esteja inserido sejam preditores importantes para determinar sua renda [@ferreira_labor_2022], assim como a escolha do curso superior pelo aluno influencie em sua renda [@altonji_heterogeneity_2012;@van_ophem_educational_2024], essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação em cada substrato da população capixaba.
+Antes de iniciar a estimação do modelo de regressão linear, é importante justificar algumas escolhas. Embora fatores como a profissão, a indústria na qual o trabalhador esteja inserido, se é setor público ou não, sejam preditores importantes para determinar sua renda [@ferreira_labor_2022], assim como a escolha do curso superior pelo aluno influencie em sua renda [@altonji_heterogeneity_2012;@van_ophem_educational_2024], essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação em cada substrato da população capixaba.
 
 Devido à omissão dessa variável, espera-se a inclusão de viés de variável omitida e, consequentemente, a introdução de heteroscedasticidade. Em relação a esta, a intuição é que profissões de alta remuneração, como juízes, médicos e engenheiros, se dão em menor frequência e são de maior remuneração, gerando resíduo $e_i$ positivo consistentemente, de forma que a variância dos resíduos não seja constante, ou homoscedástica.
 
@@ -426,10 +434,10 @@ Para estimar os efeitos da escolaridade na determinação da renda do trabalhado
 A especificação do modelo é dada por:
 
 $$
-log(Y) = X\beta + \mu
+log(\mathbfit{Y}) = \mathbfit{X\beta} + \mathbfit{\mu}
 $$ {#eq-especificacao}
 
-Como a escolaridade, raça/cor e sexo são variáveis qualitativas, cada estado recebe uma variável e coeficiente, exceto os estados definidos como linha de base. Dessa forma, temos:
+Onde $\mathbfit{Y}$ é o vetor da renda nominal, $\mathbfit{X}$ é o vetor de preditores, $\mathbfit{\beta}$ é o vetor de coeficientes a serem estimados e $\mathbfit{\mu}$ é o vetor do erro estocástico. -0765ewa\ a escolaridade, raça/cor e sexo são variáveis qualitativas, cada estado recebe uma variável e coeficiente, exceto os estados definidos como linha de base. Dessa forma, temos:
 
 - $X_1$: escolaridade (grau) = fundamental I
 - $X_2$: escolaridade (grau) = fundamental II
@@ -443,14 +451,24 @@ Como a escolaridade, raça/cor e sexo são variáveis qualitativas, cada estado 
 - $X_{10}$: raça/cor (raca_cor) = parda
 - $X_{11}$: experiência (exp)
 
-E também serão utilizadas variáveis de interação, que estimam o efeito em pares de estados possíveis (por brevidade, escrevo apenas a interação entre as variáveis `sexo` e `raca_cor`):
+E também serão utilizadas variáveis de interação, que estimam o efeito em pares de estados possíveis para as variáveis de escolaridade, sexo e raça/cor (e.g., o efeito de ser do sexo masculino e da cor branca é representado pela interação $X_7 \times X_9$).
 
-- $X_{12}$: sexo = masculino * raça/cor (raca_cor) = amarela
-- $X_{13}$: sexo = masculino * raça/cor (raca_cor) = branca
-- $X_{14}$: sexo = masculino * raça/cor (raca_cor) = indígena
-- $X_{15}$: sexo = masculino * raça/cor (raca_cor) = parda
+Então, temos o vetor de covariantes:
 
-<!-- TODO: Readequar os dados baseado em Mincer (idade -6) -->
+$$
+\mathbfit{X} = [1 \quad X_1 \quad X_2 \quad ... \quad X_1 * X_7 \quad X_1  * X_8 \quad ...]
+$$ {#eq-covariantes}
+
+E o vetor de coeficientes:
+
+$$
+\mathbfit{\beta} = \begin{bmatrix}
+  \beta_0 \\
+  \beta_1 \\
+  \beta_2 \\
+  \vdots
+\end{bmatrix}
+$$ {#eq-coeficientes}
 
 ```{r estimação}
 
@@ -458,7 +476,7 @@ E também serão utilizadas variáveis de interação, que estimam o efeito em p
 anos = c(2022, 2006)
 
 # subset
-rais = rais[rais$ano %in% anos, ]
+rais = subset(rais, ano %in% anos & raca_cor %in% c("branca", "preta", "parda"))
 
 # estimação
 modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
@@ -475,34 +493,94 @@ modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
 })
 ```
 
-```{r}
+Os gráficos de diagnóstico dos resíduos são apresentados a seguir. Usando uma amostra aleatória de mil observações para plotar os gráficos, é possível notar na @fig-resid-qqplot que a distribuição apresenta assimetria positiva, com cauda mais pesada à direita, o que podemos confirmar com o histograma completo dos resíduos (@fig-resid-hist). Isso significa que o modelo consegue explicar bem a parte inferior e central da distribuição da renda, mas **falha mais em explicar os quantis superiores, onde estão os maiores salários**.
+
+```{r plot de residuos}
+#| label: fig-resid-scatter
+#| fig-cap: "Gráfico de dispersão dos resíduos"
+
 # amostragem para diagnóstico
 indices <- sample(length(modelos$m2022$residuals), 1000)
 
 # gráfico de dispersão dos resíduos
-plot(modelos$m2022$fitted.values[indices], modelos$m2022$residuals[indices])
+plot(
+  modelos$m2022$fitted.values[indices],
+  modelos$m2022$residuals[indices],
+  xlab = "Valores ajustados",
+  ylab = "Resíduos",
+)
 abline(h = 0, col = "steelblue")
+```
+
+```{r}
+#| label: fig-resid-qqplot
+#| fig-cap: "Gráfico Quantil-Quantil dos resíduos"
 
 # normal Q-Q plot
 qqnorm(modelos$m2022$residuals[indices])
 qqline(modelos$m2022$residuals[indices], col = "steelblue")
+```
+
+```{r}
+#| label: fig-resid-hist
+#| fig-cap: "Histograma dos resíduos"
 
 # histograma dos resíduos e curva normal
-histograma <- hist(modelos$m2022$residuals)
+histograma <- hist(modelos$m2022$residuals, xlab = "Resíduos")
 xfit <- seq(min(modelos$m2022$residuals), max(modelos$m2022$residuals), length = 40)
 yfit <- dnorm(xfit, mean = mean(modelos$m2022$residuals), sd = sd(modelos$m2022$residuals))
 yfit <- yfit * diff(histograma$mids[1:2]) * length(modelos$m2022$residuals)
 lines(xfit, yfit, col = "steelblue", lwd = 2)
 ```
 
+Formalmente, a heteroscedasticidade é testada com o teste de White, que é um teste de hipótese que compara o ajuste de um modelo de regressão linear com e sem termos quadráticos e de interação. O teste é realizado a seguir. Com p-valor quase nulo, rejeitamos a hipótese nula de homoscedasticidade, como esperado.
+
+$$
+\begin{aligned}
+  H_0 &: \text{Homoscedasticidade} \\
+  H_1 &: \text{Heteroscedasticidade}
+\end{aligned}
+$$
+
+```{r teste de white}
+#| label: teste-white
+#| tbl-cap: "Teste Breusch-Pagan para heteroscedasticidade"
+
+# teste de white
+lmtest::bptest(modelos$m2022, data = rais[rais$ano == 2022, ]) |>
+  broom::tidy() |>
+  kbl() |>
+  kable_styling(latex_options = "striped")
+```
+
+Para corrigir a heteroscedasticidade e obter testes de hipóteses válidos, utilizo correção de White para erros padrões robustos. Os resultados da estimação na @tbl-modelos já incluem os erros padrões robustos.
+
+```{r erros padroes robustos}
+
+# matriz de covariância corrigida
+cov_2006 <- sandwich::vcovHC(modelos$m2006, type = "HC")
+cov_2022 <- sandwich::vcovHC(modelos$m2022, type = "HC")
+
+# erros padrões robustos
+robust_se_2006 <- sqrt(diag(cov_2006))
+robust_se_2022 <- sqrt(diag(cov_2022))
+```
+
+## Resultados
+
+Os resultados da estimação dos modelos de regressão linear múltipla para os anos de 2022 e 2006 são apresentados na @tbl-modelos a seguir.
+
 ```{r tabela modelos}
-#| output: asis
+#| results: asis
+#| label: tbl-modelos
 #| tbl-cap: "Estimação"
 
 # parâmetros
 stargazer::stargazer(
   modelos$m2022,
   modelos$m2006,
+  se = list(robust_se_2022, robust_se_2006),
+  float = FALSE,
   header = FALSE,
   align = TRUE,
   single.row = TRUE,
@@ -511,6 +589,8 @@ stargazer::stargazer(
   column.labels = c("2022", "2006")
 )
 ```
+
+<!-- TODO: Escrever interpretação -->
 
 ## Conclusão
 

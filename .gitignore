@@ -3,3 +3,5 @@ nul
 /.quarto/
 render/img/
 .DS_Store
+monografia_cache/
+monografia_files/
