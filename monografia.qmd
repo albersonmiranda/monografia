@@ -91,7 +91,7 @@ Nesse sentido, @altonji_heterogeneity_2012 aponta que a escolha do curso superio
 
 ## Metodologia
 
-Neste trabalho, de ordem quantitativa, utilizo os dados da Relação Anual de Informações Sociais (Rais) de 2006 a 2022 para estimar os efeitos da escolaridade sobre a renda dos trabalhadores do estado do Espírito Santo. Para tanto, utilizo o *datalake* tratado e disponibilizado gratuitamente pelo projeto Base dos Dados [@cavalcante_basedosdados_2022]. O acesso, manipulação dos dados e a análise foram realizados com o *software* R [@R-base] e o repositório com todo o código realizado aqui está disponível publicamente e pode ser reproduzido em sua totalidade\footnote{https://github.com/albersonmiranda/monografia.}.
+Neste trabalho, de ordem quantitativa, utilizo os dados da Relação Anual de Informações Sociais (Rais) de 2006 e 2022 para estimar os efeitos da escolaridade sobre a renda dos trabalhadores do estado do Espírito Santo. Para tanto, utilizo o *datalake* tratado e disponibilizado gratuitamente pelo projeto Base dos Dados [@cavalcante_basedosdados_2022]. O acesso, manipulação dos dados e a análise foram realizados com o *software* R [@R-base] e o repositório com todo o código realizado aqui está disponível publicamente e pode ser reproduzido em sua totalidade\footnote{https://github.com/albersonmiranda/monografia.}.
 
 As variáveis de interesse extraídas da Rais foram:
 
@@ -152,9 +152,17 @@ Em que supõe-se:
 
 Assim, por exemplo, para um indivíduo de 30 anos com mestrado, temos $30-18-5=7$ anos de experiência.
 
+Por fim, para permitir comparação direta da renda no tempo, é realizada a deflação pelo IPCA dos valores de 2022 para os valores de 2006 (@eq-deflacao).
+
+$$
+Vr_{i:j} = \frac{I_j}{I_i} \times V_i
+$$ {#eq-deflacao}
+
+\noindent em que $Vr_{i:j}$ é o valor real deflacionado no período $i$ na data-base $j$, $I_i$ é o índice de preços fixado na data-base $j$, que neste caso é `r scales::number(2615.05, big.mark = ",", decimal.mark = ".")` (dezembro/2006), $I_j$ é o índice de preços no período $i$ (dezembro/2022), `r scales::number(6474.09, big.mark = ",", decimal.mark = ".")` e $V_i$ é o valor nominal no período $i$.
+
 ### Análise exploratória dos dados
 
-A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 a 2022, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
+A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 e 2022, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
 
 ```{r tabela entradas por ano}
 #| tbl-cap: "Entradas por ano"
@@ -429,7 +437,7 @@ Devido à omissão dessa variável, espera-se a inclusão de viés de variável 
 
 ## Estimação
 
-Para estimar os efeitos da escolaridade na determinação da renda do trabalhador formal no Espírito Santo, utilizo um modelo de regressão linear múltipla. A variável dependente é a renda média nominal do trabalhador, e as variáveis independentes são o ciclo de escolaridade, estimativa de experiência, a raça/cor e o sexo do trabalhador. A escolha do modelo de regressão linear múltipla se dá por sua capacidade de interpretação e pela possibilidade de estimar os efeitos marginais de cada variável independente na variável dependente, bem como a possibilidade de incluir interações entre as variáveis independentes.
+Para estimar os efeitos da escolaridade na determinação da renda do trabalhador formal no Espírito Santo, utilizo um modelo de regressão linear múltipla log-linear. A variável dependente é a renda média nominal do trabalhador, e as variáveis independentes são o ciclo de escolaridade, estimativa de experiência, a raça/cor e o sexo do trabalhador. A escolha do modelo de regressão linear múltipla se dá por sua capacidade de interpretação e pela possibilidade de estimar os efeitos marginais de cada variável independente na variável dependente, bem como a possibilidade de incluir interações entre as variáveis independentes.
 
 A especificação do modelo é dada por:
 
@@ -437,7 +445,7 @@ $$
 log(\mathbfit{Y}) = \mathbfit{X\beta} + \mathbfit{\mu}
 $$ {#eq-especificacao}
 
-Onde $\mathbfit{Y}$ é o vetor da renda nominal, $\mathbfit{X}$ é o vetor de preditores, $\mathbfit{\beta}$ é o vetor de coeficientes a serem estimados e $\mathbfit{\mu}$ é o vetor do erro estocástico. -0765ewa\ a escolaridade, raça/cor e sexo são variáveis qualitativas, cada estado recebe uma variável e coeficiente, exceto os estados definidos como linha de base. Dessa forma, temos:
+Onde $\mathbfit{Y}$ é o vetor da renda nominal, $\mathbfit{X}$ é o vetor de preditores, $\mathbfit{\beta}$ é o vetor de coeficientes a serem estimados e $\mathbfit{\mu}$ é o vetor do erro estocástico. Como a escolaridade, raça/cor e sexo são variáveis qualitativas, cada estado recebe uma variável binária --- que pode assumir os valores 0 ou 1 ---, e coeficiente, exceto os estados definidos como linha de base. Dessa forma, temos:
 
 - $X_1$: escolaridade (grau) = fundamental I
 - $X_2$: escolaridade (grau) = fundamental II
@@ -451,7 +459,7 @@ Onde $\mathbfit{Y}$ é o vetor da renda nominal, $\mathbfit{X}$ é o vetor de pr
 - $X_{10}$: raça/cor (raca_cor) = parda
 - $X_{11}$: experiência (exp)
 
-E também serão utilizadas variáveis de interação, que estimam o efeito em pares de estados possíveis para as variáveis de escolaridade, sexo e raça/cor (e.g., o efeito de ser do sexo masculino e da cor branca é representado pela interação $X_7 \times X_9$).
+E também serão estimados coeficientes para interação, que estimam o efeito em pares de estados possíveis para as variáveis de escolaridade, sexo e raça/cor (e.g., o efeito de ser do sexo masculino e da cor branca é representado pela interação $X_7 \times X_9$).
 
 Então, temos o vetor de covariantes:
 
@@ -476,7 +484,9 @@ $$ {#eq-coeficientes}
 anos = c(2022, 2006)
 
 # subset
-rais = subset(rais, ano %in% anos & raca_cor %in% c("branca", "preta", "parda"))
+rais = subset(rais, ano %in% anos & raca_cor %in% c("branca", "preta", "parda")) |>
+  # drop unused levels
+  transform(raca_cor = factor(raca_cor))
 
 # estimação
 modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
@@ -533,7 +543,7 @@ yfit <- yfit * diff(histograma$mids[1:2]) * length(modelos$m2022$residuals)
 lines(xfit, yfit, col = "steelblue", lwd = 2)
 ```
 
-Formalmente, a heteroscedasticidade é testada com o teste de White, que é um teste de hipótese que compara o ajuste de um modelo de regressão linear com e sem termos quadráticos e de interação. O teste é realizado a seguir. Com p-valor quase nulo, rejeitamos a hipótese nula de homoscedasticidade, como esperado.
+Formalmente, a heteroscedasticidade pode ser verificada através do teste de Breusch-Pagan, que avalia se os resíduos da regressão $\mathbfit{\mu}$ são independentes dos preditores $\mathbfit{X}$. O resultado do teste é exibido na @tbl-bp. Com p-valor quase nulo, rejeitamos a hipótese nula de homoscedasticidade, como esperado.
 
 $$
 \begin{aligned}
@@ -542,8 +552,8 @@ $$
 \end{aligned}
 $$
 
-```{r teste de white}
-#| label: teste-white
+```{r breusch-pagan}
+#| label: tbl-bp
 #| tbl-cap: "Teste Breusch-Pagan para heteroscedasticidade"
 
 # teste de white
@@ -553,7 +563,7 @@ lmtest::bptest(modelos$m2022, data = rais[rais$ano == 2022, ]) |>
   kable_styling(latex_options = "striped")
 ```
 
-Para corrigir a heteroscedasticidade e obter testes de hipóteses válidos, utilizo correção de White para erros padrões robustos. Os resultados da estimação na @tbl-modelos já incluem os erros padrões robustos.
+Para corrigir a heteroscedasticidade e obter testes de hipóteses válidos para significância individual dos coeficientes $\mathbfit{\beta}$, utilizo a correção de White para erros padrões robustos. Os resultados da estimação na @tbl-modelos já incluem os erros padrões robustos.
 
 ```{r erros padroes robustos}
 
@@ -568,7 +578,7 @@ robust_se_2022 <- sqrt(diag(cov_2022))
 
 ## Resultados
 
-Os resultados da estimação dos modelos de regressão linear múltipla para os anos de 2022 e 2006 são apresentados na @tbl-modelos a seguir.
+Os resultados da estimação dos modelos de regressão linear múltipla para os anos de 2022 e 2006 são apresentados na @tbl-modelos a seguir. Como a variável dependente é o logaritmo da renda, deve-se interpretar os coeficientes de acordo com o tipo de variável independente (ver Apêndice \ref{apendice_demonstracoes}).
 
 ```{r tabela modelos}
 #| results: asis
@@ -590,11 +600,40 @@ stargazer::stargazer(
 )
 ```
 
-<!-- TODO: Escrever interpretação -->
+Na comparação dos anos de 2006 e 2022, o primeiro fato a se notar é que o coeficiente de determinação R² reduziu de 29,8% para 22,2%. Isso significa que a qualidade do ajuste foi reduzida, ou seja, em 2022, o mesmo conjunto de variáveis explica menos a variação da renda do trabalhador formal no Espírito Santo do que em 2006.
+
+O segundo resultado imediato é a redução dos coeficientes relacionados à escolaridade. Todos os efeitos marginais, apesar de significativos e positivos, são menores que em 2006. Isso significa que, embora a escolaridade continue sendo um fator determinante na renda do trabalhador formal, seus efeitos estão se reduzindo ao longo do tempo. Por exemplo, o efeito marginal de ter o ensino superior completo em relação ao médio em 2006 --- lembrando que as características de linha de base é sexo feminino e cor preta ---, era $\frac{e^{1.336}}{e^{0.640}} = 2$, ou seja, duas vezes maior. Em 2022, esse efeito caiu para $\frac{e^{1.007}}{e^{0.504}} = 1.65$, uma redução de 17,6%.
+
+Esse fenômeno não é exclusivo do Espírito Santo, sendo também observado por @colclough_changing_2010, que atribuem como causa mudanças estruturais na escolaridade da população:
+
+\begin{citacao}
+  Educational expansion at the primary level proceeded at a rate which exceeded that of job creation in many of the poorer countries. In consequence, it became increasingly difficult, in most Southern continents, to find jobs in the formal sector without having already had some education at post-primary level. More generally, as education systems expand to include greater proportions of the school-age group, the qualification required for eligibility for particular jobs rise. In these circumstances, it is to be expected that the reduced access to jobs provided by primary schooling will be associated with downward pressure on its wage rewards. \cite{colclough_changing_2010}
+\end{citacao}
+
+Segundo os autores, conforme maior parte da população alcança determinado nível educacional, as vagas de trabalho nos níveis inferiores desaparecem. A evidência é a escassez, ou quase extinção, das vagas de trabalho que exigem apenas o ensino fundamental completo. Com isso, à medida que o nível educacional médio da população aumenta, a escolaridade tende a deixar de ser um fator de diferenciação e passar a ser um requisito mínimo para a entrada no mercado de trabalho formal.
+
+O terceiro resultado aparece quando analisamos os substratos da população. Em primeiro lugar, em relação aos coeficientes, enquanto praticamente todos foram significativos para o ano de 2006, aqueles associados à cor parda são, em quase sua totalidade, não significativos em 2022. Isso pode indicar que ser considerado pardo de fato deixa de ser um preditor para a renda, com pardos ocupando posições diversas no mercado de trabalho indistintamente.
+
+Ainda em relação à variável `raca_cor`, ser branco não escolarizado está associado a um efeito negativo da renda em 2022. Uma hipótese é de que a escolaridade média da população branca tenha avançado mais rapidamente, de forma que sua parcela não escolarizada esteja presente em maior partre no setor agrícola no interior do estado, cuja remuneração é inferior e, embora tenha avançado nos últimos anos, ainda corresponde a 71% da renda média brasileira [@possamai_mercado_2023].
+
+Já quando olhamos para a população escolarizada, o cenário é invertido. O coeficiente do ensino superior sobre a linha de base, ou seja, mulheres pretas com ensino superior, é 1.007, o que corresponde a um efeito de $e^{1.007}=2.74$ na renda. Já para a interação ensino superior e cor branca, o coeficiente estimado é de 0.264, o que corresponde a um efeito de $e^{1.007-0.040+0.264}=3.42$. Isso significa que uma mulher branca com ensino superior tem remuneração, em média, 25% superior a uma mulher preta no Espírito Santo.
 
 ## Conclusão
 
-[...]
+Neste estudo, demonstro que a escolaridade é um fator determinante na renda do trabalhador formal no Espírito Santo, com efeitos positivos e significativos em todos os níveis de escolaridade. Entretanto, seus efeitos estão se reduzindo ao longo dos anos.
+
+Destacam-se os seguintes resultados:
+
+1. O coeficiente de determinação reduziu de 29,8% para 22,2% entre 2006 e 2022, indicando a redução da capacidade do modelo de explicar a variação da renda do trabalhador formal no Espírito Santo. Isso pode ser um indicativo de que outros fatores, como a profissão, a indústria e o setor de atuação, estão se tornando mais importantes na determinação da renda do trabalhador formal.
+2. 
+
+Acerca desses resultados, além da explicação da mudança estrutural da oferta de trabalhadores qualificados explorada em @colclough_changing_2010, podemos oferecer uma interpretação alternativa, ou complementar, seguindo a literatura da sociologia da educação. Segundo Bourdieu, podemos argumentar que
+
+\begin{citacao}
+  $[\ldots]$ a instituição escolar dissimula por trás de sua aparente neutralidade, ou seja, justamente a reprodução das relações sociais e de poder vigentes. Encobertos sob as aparências de critérios puramente escolares, estão critérios sociais de triagem e de seleção dos indivíduos para ocupar determinados postos na vida \cite{rodrigues_sociologia_2018}.
+\end{citacao}
+
+Essa afirmação nos convida a indagar se, de fato, é a escolaridade que determina a renda do trabalhador, ou se, contrariamente, é sua posição social que determina a escolaridade. No Espírito Santo, como um recorte do Brasil, até a década passada, os cursos superiores, principalmente os de maior retorno, eram praticamente exclusivos para parcela privilegiada da sociedade. Entretanto, com o advento de políticas afirmativas e consequente aumento da democratização do ensino superior, a camada mais pobre da população ganhou acesso à essa educação. Entretanto, conforme o resultado da estimação demonstrou, mesmo quando com a mesma qualificação, substratos não privilegiados da população permanecem com renda inferior. É essa linha de reciocício que será explorada no capítulo seguinte. 
 
 # O PAPEL DA EDUCAÇÃO MATEMÁTICA SOB A HEGEMONIA DO CAPITAL
 
@@ -604,7 +643,7 @@ Em uma sociedade capitalista, não se pode compreender a educação desassociada
 
 Neste capítulo, procuro sistematizar os mecanismos de reprodução do capitalismo na educação, mostrando evidenciar como a educação matemática, enquanto não rompe com seu papel na reprodução das relações sociais de poder, é ineficaz na promoção de mudanças estruturais na sociedade.
 
-## O propósito da escola ao longo da história
+## A educação ao longo da história
 
 Considere o seguinte exercício mental: Suponha uma sociedade em um futuro muito distante onde não exista trabalho como relação social. Robôs realizam toda a atividade laboral. Como seria a escola nessa sociedade? O que sobra de *puro* na educação? Qual seria seu propósito? Antes de tentar inferir qualquer coisa acerca de tais perguntas, podemos nos munir de uma breve visão geral do propósito da educação na história da educação.
 
