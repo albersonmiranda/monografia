@@ -82,6 +82,39 @@
 
   Logo, $e^{\beta_1}$ representa a variação relativa em $Y$ dada a presença do nível $i$ de $X_i$. Analogamente, $e^{\beta_p}$ representa a variação relativa em $Y$ dada a variação unitária em $X_p$.
 \end{proof}
+
+% proposição 3
+\begin{proposition}
+  \label{proposicao3}
+
+  Sendo $Y$ a variável dependente de um modelo log-linear do tipo
+  
+  \begin{equation}
+    \log(Y) = \beta_0 + \beta_1X_1 + \beta_2X^2_1 + \ldots + \beta_pX_p
+  \end{equation} \label{eq:loglinear3}
+  
+  \noindent $\beta_1 + 2\beta_2X_1$, com $\beta_1$ e $\beta_2$ relacionados a um preditor contínuo, representa a variação relativa em $Y$ em relação a $X_1$, no ponto $X_2 = x_2$.
+\end{proposition}
+
+\begin{proof}
+  Derivando ambos lados de \eqref{eq:loglinear3} em relação a $X_1$, temos
+
+  \begin{equation} \label{eq:derivada1}
+    \frac{\partial \log(Y)}{\partial X_1} = \beta_1 + 2\beta_2X_1
+  \end{equation}
+
+  Pela regra da cadeia, temos
+
+  $$
+  \begin{aligned}
+    \frac{1}{Y}Y' &= \beta_1 + 2\beta_2X_1\\
+    \frac{Y'}{Y} &= \beta_1 + 2\beta_2X_1
+  \end{aligned}
+  $$
+
+  Portanto, $\beta_1 + 2 \beta_2X_1$ representa a variação relativa em $Y$ dada variação unitária em $X_1$ no ponto $X_2 = x_2$.
+\end{proof}
+  
 \end{apendicesenv}
 
 % anexos 

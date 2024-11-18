@@ -437,7 +437,7 @@ Devido à omissão dessa variável, espera-se a inclusão de viés de variável 
 
 ## Estimação
 
-Para estimar os efeitos da escolaridade na determinação da renda do trabalhador formal no Espírito Santo, utilizo um modelo de regressão linear múltipla log-linear. A variável dependente é a renda média nominal do trabalhador, e as variáveis independentes são o ciclo de escolaridade, estimativa de experiência, a raça/cor e o sexo do trabalhador. A escolha do modelo de regressão linear múltipla se dá por sua capacidade de interpretação e pela possibilidade de estimar os efeitos marginais de cada variável independente na variável dependente, bem como a possibilidade de incluir interações entre as variáveis independentes.
+Para estimar os efeitos da escolaridade na determinação da renda do trabalhador formal no Espírito Santo, utilizo um modelo de regressão linear múltipla log-linear. A variável dependente é a renda média nominal do trabalhador, e as variáveis independentes são o ciclo de escolaridade, estimativa de experiência (incluindo um termo quadrático para avaliar possíveis efeitos não lineares), a raça/cor e o sexo do trabalhador. A escolha do modelo de regressão linear múltipla se dá por sua capacidade de interpretação e pela possibilidade de estimar os efeitos marginais de cada variável independente na variável dependente, bem como a possibilidade de incluir interações entre as variáveis independentes.
 
 A especificação do modelo é dada por:
 
@@ -458,6 +458,7 @@ Onde $\mathbfit{Y}$ é o vetor da renda nominal, $\mathbfit{X}$ é o vetor de pr
 - $X_9$: raça/cor (raca_cor) = branca
 - $X_{10}$: raça/cor (raca_cor) = parda
 - $X_{11}$: experiência (exp)
+- $X_{12}$: experiência ao quadrado ($exp^2$)
 
 E também serão estimados coeficientes para interação, que estimam o efeito em pares de estados possíveis para as variáveis de escolaridade, sexo e raça/cor (e.g., o efeito de ser do sexo masculino e da cor branca é representado pela interação $X_7 \times X_9$).
 
@@ -494,7 +495,7 @@ modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
     # variável dependente
     log(vlr_rem) ~
       # variáveis dependentes
-      grau + sexo + raca_cor + exp + exp^2 +
+      grau + sexo + raca_cor + exp + I(exp^2) +
       # interação
       sexo * raca_cor + sexo * grau + grau * raca_cor,
     # dataset
@@ -503,14 +504,14 @@ modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
 })
 ```
 
-Os gráficos de diagnóstico dos resíduos são apresentados a seguir. Usando uma amostra aleatória de mil observações para plotar os gráficos, é possível notar na @fig-resid-qqplot que a distribuição apresenta assimetria positiva, com cauda mais pesada à direita, o que podemos confirmar com o histograma completo dos resíduos (@fig-resid-hist). Isso significa que o modelo consegue explicar bem a parte inferior e central da distribuição da renda, mas **falha mais em explicar os quantis superiores, onde estão os maiores salários**.
+Os gráficos de diagnóstico dos resíduos para o modelo de 2022 são apresentados a seguir. Usando uma amostra aleatória de 5 mil resíduos para plotar os gráficos, é possível notar na @fig-resid-qqplot que a distribuição apresenta assimetria positiva, com cauda mais pesada à direita, o que podemos confirmar com o histograma completo dos resíduos (@fig-resid-hist). Isso significa que o modelo consegue explicar bem a parte inferior e central da distribuição da renda, mas **falha mais em explicar os quantis superiores, onde estão os maiores salários**. Considerando que o desvio-padrão da renda é `r scales::dollar(sd(rais[rais$ano == 2022,]$vlr_rem))`, a assimetria positiva dos resíduos, que assume desvios extremos a partir de 3 desvios-padrão, indica que o modelo subestima a renda dos trabalhadores com salários a partir de `r scales::dollar(3 * sd(rais[rais$ano == 2022,]$vlr_rem))`. Ou seja, outros fatores além da escolaridade, raça/cor, sexo e experiência, são necessários para explicar remunerações nesse nível.
 
 ```{r plot de residuos}
 #| label: fig-resid-scatter
 #| fig-cap: "Gráfico de dispersão dos resíduos"
 
 # amostragem para diagnóstico
-indices <- sample(length(modelos$m2022$residuals), 1000)
+indices <- sample(length(modelos$m2022$residuals), 5000)
 
 # gráfico de dispersão dos resíduos
 plot(
@@ -600,9 +601,9 @@ stargazer::stargazer(
 )
 ```
 
-Na comparação dos anos de 2006 e 2022, o primeiro fato a se notar é que o coeficiente de determinação R² reduziu de 29,8% para 22,2%. Isso significa que a qualidade do ajuste foi reduzida, ou seja, em 2022, o mesmo conjunto de variáveis explica menos a variação da renda do trabalhador formal no Espírito Santo do que em 2006.
+Na comparação dos anos de 2006 e 2022, o primeiro fato a se notar é que o coeficiente de determinação R² reduziu de 31,7% para 23,3%. Isso significa que a qualidade do ajuste foi reduzida, ou seja, em 2022, o mesmo conjunto de variáveis explica menos a variação da renda do trabalhador formal no Espírito Santo do que em 2006.
 
-O segundo resultado imediato é a redução dos coeficientes relacionados à escolaridade. Todos os efeitos marginais, apesar de significativos e positivos, são menores que em 2006. Isso significa que, embora a escolaridade continue sendo um fator determinante na renda do trabalhador formal, seus efeitos estão se reduzindo ao longo do tempo. Por exemplo, o efeito marginal de ter o ensino superior completo em relação ao médio em 2006 --- lembrando que as características de linha de base é sexo feminino e cor preta ---, era $\frac{e^{1.336}}{e^{0.640}} = 2$, ou seja, duas vezes maior. Em 2022, esse efeito caiu para $\frac{e^{1.007}}{e^{0.504}} = 1.65$, uma redução de 17,6%.
+O segundo resultado imediato é a redução dos coeficientes relacionados à escolaridade na linha de base. Todos os efeitos marginais, apesar de significativos e positivos, são menores que em 2006. Isso significa que, embora a escolaridade continue sendo um fator determinante na renda do trabalhador formal, seus efeitos estão se reduzindo ao longo do tempo. Por exemplo, o efeito marginal de ter o ensino superior completo em relação ao médio em 2006 --- lembrando que as características de linha de base é sexo feminino e cor preta ---, era $\frac{e^{1.286}}{e^{0.598}} = 1.99$, ou seja, duas vezes maior. Em 2022, esse efeito caiu para $\frac{e^{0.892}}{e^{0.398}} = 1.64$, uma redução de 17,7%.
 
 Esse fenômeno não é exclusivo do Espírito Santo, sendo também observado por @colclough_changing_2010, que atribuem como causa mudanças estruturais na escolaridade da população:
 
@@ -616,7 +617,24 @@ O terceiro resultado aparece quando analisamos os substratos da população. Em 
 
 Ainda em relação à variável `raca_cor`, ser branco não escolarizado está associado a um efeito negativo da renda em 2022. Uma hipótese é de que a escolaridade média da população branca tenha avançado mais rapidamente, de forma que sua parcela não escolarizada esteja presente em maior partre no setor agrícola no interior do estado, cuja remuneração é inferior e, embora tenha avançado nos últimos anos, ainda corresponde a 71% da renda média brasileira [@possamai_mercado_2023].
 
-Já quando olhamos para a população escolarizada, o cenário é invertido. O coeficiente do ensino superior sobre a linha de base, ou seja, mulheres pretas com ensino superior, é 1.007, o que corresponde a um efeito de $e^{1.007}=2.74$ na renda. Já para a interação ensino superior e cor branca, o coeficiente estimado é de 0.264, o que corresponde a um efeito de $e^{1.007-0.040+0.264}=3.42$. Isso significa que uma mulher branca com ensino superior tem remuneração, em média, 25% superior a uma mulher preta no Espírito Santo.
+Já quando olhamos para a população escolarizada, o cenário é invertido. O coeficiente do ensino superior sobre a linha de base, ou seja, mulheres pretas com ensino superior, é 0.892, o que corresponde a um efeito de $e^{0.892}=2.44$ na renda. Já para a interação ensino superior e cor branca, o coeficiente estimado é de 0.222, o que corresponde a um efeito de $e^{0.892-0.002+0.222}=3.04$. Isso significa que uma mulher branca com ensino superior tem remuneração, em média, 25% superior a uma mulher preta no Espírito Santo.
+
+Em relação ao sexo, os efeitos marginais associados ao sexo masculino escancaram as diferenças de gênero no mercado de trabalho formal capixaba. Sob a linha de base, o efeito de ser homem é de $e^{0.274}=1.315$. Quando associado à cor branca com ensino superior, esse efeito aumenta para $e^{0.892+0.274-0.002+0.039+0.166+0.222}=4.91$, ou seja, dentre a população branca detentora de educação superior, ser homem concede uma vantagem média de 62% em relação à remuneração da mulher. Em relação à mulher preta graduada, essa vantagem é de 101%.
+
+As dimensões raciais e de gênero são tão importantes que o efeito marginal de ser homem branco com ensino superior ($e^{0.892+0.274-0.002+0.039+0.166+0.222}=4.9086$) é maior do que o efeito de ser uma mulher preta com doutorado ($e^{4.191}$). Ou seja, mesmo com doutorado, a remuneração média de mulheres pretas é 17% menor que a de homens brancos com apenas graduação.
+
+Por fim, em relação à experiência, por conta da presença do termo quadrático para captar possíveis efeitos não lineares, a interpretação dos coeficientes é um pouco mais complexa^[Ver \ref{proposicao3}.]. Sob a hipótese de que até certo ponto a idade se relaciona positivamente e, ao final da carreira, negativamente com a renda, espera-se que o coeficiente quadrático seja negativo, o que é confirmado pelo sinal do coeficiente do termo quadrático. Com isso, por exemplo, 15 anos de experiência contribuem, em média, com $e^{0.035*15-0.0004*15^2}=1.545$ na renda, ou um acréscimo de 54,5% na renda em relação a um indivíduo sem experiência.
+
+O ponto de inflexão, quando a idade/experiência passa a contribuir negativamente com a renda, pode ser calculado. Para isso, basta igualar a derivada primeira da equação de renda em relação à experiência a zero e resolver para a experiência. Definindo $f(exp) = \beta_{11} * exp + \beta_{12} * exp^2$, temos:
+
+$$
+\begin{aligned}
+  f'(exp) &= \beta_{11} + 2(\beta_{12})(exp) = 0 \\
+  exp &= -\frac{(\beta_{11})}{2(\beta_{12})}
+\end{aligned}
+$$ {#eq-ponto-inflexao}
+
+Substituindo os coeficientes estimados, temos que o ponto de inflexão é $-\frac{0.035}{2*-0.0004} = 43.75$. Com isso, em média, após 44 anos de experiência, cada ano adicional reflete negativamente na renda do trabalhador formal no Espírito Santo.
 
 ## Conclusão
 
@@ -624,8 +642,11 @@ Neste estudo, demonstro que a escolaridade é um fator determinante na renda do 
 
 Destacam-se os seguintes resultados:
 
-1. O coeficiente de determinação reduziu de 29,8% para 22,2% entre 2006 e 2022, indicando a redução da capacidade do modelo de explicar a variação da renda do trabalhador formal no Espírito Santo. Isso pode ser um indicativo de que outros fatores, como a profissão, a indústria e o setor de atuação, estão se tornando mais importantes na determinação da renda do trabalhador formal.
-2. 
+1. O coeficiente de determinação reduziu de 31,7% para 23,3% entre 2006 e 2022, indicando a redução da capacidade do modelo de explicar a variação da renda do trabalhador formal no Espírito Santo. Isso pode ser um indicativo de que outros fatores não observados estão se tornando mais importantes na determinação da renda do trabalhador formal.
+2. Os maiores resíduos de regressão estão nos quantis superiores da distribuição da renda, indicando que o modelo falha em explicar os maiores salários, os subestimando. Isso significa que fatores não observados são importantes na determinação das maiores rendas. Escolaridade não explica altos salários. Outros tipos de privilégios devem ser considerados.
+3. Todos os coeficientes associados à escolaridade diminuiram na linha de base (mulheres pretas) entre 2006 e 2022, indicando que a escolaridade está deixando de ser um fator de diferenciação e passando a ser um requisito mínimo para a entrada no mercado de trabalho formal.
+4. Fora da linha de base, os efeitos para nível superior aumentariam quando associados à cor branca ou sexo masculino, indicando que a desigualdade racial e de gênero no mercado de trabalho formal capixaba, apesar de ter reduzido em relação ao acesso, não reduziu em relação à remuneração.
+
 
 Acerca desses resultados, além da explicação da mudança estrutural da oferta de trabalhadores qualificados explorada em @colclough_changing_2010, podemos oferecer uma interpretação alternativa, ou complementar, seguindo a literatura da sociologia da educação. Segundo Bourdieu, podemos argumentar que
 
@@ -633,7 +654,7 @@ Acerca desses resultados, além da explicação da mudança estrutural da oferta
   $[\ldots]$ a instituição escolar dissimula por trás de sua aparente neutralidade, ou seja, justamente a reprodução das relações sociais e de poder vigentes. Encobertos sob as aparências de critérios puramente escolares, estão critérios sociais de triagem e de seleção dos indivíduos para ocupar determinados postos na vida \cite{rodrigues_sociologia_2018}.
 \end{citacao}
 
-Essa afirmação nos convida a indagar se, de fato, é a escolaridade que determina a renda do trabalhador, ou se, contrariamente, é sua posição social que determina a escolaridade. No Espírito Santo, como um recorte do Brasil, até a década passada, os cursos superiores, principalmente os de maior retorno, eram praticamente exclusivos para parcela privilegiada da sociedade. Entretanto, com o advento de políticas afirmativas e consequente aumento da democratização do ensino superior, a camada mais pobre da população ganhou acesso à essa educação. Entretanto, conforme o resultado da estimação demonstrou, mesmo quando com a mesma qualificação, substratos não privilegiados da população permanecem com renda inferior. É essa linha de reciocício que será explorada no capítulo seguinte. 
+Essa afirmação nos convida a indagar se, de fato, é a escolaridade que determina a renda do trabalhador, ou se, contrariamente, é sua posição social que determina a escolaridade. No Espírito Santo, como um recorte do Brasil, até a década passada, os cursos superiores, principalmente os de maior retorno, eram praticamente exclusivos para parcela privilegiada da sociedade. Entretanto, com o advento de políticas afirmativas e consequente aumento da democratização do ensino superior, a camada mais pobre da população ganhou acesso à essa educação. Entretanto, conforme o resultado da estimação demonstrou, mesmo quando com a mesma qualificação, substratos não privilegiados da população permanecem com renda inferior. Essa linha de raciocício será explorada no capítulo seguinte. 
 
 # O PAPEL DA EDUCAÇÃO MATEMÁTICA SOB A HEGEMONIA DO CAPITAL
 
@@ -643,7 +664,7 @@ Em uma sociedade capitalista, não se pode compreender a educação desassociada
 
 Neste capítulo, procuro sistematizar os mecanismos de reprodução do capitalismo na educação, mostrando evidenciar como a educação matemática, enquanto não rompe com seu papel na reprodução das relações sociais de poder, é ineficaz na promoção de mudanças estruturais na sociedade.
 
-## A educação ao longo da história
+## Educação pré-capitalista
 
 Considere o seguinte exercício mental: Suponha uma sociedade em um futuro muito distante onde não exista trabalho como relação social. Robôs realizam toda a atividade laboral. Como seria a escola nessa sociedade? O que sobra de *puro* na educação? Qual seria seu propósito? Antes de tentar inferir qualquer coisa acerca de tais perguntas, podemos nos munir de uma breve visão geral do propósito da educação na história da educação.
 
@@ -677,6 +698,18 @@ All these schools, too, were completely under the control of the Church. There w
 \end{citacao}
 
 Nesse sentido, a educação cristã medieval era, em sua essência, um instrumento de reprodução e perpetuação da própria estrutura de poder da igreja. De manutenção da ordem e da hierarquia social, e não de formação intelectual e crítica dos indivíduos.
+
+Em 1450, o movimento de resgatar a literatura clássica e a filosofia grega e romana, conhecido como Renascimento, começa a se espalhar pela Europa a partir da Itália, trazendo consigo a redescoberta da matemática grega e árabe, além de agregar o estudo das humanidades ao lado da educação moral e física. Esse período marca a ruptura com o pensamento e educação clériga, e lança as bases para a educação moderna. Entretanto, de forma e conteúdo, pouco se tem de diferente da educação clássica grega e romana. Com o apoio das classes dominantes, a ascenção das escolas secundárias e unviersidades renascentistas restauraram a educação do tempo de Cícero, que trazia uma educação aristocrática, em preparação para serviços na Igreja, no Estado e nos grandes negócios.
+
+\begin{citacao}
+History was introduced in these schools for the first time and as a new subject of study, though the history was the history of Greece and Rome and was drawn from the authors studied. Livy and Plutarch were the chief historical writers used. Nothing that happened after the fall of Rome was deemed as of importance. Much emphasis was placed on manners, morality, and reverence, with Livy and Plutarch again as the great guides to conduct.
+
+$[...]$ The result was an all-round physical, mental, and moral training, vastly superior to anything previously offered by the cathedral and other church schools. \cite{cubberley_history_1920}
+\end{citacao}
+
+Há vários outros eventos na história que podem ser analisados sob a ótica do seu impacto na educação: a reforma protestante^[Calvino escreve para o Príncipe de Genebra, em 1541, que "as artes liberais e a boa educação são bons auxiliares no pleno conhecimento da Palavra".], que, dentre vários outros desdobramentos, gera um novo nível de tolerância religiosa ao conhecimento que acaba por abrir caminho para o surgimento do método científico moderno [@cubberley_history_1920]; o sucesso da contra-reforma e da educação jesuíta nos processos colonizadores, que "promoveram o **controle da fé e da moral** dos habitantes" [@rosario_educacao_2015]; o puritanismo na América do Norte, que estabelece as bases do sistema educacional americano. Entretanto, o propósito deste trabalho não é de forma alguma ser exaustivo, mas sim de argumentar um ponto.
+
+Voltando à pergunta inicial: o que sobra de puro na educação ao se retirar as relações sociais de exploracão e poder? Este estudante, ao inciar a leitura para este capítulo, tinha como hipótese e espera encontrar evidências de que a educação pré-capitalista tinha em seu cerne a curiosidade e o espírito humano, com foco nas artes. Entretanto, a história nos mostra que o elemento em comum que aparecem em todas as sociedades é a normalização moral do indivíduo e de reprodução das relações sociais vigentes, através da transmissão de valores e normas sociais e da formação dos filhos das classes dominantes para ocupar determinados postos na sociedade.
 
 ## A educação matemática sob a superestrutura capitalista
 
