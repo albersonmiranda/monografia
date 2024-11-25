@@ -71,13 +71,26 @@ Na segunda parte, procuro explicar esses sintomas apresentando uma sistematizaç
 
 ## Outline
 
-[...]
+Este trabalho está dividido em duas partes principais:
+
+1. **Efeitos da Escolaridade em Diferentes Substratos Sociais no Espírito Santo**:
+   - Análise estatística dos dados de escolaridade, sexo, raça e rendimentos.
+   - Demonstração de que a escolaridade é um preditor significativo para a renda, mas seus efeitos estão se reduzindo ao longo do tempo.
+   - Evidência de que substratos marginalizados da sociedade têm retornos menores mesmo com maior escolaridade.
+
+2. **O Papel da Educação Matemática sob a Hegemonia do Capital**:
+   - Análise histórica e teórica da educação como instrumento de reprodução das relações sociais de poder.
+   - Discussão sobre as limitações da educação matemática crítica devido à sua inserção em instituições panópticas.
 
 # EFEITOS DA ESCOLARIDADE EM DIFERENTES SUBSTRATOS SOCIAIS NO ESPÍRITO SANTO
 
 ## Introdução
 
-[...]
+A relação entre escolaridade e renda é um tema amplamente estudado na literatura econômica e sociológica. A teoria do capital humano sugere que a educação aumenta a produtividade dos indivíduos, resultando em maiores rendimentos. No entanto, essa relação pode ser influenciada por diversos fatores, como gênero, raça e contexto socioeconômico.
+
+Este capítulo tem como objetivo analisar os efeitos da escolaridade na determinação da renda dos trabalhadores formais no estado do Espírito Santo, com foco nas desigualdades de gênero e raça. Utilizando dados da Relação Anual de Informações Sociais (Rais) de 2006 e 2022, buscamos entender como a escolaridade impacta a renda em diferentes substratos sociais e como essas relações têm evoluído ao longo do tempo.
+
+A análise estatística permitirá identificar padrões e tendências, bem como discutir as implicações das políticas educacionais e ações afirmativas na redução das desigualdades sociais. Além disso, exploraremos a hipótese de que a escolaridade, embora importante, não é suficiente para superar as barreiras estruturais que perpetuam a desigualdade social.
 
 ## Breve revisão de literatura
 
@@ -711,13 +724,47 @@ Há vários outros eventos na história que podem ser analisados sob a ótica do
 
 Voltando à pergunta inicial: o que sobra de puro na educação ao se retirar as relações sociais de exploracão e poder? Este estudante, ao inciar a leitura para este capítulo, tinha como hipótese e espera encontrar evidências de que a educação pré-capitalista tinha em seu cerne a curiosidade e o espírito humano, com foco nas artes. Entretanto, a história nos mostra que o elemento em comum que aparecem em todas as sociedades é a normalização moral do indivíduo e de reprodução das relações sociais vigentes, através da transmissão de valores e normas sociais e da formação dos filhos das classes dominantes para ocupar determinados postos na sociedade.
 
-## A educação matemática sob a superestrutura capitalista
+## Educação sob a superestrutura capitalista
 
-[...]
+Então, qual a mudança profunda que ocorre na educação a partir da segunda metade do século XVIII, com a revolução francesa e revolução industrial, e advento do capitalismo?
 
-## A escola como instituição panóptica
+Nas sociedades pré-capitalistas, a educação "resumia-se a ajudar a criança a ajustar-se à ordem social tradicionalmente estabelecida", de forma que se tratava de um processo inconsciente de assimilação, por parte das crianças, do modelo da ordem vigente \apud{mannheim_essays_2013}{rodrigues_sociologia_2018}. E essa ordem era justificada por um poder divino ou natural. Quando o indivíduo não se ajustava a essa ordem, era excluído: na Grécia antiga, mulheres, estrangeiros e aqueles que não tinham propriedade eram excluídos da educação; em Roma, os plebeus; na educação monástica, os não cristãos. As instituições pré-capitalistas eram moldadas para a exclusão. Foucault ilustra esse processo de exclusão com o exemplo do hospital psiquiátrico:
 
-@bourdieu_economia_2011 coloca o sistema educacional como um dos instrumentos mais eficazes de integração moral e lógica da sociedade, que tem como produto o indivíduo "programado" — homogêneo em percepção, pensamento e ação:
+\begin{citacao}
+Quando alguém era internado, tratava-se sempre de um indivíduo marginalizado em relação à família, ao grupo social, à comunidade local a que pertencia; alguém que não estava dentro da regra e que se tornara marginal por sua conduta, sua desordem, a irregularidade da sua vida. O internamento respondia a essa marginalização de fato, com uma espécie de marginalização de segundo grau, de punição. Era como se se dissesse ao indivíduo: "Já que você se separou do seu grupo, vamos separá-lo definitiva e provisoriamente da sociedade". \cite[p.~113]{foucault_verdade_2013}
+\end{citacao}
+
+Quando a classe burguesa assume o poder, a partir da revolução francesa, a existência de uma classe dominante deixa de ser explicada por um poder divino ou natural, mas econômico e político, e se faz necessário construir um mecanismo para perpetuação desse poder. Este toma forma de uma superestrutura ideológica que tem na educação, ao lado das dimensões moral e jurídica da sociedade, um de seus pilares. Segundo @gramsci_selections_2012, é preciso conquistar a consciência da população, "ganhar a batalha das ideias", para vencer a disputa pelo o que ele chamou de hegemonia.
+
+Com isso, temos diferentes formas de educação, em que cada uma delas contém o germe da luta de classes. Nas palavras de @frigotto_trabalho_2012:
+
+\begin{citacao}
+Sob as necessidades do capital de formação da mão de obra para as empresas, o trabalho educa para a disciplina, para a adaptação às suas formas de exploração ou, simplesmente, para o adestramento nas funções úteis à produção. Sob a contingência das necessidades dos trabalhadores, o trabalho deve não somente preparar para o exercício das atividades laborais para a educação profissional nos termos da lei em vigor –, mas também para a compreensão dos processos técnicos, científicos e histórico-sociais que lhe são subjacentes e que sustentam a introdução das tecnologias e da organização do trabalho.
+\end{citacao}
+
+Assim, não sobra espaço para, como diz @gramsci_selections_2012, uma escola formativa para a população geral. Para esta, o discurso hegemônico é de _"difundir cada vez mais as escolas profissionais especializadas, nas quais o destino do aluno e sua futura atividade são predeterminados"_. Para a elite, reserva-se um reduzido exemplar do modelo de educação da cultura humanista, que lhe permite a formação de seus próprios intelectuais orgânicos, que trabalharão para manter a disputa pela batalha das ideias pendendo para o lado do mais forte.
+
+E é exatamente essa hegemonia intelectual que dá força à classe dominante para a manutenção do _status quo_. Acerca da questão colocada na introdução deste trabalho, motivada pelo professor Rômulo Lins, _por que é tão difícul fazer com que o sistema se coloque em rota de mudança?_, Florestan Fernandes descreve bem as consequências da hegemonia intelectual pela elite:
+
+\begin{citacao}
+Tanto os "interesses univocamente econômicos" quanto o "conflito de classe" só podem manifestar-se como fatores de integração e de mudanças da ordem social quando eles encontram suporte em formas de consenso e de solidariedade (de alcance grupal ou nacional). \textbf{Uma fraca integração da solidariedade moral em nível nacional, por exemplo, aumenta o teor egoístico de comportamentos econômicos individualistas (podendo inclusive polarizá-los em direções anti-sociais) e concorre para manter estados de apatia ou de conformismo diante da perpetuação de formas iníquas de exploração econômica, de privilégios sociais aberrantes e perigosos ou da monopolização do poder por elites mais ou menos indiferentes ao destino da coletividade}. Além disso, \textbf{a persistência, em bloco, de estruturas arcaicas e a intensidade sociopática da resistência à mudança} são, em si mesmas, sintomáticas. \cite{fernandes_sociedade_2021}
+\end{citacao}
+
+Em outras palavras, sob uma disfarce de expurgo da integração moral em benefício de uma suposta neutralidade, adota-se um sistema educacional que acaba por gerar uma fraca integração moral em nível nacional, mantendo a apatia e conformismo diante da perpetuação da exploração econômica, de privilégios sociais e manutenção da ordem política vigente. Essa suposta neutralidade também se faz presente no discurso hegemônico, que defendem uma escola puramente técnica, igualitária, neutra, "para todos". Bourdieu, entretanto, evidencia que por trás dessa aparente neutralidade, a escola dissimula justamente a reprodução das relações sociais de poder vigentes: "Encobertos sob as aparências de critérios puramente escolares, estão critérios sociais de triagem e de seleção dos indivíduos para ocupar determinados postos na vida" [@rodrigues_sociologia_2018]. Isso é um tipo de manifestação do fenômeno ao qual Bourdieu chamou de violência simbólica, que se manifesta numa imposição arbitrária mas que é apresentada àquele que sofre a violência de um modo dissimulado, como se fosse natural e legítima.
+
+A educação, antes um instrumento de reprodução da ordem social e moral, passa a ser _também_ um instrumento de reprodução da ordem econômica e política. A cadeia causal desse fenômeno está resumido na @fig-reproducao. Quanto maior a educação, maior é a produtividade (passo 1). O que o discurso hegemônico internalizou na sociedade é que produtores (trabalhadores) e donos dos meios de produção (capitalistas) estão em pé de igualdade, com o salário real pago a cada trabalhador igual à produtividade marginal do trabalho, e o rendimento real pago aos proprietários do capital a produtividade marginal do capital [@mankiw_macroeconomics_2013]. Entretanto, a remuneração do trabalho não cresce na mesma proporção que o lucro [@stansbury_productivity_2017], gerando maiores ganhos para o capitalista (passo 2) e, consequentemente, concentração de renda na classe dominante (passo 3).
+
+![Esquema de reprodução capitalista via educação.](img/reproducao.excalidraw.png){#fig-reproducao}
+
+Agora, como a educação, sendo uma educação para o trabalho, pode ser emancipadora se, a nível da superestrutura, ela é um instrumento de reprodução da ordem econômica e política vigente? Numa sociedade capitalista, o trabalhador, como classe, deve se incorporar-se continuamente ao capital e isso acaba por expandi-lo; não pode livrar-se dele [@marx_o_1998]. E essa expansão do capital, sua reprodução, está instrinsecamente associada à intensificação da exploração da classe trabalhadora (passo 4), em um esquema identificado desde os primeiros passos do capitalismo, ainda no séc. XVIII:
+
+\begin{citacao}
+Nos países onde a propriedade está bem protegida, é mais fácil viver sem dinheiro do que sem os pobres, pois quem faria o trabalho? (...) Se não se deve deixar os pobres morrerem de fome, não se lhes deve dar coisa alguma que lhes permita economizarem. Se esporadicamente um indivíduo, à custa de trabalho e de privações, se eleva acima das condições em que nasceu, ninguém lhe deve criar obstáculos: é inegável que, para todo indivíduo, para toda família, o mais sábio é praticar a frugalidade; mas é interesse de todas as nações ticas que a maior parte dos pobres nunca fique desocupada e que, ao mesmo tempo, gaste sempre tudo o que ganha. (...) Os que ganham sua vida com o trabalho quotidiano só têm um estímulo, para prestar seus serviços, suas necessidades. Por isso, é prudente mitigá-las, mas seria loucura curá-las. A única coisa que pode tornar ativo o trabalhador é um salário moderado. Um salário demasiadamente pequeno, segundo o temperamento do trabalhador, deprime-o ou desespera-o; um demasiadamente grande torna-o insolente e preguiçoso. (...) Numa nação livre onde se proíbe a escravatura, a riqueza mais segura é constituída por um grande número de pobres laboriosos. Constituem fonte inesgotável para o recrutamento da marinha e do exército; sem eles, nada se poderia fruir nem poderiam ser explorados os produtos de um páís. Para tornar feliz a sociedade --- isto é, os que não trabalham ---, e para que o povo viva contente, mesmo em condições miseráveis, é necessário que a maioria permaneça ignorante e pobres. O saber aumenta e multiplica nossos desejos, e, quanto menos um homem deseje, mais fácil é satisfazer suas necessidades. \apud{mandeville_fable_1989}{marx_o_1998}
+\end{citacao}
+
+Uma vez nesse estado de apatia, atado moral, econômica e politicamente, a classe trabalhadora, em sua ação, apenas reproduz as orientações determinadas pela estrutura social vigente. O sujeito, então, está "simplesmente submetido aos desígnios da sociedade, faz o que suas estruturas determinam, não sabe disso e ainda é iludido pelos discursos dominantes, que o fazem pensar que sua ação é resultante de vontade própria" [@rodrigues_sociologia_2018].
+
+E qual o papel da escola nesse processo? @bourdieu_economia_2011 coloca o sistema educacional como um dos instrumentos mais eficazes de integração moral e lógica da sociedade, que tem como produto o indivíduo "programado" — homogêneo em percepção, pensamento e ação:
 
 \begin{citacao}
 Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua qualidade de código comum é o que permite a todos os detentores deste código associar o mesmo sentido às mesmas obras e, de maneira recíproca, de exprimir a mesma intenção significante por intermédio das mesmas palavras, dos mesmos comportamentos e das mesmas obras, pode-se compreender por que \textbf{a Escola, incumbida de transmitir esta cultura, constitui o fator fundamental do consenso cultural} nos termos de uma participação de um senso comum entendido como condição da comunicação. \cite{bourdieu_economia_2011}
@@ -726,8 +773,7 @@ Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua 
 A nível institucional, @foucault_verdade_2013 trabalha esse aspecto de normalização cultural e moral. Ele coloca a escola como um exemplo de instituição panóptica (ou de sequestro). Esse tipo de instituição exerce poder sobre os indivíduos em uma sociedade de três formas características: *vigilância* individual e contínua; *controle* através de punição e recompensa e; formação e transformação dos indivíduos em função de certas normas, o que Foucault chamou de *correção*. Podemos associar esse consenso cultural que Bourdieu trata ao tríplice aspecto das instituições panópticas na definição de Foucault, especificamente a *correção*.
 
 \begin{citacao}
-Na época atual, todas essas instituições --- fábrica, escola, hospital psiquiátrico, hospital, prisão --- têm por finalidade não excluir, mas, ao contrário, fixar os indivíduos. A fábrica não exclui os indivíduos; liga-os a um aparelho de produção. \textbf{A escola não exclui os indivíduos; mesmo fechando-os; ela os fixa a um aparelho de transmissão do saber}. O hospital psiquiátrico não exclui os indivíduos; liga-os a um aparelho de correção, a um aparelho de normalização dos indivíduos. O mesmo acontece com a casa de correção ou com a prisão. Mesmo se os efeitos dessas instituições são a exclusão
-do indivíduo, elas têm como finalidade primeira fixar os indivíduos em um aparelho de normalização dos homens. A fábrica, \textbf{a escola}, a prisão ou os hospitais \textbf{têm por objetivo ligar o indivíduo a um processo de produção, de formação ou de correção dos produtores. Trata-se de garantir a produção ou os produtores em função de uma determinada norma}. \cite[p.~114]{foucault_verdade_2013}
+Na época atual, todas essas instituições --- fábrica, escola, hospital psiquiátrico, hospital, prisão --- têm por finalidade não excluir, mas, ao contrário, fixar os indivíduos. A fábrica não exclui os indivíduos; liga-os a um aparelho de produção. \textbf{A escola não exclui os indivíduos; mesmo fechando-os; ela os fixa a um aparelho de transmissão do saber}. O hospital psiquiátrico não exclui os indivíduos; liga-os a um aparelho de correção, a um aparelho de normalização dos indivíduos. O mesmo acontece com a casa de correção ou com a prisão. Mesmo se os efeitos dessas instituições são a exclusão do indivíduo, elas têm como finalidade primeira fixar os indivíduos em um aparelho de normalização dos homens. A fábrica, \textbf{a escola}, a prisão ou os hospitais \textbf{têm por objetivo ligar o indivíduo a um processo de produção, de formação ou de correção dos produtores. Trata-se de garantir a produção ou os produtores em função de uma determinada norma}. \cite[p.~114]{foucault_verdade_2013}
 \end{citacao}
 
 A primeira função da instituição panóptica é a extração da totalidade do tempo do indivíduo. É preciso que todo o tempo da existência humana esteja disponível ao trabalho, suas exigências ou sua preparação --- aí incluindo a educação, que os economistas chamam frequentemente de capital humano. Ao sequestrar o tempo do homem, ela transforma seu tempo de vida em tempo de trabalho. A segunda função é controlar seus corpos, fazendo com que o corpo do indivíduo se torne força de trabalho. Aqui o corpo humano deve ser formado, reformado, corrigido. Deve "adquirir aptidões, receber um certo número de qualidades, qualificar-se como um corpo capaz de trabalhar". 
@@ -746,24 +792,86 @@ A pedagogia se formou a partir das próprias adaptações da criança às tarefa
 
 Esse conjunto de características tem como objetivo principal a *transformação dos homens em força produtiva*. É através desse micro-poder entranhado nas relações sociais de uma sociedade panóptica que o indivíduo é fixado ao aparelho de produção, e a escola é um instrumento essencial para a formação desse micro-poder.
 
-## Da insuficiência da educação matemática crítica
+Em total consonância, Bourdieu conclui que "todo sistema de ensino institucionalizado visa em alguma medida realizar de modo organizadoe  sistemático a inculcação dos valores dominantes e reproduzir as condições de dominação social que estão por trás de sua ação pedagógica" [@rodrigues_sociologia_2018].
 
-[...]
+## Omnilateralidade e o nível pedagógico
 
-## Omnilateralidade versus integração com artes
+Lançando luz agora sobre a esfera micro, para o sucesso desse abritrário cultural e moral, é necessário uma autoridade pedagógica, como Bourdieu chamou, por parte das instituições de ensino --- dotado do micro-poder político, econômico e judiciário que Foucault descreve. E uma vez que o aluno interioriza esses valores culturais e morais que lhe são impostos pelo sistema de ensino, de forma que mesmo depois de sair da escola, ele continua a agir de acordo com esses valores, tendo-os incorporado junto de seus próprios a ponto de não conseguir dinstinguí-los, ele adquire o que Bourdieu chamou de _habitus_ [@rodrigues_sociologia_2018].
 
-[...]
+Adquirido esse _habitus_, Bourdieu nega qualquer possibilidade de rompimento com as estruturas de reprodução, sendo as teorias pedagógicas nada mais que uma cortina de fumaça que oculta o micro-poder do sistema de ensino:
+
+\begin{citacao}
+Simplesmente não há saída: o sistema de ensino filtra os alunos sem que eles se deem conta e, com isso, reproduz as relações vigentes. Não há possibilidade de mudança. A própria revolta estudantil, para eles (Bourdieu e Passeron), não faz mais que reforçar o sistema. Pois ela é absovida e serve como aprendizado para as estruturas melhor se comportarem no sentido de reproduzir as relações. A revolta contra as normas vigentes é apresentada por eles como um reforço da interiorizaçãod a própria norma. \cite{rodrigues_sociologia_2018}
+\end{citacao}
+
+Nesse sentido, tendências pedagógicas como a pedagogia crítica tem o objetivo de agir no processo formativo para impedir a interiorização desse _habitus_ por parte dos alunos. De um lado, temos a sociologia da educação, munida de visões de Marx, Bourdieu e Foucault; de outro, temos, no nosso caso, todo um corpo de produção acadêmica categorizado nas chamadas tendências em educação matemática. Essas categorizações buscam identificar e descrever as diferentes abordagens e perspectivas que norteiam a pesquisa e o ensino da matemática [@mello_tendencias_2007]. De acordo com a primeira, a segunda não é capaz de romper com as estruturas de reprodução, apenas reforçando-as.
+
+Este trabalho não tem como objetivo criticar as tendências pedagógicas em educação matemática. Pelo contrário, essas linhas de pesquisa foram construídas _em torno_ desssas questões. @freire_pedagogia_2021 tem uma sessão inteira ("Ensinar exige reconhecer que a educação é ideológica") dedicada a discutir os riscos que a ideologia neoliberal traz para o educador, os tornando míopes e suscetíveis ao discurso hegemônico que visa "robustecer a riqueza de uns poucos e verticalizando a pobreza e a miséria de milhões". Na mesma linha, @skovsmose_educacao_2001 coloca que:
+
+\begin{citacao}
+Poderia ser razoável assumir que esses alunos destituídos de poder seriam capazes de se tornar atores mais críticos na sociedade se tivessem acesso à matemática. Mas, por outro lado, obter acesso à educação matemática sem ser crítico da ideologia da certeza\footnote{Ele define a \textit{ideologia da certeza} como uma "estrutura geral e fundamental de interpretação para um número crescente de questões que transformam a matemática em uma 'linguagem de poder'. Essa visão da matemática --- como um sistema perfeito, como pura, como uma ferramenta infalível se bem usada -- contribui para o controle político". \cite{skovsmose_educacao_2001}} pode reforçar o \textit{status quo}.
+\end{citacao}
+
+Entretanto, é essencial entender os limites dessas abordagens enquanto seu poder para reformar ou emancipar de fato. No caso da educação matemática, tratar as questões da ideologia passam, necessariamente, pela interdisciplinaridade. Esta é uma abordagem que visa a integração de diferentes áreas do conhecimento, com o objetivo de promover uma aprendizagem mais significativa e contextualizada. Esse conceito envolve ao mesmo tempo teoria e ação, uma vez que exige mais a atuação do professor em sala de aula do que a simples união de duas ou mais disciplinas ou áreas do saber em atividades [@mello_tendencias_2007].
+
+Essa interdisciplinaridade é alcançada a partir do rompimento com o isolamento e a fragmentação dos conteúdos, possibilitando a transferência de aprendizagem de uma situação para a outra e a construção de significado em cima desse aprendizado transferido [@souto_interdisciplinaridade_2010]. Para que isso seja possível, @souto_interdisciplinaridade_2010 lista algumas condições que a atividade matemática interdisciplinar deve atender, como:
+
+1. O tema deve ser algo conhecido dos alunos;
+1. Ser de discussão possível;
+1. Ter valor em si mesmo;
+1. Ser capaz de criar conceitos matemáticos;
+1. desenvolver habilidades matemáticas;
+1. e privilegiar a concretude social.
+
+Essa integração pode se dar em vários níveis. Especificamente em um contexto de interdisciplinaridade voltada para integração com artes, mas que vamos generalizar para o contexto geral, @robinson_arts_2013 enumera três características que devem ser consideradas para que seja alcançada uma interdisciplinaridade de alta qualidade, são elas:
+
+1. Aprendizado *através* e *com* artes;
+1. Artes como processo de conexão curricular;
+1. Artes como engajamento colaborativo.
+
+@bresler_subservient_1995 realizou um estudo etnográfico em três escolas K-8 nos Estados Unidos^[K-8 é uma abreviação para *kindergarten* (pré-escola) até o 8º ano do ensino fundamental.], incluindo observações de aulas; entrevistas com professores, diretores e artistas residentes; e revisão de materiais curriculares. A partir desse estudo, a autora definiu quarto abordagens de integração com a arte, sintetizadas por @robinson_arts_2013, são elas:
+
+1. **Integração subserviente**: a arte é apenas um extra, usada para ilustrar ou reforçar conceitos de outras disciplinas;
+1. **Integração afetiva**: a integração se dá por meio da imersão e da consequente reação dos alunos à arte, como música e peças artísticas, complementando o currículo de outras disciplinas;
+1. **Integração social**: baseada em atividades, utilizando a arte para promover a interação entre os alunos e aumentar a participação parental, como em peças de teatro ou música em grupo;
+1. **Integração co-igual cognitiva**: a arte é integrada com outros aspectos do currículo e os alunos são exigidos a usar habilidades de pensamento de ordem superior e qualidades estéticas^[Na filosofia, a estética é uma área de conhecimento associada às artes e sensações. É a forma de conhecer o mundo através dos cinco sentidos.] para obter um entendimento mais aprofundado de um conceito acadêmico específico;
+
+As três primeiras abordagens utilizam a arte como uma ferramenta. Já a quarta abordagem, a integração co-igual cognitiva, é a mais exigente, demandando do professor não apenas o conhecimento, habilidade e confiança no seu conteúdo, mas também na forma de arte escolhida. Além disso, requer tempo para planejar e efetivamente preparar aulas que integrem a arte com o conteúdo acadêmico [@lovemore_enriching_2021].
+
+Se substituirmos "artes" por "sociologia", temos um bom guia para a integração da sociologia com a matemática. Na maior parte do tempo, o que se vê é a integração subserviente. A realidade do professor brasileiro é de uma carga horária exaustiva, sala cheia, salários baixos e condições de trabalho precárias. Em uma pesquisa quantitativa com professores dos estados do Ceará e Paraná, apesar de 95% dos educadores já terem ouvido falar em metodologias ativas, 52% nunca fizeram uma única capacitação sobre, e somente 7% consideram fácil trabalhar com elas [@silva_metodologias_2023]. Somados esses fatores, manter um projeto pedagógico no nível necessário para alcançar uma integração co-igual cognitiva se torna uma tarefa hercúlea.
+
+Além disso, deve-se levar em consideração o risco que o professor assume ao tentar implementar uma abordagem crítica em sala de aula. Primeiramente, porque ao abandonar a suposta neutralidade que o discurso hegemônico defende, o professor se coloca numa posição de insubordinação que não o traz benefício individual. Pelo contrário, uma vez que nos encontramos no cenário descrito por @fernandes_sociedade_2021 de "polarização em direções anti-sociais", tal projeto pedagógico pode ser o gatilho para que pais descontentes acabem por contribuir com a insalubridade do ambiente de trabalho do professor. 
+
+A educação matemática crítica é contraditória em sua essência, porque o professor, mesmo que consciente de sua posição, não pode ser um agente de transformação enquanto inserido em uma instituição panóptica. Para que o seja, deve partir de uma posição de insubordinação, de rebelia, e, muito provavelmente, de ineficiência para a escola panóptica. Qual conteúdo matemático avaliado em um teste padronizado internacional o professor de matemática ousaria dar menor atenção ou dispender menos tempo para que sobre espaço no ano letivo para discussão de um problema mais relevante para a realidade brasileira, como propõe a etnomatemática, ou para introduzir o processo de acumulação primitiva de Marx? Aliás, como fazê-lo com alguma profundidade que não seja meramente subserviente? O professor de matemática não é, em geral, treinado em filosofia e sociologia, sendo, portanto, mal equipado para tratar com precisão e alguma profundidade as questões que são requeridas pela educação integral^["Integral" no sentido de omnilateralidade.]. Isso dificulta a tradução de abordagens como a matemática crítica e etnomatemática em ações relevantes em sala de aula.
+
+Assim, podemos argumentar que a educação matemática no seu sentido estrito, como disciplina, mesmo utilizando diversas abordagens como interdisciplinaridade, educação matemática crítica e etnomatemática, não é capaz de alcançar seu objetivo sem uma mudança profunda na superestrutura. Para tanto, deve-se estabelecer um sistema educacional voltado para a educação omnilateral, visando a formação integral do ser humano, que envolve o desenvolvimento de todas as suas potencialidades, incluindo a intelectual, a física, a artística, a moral e a ética. Esse objetivo é alcançado apenas a partir da ruptura do mecanismo de reprodução da hegemonia intelectual, através do desenvolvimento de "processos pedagógicos que garantam, ao final do processo educativo, o acesso efetivamente democrático ao conhecimento na sua mais elevada universalidade", que se dão em oposição ao tipo de educação presente no seio das sociedades capitalistas [@maciel_educacao_2015; apud @frigotto_trabalho_2012].
 
 ## Conclusão
 
-[...]
+Neste capítulo, argumentei que a educação matemática, enquanto inserida na superestrutura capitalista, atua como um instrumento de reprodução das relações sociais de poder. A análise histórica e teórica demonstrou que a educação, desde suas formas pré-capitalistas, sempre serviu à normalização moral e à perpetuação das estruturas de poder vigentes. No contexto capitalista, essa função se expande para incluir a reprodução da ordem econômica e política.
+
+A educação matemática crítica, embora busque romper com essas estruturas, enfrenta limitações significativas devido à sua inserção em instituições panópticas que exercem micro-poderes sobre os indivíduos. A interdisciplinaridade e outras abordagens pedagógicas, apesar de seus méritos, não são suficientes para alcançar uma verdadeira emancipação sem uma mudança profunda na superestrutura.
+
+Portanto, para que a educação matemática possa realmente contribuir para a transformação social, é necessário um sistema educacional voltado para a educação omnilateral, que promova o desenvolvimento integral do ser humano e rompa com os mecanismos de reprodução da hegemonia intelectual presentes nas sociedades capitalistas.
 
 # CONCLUSÕES
 
 ## Conclusões da monografia
 
-[...]
+Esta monografia investigou a relação entre escolaridade e renda no estado do Espírito Santo, destacando as desigualdades de gênero e raça, e analisou o papel do sistema educacional na reprodução das relações sociais de poder sob a hegemonia capitalista.
+
+No primeiro ensaio, a análise estatística demonstrou que a escolaridade é um fator determinante na renda do trabalhador formal, mas seus efeitos estão se reduzindo ao longo do tempo. A desigualdade racial e de gênero persiste, com mulheres e indivíduos de cor preta recebendo remunerações inferiores, mesmo com níveis de escolaridade equivalentes ou superiores aos de homens brancos. Esses resultados sugerem que a escolaridade, embora importante, não é suficiente para superar as barreiras estruturais que perpetuam a desigualdade social.
+
+No segundo ensaio, argumentou-se que o sistema educacional, enquanto inserido na superestrutura capitalista, atua como um instrumento de reprodução das relações sociais de poder. A análise histórica e teórica mostrou que a educação serviu à normalização moral e à perpetuação das estruturas de poder vigentes. A educação matemática crítica, embora busque romper com essas estruturas, enfrenta limitações significativas devido à sua inserção em instituições panópticas que exercem micro-poderes sobre os indivíduos.
+
+Portanto, para que a educação matemática possa realmente contribuir para a transformação social, é necessário um sistema educacional voltado para a educação omnilateral, que promova o desenvolvimento integral do ser humano e rompa com os mecanismos de reprodução da hegemonia intelectual presentes nas sociedades capitalistas.
 
 ## Pesquisa futura
 
-[...]
+O conteúdo deste trabalho é apenas introdutório e pode ser expandido em diversas direções. Algumas sugestões para pesquisas futuras incluem:
+
+1. **Estudos Longitudinais**: Realizar estudos longitudinais que acompanhem indivíduos ao longo do tempo para entender melhor como a escolaridade e outros fatores influenciam a trajetória de renda e mobilidade social.
+2. **Análise de Políticas Públicas**: Investigar o impacto de políticas públicas específicas, como ações afirmativas e programas de inclusão educacional, na redução das desigualdades de gênero e raça.
+3. **Educação Omnilateral**: Explorar modelos de educação omnilateral em diferentes contextos e avaliar sua eficácia na promoção de uma formação integral e na redução das desigualdades sociais.
+
+Esses caminhos visam aprofundar a compreensão das relações entre educação, desigualdade e poder, contribuindo para o desenvolvimento de estratégias mais eficazes para a promoção da justiça social através da educação.
