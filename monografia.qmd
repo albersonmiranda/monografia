@@ -285,9 +285,9 @@ rais[rais$ano %in% c(2006, 2022), c("ano", "sexo", "raca_cor")] |>
 
 Essa hipótese é confirmada por dados do IPEA, que mostram, em 2022, 13,9% das mulheres negras estavam desocupadas (@fig-desocupacao), e 47,5% na informalidade (@fig-informalidade). Homens negros têm a mesma taxa de informalidade, porém menor taxa de desemprego (8,9%).
 
-![Taxa de desocupação por sexo/raça](img\ipea_retrato2024_graf0705_2022_Brasil.pdf){#fig-desocupacao width=70%}
+![Taxa de desocupação por sexo/raça. Fonte: IPEA](img\ipea_retrato2024_graf0705_2022_Brasil.pdf){#fig-desocupacao fig-scap="Taxa de desocupação por sexo/raça" width=70%}
 
-![Taxa de informalidade por sexo/raça](img\ipea_retrato2024_graf0706_2022_Brasil.pdf){#fig-informalidade width=70%}
+![Taxa de informalidade por sexo/raça. Fonte: IPEA](img\ipea_retrato2024_graf0706_2022_Brasil.pdf){#fig-informalidade fig-scap="Taxa de informalidade por sexo/raça" width=70%}
 
 Dada a baixa representatividade de indígenas e amarelos, optou-se por excluí-los da análise. A partir deste ponto, a análise contará apenas com brancos, pretos e pardos.
 
@@ -638,7 +638,7 @@ O segundo resultado imediato é a redução dos coeficientes relacionados à esc
 Esse fenômeno não é exclusivo do Espírito Santo, sendo também observado por @colclough_changing_2010, que atribuem como causa mudanças estruturais na escolaridade da população:
 
 \begin{citacao}
-  Educational expansion at the primary level proceeded at a rate which exceeded that of job creation in many of the poorer countries. In consequence, it became increasingly difficult, in most Southern continents, to find jobs in the formal sector without having already had some education at post-primary level. More generally, as education systems expand to include greater proportions of the school-age group, the qualification required for eligibility for particular jobs rise. In these circumstances, it is to be expected that the reduced access to jobs provided by primary schooling will be associated with downward pressure on its wage rewards. \cite{colclough_changing_2010}
+  A expansão educacional no nível primário procedeu a uma taxa que excedeu a da criação de empregos em muitos dos países mais pobres. Em consequência, tornou-se cada vez mais difícil, na maioria dos continentes do Sul, encontrar empregos no setor formal sem ter algum nível de educação pós-primária. De forma mais geral, à medida que os sistemas educacionais se expandem para incluir maiores proporções do grupo em idade escolar, a qualificação exigida para a elegibilidade a determinados empregos aumenta. Nessas circunstâncias, é de se esperar que o acesso reduzido a empregos proporcionado pela escolaridade primária esteja associado a uma pressão descendente sobre suas recompensas salariais.\cite{colclough_changing_2010}
 \end{citacao}
 
 Segundo os autores, conforme maior parte da população alcança determinado nível educacional, as vagas de trabalho nos níveis inferiores desaparecem. A evidência é a escassez, ou quase extinção, das vagas de trabalho que exigem apenas o ensino fundamental completo. Com isso, à medida que o nível educacional médio da população aumenta, a escolaridade tende a deixar de ser um fator de diferenciação e passar a ser um requisito mínimo para a entrada no mercado de trabalho formal.
@@ -660,7 +660,7 @@ O ponto de inflexão, quando a idade/experiência passa a contribuir negativamen
 $$
 \begin{aligned}
   f'(exp) &= \beta_{11} + 2(\beta_{12})(exp) = 0 \\
-  exp &= -\frac{(\beta_{11})}{2(\beta_{12})}
+  exp &= -\frac{\beta_{11}}{2(\beta_{12})}
 \end{aligned}
 $$ {#eq-ponto-inflexao}
 
