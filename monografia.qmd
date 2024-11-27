@@ -51,7 +51,9 @@ Em seu texto acerca dos Parâmetros Curriculares Nacionais (PCN), o professor R�
 Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior problema é a resistência do sistema em mudar. \cite{oliveira_os_2021}
 \end{citacao}
 
-Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o que ele chamou de nível *micro*, não é suficiente para colocar o sistema educacional em rota de mudança. Paralelamente, deve ser realizado um trabalho estrutural na esfera *macro* — aqui, principalmente, o Ministério da Educação (MEC) — que possibilite uma mudança do educar *para* matemática para o educar *pela* a matemática. Essa diferença é ilustrada por Lins da seguinte forma:
+Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o que ele chamou de nível *micro*, não é suficiente para colocar o sistema educacional em rota de mudança. Paralelamente, deve ser realizado um trabalho estrutural na esfera *macro* — aqui, principalmente, o Ministério da Educação (MEC) — que possibilite uma mudança do educar *para* matemática para o educar *pela* a matemática. Aqui, educar *pela* matemática significa, através da matemática, desenvolver no educando outras competências mais amplas, como raiocínio lógico, capacidade de resolução de problemas, de abstração, pensamento crítico, além de outras competências compartilhadas com as demais disciplinas, como colaboração, comunicação, criatividade e cidadania.
+
+Essa diferença é ilustrada por Lins da seguinte forma:
 
 \begin{citacao}
 A diferença fica bastante mais clara se pensamos no caso da Educação Física. Será que alguém concebe que o papel das aulas de Educação Física é preparar todas as crianças (todas, eu disse) para o esporte competitivo? Claro que não. Se assim fosse as aulas de Educação Física não representariam, na formação das crianças, a educação para a saúde, para o desenvolvimento motor, para a socialização e o respeito a regras, para a colaboração. E os que quiserem ser atletas e jogadores vão buscar esta formação específica em outros espaços (possivelmente dentro dos times competitivos de suas escolas ou em clubes). Podemos dizer que a Educação Física escolar se concentra em modos de ser, promovendo aquela educação \textit{por meio} de esportes e exercícios físicos, enquanto o Treinamento Esportivo se concentra em potencializar habilidades, fazendo isso por meio da aquisição de técnicas específicas. \cite{oliveira_os_2021}
@@ -69,7 +71,7 @@ Este trabalho está dividido em duas partes. Na primeira, evidencio os sintomas:
 
 Na segunda parte, procuro explicar esses sintomas apresentando uma sistematização dos mecanismos causais de transmissão dos efeitos da superestrutura capitalista, a partir de elementos de Marx e Bourdieu, passando pelo nível institucional, com a visão de Foucault sobre a escola como instituição panóptica, e chegando ao nível pedagógico, discutindo interdisciplinaridade, omnilateralidade e os limites da educação matemática crítica como instrumento emancipador.
 
-## Outline
+## Organização do trabalho
 
 Este trabalho está dividido em duas partes principais:
 
@@ -94,11 +96,19 @@ A análise estatística permitirá identificar padrões e tendências, bem como 
 
 ## Breve revisão de literatura
 
-A primeira abordagem quantitativa para evidenciar o poder de explicação da escolaridade sobre a renda do trabalhador foi realizada no trabalho seminal de @mincer_schooling_1974. O autor propôs um modelo de capital humano, onde a escolaridade é um dos principais determinantes da renda -- especificamente, do logarítmo da renda. A partir de dados do censo norte-americano, ele estimou que modelos baseados em  escolaridade e tempo de experiência foram capazes de explicar até 33% da variação da renda do trabalhador, a depender da equação, com o coeficiente de retorno médio de escolaridade de até 0.16, o que significa um incremento médio de 17,4% na renda^[Como o modelo utiliza o log da renda, para se computar o efeito em moeda deve-se realizar a operação inversa, resultando em $e^{0.16} = 1.1735$].
+A primeira abordagem quantitativa, baseada em modelagem estatística, para evidenciar o poder de explicação da escolaridade sobre a renda do trabalhador foi realizada no trabalho seminal de @mincer_schooling_1974. O autor propôs um modelo de capital humano, onde a escolaridade é um dos principais determinantes da renda -- especificamente, do logarítmo da renda. A especificação que ficou conhecida como _equação de Mincer_ é a seguinte:
+
+$$
+\ln Y = \beta_0 + \beta_1 S + \beta_2 E + \beta_3 S^2 + \beta_4 E^2 + \varepsilon
+$$ {#eq-mincer}
+
+\noindent em que $Y$ é a renda, $S$ é a escolaridade (medida em anos), $E$ é o tempo de experiência (estimada como a idade subtraída dos anos de escolaridade e da constante 6, considerada a idade para início da formação) e $\varepsilon$ é o erro aleatório. O modelo de Mincer foi amplamente utilizado e adaptado em diversos estudos subsequentes, tornando-se uma referência na literatura sobre capital humano.
+
+A partir de dados do censo norte-americano, ele estimou diversas especificações de modelos estatísticos, concluindo que aqueles que utilizaram a escolaridade e tempo de experiência como variáveis dependentes foram capazes de explicar até 33% da variação da renda do trabalhador^[Medidos pelo coeficiente de determinação $R^2$.], com o coeficiente de retorno médio de escolaridade ($\beta_1$ na @eq-mincer) de até 0.16, o que significa um incremento médio de 17,4% na renda por ano de escolaridade^[Como o modelo utiliza o log da renda, para se computar o efeito em moeda deve-se realizar a operação inversa, resultando em $e^{0.16} = 1.1735$.].
 
 Desde então, diversos estudos têm sido realizados para estimar os efeitos da escolaridade sobre a renda do trabalhador, cada um estendendo ou aplicando o modelo de Mincer em diferentes contextos. @psacharopoulos_returns_2004 estimam, em média, cerca de 10% de incremento de renda para cada ano de estudo. @colclough_changing_2010 mostram, a partir de dados de 34 países, que até a década de 1990 os retornos a cada nível de escolaridade eram descrescentes, mas que, a partir de então, o retorno a cada ano extra de estudo aumenta a cada incremento no nível de escolaridade. Neste mesmo trabalho, os autores demonstram que os retornos em todos os níveis de escolaridade (primário, secundário e terciário) estão reduzindo ao longo das décadas, mas que a redução é mais acentuada no nível primário.
 
-@ferreira_labor_2022 analisam a desigualdade salarial no Brasil no período entre 1995-2012 e mostram que os dois principais fatores que aumentam a desigualdade são 1) a maior disparidade de salários entre diferentes setores da economia, e; 2) o chamado "paradoxo do progresso", o efeito intensificador da desigualdade quando há aumento da educação da população em uma sociedade em que os retornos à educação são convexos, ou seja, aumentam exponencialmente a cada aumento do nível educacional.
+@ferreira_labor_2022 analisam a desigualdade salarial no Brasil no período entre 1995-2012 e mostram que os dois principais fatores que aumentam a desigualdade são 1) a maior disparidade de salários entre diferentes setores da economia, e; 2) o chamado "paradoxo do progresso", o efeito intensificador da desigualdade quando há aumento da educação da população em uma sociedade em que os retornos à educação são convexos, ou seja, aumentam exponencialmente a cada aumento do nível educacional. Esse fenômeno é paradoxal no sentido de que se espera que a educação reduza a desigualdade, mas, em sociedades em que os retornos associados aos níveis superiores de educação são muito altos em relação aos menores, a escolaridade tem efeito contrário, de intensificação das desigualdades.
 
 Nesse sentido, @altonji_heterogeneity_2012 aponta que a escolha do curso superior é de grande impacto na determinação da renda, destacando que a diferença no retorno médio entre alguns cursos superiores, como engenharia elétrica e pedagogia, é quase tão grande quanto a diferença média entre indivíduos com ensino médio e ensino superior. @van_ophem_educational_2024 reforçam essa ideia, mostrando que a escolha do curso superior é um dos principais elementos não apenas na renda inicial quanto também na progressão salarial ao longo da carreira.
 
@@ -175,7 +185,7 @@ $$ {#eq-deflacao}
 
 ### Análise exploratória dos dados
 
-A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 e 2022, e cobre todos os `r length(unique(rais$id_municipio))` municípios do Espírito Santo.
+A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 e 2022, e cobre todos os `r scales::number(length(unique(rais$id_municipio)), big.mark = ",", decimal.mark = ".")` municípios do Espírito Santo.
 
 ```{r tabela entradas por ano}
 #| tbl-cap: "Entradas por ano"
@@ -231,15 +241,16 @@ rais[rais$ano %in% c(2006, 2022), c("ano", "sexo")] |>
   geom_bar() +
   geom_label(color = "white", stat = "count", show.legend = FALSE) +
   scale_y_continuous(labels = scales::number) +
-  scale_fill_manual(values = c("#003f5c", "#bc5090")) +
+  scale_fill_manual(values = c("#bc5090", "#003f5c")) +
   facet_grid(~ano, scales = "free") +
   labs(x = "Sexo", y = "Quantidade", fill = "Sexo") +
   tema
 ```
 
-Adicionando a dimensão da raça/cor, vemos que a mulher preta é o substrato social mais empurrado à informalidade. Dos declarados pretos, apenas `r proporcao_pretos_2022["feminino"] |> scales::percent(accuracy = 0.1)` são mulheres, enquanto dentre os brancos, as mulheres ocupam `r proporcao_brancos_2022["feminino"] |> scales::percent(accuracy = 0.1)`.
+Adicionando a dimensão da raça/cor (@tbl-sexo-raca-cor), vemos uma alta disparidade entre a população empregada, com indicações de que a mulher preta seja o substrato social mais empurrado à informalidade ou desemprego. Isso porque a proporção populacional entre homens e mulheres é 50% mas, dentre os declarados pretos, apenas `r proporcao_pretos_2022["feminino"] |> scales::percent(accuracy = 0.1)` são mulheres. Dentre os brancos, as mulheres ocupam `r proporcao_brancos_2022["feminino"] |> scales::percent(accuracy = 0.1)`. 
 
 ```{r tabela entradas por ano sexo cor}
+#| label: tbl-sexo-raca-cor
 #| tbl-cap: "Comparativo 2006-2022 por sexo/raça/cor"
 
 kbl(
@@ -271,6 +282,12 @@ rais[rais$ano %in% c(2006, 2022), c("ano", "sexo", "raca_cor")] |>
   guides(fill = "none") +
   tema
 ```
+
+Essa hipótese é confirmada por dados do IPEA, que mostram, em 2022, 13,9% das mulheres negras estavam desocupadas (@fig-desocupacao), e 47,5% na informalidade (@fig-informalidade). Homens negros têm a mesma taxa de informalidade, porém menor taxa de desemprego (8,9%).
+
+![Taxa de desocupação por sexo/raça](img\ipea_retrato2024_graf0705_2022_Brasil.pdf){#fig-desocupacao width=70%}
+
+![Taxa de informalidade por sexo/raça](img\ipea_retrato2024_graf0706_2022_Brasil.pdf){#fig-informalidade width=70%}
 
 Dada a baixa representatividade de indígenas e amarelos, optou-se por excluí-los da análise. A partir deste ponto, a análise contará apenas com brancos, pretos e pardos.
 
@@ -424,7 +441,7 @@ rais |>
   subset(ano == 2022) |>
   ggplot(aes(x = raca_cor, y = vlr_rem, fill = sexo)) +
   geom_boxplot(outliers = FALSE) +
-  facet_wrap(~grau, scales = "fixed") +
+  facet_wrap(~grau, scales = "free") +
   scale_y_continuous(labels = scales::dollar) +
   scale_fill_manual(values = c("#bc5090", "#003f5c")) +
   labs(x = "Raça/Cor", y = "Renda (em R$)", fill = "Sexo") +
@@ -444,7 +461,7 @@ Isso quer dizer que todos os coeficientes a serem estimados serão em relação 
 
 Antes de iniciar a estimação do modelo de regressão linear, é importante justificar algumas escolhas. Embora fatores como a profissão, a indústria na qual o trabalhador esteja inserido, se é setor público ou não, sejam preditores importantes para determinar sua renda [@ferreira_labor_2022], assim como a escolha do curso superior pelo aluno influencie em sua renda [@altonji_heterogeneity_2012;@van_ophem_educational_2024], essas variáveis não devem ser incluídas no modelo exatamente porque um dos objetivos da escolaridade é permitir aos trabalhadores moverem-se para indústrias de melhor remuneração. Incluí-las significaria estimar os efeitos da escolaridade na mesma indústria/ocupação (eg., o quanto que um engenheiro com mestrado recebe em média a mais que um apenas graduado). Fosse o objetivo do trabalho prever com a maior precisão o possível a renda de um determinado indivíduo dadas suas características, essas variáveis deveriam ser inseridas. Entretanto, espera-se estimar isoladamente os efeitos da educação em cada substrato da população capixaba.
 
-Devido à omissão dessa variável, espera-se a inclusão de viés de variável omitida e, consequentemente, a introdução de heteroscedasticidade. Em relação a esta, a intuição é que profissões de alta remuneração, como juízes, médicos e engenheiros, se dão em menor frequência e são de maior remuneração, gerando resíduo $e_i$ positivo consistentemente, de forma que a variância dos resíduos não seja constante, ou homoscedástica.
+Devido à omissão dessa variável, espera-se a inclusão de viés de variável omitida e, consequentemente, a violação da hipótese de homoscedasticidade (variância constante do resíduo) do modelo clássico de regressão linear. A intuição é que profissões de alta remuneração, como juízes, médicos e engenheiros, se dão em menor frequência e são de maior remuneração, gerando resíduo $e_i$ positivo consistentemente, de forma que a variância dos resíduos não seja constante.
 
 ![Heteroscedasticidade decorrente de omissão de variável importante.](img/vies_omissao.svg){#fig-vies fig-scap="Previsões base a serem reconciliadas" width=70%}
 
