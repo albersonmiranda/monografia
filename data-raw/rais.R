@@ -10,7 +10,7 @@ rais = basedosdados::bdplyr("br_me_rais.microdados_vinculos") |>
     # Espírito Santo
     sigla_uf == "ES" &
       # anos de 2006 e 2022
-      ano %in% c(2006, 2022) &
+      ano %in% c(2006, 2014, 2022) &
       # sem vazios em remuneração
       !is.na(valor_remuneracao_media) &
       # sem vazios em raça/cor
@@ -101,8 +101,11 @@ rais = within(rais, {
 })
 
 # deflacionando salários pelo IPCA
-deflator <- 2615.05 / 6474.09
-rais$vlr_rem = rais$vlr_rem * deflator
+deflator_2022 <- 2615.05 / 6474.09
+deflator_2014 <- 2615.05 / 4059.86
+
+rais$vlr_rem = ifelse(rais$ano == 2014, rais$vlr_rem * deflator_2014, rais$vlr_rem)
+rais$vlr_rem = ifelse(rais$ano == 2022, rais$vlr_rem * deflator_2022, rais$vlr_rem)
 
 # salvando dataframe
 if (!dir.exists("data")) {

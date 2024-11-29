@@ -185,7 +185,7 @@ $$ {#eq-deflacao}
 
 ### Análise exploratória dos dados
 
-A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, de 2006 e 2022, e cobre todos os `r scales::number(length(unique(rais$id_municipio)), big.mark = ",", decimal.mark = ".")` municípios do Espírito Santo.
+A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, dos anos de 2006, 2014 e 2022, e cobre todos os `r scales::number(length(unique(rais$id_municipio)), big.mark = ",", decimal.mark = ".")` municípios do Espírito Santo.
 
 ```{r tabela entradas por ano}
 #| tbl-cap: "Entradas por ano"
@@ -235,7 +235,7 @@ Em termos de gênero no mercado de trabalho formal capixaba, a proporção se ma
 ```{r count sexo}
 #| fig-cap: "Comparativo 2006-2022 por sexo"
 
-rais[rais$ano %in% c(2006, 2022), c("ano", "sexo")] |>
+rais[, c("ano", "sexo")] |>
   tidyr::pivot_longer(!ano) |>
   ggplot(aes(x = name, fill = value, label = scales::number(after_stat(count)))) +
   geom_bar() +
@@ -256,7 +256,7 @@ Adicionando a dimensão da raça/cor (@tbl-sexo-raca-cor), vemos uma alta dispar
 kbl(
   as.data.frame(
     ftable(table(
-      subset(rais, ano %in% c(2006, 2022), select = c("ano", "sexo", "raca_cor"))
+      subset(rais, select = c("ano", "sexo", "raca_cor"))
     ))
   ) |> tidyr::pivot_wider(names_from = raca_cor, values_from = Freq),
   format.args = list(big.mark = ".", decimal.mark = ",")
@@ -268,11 +268,11 @@ kbl(
 #| fig-cap: "Comparativo 2006-2022 por sexo/raça/cor"
 #| out.width: "100%"
 
-rais[rais$ano %in% c(2006, 2022), c("ano", "sexo", "raca_cor")] |>
+rais[, c("ano", "sexo", "raca_cor")] |>
   ggplot(aes(x = raca_cor, fill = sexo, label = scales::number(after_stat(count)))) +
   geom_bar() +
   geom_label(
-    data = subset(rais, ano %in% c(2006, 2022) & raca_cor %in% c("branca", "parda", "preta")),
+    data = subset(rais, raca_cor %in% c("branca", "parda", "preta")),
     color = "white", stat = "count", show.legend = FALSE, size = 2, position = position_stack(vjust = 0.8)
   ) +
   scale_y_continuous(labels = scales::number) +
@@ -304,7 +304,7 @@ Em relação à escolaridade, seja por uma mudança do perfil da população ou 
 kbl(
   as.data.frame(
     ftable(table(
-      subset(rais, ano %in% c(2006, 2022), select = c("ano", "sexo", "grau"))
+      subset(rais, select = c("ano", "sexo", "grau"))
     ))
   ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
   format.args = list(big.mark = ".", decimal.mark = ",")
@@ -317,7 +317,7 @@ kbl(
 #| out.width: "100%"
 #| warning: false
 
-subset(rais, ano %in% c(2006, 2022)) |>
+rais |>
   ggplot(aes(x = grau, fill = sexo)) +
   geom_bar() +
   scale_y_continuous(labels = scales::number_format(scale = 1 / 1000)) +
@@ -339,7 +339,6 @@ kbl(
     ftable(table(
       droplevels(subset(
         rais,
-        ano %in% c(2006, 2022),
         select = c("ano", "sexo", "grau", "raca_cor")
       ))
     ))
@@ -354,7 +353,7 @@ kbl(
 #| out.width: "100%"
 #| warning: false
 
-subset(rais, ano %in% c(2006, 2022)) |>
+rais |>
   ggplot(aes(x = grau, fill = sexo)) +
   geom_bar() +
   scale_y_continuous(labels = scales::number_format(scale = 1 / 1000)) +
@@ -403,18 +402,18 @@ kbl(prop_pp) |>
   kable_styling(latex_options = c("striped", "scale_down"))
 ```
 
-Finalmente, em relação à renda, tanto a mediana quanto o quartil superior da renda dos homens é superior à das mulheres em quase todos os casos. Além disso, fica evidente a progressão de renda com a escolaridade, principalmente em relação à pós-graduação.
+Finalmente, em relação à renda, tanto a mediana quanto o quartil superior da renda dos homens é superior à das mulheres em quase todos os casos. Além disso, fica evidente a progressão de renda com a escolaridade, principalmente em relação à pós-graduação. Nos gráficos a seguir, os valores de 2014 e 2022 foram deflacionados para permitir a comparação dos salários reais com os de 2006.
 
 ```{r boxplot renda sexo}
 #| fig-cap: "Boxplot renda por sexo"
 #| out.width: "100%"
 
 rais |>
-  subset(ano == 2022) |>
   ggplot(aes(x = sexo, y = vlr_rem, fill = sexo)) +
   geom_boxplot(outliers = FALSE) +
   scale_y_continuous(labels = scales::dollar) +
   scale_fill_manual(values = c("#bc5090", "#003f5c")) +
+  facet_grid(~ano, scales = "free") +
   labs(x = "Sexo", y = "Renda (em R$)", fill = "Sexo") +
   tema
 ```
@@ -424,17 +423,17 @@ rais |>
 #| out.width: "100%"
 
 rais |>
-  subset(ano == 2022) |>
   ggplot(aes(x = raca_cor, y = vlr_rem, fill = sexo)) +
   geom_boxplot(outliers = FALSE) +
   scale_y_continuous(labels = scales::dollar) +
   scale_fill_manual(values = c("#bc5090", "#003f5c")) +
+  facet_grid(~ano, scales = "free") +
   labs(x = "Raça/Cor", y = "Renda (em R$)", fill = "Sexo") +
   tema
 ```
 
 ```{r boxplot renda escolaridade}
-#| fig-cap: "Boxplot renda por sexo/raça/cor"
+#| fig-cap: "Boxplot renda por sexo/raça/cor (2022)"
 #| out.width: "100%"
 
 rais |>
