@@ -1,17 +1,19 @@
 % packages, font, color, and new commands
 \usepackage{amsfonts, amsmath, oldgerm, lmodern, animate}
-\usepackage{verbatim, ragged2e, longtable}
+\usepackage{verbatim, ragged2e}
 \usepackage{bm}
-\usepackage{config/apresentacao/ppgeco}
-\usepackage[backend=biber, style=authoryear]{biblatex}
-\usefonttheme{serif}
+\usepackage{config/beamer/ppgeco}
+\usepackage[backend=biber, style=abnt, justify, giveninits, backref=true, backrefstyle=three, citecounter=true]{biblatex}
 
 % justificar
 \justifying
 
-% configurações de bibliografia
-\renewcommand*{\nameyeardelim}{\addcomma\space}
-\addbibresource{config/bib.bib}
+% font
+\usefonttheme{serif}
+
+% bibliografia
+\addbibresource{config/elementos/monografia.bib}
+\addbibresource{config/elementos/packages.bib}
 
 % TYPESETTING ELEMENTS
 
@@ -114,7 +116,3 @@
 
 % allow large matrices
 \setcounter{MaxMatrixCols}{20}
-
-% tradução de figura
-\captionsetup[figure]{name=Figura}
-\captionsetup[table]{name=Tabela}

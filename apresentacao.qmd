@@ -1,56 +1,37 @@
 ---
-title: RELAÇÕES ESCOLARIDADE-RENDA E O PAPEL DA ESCOLA EM UMA SOCIEDADE PANÓPTICA
-subtitle: RESULTADO PRELIMINAR DE MONOGRAFIA
+title: Ensaios sobre escolaridade e reprodução social
+subtitle: Defesa de monografia
 author: Alberson Miranda, LiMat/IFES
-date: '`r format(Sys.Date(), "%B de %Y")`'
+date: last-modified
+date-format: "[Dezembro de 2024]"
 format:
     beamer:
-        include-in-header: config/apresentacao/preamble.tex
-        include-after-body: config/apresentacao/backmatter.tex
-        output-file: render/apresentacao.pdf
+        include-in-header: config/beamer/preamble.tex
+        include-after-body: config/beamer/backmatter.tex
         keep-tex: false
-execute:
-    echo: false
+        latex-max-runs: 4
+        number-sections: false
+        output-file: apresentacao.pdf
+bibliography: config/elementos/monografia.bib
+cite-method: biblatex
+link-citations: true
+link-bibliography: true
 ---
 
-```{r config}
-#| include = FALSE
-
-# opções
-knitr::opts_chunk$set(
-    out.width = "100%",
-    echo = FALSE
-)
-
-# reprodutibilidade
-set.seed(1)
-
-# pacotes
-pacman::p_load(
-    kableExtra,
-    ggplot2
-)
-
-# dados
-rais = readRDS("data/rais.RDS")
-
-# tema ggplot
-tema = theme_classic() +
-    theme(
-        text = element_text(family = "serif")
-    )
-
-# gerar bibliografia de pacotes
-knitr::write_bib(file = "config/packages.bib")
-```
-
 # CONTEXTUALIZAÇÃO DA PESQUISA
+
+## ESTRUTURA DO TRABALHO
+
+Dois temas independentes:
+
+1. Efeitos da escolaridade em diferentes substratos sociais no Espírito Santo (quantitativa)
+2. O papel da educação matemática sob a hegemonia do capital (qualitativa)
 
 ## PROBLEMA DE PESQUISA
 
 \begin{block}{LINS E OS PCN}
 \justifying
-"Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior problema é a resistência do sistema em mudar." \parencite{lins_os_2020}
+"Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior problema é a resistência do sistema em mudar." \parencite{oliveira_os_2021}
 \end{block}
 
 \begin{center}
@@ -58,322 +39,105 @@ knitr::write_bib(file = "config/packages.bib")
 \textit{Por que é tão difícil colocar o sistema educacional em rota de mudança?}
 \end{center}
 
-OBJETIVO: responder essa pergunta a partir de Marx, Bourdieu e Foucault, e gerar outras a partir dos dados de escolaridade e renda no ES
-
-## MICRO X MACRO
-
-![microestrutura educacional](img/micro.excalidraw.png){width=70%}
-
-## MICRO X MACRO
-
-![macroestrutura educacional](img/macro.excalidraw.png){width=70%}
-
-## HIPÓTESE
-
-![relação de subordinação do sistema educacional com a superestrutura capitalista](img/super.excalidraw.png){width=70%}
-
-## HIPÓTESE
-
-### A ESCOLA COMO INSTRUMENTO DE REPRODUÇÃO DO STATUS QUO
-\justifying
-A superestrutura capitalista, caracterizada principalmente pelas relações de produção e relações de propriedade \parencite{marx_manifesto_2015}, ou seja, pela propriedade privada dos meios de produção e pela *exploração do homem pelo homem*, limitam e restringem o sistema educacional de forma que a ação de mudança, mesmo no nível macro, não é capaz de extinguir a *participação do sistema educacional na reprodução das relações sociais e de poder vigentes* \parencite{rodrigues_sociologia_2007}.
-
-# A ESCOLA COMO INSTITUIÇÃO PANÓPTICA
-
-## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
-
-### PAN-ÓPTICO: A PRISÃO PERFEITA — SOCIEDADE DISCIPLINAR
-\justifying
-
-Ao contrário das sociedades pré-capitalistas, em que o indivíduo diferente era excluído (pária), na sociedade panóptica o indivíduo é ligado a um processo de produção, formação ou correção de produtores, visando a perpetuação das relações sociais e de poder.
-
-## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
-
-A instituição panóptica (ou de sequestro) tem como objetivo final a *transformação dos homens em força produtiva* e exerce poder sobre os indivíduos de três formas \parencite{foucault_verdade_2013}:
-
-1. *vigilância* individual e contínua
-2. *controle* através de punição e recompensa
-3. formação e transformação de indivíduos — *correção*
-
-## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
-
-- Fábricas-prisões do séc. XIX
-- Manicômios
-- Prisão
-- Escola (ex.: Escola de Aprendizes e Artífices)
-
-## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
-
-4 funções:
-
-1. extração da totalidade do tempo do indivíduo (sequestro do tempo)
-    - transformação do tempo de vida em tempo de trabalho
-    - é preciso que todo tempo da existência humana esteja disponível ao trabalho, suas exigências ou sua preparação (educação)
-
-## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
-
-2. controle dos corpos (sequestro do corpo)
-    - transformação do corpo em força de trabalho
-    - o corpo humano deve ser formado, reformado e corrigido
-    - deve adquirir aptidões, receber um certo número de qualidade, qualificar-se como um corpo capaz de trabalhar
-
-## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
-
-3. criação de um micro-poder político, econômico e judiciário
-
-> O sistema escolar também é inteiramente baseado em uma espécie de poder judiciário. A todo poder se pune e recompensa, se avalia, se classifica, se diz quem é o melhor, quem é o pior. [...] Por que, para ensinar alguma coisa a alguém, se deve punir e recompensar? Esse sistema parece evidente, mas, se refletirmos, vemos que a evidência se dissolve. \parencite{foucault_verdade_2013}
-
-- Lins: educação física *por meio* de esportes X educação física *para* esportes
-- Educar *pela* matemática X educar *para* a matemática
-
-## FOUCAULT E AS INSTITUIÇÕES PANÓPTICAS
-
-4. extração do saber
-
-    - através da apropriação do conhecimento técnico e tecnológico produzido durante o labor, e;
-    - da observação do comportamento dos indivíduos controlados e vigiados
-
-> A pedagogia se formou a partir das próprias adaptações da criança às tarefas escolares, adaptações observadas e extraídas do seu comportamento para tornarem-se em seguida leis de funcionamento das instituições e forma de poder exercido sobre a criança. \parencite{foucault_verdade_2013}
-
-## BOURDIEU E O CONSENSO CULTURAL
-
-Bourdieu coloca o sistema educacional como um dos instrumentos mais eficazes de integração moral e lógica da sociedade, que tem como produto o indivíduo "programado" — homogêneo em percepção, pensamento e ação.
-
-## BOURDIEU E O CONSENSO CULTURAL
-
-### O QUE SIGNIFICA SER HOMOGÊNEO EM PERCEPÇÃO E PENSAMENTO?
-"Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua qualidade de código comum é o que permite a todos os detentores deste código associar o mesmo sentido às mesmas obras e, de maneira recíproca, de exprimir a mesma intenção significante por intermédio das mesmas palavras, dos mesmos comportamentos e das mesmas obras, pode-se compreender por que \textbf{a Escola, incumbida de transmitir esta cultura, constitui o fator fundamental do consenso cultural} nos termos de uma participação de um senso comum entendido como condição da comunicação." \parencite{bourdieu_sistemas_2015}
-
-# RELAÇÕES ESCOLARIDADE-RENDA NO ES
-
 ## PROBLEMA DE PESQUISA
 
-Como os efeitos da função social do sistema educacional (transformação do homem em força produtiva) se manifestam nas relações escolaridade-renda de diferentes substratos demográficos e como eles mudaram nos últimos 15 anos no ES?
+### HIPÓTESE
+A resistência do sistema em mudar é um sintoma de uma sociedade que historicamente reproduz, por meio do processo educativo, as relações sociais de poder que a constituem.
 
-### TODA AÇÃO PEDAGÓGICA É UMA VIOLÊNCIA SIMBÓLICA
-Para Bordieu, "A instituição escolar dissimula por trás de sua aparente neutralidade a reprodução das relações sociais e de poder vigentes. Encobertos sob as aparências de critérios puramente escolares, estão critérios sociais de triagem e de seleção dos indivíduos para ocupar determinados postos na vida." \parencite{rodrigues_sociologia_2007}
+# EFEITOS DA ESCOLARIDADE EM DIFERENTES SUBSTRATOS SOCIAIS NO ESPÍRITO SANTO
 
-## METODOLOGIA
+## INTRODUÇÃO
 
-- Relação Anual das Informações Sociais (Rais)
-- Trabalhador formal
-- 2006 e 2021
-- 1.424.464 observações
+A relação entre escolaridade e renda é um tema amplamente estudado na literatura econômica e sociológica. A teoria do capital humano sugere que a educação aumenta a produtividade dos indivíduos, resultando em maiores rendimentos. No entanto, essa relação pode ser influenciada por diversos fatores, como gênero, raça e contexto socioeconômico.
 
-## METODOLOGIA
+Este capítulo tem como objetivo analisar os efeitos da escolaridade na determinação da renda dos trabalhadores formais no estado do Espírito Santo, com foco nas desigualdades de gênero e raça. Utilizando dados da Relação Anual de Informações Sociais (Rais) de 2006 e 2022, buscamos entender como a escolaridade impacta a renda em diferentes substratos sociais e como essas relações têm evoluído ao longo do tempo.
 
-Variáveis de interesse
+## REVISÃO DE LITERATURA
 
-1. renda média nominal naquele ano
-2. ciclo de escolaridade
-3. idade
-4. raça/cor
-5. sexo
+- @mincer_schooling_1974: Modelo de capital humano e equação de Mincer.
+- @psacharopoulos_returns_2004: Incremento médio de renda por ano de estudo.
+- @colclough_changing_2010: Retornos decrescentes e mudanças estruturais na escolaridade.
+- @ferreira_labor_2022: Desigualdade salarial no Brasil e "paradoxo do progresso".
+- @altonji_heterogeneity_2012: Impacto da escolha do curso superior na determinação da renda.
+- @van_ophem_educational_2024: Escolha do curso superior e progressão salarial.
 
-## DADOS
+## PRINCIPAIS RESULTADOS
 
-```{r possiveis valores rais}
-#| tbl-cap: Possíveis valores para as variáveis selecionadas da Rais
+1. Redução do poder explicativo da escolaridade
+   - R² reduziu de 31,7% para 23,3% entre 2006-2022
+   - Escolaridade explica cada vez menos a renda do trabalhador
 
-kbl(
-    data.frame(
-        Variável = c(
-            "Sigla UF",
-            "Renda Média Nominal",
-            "Ciclo de Escolaridade",
-            "Idade",
-            "Raça/Cor",
-            "Sexo",
-            "Ocupação",
-            "Região"
-        ),
-        Valores = c(
-            "ES",
-            "Núméricos, não negativos",
-            "Analfabeto, Ensino Fundamental (I/II, completo/incompleto),  Ensino Médio (completo/incompleto), Ensino Superior (completo/incompleto), Mestrado ou Doutorado",
-            "$>25$",
-            "Branco, Preto, Pardo, Indígena ou Amarelo",
-            "Masculino ou Feminino",
-            "46 ocupações do segundo nível de agregação da Classificação Brasileira de Ocupações (CBO)",
-            "Grande Vitória (Vitória, Vila Velha, Cariacica e Serra) ou Interior"
-        )
-    ),
-    booktabs = TRUE,
-    escape = FALSE) |>
-kable_styling(latex_options = "striped", font_size = 8) |>
-column_spec(2, width = "30em")
-```
+2. Desigualdades persistentes
+   - Homem branco com superior: +62% que mulher branca graduada
+   - Homem branco com superior: +101% que mulher preta graduada
+   - Mulher preta com doutorado: -17% que homem branco graduado
 
-## MODELO
+## CONCLUSÕES DO PRIMEIRO ENSAIO
 
-```{r modelo 1}
+- Escolaridade é determinante na renda, mas seu efeito está diminuindo
+- Substratos marginalizados têm retornos menores mesmo com maior escolaridade
+- Políticas afirmativas estão reduzindo barreiras de acesso, mas não de remuneração
 
-# estimação 2006
-modelo_1 = lm(
-    # variável dependente
-    log(vlr_rem) ~
-    # variáveis dependentes
-    grau + sexo + raca_cor + idade + idade^2 +
-    # interação
-    sexo * raca_cor + sexo * grau + raca_cor * grau,
-    # dataset
-    data = rais[rais$ano == 2006, ]
-)
+# O PAPEL DA EDUCAÇÃO MATEMÁTICA SOB A HEGEMONIA DO CAPITAL
 
-# estimação 2021
-modelo_2 = lm(
-    # variável dependente
-    log(vlr_rem) ~
-    # variáveis dependentes
-    grau + sexo + raca_cor + idade + idade^2 +
-    # interação
-    sexo * raca_cor + sexo * grau + raca_cor * grau,
-    # dataset
-    data = rais[rais$ano == 2021, ]
-)
-```
+## INTRODUÇÃO
 
-- Especificação inicial: log-linear
+Em uma sociedade capitalista, não se pode compreender a educação desassociada das relações de trabalho. Além das técnicas aplicadas à educação, as normas vigentes e valores compartilhados de uma determinada sociedade também são refletidas e moldam as ações educacionais.
 
-$$log(\mathbfit{Y}) = \mathbfit{X\beta} + \mathbfit{u}$$
+Este capítulo procura sistematizar os mecanismos de reprodução do capitalismo na educação, evidenciando como a educação matemática, enquanto não rompe com seu papel na reprodução das relações sociais de poder, é ineficaz na promoção de mudanças estruturais na sociedade.
 
-- Fatores de referência:
+## REVISÃO DE LITERATURA
 
-    - grau: sem escolaridade
-    - raca_cor: preta
-    - sexo: feminino
+- @cubberley_history_1920: História da educação na Grécia e Roma.
+- @williams_history_2016: Educação na alta e baixa Idade Média.
+- @gramsci_selections_2012: Hegemonia e educação.
+- @frigotto_trabalho_2012: Educação e trabalho sob o capitalismo.
+- @bourdieu_economia_2011: Sistema educacional e reprodução das relações sociais.
+- @foucault_verdade_2013: Instituições panópticas e normalização.
 
-## INTERPRETAÇÃO
+## MECANISMOS DE REPRODUÇÃO
 
-```{r interpretacao 1}
-#| output: asis
-#| tbl-cap: resultados da regressão
+\begin{block}{Sistema Educacional}
+\justifying
+A escola dissimula por trás de sua aparente neutralidade a reprodução das relações sociais e de poder vigentes. Encobertos sob as aparências de critérios puramente escolares, estão critérios sociais de triagem e de seleção dos indivíduos.
+\end{block}
 
-# parâmetros
-stargazer::stargazer(
-    modelo_1,
-    modelo_2,
-    keep = 1:12,
-    header = FALSE,
-    single.row = TRUE,
-    font.size = "tiny",
-    column.labels = c("2006", "2021"),
-    omit.stat = c("n", "ser"),
-    se = list(
-        lmtest::coeftest(
-            modelo_1,
-            vcov. = sandwich::vcovHC(modelo_1, type = "HC1")
-        )[, 2],
-        lmtest::coeftest(
-            modelo_2,
-            vcov. = sandwich::vcovHC(modelo_2, type = "HC1")
-        )[, 2]
-    )
-)
-```
+## INSTITUIÇÃO PANÓPTICA
 
-## INTERPRETAÇÃO
+Características segundo Foucault:
 
-\footnotesize
-- Variáveis contínuas:
+1. Extração da totalidade do tempo
+2. Controle dos corpos
+3. Micro-poder político, econômico e judiciário
+4. Extração do saber
 
-$$ln(Y) = \beta_0 + \beta_1X_1$$
+## LIMITES DA EDUCAÇÃO MATEMÁTICA CRÍTICA
 
-Derivando ambos lados em relação a $X_1$:
+- Professor inserido em instituição panóptica
+- Dificuldades práticas da interdisciplinaridade
+- Risco de insubordinação ao sistema
+- Necessidade de formação além da matemática
 
-$$\frac{d\;ln(Y)}{d\;X_1} = 0 + \beta_1$$
+## CONCLUSÕES DO SEGUNDO ENSAIO
 
-Pela regra da cadeia:
-
-$$
-\begin{aligned}
-\frac{1}{Y}Y' &= \beta_1\\
-\frac{Y'}{Y} &= \beta_1
-\end{aligned}
-$$
-
-Ou seja, $\beta_1$ é a variação relativa em $Y$ dada a variação unitária em $X$
-
-## INTERPRETAÇÃO
-
-- Variáveis binárias:
-
-$$ln(Y) = \beta_0 + \beta_1X_1$$
-
-Posso tomar a base $e$ que mantenho a coerência da equação:
-
-$$
-\begin{aligned}
-e^{ln(Y)} &= e^{\beta_0 + \beta_1X_1} \\
-Y &= e^{\beta_0}e^{\beta_1X_1}
-\end{aligned}
-$$
-
-Então,
-
-$$
-Y = 
-\begin{cases}
-e^{\beta_0} & \text{se $X_1=0$} \\
-e^{\beta_0}e^{\beta_1} & \text{se $X_1=1$}
-\end{cases}
-$$
-
-O efeito de $X_1 = 1$ é relativo, com peso $e^{\beta_1}$
-
-## INTERPRETAÇÃO
-
-```{r efeito medio educacao}
-#| tbl-cap: efeito médio da educação
-
-tibble::tribble(
-    ~Variável, ~`2006`, ~`2021`,
-    "fundamental II", 1.22, 1.12,
-    "médio", 1.53, 1.36,
-    "graduação", 3, 2.08,
-    "mestrado", 4.99, 2.78,
-    "doutorado", 4.93, 2.17
-) |> kbl()
-```
-
-## INTERPRETAÇÃO
-
-```{r efeito medio cor e genero}
-#| tbl-cap: efeito médio em substratos favorecidos
-
-tibble::tribble(
-    ~Variável, ~`2006`, ~`2021`,
-    "homem", 1.31, 1.19,
-    "homem branco", 1.39, 1.30,
-    "homem, branco, graduação", 5.68, 3.97,
-    "homem, branco, doutorado", 7.2, 5.35
-) |> kbl()
-```
+1. Educação reproduz estruturas de poder desde sociedades pré-capitalistas
+2. Sistema educacional atual atua na reprodução da ordem econômica
+3. Educação matemática crítica tem limites estruturais
+4. Necessária mudança para educação omnilateral
 
 # CONSIDERAÇÕES FINAIS
 
-## O PAPEL DA ESCOLA EM UMA SOCIEDADE PANÓPTICA
+## CONCLUSÕES DA MONOGRAFIA
 
-### POR QUE É TÃO DIFÍCIL MUDAR O SISTEMA EDUCACIONAL?
-\justifying
+1. Escolaridade sozinha não supera barreiras estruturais
+2. Sistema educacional reproduz relações de poder
+3. Necessária mudança profunda na superestrutura
+4. Educação omnilateral como possível caminho
 
-- Enquanto a educação exercer esse papel na sociedade, a sua estrutura é inalterada na essência e mesmo a ação no nível macro é limitada
+## PESQUISA FUTURA
 
-- Com a redução dos efeitos do sistema educacional na reprodução das relações sociais vigentes, aumenta a resposta da classe dominante (ex.: privatizações, sucateamento, novo ensino médio)
+Sugestões para aprofundamento:
 
-- Apenas no momento em que a escola não mais existir para normalizar o indivíduo e reproduzir as relações de poder vigentes é que ela perderá sua razão de ser numa sociedade panóptica e será livre para se tornar algo diferente — e de fato libertadora
-
-# REFERÊNCIAS
-
-## BIBLIOGRAFIA
-
-BOURDIEU, P. Sistemas de Ensino e Sistemas de Pensamento. Em: A Economia das Trocas Simbólicas. 8. ed. São Paulo: Perspectiva, 2015. 
-
-FOUCAULT, M. A Verdade E As Formas Jurídicas. 4ª edição ed. Rio de Janeiro: NAU, 2013. 
-
-LINS, R. C. Os PCN e a Educação Matemática no Brasil. Em: O Modelo dos Campos Semânticos na Educação Básica. 1. ed. Curitiba, PR: Appris, 2020. 
-
-MARX, K.; ENGELS, F. Manifesto comunista. São Paulo: Boitempo Editorial, 2015. 
-
-RODRIGUES, A. T. Sociologia da Educação. Rio de Janeiro: Lamparina, 2007. 
-
+1. Estudos longitudinais
+2. Análise de políticas públicas
+3. Educação omnilateral em diferentes contextos
