@@ -41,8 +41,12 @@ Dois temas independentes:
 
 ## PROBLEMA DE PESQUISA
 
-### HIPÓTESE
+\begin{block}{HIPÓTESE}
+\justifying
 A resistência do sistema em mudar é um sintoma de uma sociedade que historicamente reproduz, por meio do processo educativo, as relações sociais de poder que a constituem.
+\end{block}
+
+Se isto for verdade, os efeitos dessa reprodução devem estar evidentes na relação entre escolaridade-renda (capítulo 1) e, deve ter raizes na própria estrutura do sistema educacional (capítulo 2).
 
 # EFEITOS DA ESCOLARIDADE EM DIFERENTES SUBSTRATOS SOCIAIS NO ESPÍRITO SANTO
 
@@ -55,22 +59,69 @@ Este capítulo tem como objetivo analisar os efeitos da escolaridade na determin
 ## REVISÃO DE LITERATURA
 
 - @mincer_schooling_1974: Modelo de capital humano e equação de Mincer.
-- @psacharopoulos_returns_2004: Incremento médio de renda por ano de estudo.
-- @colclough_changing_2010: Retornos decrescentes e mudanças estruturais na escolaridade.
+- @psacharopoulos_returns_2004: Incremento médio de renda por ano de estudo (revisão sistemática a nível mundial).
+- @colclough_changing_2010: Retornos decrescentes e mudanças estruturais na escolaridade (escolaridade se torna requerimento e retornos descrescem).
 - @ferreira_labor_2022: Desigualdade salarial no Brasil e "paradoxo do progresso".
 - @altonji_heterogeneity_2012: Impacto da escolha do curso superior na determinação da renda.
 - @van_ophem_educational_2024: Escolha do curso superior e progressão salarial.
 
+## REVISÃO DE LITERATURA
+
+- @colclough_changing_2010, a nível mundial (34 países) e @ferreira_labor_2022 (Brasil) apontam para um paradoxo: apesar do aumento da escolaridade, a desigualdade salarial persiste ou aumenta.
+
+### PARADOXO DO PROGRESSO
+
+O efeito intensificador da desigualdade quando há aumento da educação da população em uma sociedade em que os retornos à educação são convexos, ou seja, aumentam exponencialmente a cada aumento do nível educacional.
+
+## REVISÃO DE LITERATURA
+
+![Paradoxo do progresso no Brasil. Fonte: @ferreira_labor_2022](img/ferreira_et_al.png){width=70%}
+
+## PRINCIPAIS RESULTADOS
+
+- Analisando os coeficientes da regressão, observamos que os retornos à escolaridade não são convexos para o substrato da linha de base (mulheres pretas).
+- Para os substratos de homens brancos, os retornos não são apenas convexos, mas também apresentam descontinunidade no ensino superior, intensificando as desigualdades.
+
+## PRINCIPAIS RESULTADOS
+
+```{r plot betas, echo=FALSE}
+#| label: fig-plot_betas
+#| fig-cap: Efeito da escolaridade na renda por substrato social
+#| out.width: 60%
+
+library(ggplot2)
+masc_branco <- .274 - .002 + .039
+dados <- data.frame(
+  beta = c(-0.006, .101, .398, .892, 1.239, 1.433, (-0.006 + masc_branco + .029 + .029), (.101 + masc_branco + .009 - .005), (.398 + masc_branco - .056 + .002), (.892 + masc_branco + .166 + .222), (1.239 + masc_branco + .046 + .137), (1.433 + masc_branco + .154 + .085)),
+  escolaridade = rep(c("fund_1", "fund_2", "medio", "superior", "mestrado", "doutorado"), 2),
+  substrato = c(rep("baseline", 6), rep("homem branco", 6))
+)
+
+dados$escolaridade <- factor(dados$escolaridade, levels = c("fund_1", "fund_2", "medio", "superior", "mestrado", "doutorado"))
+
+dados |>
+  ggplot(aes(x = escolaridade, y = beta, color = substrato, group = substrato)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    x = "Escolaridade",
+    y = "Efeito da escolaridade na renda",
+    color = "Substrato") +
+  theme_minimal()
+
+```
+
 ## PRINCIPAIS RESULTADOS
 
 1. Redução do poder explicativo da escolaridade
-   - R² reduziu de 31,7% para 23,3% entre 2006-2022
-   - Escolaridade explica cada vez menos a renda do trabalhador
+    - R² reduziu de 31,7% para 23,3% entre 2006-2022
+    - Escolaridade explica cada vez menos a renda do trabalhador
 
 2. Desigualdades persistentes
-   - Homem branco com superior: +62% que mulher branca graduada
-   - Homem branco com superior: +101% que mulher preta graduada
-   - Mulher preta com doutorado: -17% que homem branco graduado
+    - O efeito de ser homem: +32% na renda média
+    - Homem + branco + superior: +62% que mulher branca graduada
+    - Homem + branco + superior: +101% que mulher preta graduada
+    - Mulher preta com doutorado: -17% que homem branco graduado
 
 ## CONCLUSÕES DO PRIMEIRO ENSAIO
 
@@ -84,44 +135,95 @@ Este capítulo tem como objetivo analisar os efeitos da escolaridade na determin
 
 Em uma sociedade capitalista, não se pode compreender a educação desassociada das relações de trabalho. Além das técnicas aplicadas à educação, as normas vigentes e valores compartilhados de uma determinada sociedade também são refletidas e moldam as ações educacionais.
 
-Este capítulo procura sistematizar os mecanismos de reprodução do capitalismo na educação, evidenciando como a educação matemática, enquanto não rompe com seu papel na reprodução das relações sociais de poder, é ineficaz na promoção de mudanças estruturais na sociedade.
+Este capítulo procura sistematizar os mecanismos de reprodução do capitalismo na educação, evidenciando como a educação, enquanto não rompe com seu papel na reprodução das relações sociais de poder, é ineficaz na promoção de mudanças estruturais na sociedade.
 
 ## REVISÃO DE LITERATURA
 
-- @cubberley_history_1920: História da educação na Grécia e Roma.
-- @williams_history_2016: Educação na alta e baixa Idade Média.
-- @gramsci_selections_2012: Hegemonia e educação.
-- @frigotto_trabalho_2012: Educação e trabalho sob o capitalismo.
-- @bourdieu_economia_2011: Sistema educacional e reprodução das relações sociais.
-- @foucault_verdade_2013: Instituições panópticas e normalização.
+- @cubberley_history_1920 e @williams_history_2016: Ao longo da história, a educação foi utilizada para a normalização moral do indivíduo e para reprodução das relações sociais vigentes, com a formação dos filhos das classes dominantes para ocupar determinados postos na sociedade.
+- @foucault_verdade_2013: No capitalismo, ao invés de excluir, a escola liga o indivíduo a um processo de formação de produtos para garantir a reprodução da força de trabalho.
+- @frigotto_trabalho_2012: Além disso, ele é educado para a disciplina, para a adaptação às formas de exploração do capital e adestramento nas funções úteis à produção
 
-## MECANISMOS DE REPRODUÇÃO
+## REVISÃO DE LITERATURA
 
-\begin{block}{Sistema Educacional}
+- @gramsci_selections_2012 e @bourdieu_economia_2011: O destino do aluno são predeterminados. A escola para a elite educa para formar seus intelectuais orgânicos e manter o discurso hegemônico.
+- @fernandes_sociedade_2021: A resistência à mudança é um sintoma de uma fraca integração da solidariedade moral.
+- @marx_o_1998: Para manter o esquema de reprodução, é necessário que o trabalhador permaneça pobre e ignorante.
+
+## SUPERESTRUTURA
+
+\begin{block}{Marx e a superestrutura}
+\justifying
+Estrutura jurídica-política (Estado) e ideológica (educação, religião, cultura) são superestruturas que se apoiam na base econômica (infraestrutura) para garantir a reprodução do sistema.
+\end{block}
+
+**Estrutura jurídica-política**: micro-poder político, econômico e judiciário que decide, comanda, pune, recompensa e julga.
+
+\vspace{1em}
+
+>O sistema escolar também é inteiramente baseado em uma espécie de poder judiciário. A todo tempo se pune e recompensa, se avalia, se classifica, se diz quem é o melhor, quem é o pior. [...] Por que, para ensinar alguma coisa a alguém, se deve punir e recompensar? Esse sistema parece evidente, mas, se refletirmos, vemos que a evidência se dissolve. \parencite{foucault_verdade_2013}
+
+## SUPERESTRUTURA
+
+2. **Estrutura ideológica**
+    - Fraca integração da solidariedade moral [@fernandes_sociedade_2021]
+    - Educação como adestramento nas funções úteis à produção [@frigotto_trabalho_2012]
+    - Escola para o trabalho x escola humanista: para a elite educa para formar seus intelectuais orgânicos [@gramsci_selections_2012]
+
+Uma vez em estado de apatia, atado moral, econômica e politicamente, a classe trabalhadora, em sua ação apenas reproduz as orientações determinadas pela estrutura social vigente.
+
+## NÍVEL INSTITUCIONAL
+
+\begin{block}{Bourdieu: toda ação pedagógica é uma violência simbólica}
 \justifying
 A escola dissimula por trás de sua aparente neutralidade a reprodução das relações sociais e de poder vigentes. Encobertos sob as aparências de critérios puramente escolares, estão critérios sociais de triagem e de seleção dos indivíduos.
 \end{block}
 
-## INSTITUIÇÃO PANÓPTICA
+- Discurso hegemônico: somos iguais, todos têm as mesmas oportunidades, mérito.
+- Bourdieu: o sistema de ensino filtra os alunos sem que eles deem conta e, com isso, reproduz as relações vigentes.
 
-Características segundo Foucault:
+## NÍVEL INSTITUCIONAL
 
-1. Extração da totalidade do tempo
-2. Controle dos corpos
-3. Micro-poder político, econômico e judiciário
-4. Extração do saber
+Não há possibilidade de mudança: toda reforma que não rompe com a lógica de reprodução é absorvida e serve como aprendizado para as estruturas melhor se comportarem (ex.: cotas, porém cursos de maiores retornos são integrais e requerem maior estrutura familiar).
 
-## LIMITES DA EDUCAÇÃO MATEMÁTICA CRÍTICA
+## NÍVEL PEDAGÓGICO
 
-- Professor inserido em instituição panóptica
-- Dificuldades práticas da interdisciplinaridade
-- Risco de insubordinação ao sistema
-- Necessidade de formação além da matemática
+- Teoria crítica: impedir a interiorização do discurso hegemônico (*habitus*).
+- Na educação matemática, isso se dá via interdisciplinaridade e deve cumprir alguns requisitos [@souto_interdisciplinaridade_2010]:
+    - O tema deve ser algo conhecido dos alunos;
+    - Ser de discussão possível;
+    - Ter valor em si mesmo;
+    - Ser capaz de criar conceitos matemáticos;
+    - Desenvolver habilidades matemáticas;
+    - Privilegiar a concretude social.
+
+## NÍVEL PEDAGÓGICO
+
+- Vários níveis de interdisciplinaridade [@robinson_arts_2013]:
+    - Integração subserviente: sociológico apenas como um extra, para ilustrar ou reforçar conceitos matemáticos.
+    - Integração afetivo: sociológico por imersão e reação dos alunos ao tema, complementando o currículo matemático.
+    - Integração social: baseada em atividades, utilizando socilogia para promover a interação entre os alunos e aumentar a participação parental (há participação parental em atividades de matemática na escola?).
+    - Integração co-igual cognitiva: a sociologia é integrada com outros aspectos do currículo e os alunos são exigidos a usar habilidades de pensamento de ordem superior e qualidades estéticas para obter um entendimento mais aprofundado de um conceito acadêmico específico.
+
+## NÍVEL PEDAGÓGICO
+
+- Professor inserido em instituição panóptica: seu objetivo é transformar, de forma eficiente, o aluno em um produto útil à sociedade.
+- Dificuldades práticas da interdisciplinaridade: 52% dos professores de matemática nunca fizeram capacitação sobre metodologias ativas e apenas 7% consideram fáceis de trabalhar [@silva_metodologias_2023]
+- Risco de insubordinação ao sistema: hordas de pais raivosos e vereadores lunáticos.
+- Necessidade de formação além da matemática: geralmente, o professor de matemática não é bem equipado para lidar com precisão e profundidade os conceitos da sociologia.
+
+## NÍVEL PEDAGÓGICO
+
+\begin{block}{OMNILATERALIDADE}
+\justifying
+Objetivo de ruptura do mecanismo de reprodução da hegemonia intelectual, através do desenvolvimento de “processos pedagógicos que garantam, ao final do processo educativo, o acesso efetivamente democrático ao conhecimento na sua mais elevada universalidade”, que se dão em oposição ao tipo de educação presente no seio das sociedades capitalistas.
+\end{block}
+
+Abolição da educação para o trabalho e formação de intelectuais orgânicos na classe trabalhadora.
 
 ## CONCLUSÕES DO SEGUNDO ENSAIO
 
 1. Educação reproduz estruturas de poder desde sociedades pré-capitalistas
-2. Sistema educacional atual atua na reprodução da ordem econômica
+2. Sistema educacional atual atua na reprodução da ordem econômica e política
 3. Educação matemática crítica tem limites estruturais
 4. Necessária mudança para educação omnilateral
 
@@ -133,11 +235,3 @@ Características segundo Foucault:
 2. Sistema educacional reproduz relações de poder
 3. Necessária mudança profunda na superestrutura
 4. Educação omnilateral como possível caminho
-
-## PESQUISA FUTURA
-
-Sugestões para aprofundamento:
-
-1. Estudos longitudinais
-2. Análise de políticas públicas
-3. Educação omnilateral em diferentes contextos
