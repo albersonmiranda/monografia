@@ -52,8 +52,6 @@ Se isto for verdade, os efeitos dessa reprodução devem estar evidentes na rela
 
 ## INTRODUÇÃO
 
-A relação entre escolaridade e renda é um tema amplamente estudado na literatura econômica e sociológica. A teoria do capital humano sugere que a educação aumenta a produtividade dos indivíduos, resultando em maiores rendimentos. No entanto, essa relação pode ser influenciada por diversos fatores, como gênero, raça e contexto socioeconômico.
-
 Este capítulo tem como objetivo analisar os efeitos da escolaridade na determinação da renda dos trabalhadores formais no estado do Espírito Santo, com foco nas desigualdades de gênero e raça. Utilizando dados da Relação Anual de Informações Sociais (Rais) de 2006 e 2022, buscamos entender como a escolaridade impacta a renda em diferentes substratos sociais e como essas relações têm evoluído ao longo do tempo.
 
 ## REVISÃO DE LITERATURA
@@ -76,6 +74,18 @@ O efeito intensificador da desigualdade quando há aumento da educação da popu
 ## REVISÃO DE LITERATURA
 
 ![Paradoxo do progresso no Brasil. Fonte: @ferreira_labor_2022](img/ferreira_et_al.png){width=70%}
+
+## PRINCIPAIS RESULTADOS
+
+1. Redução do poder explicativo da escolaridade
+    - R² reduziu de 31,7% para 23,3% entre 2006-2022
+    - Escolaridade explica cada vez menos a renda do trabalhador
+
+2. Desigualdades persistentes
+    - O efeito de ser homem: +32% na renda média
+    - Homem + branco + superior: +62% que mulher branca graduada
+    - Homem + branco + superior: +101% que mulher preta graduada
+    - Mulher preta com doutorado: -17% que homem branco graduado
 
 ## PRINCIPAIS RESULTADOS
 
@@ -111,18 +121,6 @@ dados |>
 
 ```
 
-## PRINCIPAIS RESULTADOS
-
-1. Redução do poder explicativo da escolaridade
-    - R² reduziu de 31,7% para 23,3% entre 2006-2022
-    - Escolaridade explica cada vez menos a renda do trabalhador
-
-2. Desigualdades persistentes
-    - O efeito de ser homem: +32% na renda média
-    - Homem + branco + superior: +62% que mulher branca graduada
-    - Homem + branco + superior: +101% que mulher preta graduada
-    - Mulher preta com doutorado: -17% que homem branco graduado
-
 ## CONCLUSÕES DO PRIMEIRO ENSAIO
 
 - Escolaridade é determinante na renda, mas seu efeito está diminuindo
@@ -133,14 +131,12 @@ dados |>
 
 ## INTRODUÇÃO
 
-Em uma sociedade capitalista, não se pode compreender a educação desassociada das relações de trabalho. Além das técnicas aplicadas à educação, as normas vigentes e valores compartilhados de uma determinada sociedade também são refletidas e moldam as ações educacionais.
-
 Este capítulo procura sistematizar os mecanismos de reprodução do capitalismo na educação, evidenciando como a educação, enquanto não rompe com seu papel na reprodução das relações sociais de poder, é ineficaz na promoção de mudanças estruturais na sociedade.
 
 ## REVISÃO DE LITERATURA
 
 - @cubberley_history_1920 e @williams_history_2016: Ao longo da história, a educação foi utilizada para a normalização moral do indivíduo e para reprodução das relações sociais vigentes, com a formação dos filhos das classes dominantes para ocupar determinados postos na sociedade.
-- @foucault_verdade_2013: No capitalismo, ao invés de excluir, a escola liga o indivíduo a um processo de formação de produtos para garantir a reprodução da força de trabalho.
+- @foucault_verdade_2013: No capitalismo, ao invés de excluir, a escola liga o indivíduo a um processo de formação de produtores para garantir a reprodução da força de trabalho.
 - @frigotto_trabalho_2012: Além disso, ele é educado para a disciplina, para a adaptação às formas de exploração do capital e adestramento nas funções úteis à produção
 
 ## REVISÃO DE LITERATURA
