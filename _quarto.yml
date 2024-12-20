@@ -5,17 +5,18 @@ project:
 author: ALBERSON DA SILVA MIRANDA
 date: last-modified
 date-format: "YYYY"
-
-number-sections: true
-cite-method: biblatex
+bibliography: [config/elementos/packages.bib, config/elementos/monografia.bib]
 biblio-title: REFERÊNCIAS
 link-citations: true
+cite-method: biblatex
+
 crossref:
   fig-prefix: Figura
   tbl-prefix: Tabela
   eq-prefix: Equação
   lof-title: LISTA DE FIGURAS
   lot-title: LISTA DE TABELAS
+
 execute:
   echo: false
   cache: false

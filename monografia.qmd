@@ -1,11 +1,11 @@
 ---
 format:
   pdf:
-    include-in-header: [config/elementos/preamble.tex, config/tema/customizacao.tex]
-    include-before-body: config/elementos/pre_textuais.tex
-    include-after-body: config/elementos/pos_textuais.tex
-    documentclass: abntex2
-    classoption: [12pt, oneside, a4paper, chapter=TITLE, section=TITLE, brazil]
+    include-in-header: [config/tema/customizacao.tex, config/elementos/preamble.tex]
+    include-before-body: config/elementos/pre_textuais/pre_textuais.tex
+    include-after-body: config/elementos/pos_textuais/pos_textuais.tex
+    documentclass: config/tema/ifestex
+    classoption: [12pt, openright, oneside, a4paper, hyphens, chapter=TITLE, section=TITLE, english, french, spanish, brazil]
     latex-max-runs: 4
     output-file: monografia.pdf
 ---

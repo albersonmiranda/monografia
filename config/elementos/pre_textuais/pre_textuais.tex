@@ -1,0 +1,36 @@
+  % --------------------------------------------------- %
+  % CAPAS                                               %
+  % --------------------------------------------------- %
+  % CAPA E FOLHA DE ROSTO
+  \capas
+  \imprimircapa
+  \imprimirfolhaderosto
+  \imprimirfichacatalografica
+  % \includepdf[pages=-]{pre_textuais/ficha.pdf}
+
+  % --------------------------------------------------- %
+  % ELEMENTOS PRÉ-TEXTUAIS                              %
+  % --------------------------------------------------- %
+  % APROVAÇÃO, DEDICATÓRIA, AGRADECIMENTOS, EPÍGRAFE
+  \pretextual
+  \imprimiraprovacao
+  % \includepdf[pages=-]{pre_textuais/aprovacao.pdf}
+  \imprimirdedicatoria
+  \imprimiragradecimentos
+  \imprimirepigrafe
+  
+  % RESUMO - PT/EN
+  \input{config/elementos/pre_textuais/resumo}
+  
+  % LISTAS E SUMÁRIO
+  \imprimirlistafiguras
+  \imprimirlistatabelas
+  %\imprimirlistaquadros
+  \imprimirlistasiglas
+  \imprimirlistasimbolos
+  \imprimirsumario
+
+  % --------------------------------------------------- %
+  % ELEMENTOS TEXTUAIS                                  %
+  % --------------------------------------------------- %
+  \textual
