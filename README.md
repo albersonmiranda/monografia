@@ -1,4 +1,4 @@
-# Monografia: Ensaios sobre Escolaridade e Reprodução Social
+# Ensaios sobre Escolaridade e Reprodução Social
 
 Este repositório contém o texto e código de minha monografia, intitulada "Ensaios sobre Escolaridade e Reprodução Social", apresentada ao Instituto Federal do Espírito Santo (IFES).
 
