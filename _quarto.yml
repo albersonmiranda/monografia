@@ -5,6 +5,7 @@ project:
 author: ALBERSON DA SILVA MIRANDA
 date: last-modified
 date-format: "YYYY"
+
 bibliography: [config/elementos/packages.bib, config/elementos/monografia.bib]
 biblio-title: REFERÊNCIAS
 link-citations: true
@@ -14,8 +15,12 @@ crossref:
   fig-prefix: Figura
   tbl-prefix: Tabela
   eq-prefix: Equação
+  tbl-title: Tabela
+  fig-title: Figura
   lof-title: LISTA DE FIGURAS
   lot-title: LISTA DE TABELAS
+
+fig-cap-location: top
 
 execute:
   echo: false

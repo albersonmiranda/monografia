@@ -8,7 +8,23 @@
 \newtheorem{corollary}{Corolário}[theorem]
 
 % bibliografia
-\usepackage[backend=biber, style=abnt, justify, giveninits, backref=true, backrefstyle=three, citecounter=true]{biblatex}
+\usepackage[backend=biber, style=abnt, giveninits, backref=true, backrefstyle=three, citecounter=true]{biblatex}
+\usepackage{setspace}
+\AtEndDocument{
+  \begingroup
+    \setlength\bibitemsep{0pt}
+    \begin{singlespace}
+      \printbibliography
+    \end{singlespace}
+  \endgroup
+}
 
 % fazer sumário começar do 1 ao invés do zero
 \renewcommand{\thesection}{\arabic{section}}
+
+% configuração de legendas de figuras e tabelas
+\newcommand{\legenda}[1]{
+  \begin{center}
+    \footnotesize{#1}
+  \end{center}
+}

@@ -120,7 +120,7 @@
 \renewcommand\cftsubsectionfont{\normalfont\normalsize}
 
 \setsubsubsecheadstyle{\normalfont\normalsize}
-\renewcommand\cftsubsubsectionfont{\normalfont\normalsize}
+\renewcommand\cftsubsubsectionfont{\normalfont\bfseries}
 
 \setsubsubsubsecheadstyle{\normalfont\itshape}
 \renewcommand\cftparagraphfont{\normalfont\normalsize\itshape} 
@@ -489,6 +489,7 @@
 \renewcommand{\listfigurename}{Lista de figuras}
 \newcommand{\imprimirlistafiguras}{
   \pdfbookmark[0]{\listfigurename}{lof}
+  \hypersetup{linkcolor=black}
   \listoffigures*
   \cleardoublepage
 }

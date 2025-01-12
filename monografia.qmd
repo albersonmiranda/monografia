@@ -1,4 +1,5 @@
 ---
+date: 2024-12-12
 format:
   pdf:
     include-in-header: [config/tema/customizacao.tex, config/elementos/preamble.tex]
@@ -29,7 +30,8 @@ pacman::p_load(
 )
 
 # dados
-rais = readRDS("data/rais.rds")
+rais = readRDS("data/rais.rds") |>
+  subset(ano %in% c(2006, 2022))
 
 # tema ggplot
 tema = theme_classic() +
@@ -43,12 +45,12 @@ knitr::write_bib(file = "config/elementos/packages.bib")
 
 # INTRODUÇÃO
 
-## Contextualização da pesquisa
+## CONTEXTUALIZAÇÃO DA PESQUISA
 
-Em seu texto acerca dos Parâmetros Curriculares Nacionais (PCN), o professor Rômulo Lins abre da seguinte forma:
+Em seu texto acerca dos Parâmetros Curriculares Nacionais (PCN), o professor Romulo Lins abre da seguinte forma:
 
 \begin{citacao}
-Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior problema é a resistência do sistema em mudar. \cite{oliveira_os_2021}
+Provavelmente o maior problema da educação matemática dos brasileiros não esteja nas atuais deficiências apontadas diversas vezes, tais como, por exemplo, formação inadequada de professores e abordagens inadequadas sendo levadas para as salas de aula. Parece-me que o maior problema é a resistência do sistema em mudar \cite{oliveira_os_2021}.
 \end{citacao}
 
 Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o que ele chamou de nível *micro*, não é suficiente para colocar o sistema educacional em rota de mudança. Paralelamente, deve ser realizado um trabalho estrutural na esfera *macro* — aqui, principalmente, o Ministério da Educação (MEC) — que possibilite uma mudança do educar *para* matemática para o educar *pela* a matemática. Aqui, educar *pela* matemática significa, através da matemática, desenvolver no educando outras competências mais amplas, como raiocínio lógico, capacidade de resolução de problemas, de abstração, pensamento crítico, além de outras competências compartilhadas com as demais disciplinas, como colaboração, comunicação, criatividade e cidadania.
@@ -56,37 +58,24 @@ Para ele, a pesquisa relacionada às técnicas e abordagens em sala de aula, o q
 Essa diferença é ilustrada por Lins da seguinte forma:
 
 \begin{citacao}
-A diferença fica bastante mais clara se pensamos no caso da Educação Física. Será que alguém concebe que o papel das aulas de Educação Física é preparar todas as crianças (todas, eu disse) para o esporte competitivo? Claro que não. Se assim fosse as aulas de Educação Física não representariam, na formação das crianças, a educação para a saúde, para o desenvolvimento motor, para a socialização e o respeito a regras, para a colaboração. E os que quiserem ser atletas e jogadores vão buscar esta formação específica em outros espaços (possivelmente dentro dos times competitivos de suas escolas ou em clubes). Podemos dizer que a Educação Física escolar se concentra em modos de ser, promovendo aquela educação \textit{por meio} de esportes e exercícios físicos, enquanto o Treinamento Esportivo se concentra em potencializar habilidades, fazendo isso por meio da aquisição de técnicas específicas. \cite{oliveira_os_2021}
+A diferença fica bastante mais clara se pensamos no caso da Educação Física. Será que alguém concebe que o papel das aulas de Educação Física é preparar todas as crianças (todas, eu disse) para o esporte competitivo? Claro que não. Se assim fosse as aulas de Educação Física não representariam, na formação das crianças, a educação para a saúde, para o desenvolvimento motor, para a socialização e o respeito a regras, para a colaboração. E os que quiserem ser atletas e jogadores vão buscar esta formação específica em outros espaços (possivelmente dentro dos times competitivos de suas escolas ou em clubes). Podemos dizer que a Educação Física escolar se concentra em modos de ser, promovendo aquela educação \textit{por meio} de esportes e exercícios físicos, enquanto o Treinamento Esportivo se concentra em potencializar habilidades, fazendo isso por meio da aquisição de técnicas específicas \cite{oliveira_os_2021}.
 \end{citacao}
 
 A mudança, então, deixa de ter como meio apenas o nível pedagógico, a sala de aula; aqui ele se alia a outras correntes que procuram afastar o diagnóstico do problema central da educação matemática de questões curriculares, como, por exemplo, se o aluno deve ou não estudar geometrias não euclidianas no ensino médio, e se expande para questionar o próprio objetivo do ensino da matemática, ou melhor, *através* da matemática.
 
-Quando o autor propõe uma educação "formativa e com o objetivo de permitir que todos que passem por ela participem de forma plena em suas sociedades", podemos nos perguntar: o que é essa participação plena? Ou ainda, por que é tão difícil realizar mudanças estruturais na educação ou, como Lins diz, fazer com que o sistema se coloque em rota de mudança?
+Quando o autor propõe uma educação "formativa e com o objetivo de permitir que todos que passem por ela participem de forma plena em suas sociedades", podemos nos perguntar: o que é essa participação plena? Ou ainda, por que é tão difícil realizar mudanças estruturais na educação ou, como Lins questiona, fazer com que o sistema se coloque em rota de mudança?
 
-Para procurar compreender essas questões, é vital ir a níveis mais profundos do que o nível macro proposto pelo professor Lins. Isto é, analisar as relações e mecanismos que moldam a expressão cultural das formas e relações de produção, ou seja, a estrutura jurídico-política e a estrutura ideológica da sociedade -- o que Marx define como *superestrutura*. 
+Para compreender essas questões, é necessário ir além do nível macro proposto por Lins. Isso implica analisar as relações e mecanismos que moldam a expressão cultural das formas e relações de produção, ou seja, a estrutura jurídico-política e a estrutura ideológica da sociedade --- o que @marx_contribuicao_2022 define como *superestrutura*. A superestrutura surge como resposta às contradições do modo de produção e das relações sociais de produção, a infraestrutura, que, ao mesmo tempo em que molda e condiciona a superestrutura, também é influenciada por ela. Nesse contexto, as ações pedagógicas nas escolas e seu caráter instrumental voltado para o mundo do trabalho não são neutras, mas sofrem influência das dinâmicas e valores impostos pela superestrutura.
 
-Neste trabalho, argumento que a resistência do sistema em mudar, como aponta Lins, é um sintoma de uma sociedade que historicamente reproduz, por meio do processo educativo, as relações sociais de poder que a constituem. Paralelamente, defendo que a violência simbólica que mascara essas relações, como aponta Bourdieu, está se deteriorando ao longo do século 21.
+Neste trabalho, argumento que a resistência do sistema em mudar, como aponta Lins, é um sintoma de uma sociedade que historicamente reproduz, por meio do processo educativo, as relações sociais de poder que a constituem. Paralelamente, defendo que a violência simbólica presente na educação — entendida, no sentido de Bourdieu, como os processos supostamente neutros que legitimam e naturalizam a seleção de indivíduos para ocupar determinados postos na sociedade — está se deteriorando ao longo do século 21. Essa deterioração refere-se à diminuição consistente dos efeitos da escolaridade na definição das posições sociais, indicando que o sistema educativo vem perdendo, progressivamente, sua capacidade de dissimular a reprodução das hierarquias sociais de forma eficaz.
 
 Este trabalho está dividido em duas partes. Na primeira, evidencio os sintomas: a partir de uma análise estatística com dados de escolaridade, sexo, raça e rendimentos de diferentes substratos sociais do estado do Espírito Santo, demonstro que 1) a escolaridade é um preditor significativo para a determinação da renda do trabalhador capixaba; 2) substratos marginalizados da sociedade têm retornos menores mesmo com maior escolaridade que os mais favorecidos; 3) esse poder explicativo está se deteriorando consistentemente nos últimos 60 anos, e; 4) políticas educacionais e ações afirmativas nos últimos 20 anos estão corroendo a violência simbólica (no sentido de Bourdieu) e, portanto, escancarando os mecanismos de reprodução das relações sociais de poder.
 
 Na segunda parte, procuro explicar esses sintomas apresentando uma sistematização dos mecanismos causais de transmissão dos efeitos da superestrutura capitalista, a partir de elementos de Marx e Bourdieu, passando pelo nível institucional, com a visão de Foucault sobre a escola como instituição panóptica, e chegando ao nível pedagógico, discutindo interdisciplinaridade, omnilateralidade e os limites da educação matemática crítica como instrumento emancipador.
 
-## Organização do trabalho
-
-Este trabalho está dividido em duas partes principais:
-
-1. **Efeitos da Escolaridade em Diferentes Substratos Sociais no Espírito Santo**:
-   - Análise estatística dos dados de escolaridade, sexo, raça e rendimentos.
-   - Demonstração de que a escolaridade é um preditor significativo para a renda, mas seus efeitos estão se reduzindo ao longo do tempo.
-   - Evidência de que substratos marginalizados da sociedade têm retornos menores mesmo com maior escolaridade.
-
-2. **O Papel da Educação Matemática sob a Hegemonia do Capital**:
-   - Análise histórica e teórica da educação como instrumento de reprodução das relações sociais de poder.
-   - Discussão sobre as limitações da educação matemática crítica devido à sua inserção em instituições panópticas.
-
 # EFEITOS DA ESCOLARIDADE EM DIFERENTES SUBSTRATOS SOCIAIS NO ESPÍRITO SANTO
 
-## Introdução
+## INTRODUÇÃO
 
 A relação entre escolaridade e renda é um tema amplamente estudado na literatura econômica e sociológica. A teoria do capital humano sugere que a educação aumenta a produtividade dos indivíduos, resultando em maiores rendimentos. No entanto, essa relação pode ser influenciada por diversos fatores, como gênero, raça e contexto socioeconômico.
 
@@ -94,7 +83,7 @@ Este capítulo tem como objetivo analisar os efeitos da escolaridade na determin
 
 A análise estatística permitirá identificar padrões e tendências, bem como discutir as implicações das políticas educacionais e ações afirmativas na redução das desigualdades sociais. Além disso, exploraremos a hipótese de que a escolaridade, embora importante, não é suficiente para superar as barreiras estruturais que perpetuam a desigualdade social.
 
-## Breve revisão de literatura
+## BREVE REVISÃO DE LITERATURA
 
 A primeira abordagem quantitativa, baseada em modelagem estatística, para evidenciar o poder de explicação da escolaridade sobre a renda do trabalhador foi realizada no trabalho seminal de @mincer_schooling_1974. O autor propôs um modelo de capital humano, onde a escolaridade é um dos principais determinantes da renda -- especificamente, do logarítmo da renda. A especificação que ficou conhecida como _equação de Mincer_ é a seguinte:
 
@@ -108,13 +97,23 @@ A partir de dados do censo norte-americano, ele estimou diversas especificaçõe
 
 Desde então, diversos estudos têm sido realizados para estimar os efeitos da escolaridade sobre a renda do trabalhador, cada um estendendo ou aplicando o modelo de Mincer em diferentes contextos. @psacharopoulos_returns_2004 estimam, em média, cerca de 10% de incremento de renda para cada ano de estudo. @colclough_changing_2010 mostram, a partir de dados de 34 países, que até a década de 1990 os retornos a cada nível de escolaridade eram descrescentes, mas que, a partir de então, o retorno a cada ano extra de estudo aumenta a cada incremento no nível de escolaridade. Neste mesmo trabalho, os autores demonstram que os retornos em todos os níveis de escolaridade (primário, secundário e terciário) estão reduzindo ao longo das décadas, mas que a redução é mais acentuada no nível primário.
 
-@ferreira_labor_2022 analisam a desigualdade salarial no Brasil no período entre 1995-2012 e mostram que os dois principais fatores que aumentam a desigualdade são 1) a maior disparidade de salários entre diferentes setores da economia, e; 2) o chamado "paradoxo do progresso", o efeito intensificador da desigualdade quando há aumento da educação da população em uma sociedade em que os retornos à educação são convexos, ou seja, aumentam exponencialmente a cada aumento do nível educacional. Esse fenômeno é paradoxal no sentido de que se espera que a educação reduza a desigualdade, mas, em sociedades em que os retornos associados aos níveis superiores de educação são muito altos em relação aos menores, a escolaridade tem efeito contrário, de intensificação das desigualdades.
+@ferreira_labor_2022 analisam a desigualdade salarial no Brasil no período entre 1995-2012 e mostram que os dois principais fatores que aumentam a desigualdade são 1) a maior disparidade de salários entre diferentes setores da economia, e; 2) o chamado "paradoxo do progresso", o efeito intensificador da desigualdade quando há aumento da educação da população em uma sociedade em que os retornos à educação são convexos, ou seja, aumentam exponencialmente a cada aumento do nível educacional (@fig-paradoxo1). Esse fenômeno é paradoxal no sentido de que se espera que a educação reduza a desigualdade, mas, em sociedades em que os retornos associados aos níveis superiores de educação são muito altos em relação aos menores, a escolaridade tem efeito contrário, de intensificação das desigualdades.
+
+::: {#fig-paradoxo1}
+
+![](img\ferreira_et_al.png){width=70%}
+
+`\legenda{Fonte: Ferreira et al. (2022).}`{=latex}
+
+Paradoxo do progresso no Brasil.
+
+:::
 
 Nesse sentido, @altonji_heterogeneity_2012 aponta que a escolha do curso superior é de grande impacto na determinação da renda, destacando que a diferença no retorno médio entre alguns cursos superiores, como engenharia elétrica e pedagogia, é quase tão grande quanto a diferença média entre indivíduos com ensino médio e ensino superior. @van_ophem_educational_2024 reforçam essa ideia, mostrando que a escolha do curso superior é um dos principais elementos não apenas na renda inicial quanto também na progressão salarial ao longo da carreira.
 
-## Metodologia
+## METODOLOGIA
 
-Neste trabalho, de ordem quantitativa, utilizo os dados da Relação Anual de Informações Sociais (Rais) de 2006 e 2022 para estimar os efeitos da escolaridade sobre a renda dos trabalhadores do estado do Espírito Santo. Para tanto, utilizo o *datalake* tratado e disponibilizado gratuitamente pelo projeto Base dos Dados [@cavalcante_basedosdados_2022]. O acesso, manipulação dos dados e a análise foram realizados com o *software* R [@R-base] e o repositório com todo o código realizado aqui está disponível publicamente e pode ser reproduzido em sua totalidade\footnote{https://github.com/albersonmiranda/monografia.}.
+Neste trabalho, de ordem quantitativa, utilizo os dados da Relação Anual de Informações Sociais (Rais) de 2006 e 2022 para estimar os efeitos da escolaridade sobre a renda dos trabalhadores do estado do Espírito Santo. Para tanto, utilizo o *data lake* tratado e disponibilizado gratuitamente pelo projeto Base dos Dados [@cavalcante_basedosdados_2022]. O acesso, manipulação dos dados e a análise foram realizados com o *software* R [@R-base] e o repositório com todo o código realizado aqui está disponível publicamente e pode ser reproduzido em sua totalidade\footnote{https://github.com/albersonmiranda/monografia.}.
 
 As variáveis de interesse extraídas da Rais foram:
 
@@ -152,7 +151,12 @@ kbl(
   escape = FALSE
 ) |>
   kable_styling(latex_options = "striped", font_size = 10) |>
-  column_spec(2, width = "30em")
+  column_spec(2, width = "30em") |>
+  footnote(
+    general = "\\\\hfill Fonte: Elaborado pelo Autor (2024) \\\\hfill",
+    general_title = "",
+    escape = FALSE
+  )
 ```
 
 Além das condições de interesse do pesquisador, é necessário atentar que a Rais trata do mercado de trabalho formal, o que exclui trabalhadores informais e profissionais autônomos. Portanto, o presente trabalho mira estimar as relações escolaridade-renda no mercado de trabalho formal do Espírito Santo, destacando o impacto de substratos marginalizados da sociedade na determinação da renda do trabalhador.
@@ -160,7 +164,7 @@ Além das condições de interesse do pesquisador, é necessário atentar que a 
 Seguindo @mincer_schooling_1974, mas adaptando à nossa Lei de Diretrizes e Bases da Educação Nacional (LDB), faremos uma aproximação para o tempo de experiência de cada indivíduo a partir da seguinte fórmula:
 
 $$
-\text{exp} = \text{idade} - \text{anos de formação} - 5
+\text{exp} = \text{idade} - \text{anos de formação} - 6
 $$ {#eq-exp}
 
 Em que supõe-se:
@@ -173,7 +177,7 @@ Em que supõe-se:
 - 2 anos para o mestrado
 - 4 anos par ao doutorado
 
-Assim, por exemplo, para um indivíduo de 30 anos com mestrado, temos $30-18-5=7$ anos de experiência.
+Assim, por exemplo, para um indivíduo de 30 anos com mestrado, temos $30-18-6=6$ anos de experiência.
 
 Por fim, para permitir comparação direta da renda no tempo, é realizada a deflação pelo IPCA dos valores de 2022 para os valores de 2006 (@eq-deflacao).
 
@@ -181,11 +185,11 @@ $$
 Vr_{i:j} = \frac{I_j}{I_i} \times V_i
 $$ {#eq-deflacao}
 
-\noindent em que $Vr_{i:j}$ é o valor real deflacionado no período $i$ na data-base $j$, $I_i$ é o índice de preços fixado na data-base $j$, que neste caso é `r scales::number(2615.05, big.mark = ",", decimal.mark = ".")` (dezembro/2006), $I_j$ é o índice de preços no período $i$ (dezembro/2022), `r scales::number(6474.09, big.mark = ",", decimal.mark = ".")` e $V_i$ é o valor nominal no período $i$.
+\noindent em que $Vr_{i:j}$ é o valor real deflacionado no período $i$ na data-base $j$, $I_i$ é o índice de preços fixado na data-base $j$, que neste caso é `r scales::number(2615.05, big.mark = ".", decimal.mark = ",")` (dezembro/2006), $I_j$ é o índice de preços no período $i$ (dezembro/2022), `r scales::number(6474.09, big.mark = ".", decimal.mark = ",")` e $V_i$ é o valor nominal no período $i$.
 
 ### Análise exploratória dos dados
 
-A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais))` de entradas, dos anos de 2006, 2014 e 2022, e cobre todos os `r scales::number(length(unique(rais$id_municipio)), big.mark = ",", decimal.mark = ".")` municípios do Espírito Santo.
+A primeira camada de entendimento em uma pesquisa deste tipo é a exploratória. Após a aplicação das condições mencionadas, a base de dados conta com expressivos `r scales::comma(nrow(rais), big.mark = ".", decimal.mark = ",")` observações, dos anos de 2006 e 2022, e cobre todos os `r scales::number(length(unique(rais$id_municipio)), big.mark = ".", decimal.mark = ",")` municípios do Espírito Santo.
 
 ```{r tabela entradas por ano}
 #| tbl-cap: "Entradas por ano"
@@ -194,11 +198,17 @@ kbl(
   t(table(rais$ano)),
   format.args = list(big.mark = ".", decimal.mark = ",")
 ) |>
-  kable_styling(latex_options = c("striped", "scale_down"))
+  kable_styling(latex_options = c("striped"), font_size = 10) |>
+  footnote(
+    general = "\\\\hfill Fonte: Elaborado pelo Autor (2024) \\\\hfill",
+    general_title = "",
+    escape = FALSE
+  )
 ```
 
+::: {#fig-entradas-ano}
+
 ```{r figura entradas por ano}
-#| fig-cap: "Entradas por ano"
 
 as.data.frame(table(rais$ano)) |>
   ggplot(aes(x = Var1, y = Freq)) +
@@ -207,6 +217,11 @@ as.data.frame(table(rais$ano)) |>
   labs(x = "Ano", y = "Quantidade") +
   tema
 ```
+
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
+
+Entradas por ano.
+:::
 
 ```{r proporcoes por genero}
 proporcao_2006 <- subset(rais, ano == 2006) |>
@@ -232,8 +247,9 @@ proporcao_pretos_2022 <- subset(rais, ano == 2022 & raca_cor == "preta") |>
 
 Em termos de gênero no mercado de trabalho formal capixaba, a proporção se manteve praticamente a mesma, com as mulheres ocupando `r proporcao_2006["feminino"] |> scales::percent(accuracy = 0.1)` das vagas em 2006 e `r proporcao_2022["feminino"] |> scales::percent(accuracy = 0.1)` em 2022.
 
+::: {#fig-comparativo-genero}
+
 ```{r count sexo}
-#| fig-cap: "Comparativo 2006-2022 por sexo"
 
 rais[, c("ano", "sexo")] |>
   tidyr::pivot_longer(!ano) |>
@@ -246,6 +262,11 @@ rais[, c("ano", "sexo")] |>
   labs(x = "Sexo", y = "Quantidade", fill = "Sexo") +
   tema
 ```
+
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
+
+Comparativo 2006-2022 por sexo
+:::
 
 Adicionando a dimensão da raça/cor (@tbl-sexo-raca-cor), vemos uma alta disparidade entre a população empregada, com indicações de que a mulher preta seja o substrato social mais empurrado à informalidade ou desemprego. Isso porque a proporção populacional entre homens e mulheres é 50% mas, dentre os declarados pretos, apenas `r proporcao_pretos_2022["feminino"] |> scales::percent(accuracy = 0.1)` são mulheres. Dentre os brancos, as mulheres ocupam `r proporcao_brancos_2022["feminino"] |> scales::percent(accuracy = 0.1)`. 
 
@@ -261,11 +282,17 @@ kbl(
   ) |> tidyr::pivot_wider(names_from = raca_cor, values_from = Freq),
   format.args = list(big.mark = ".", decimal.mark = ",")
 ) |>
-  kable_styling(latex_options = c("striped"))
+  kable_styling(latex_options = c("striped"), font_size = 10) |>
+  footnote(
+    general = "\\\\hfill Fonte: Elaborado pelo Autor (2024) \\\\hfill",
+    general_title = "",
+    escape = FALSE
+  )
 ```
 
+::: {#fig-comparativo-raca-cor}
+
 ```{r count raca e cor}
-#| fig-cap: "Comparativo 2006-2022 por sexo/raça/cor"
 #| out.width: "100%"
 
 rais[, c("ano", "sexo", "raca_cor")] |>
@@ -283,11 +310,30 @@ rais[, c("ano", "sexo", "raca_cor")] |>
   tema
 ```
 
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
+
+Comparativo 2006-2022 por sexo/raça/cor
+:::
+
 Essa hipótese é confirmada por dados do IPEA, que mostram, em 2022, 13,9% das mulheres negras estavam desocupadas (@fig-desocupacao), e 47,5% na informalidade (@fig-informalidade). Homens negros têm a mesma taxa de informalidade, porém menor taxa de desemprego (8,9%).
 
-![Taxa de desocupação por sexo/raça. Fonte: IPEA](img\ipea_retrato2024_graf0705_2022_Brasil.pdf){#fig-desocupacao fig-scap="Taxa de desocupação por sexo/raça" width=70%}
+::: {#fig-desocupacao}
 
-![Taxa de informalidade por sexo/raça. Fonte: IPEA](img\ipea_retrato2024_graf0706_2022_Brasil.pdf){#fig-informalidade fig-scap="Taxa de informalidade por sexo/raça" width=70%}
+![](img\ipea_retrato2024_graf0705_2022_Brasil.pdf){fig-scap="Taxa de desocupação por sexo/raça" width=70%}
+
+`\legenda{Fonte: IPEA.}`{=latex}
+
+Taxa de desocupação por sexo/raça.
+:::
+
+::: {#fig-informalidade}
+
+![](img\ipea_retrato2024_graf0706_2022_Brasil.pdf){fig-scap="Taxa de informalidade por sexo/raça" width=70%}
+
+`\legenda{Fonte: IPEA.}`{=latex}
+
+Taxa de informalidade por sexo/raça.
+:::
 
 Dada a baixa representatividade de indígenas e amarelos, optou-se por excluí-los da análise. A partir deste ponto, a análise contará apenas com brancos, pretos e pardos.
 
@@ -309,11 +355,17 @@ kbl(
   ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
   format.args = list(big.mark = ".", decimal.mark = ",")
 ) |>
-  kable_styling(latex_options = c("striped"))
+  kable_styling(latex_options = c("striped", "scale_down"), font_size = 10) |>
+  footnote(
+    general = "\\\\hfill Fonte: Elaborado pelo Autor (2024) \\\\hfill",
+    general_title = "",
+    escape = FALSE
+  )
 ```
 
+::: {#fig-comparativo-escolaridade}
+
 ```{r entradas por escolaridade}
-#| fig-cap: "Entradas por sexo/escolaridade"
 #| out.width: "100%"
 #| warning: false
 
@@ -328,6 +380,11 @@ rais |>
   coord_flip() +
   tema
 ```
+
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
+
+Entradas por sexo/escolaridade
+:::
 
 Adicionando a dimensão da raça/cor, percebemos que a ocupação de postos de trabalho de nível superior deixa de ser quase exclusividade de brancos. Entretanto, pardos e pretos ainda ocupam majoritariamente as vagas de trabalho de nível inferiores de escolaridade, além de, tanto proporcionalmente quanto absolutamente, ainda ocuparem menos vagas de ensino superior.
 
@@ -345,11 +402,17 @@ kbl(
   ) |> tidyr::pivot_wider(names_from = grau, values_from = Freq),
   format.args = list(big.mark = ".", decimal.mark = ",")
 ) |>
-  kable_styling(latex_options = c("striped", "scale_down"))
+  kable_styling(latex_options = c("striped", "scale_down"), font_size = 10) |>
+  footnote(
+    general = "\\\\hfill Fonte: Elaborado pelo Autor (2024) \\\\hfill",
+    general_title = "",
+    escape = FALSE
+  )
 ```
 
+::: {#fig-comparativo-raca-escolaridade}
+
 ```{r entradas por sexo escolaridade raca}
-#| fig-cap: "Entradas por sexo/escolaridade/raça/cor"
 #| out.width: "100%"
 #| warning: false
 
@@ -365,10 +428,16 @@ rais |>
   tema
 ```
 
-A tabela a seguir evidencia mais explicitamente um ponto alarmante: quanto menor o nível de escolaridade da vaga, maior é a proporção de pretos e pardos que a ocupa.
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
+
+Entradas por sexo/escolaridade/raça/cor
+:::
+
+A @tbl-prop-raca-escolaridade a seguir evidencia mais explicitamente um ponto alarmante: quanto menor o nível de escolaridade da vaga, maior é a proporção de pretos e pardos que a ocupa.
 
 ```{r proporcao pretos e pardos}
 #| tbl-cap: "Comparativo 2006-2022 proporção de pretos e pardos por nível de escolaridade"
+#| label: tbl-prop-raca-escolaridade
 
 prop_pp = data.frame(
   grau = NA,
@@ -399,13 +468,19 @@ prop_pp = dplyr::arrange(
 )
 
 kbl(prop_pp) |>
-  kable_styling(latex_options = c("striped", "scale_down"))
+  kable_styling(latex_options = c("striped", "scale_down"), font_size = 10) |>
+  footnote(
+    general = "\\\\hfill Fonte: Elaborado pelo Autor (2024) \\\\hfill",
+    general_title = "",
+    escape = FALSE
+  )
 ```
 
-Finalmente, em relação à renda, tanto a mediana quanto o quartil superior da renda dos homens é superior à das mulheres em quase todos os casos. Além disso, fica evidente a progressão de renda com a escolaridade, principalmente em relação à pós-graduação. Nos gráficos a seguir, os valores de 2014 e 2022 foram deflacionados para permitir a comparação dos salários reais com os de 2006.
+Finalmente, em relação à renda, tanto a mediana quanto o quartil superior da renda dos homens é superior à das mulheres em quase todos os casos. Além disso, fica evidente a progressão de renda com a escolaridade, principalmente em relação à pós-graduação. Nos gráficos a seguir, os valores de 2022 foram deflacionados para permitir a comparação dos salários reais com os de 2006.
+
+::: {#fig-boxplot-renda-sexo}
 
 ```{r boxplot renda sexo}
-#| fig-cap: "Boxplot renda por sexo"
 #| out.width: "100%"
 
 rais |>
@@ -418,8 +493,14 @@ rais |>
   tema
 ```
 
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
+
+Boxplot renda por sexo
+:::
+
+::: {#fig-boxplot-renda-raca}
+
 ```{r boxplot renda raca}
-#| fig-cap: "Boxplot renda por sexo/raça/cor"
 #| out.width: "100%"
 
 rais |>
@@ -432,8 +513,14 @@ rais |>
   tema
 ```
 
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
+
+Boxplot renda por sexo/raça/cor
+:::
+
+::: {#fig-boxplot-renda-escolaridade}
+
 ```{r boxplot renda escolaridade}
-#| fig-cap: "Boxplot renda por sexo/raça/cor (2022)"
 #| out.width: "100%"
 
 rais |>
@@ -447,6 +534,11 @@ rais |>
   tema +
   theme(legend.position = "none")
 ```
+
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
+
+Boxplot renda por sexo/escolaridade/raça/cor (2022)
+:::
 
 ### Notas sobre a estimação
 
@@ -462,9 +554,16 @@ Antes de iniciar a estimação do modelo de regressão linear, é importante jus
 
 Devido à omissão dessa variável, espera-se a inclusão de viés de variável omitida e, consequentemente, a violação da hipótese de homoscedasticidade (variância constante do resíduo) do modelo clássico de regressão linear. A intuição é que profissões de alta remuneração, como juízes, médicos e engenheiros, se dão em menor frequência e são de maior remuneração, gerando resíduo $e_i$ positivo consistentemente, de forma que a variância dos resíduos não seja constante.
 
-![Heteroscedasticidade decorrente de omissão de variável importante.](img/vies_omissao.svg){#fig-vies fig-scap="Previsões base a serem reconciliadas" width=70%}
+::: {#fig-vies}
 
-## Estimação
+![](img/vies_omissao.svg){fig-scap="Previsões base a serem reconciliadas." width=70%}
+
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
+
+Heteroscedasticidade decorrente de omissão de variável importante.
+:::
+
+## ESTIMAÇÃO
 
 Para estimar os efeitos da escolaridade na determinação da renda do trabalhador formal no Espírito Santo, utilizo um modelo de regressão linear múltipla log-linear. A variável dependente é a renda média nominal do trabalhador, e as variáveis independentes são o ciclo de escolaridade, estimativa de experiência (incluindo um termo quadrático para avaliar possíveis efeitos não lineares), a raça/cor e o sexo do trabalhador. A escolha do modelo de regressão linear múltipla se dá por sua capacidade de interpretação e pela possibilidade de estimar os efeitos marginais de cada variável independente na variável dependente, bem como a possibilidade de incluir interações entre as variáveis independentes.
 
@@ -533,12 +632,11 @@ modelos = lapply(setNames(anos, paste0("m", anos)), function(ano) {
 })
 ```
 
-Os gráficos de diagnóstico dos resíduos para o modelo de 2022 são apresentados a seguir. Usando uma amostra aleatória de 5 mil resíduos para plotar os gráficos, é possível notar na @fig-resid-qqplot que a distribuição apresenta assimetria positiva, com cauda mais pesada à direita, o que podemos confirmar com o histograma completo dos resíduos (@fig-resid-hist). Isso significa que o modelo consegue explicar bem a parte inferior e central da distribuição da renda, mas **falha mais em explicar os quantis superiores, onde estão os maiores salários**. Considerando que o desvio-padrão da renda é `r scales::dollar(sd(rais[rais$ano == 2022,]$vlr_rem))`, a assimetria positiva dos resíduos, que assume desvios extremos a partir de 3 desvios-padrão, indica que o modelo subestima a renda dos trabalhadores com salários a partir de `r scales::dollar(3 * sd(rais[rais$ano == 2022,]$vlr_rem))`. Ou seja, outros fatores além da escolaridade, raça/cor, sexo e experiência, são necessários para explicar remunerações nesse nível.
+Os gráficos de diagnóstico dos resíduos para o modelo de 2022 são apresentados a seguir. Usando uma amostra aleatória de 5 mil resíduos para plotar os gráficos, é possível notar na @fig-resid-qqplot que a distribuição apresenta assimetria positiva, com cauda mais pesada à direita, o que podemos confirmar com o histograma completo dos resíduos (@fig-resid-hist). Isso significa que o modelo consegue explicar bem a parte inferior e central da distribuição da renda, mas **falha mais em explicar os quantis superiores, onde estão os maiores salários**. Considerando que o desvio-padrão da renda é `r scales::dollar(sd(rais[rais$ano == 2022,]$vlr_rem), prefix = "R$", big.mark = ".", decimal.mark = ",")`, a assimetria positiva dos resíduos, que assume desvios extremos a partir de 3 desvios-padrão, indica que o modelo subestima a renda dos trabalhadores com salários a partir de `r scales::dollar(3 * sd(rais[rais$ano == 2022,]$vlr_rem), prefix = "R$", big.mark = ".", decimal.mark = ",")`. Ou seja, outros fatores além da escolaridade, raça/cor, sexo e experiência, são necessários para explicar remunerações nesse nível.
+
+::: {#fig-resid-scatter}
 
 ```{r plot de residuos}
-#| label: fig-resid-scatter
-#| fig-cap: "Gráfico de dispersão dos resíduos"
-
 # amostragem para diagnóstico
 indices <- sample(length(modelos$m2022$residuals), 5000)
 
@@ -552,26 +650,39 @@ plot(
 abline(h = 0, col = "steelblue")
 ```
 
-```{r}
-#| label: fig-resid-qqplot
-#| fig-cap: "Gráfico Quantil-Quantil dos resíduos"
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
 
+Gráfico de dispersão dos resíduos.
+:::
+
+::: {#fig-resid-qqplot}
+
+```{r}
 # normal Q-Q plot
-qqnorm(modelos$m2022$residuals[indices])
+qqnorm(modelos$m2022$residuals[indices], main = NULL)
 qqline(modelos$m2022$residuals[indices], col = "steelblue")
 ```
 
-```{r}
-#| label: fig-resid-hist
-#| fig-cap: "Histograma dos resíduos"
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
 
+Gráfico Quantil-Quantil dos resíduos.
+:::
+
+::: {#fig-resid-hist}
+
+```{r}
 # histograma dos resíduos e curva normal
-histograma <- hist(modelos$m2022$residuals, xlab = "Resíduos")
+histograma <- hist(modelos$m2022$residuals, xlab = "Resíduos", main = NULL)
 xfit <- seq(min(modelos$m2022$residuals), max(modelos$m2022$residuals), length = 40)
 yfit <- dnorm(xfit, mean = mean(modelos$m2022$residuals), sd = sd(modelos$m2022$residuals))
 yfit <- yfit * diff(histograma$mids[1:2]) * length(modelos$m2022$residuals)
 lines(xfit, yfit, col = "steelblue", lwd = 2)
 ```
+
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
+
+Histograma dos resíduos.
+:::
 
 Formalmente, a heteroscedasticidade pode ser verificada através do teste de Breusch-Pagan, que avalia se os resíduos da regressão $\mathbfit{\mu}$ são independentes dos preditores $\mathbfit{X}$. O resultado do teste é exibido na @tbl-bp. Com p-valor quase nulo, rejeitamos a hipótese nula de homoscedasticidade, como esperado.
 
@@ -590,7 +701,12 @@ $$
 lmtest::bptest(modelos$m2022, data = rais[rais$ano == 2022, ]) |>
   broom::tidy() |>
   kbl() |>
-  kable_styling(latex_options = "striped")
+  kable_styling(latex_options = "striped", font_size = 10) |>
+  footnote(
+    general = "\\\\hfill Fonte: Elaborado pelo Autor (2024) \\\\hfill",
+    general_title = "",
+    escape = FALSE
+  )
 ```
 
 Para corrigir a heteroscedasticidade e obter testes de hipóteses válidos para significância individual dos coeficientes $\mathbfit{\beta}$, utilizo a correção de White para erros padrões robustos. Os resultados da estimação na @tbl-modelos já incluem os erros padrões robustos.
@@ -606,7 +722,7 @@ robust_se_2006 <- sqrt(diag(cov_2006))
 robust_se_2022 <- sqrt(diag(cov_2022))
 ```
 
-## Resultados
+## RESULTADOS
 
 Os resultados da estimação dos modelos de regressão linear múltipla para os anos de 2022 e 2006 são apresentados na @tbl-modelos a seguir. Como a variável dependente é o logaritmo da renda, deve-se interpretar os coeficientes de acordo com o tipo de variável independente (ver Apêndice \ref{apendice_demonstracoes}).
 
@@ -626,7 +742,11 @@ stargazer::stargazer(
   single.row = TRUE,
   font.size = "scriptsize",
   dep.var.labels = "log(remuneração)",
-  column.labels = c("2022", "2006")
+  column.labels = c("2022", "2006"),
+  notes = "Fonte: Elaborado pelo Autor (2024).",
+  notes.align = "c",
+  notes.label = "",
+  model.numbers = FALSE
 )
 ```
 
@@ -637,14 +757,14 @@ O segundo resultado imediato é a redução dos coeficientes relacionados à esc
 Esse fenômeno não é exclusivo do Espírito Santo, sendo também observado por @colclough_changing_2010, que atribuem como causa mudanças estruturais na escolaridade da população:
 
 \begin{citacao}
-  A expansão educacional no nível primário procedeu a uma taxa que excedeu a da criação de empregos em muitos dos países mais pobres. Em consequência, tornou-se cada vez mais difícil, na maioria dos continentes do Sul, encontrar empregos no setor formal sem ter algum nível de educação pós-primária. De forma mais geral, à medida que os sistemas educacionais se expandem para incluir maiores proporções do grupo em idade escolar, a qualificação exigida para a elegibilidade a determinados empregos aumenta. Nessas circunstâncias, é de se esperar que o acesso reduzido a empregos proporcionado pela escolaridade primária esteja associado a uma pressão descendente sobre suas recompensas salariais.\cite{colclough_changing_2010}
+  A expansão educacional no nível primário procedeu a uma taxa que excedeu a da criação de empregos em muitos dos países mais pobres. Em consequência, tornou-se cada vez mais difícil, na maioria dos continentes do Sul, encontrar empregos no setor formal sem ter algum nível de educação pós-primária. De forma mais geral, à medida que os sistemas educacionais se expandem para incluir maiores proporções do grupo em idade escolar, a qualificação exigida para a elegibilidade a determinados empregos aumenta. Nessas circunstâncias, é de se esperar que o acesso reduzido a empregos proporcionado pela escolaridade primária esteja associado a uma pressão descendente sobre suas recompensas salariais \cite{colclough_changing_2010}.
 \end{citacao}
 
 Segundo os autores, conforme maior parte da população alcança determinado nível educacional, as vagas de trabalho nos níveis inferiores desaparecem. A evidência é a escassez, ou quase extinção, das vagas de trabalho que exigem apenas o ensino fundamental completo. Com isso, à medida que o nível educacional médio da população aumenta, a escolaridade tende a deixar de ser um fator de diferenciação e passar a ser um requisito mínimo para a entrada no mercado de trabalho formal.
 
 O terceiro resultado aparece quando analisamos os substratos da população. Em primeiro lugar, em relação aos coeficientes, enquanto praticamente todos foram significativos para o ano de 2006, aqueles associados à cor parda são, em quase sua totalidade, não significativos em 2022. Isso pode indicar que ser considerado pardo de fato deixa de ser um preditor para a renda, com pardos ocupando posições diversas no mercado de trabalho indistintamente.
 
-Ainda em relação à variável `raca_cor`, ser branco não escolarizado está associado a um efeito negativo da renda em 2022. Uma hipótese é de que a escolaridade média da população branca tenha avançado mais rapidamente, de forma que sua parcela não escolarizada esteja presente em maior partre no setor agrícola no interior do estado, cuja remuneração é inferior e, embora tenha avançado nos últimos anos, ainda corresponde a 71% da renda média brasileira [@possamai_mercado_2023].
+Ainda em relação à variável `raca_cor`, ser branco não escolarizado está associado a um efeito negativo da renda em 2022. Uma hipótese é de que a escolaridade média da população branca tenha avançado mais rapidamente, de forma que sua parcela não escolarizada esteja presente em maior parte no setor agrícola no interior do estado, cuja remuneração é inferior e, embora tenha avançado nos últimos anos, ainda corresponde a 71% da renda média brasileira [@possamai_mercado_2023].
 
 Já quando olhamos para a população escolarizada, o cenário é invertido. O coeficiente do ensino superior sobre a linha de base, ou seja, mulheres pretas com ensino superior, é 0.892, o que corresponde a um efeito de $e^{0.892}=2.44$ na renda. Já para a interação ensino superior e cor branca, o coeficiente estimado é de 0.222, o que corresponde a um efeito de $e^{0.892-0.002+0.222}=3.04$. Isso significa que uma mulher branca com ensino superior tem remuneração, em média, 25% superior a uma mulher preta no Espírito Santo.
 
@@ -652,9 +772,9 @@ Em relação ao sexo, os efeitos marginais associados ao sexo masculino escancar
 
 As dimensões raciais e de gênero são tão importantes que o efeito marginal de ser homem branco com ensino superior ($e^{0.892+0.274-0.002+0.039+0.166+0.222}=4.9086$) é maior do que o efeito de ser uma mulher preta com doutorado ($e^{4.191}$). Ou seja, mesmo com doutorado, a remuneração média de mulheres pretas é 17% menor que a de homens brancos com apenas graduação.
 
-Por fim, em relação à experiência, por conta da presença do termo quadrático para captar possíveis efeitos não lineares, a interpretação dos coeficientes é um pouco mais complexa^[Ver \ref{proposicao3}.]. Sob a hipótese de que até certo ponto a idade se relaciona positivamente e, ao final da carreira, negativamente com a renda, espera-se que o coeficiente quadrático seja negativo, o que é confirmado pelo sinal do coeficiente do termo quadrático. Com isso, por exemplo, 15 anos de experiência contribuem, em média, com $e^{0.035*15-0.0004*15^2}=1.545$ na renda, ou um acréscimo de 54,5% na renda em relação a um indivíduo sem experiência.
+Em relação à experiência, por conta da presença do termo quadrático para captar possíveis efeitos não lineares, a interpretação dos coeficientes é um pouco mais complexa^[Ver proposição \ref{proposicao3}.]. Sob a hipótese de que até certo ponto a idade se relaciona positivamente e, ao final da carreira, negativamente com a renda, espera-se que o coeficiente quadrático seja negativo, o que é confirmado pelo sinal do coeficiente do termo quadrático. Com isso, por exemplo, 15 anos de experiência contribuem, em média, com $e^{0.035*15-0.0004*15^2}=1.545$ na renda, ou um acréscimo de 54,5% na renda em relação a um indivíduo sem experiência.
 
-O ponto de inflexão, quando a idade/experiência passa a contribuir negativamente com a renda, pode ser calculado. Para isso, basta igualar a derivada primeira da equação de renda em relação à experiência a zero e resolver para a experiência. Definindo $f(exp) = \beta_{11} * exp + \beta_{12} * exp^2$, temos:
+O ponto de inflexão, onde a idade/experiência começa a contribuir negativamente para a renda, pode ser determinado utilizando o teste da derivada primeira. Para isso, igualamos a derivada primeira da equação de renda em relação à experiência a zero e resolvemos para a experiência. Definindo $f(exp) = \beta_{11} * exp + \beta_{12} * exp^2$, temos:
 
 $$
 \begin{aligned}
@@ -663,9 +783,39 @@ $$
 \end{aligned}
 $$ {#eq-ponto-inflexao}
 
-Substituindo os coeficientes estimados, temos que o ponto de inflexão é $-\frac{0.035}{2*-0.0004} = 43.75$. Com isso, em média, após 44 anos de experiência, cada ano adicional reflete negativamente na renda do trabalhador formal no Espírito Santo.
+Substituindo os coeficientes estimados, encontramos que o ponto de inflexão é $-\frac{0.035}{2*-0.0004} = 43.75$. Portanto, em média, após 44 anos de experiência, cada ano adicional passa a impactar negativamente a renda do trabalhador formal no Espírito Santo.
 
-## Conclusão
+Por fim, comparo os resultados obtidos com a análise de @ferreira_labor_2022 em relação ao paradoxo do progresso. @ferreira_labor_2022 chegaram à conclusão da convexidade dos efeitos da escolaridade na renda a partir da análise da amostra completa. Entretanto, ao analisar a amostra por substratos, ao menos para o corte amostral deste trabalho, observamos que os retornos à escolaridade não são convexos para o substrato da linha de base (mulheres pretas). Já para o substrato de homens brancos, os retornos não são apenas convexos, mas também apresentam descontinunidade no ensino superior, intensificando as desigualdades (@fig-plot_betas).
+
+::: {#fig-plot_betas}
+
+```{r plot betas}
+masc_branco <- .274 - .002 + .039
+dados <- data.frame(
+  beta = c(-0.006, .101, .398, .892, 1.239, 1.433, (-0.006 + masc_branco + .029 + .029), (.101 + masc_branco + .009 - .005), (.398 + masc_branco - .056 + .002), (.892 + masc_branco + .166 + .222), (1.239 + masc_branco + .046 + .137), (1.433 + masc_branco + .154 + .085)),
+  escolaridade = rep(c("fund_1", "fund_2", "medio", "superior", "mestrado", "doutorado"), 2),
+  substrato = c(rep("baseline", 6), rep("homem branco", 6))
+)
+
+dados$escolaridade <- factor(dados$escolaridade, levels = c("fund_1", "fund_2", "medio", "superior", "mestrado", "doutorado"))
+
+dados |>
+  ggplot(aes(x = escolaridade, y = beta, color = substrato, group = substrato)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    x = "Escolaridade",
+    y = "Efeito da escolaridade na renda",
+    color = "Substrato") +
+  theme_minimal()
+```
+
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
+
+Efeito da escolaridade na renda por substrato social.
+:::
+
+## CONCLUSÃO
 
 Neste estudo, demonstro que a escolaridade é um fator determinante na renda do trabalhador formal no Espírito Santo, com efeitos positivos e significativos em todos os níveis de escolaridade. Entretanto, seus efeitos estão se reduzindo ao longo dos anos.
 
@@ -675,7 +825,7 @@ Destacam-se os seguintes resultados:
 2. Os maiores resíduos de regressão estão nos quantis superiores da distribuição da renda, indicando que o modelo falha em explicar os maiores salários, os subestimando. Isso significa que fatores não observados são importantes na determinação das maiores rendas. Escolaridade não explica altos salários. Outros tipos de privilégios devem ser considerados.
 3. Todos os coeficientes associados à escolaridade diminuiram na linha de base (mulheres pretas) entre 2006 e 2022, indicando que a escolaridade está deixando de ser um fator de diferenciação e passando a ser um requisito mínimo para a entrada no mercado de trabalho formal.
 4. Fora da linha de base, os efeitos para nível superior aumentariam quando associados à cor branca ou sexo masculino, indicando que a desigualdade racial e de gênero no mercado de trabalho formal capixaba, apesar de ter reduzido em relação ao acesso, não reduziu em relação à remuneração.
-
+5. O paradoxo do progresso, observado por @ferreira_labor_2022, não se aplica ao substrato da linha de base (mulheres pretas), cujos retornos à escolaridade não são convexos. Já para o substrato de homens brancos, os retornos não são apenas convexos, mas também apresentam descontinunidade no ensino superior, intensificando as desigualdades.
 
 Acerca desses resultados, além da explicação da mudança estrutural da oferta de trabalhadores qualificados explorada em @colclough_changing_2010, podemos oferecer uma interpretação alternativa, ou complementar, seguindo a literatura da sociologia da educação. Segundo Bourdieu, podemos argumentar que
 
@@ -687,13 +837,13 @@ Essa afirmação nos convida a indagar se, de fato, é a escolaridade que determ
 
 # O PAPEL DA EDUCAÇÃO MATEMÁTICA SOB A HEGEMONIA DO CAPITAL
 
-## Introdução
+## INTRODUÇÃO
 
 Em uma sociedade capitalista, não se pode compreender a educação desassociada das relações de trabalho. Pois além das técnicas aplicadas à educação -- aí compreendidas a pedagogia em suas dimensões filosófica e sociológica --, as normas vigentes e valores compartilhados de uma determinada sociedade também são refletidas e moldam as ações educacionais.
 
 Neste capítulo, procuro sistematizar os mecanismos de reprodução do capitalismo na educação, mostrando evidenciar como a educação matemática, enquanto não rompe com seu papel na reprodução das relações sociais de poder, é ineficaz na promoção de mudanças estruturais na sociedade.
 
-## Educação pré-capitalista
+## EDUCAÇÃO PRÉ-CAPITALISTA
 
 Considere o seguinte exercício mental: Suponha uma sociedade em um futuro muito distante onde não exista trabalho como relação social. Robôs realizam toda a atividade laboral. Como seria a escola nessa sociedade? O que sobra de *puro* na educação? Qual seria seu propósito? Antes de tentar inferir qualquer coisa acerca de tais perguntas, podemos nos munir de uma breve visão geral do propósito da educação na história da educação.
 
@@ -733,21 +883,21 @@ Em 1450, o movimento de resgatar a literatura clássica e a filosofia grega e ro
 \begin{citacao}
 History was introduced in these schools for the first time and as a new subject of study, though the history was the history of Greece and Rome and was drawn from the authors studied. Livy and Plutarch were the chief historical writers used. Nothing that happened after the fall of Rome was deemed as of importance. Much emphasis was placed on manners, morality, and reverence, with Livy and Plutarch again as the great guides to conduct.
 
-$[...]$ The result was an all-round physical, mental, and moral training, vastly superior to anything previously offered by the cathedral and other church schools. \cite{cubberley_history_1920}
+$[...]$ The result was an all-round physical, mental, and moral training, vastly superior to anything previously offered by the cathedral and other church schools \cite{cubberley_history_1920}.
 \end{citacao}
 
 Há vários outros eventos na história que podem ser analisados sob a ótica do seu impacto na educação: a reforma protestante^[Calvino escreve para o Príncipe de Genebra, em 1541, que "as artes liberais e a boa educação são bons auxiliares no pleno conhecimento da Palavra".], que, dentre vários outros desdobramentos, gera um novo nível de tolerância religiosa ao conhecimento que acaba por abrir caminho para o surgimento do método científico moderno [@cubberley_history_1920]; o sucesso da contra-reforma e da educação jesuíta nos processos colonizadores, que "promoveram o **controle da fé e da moral** dos habitantes" [@rosario_educacao_2015]; o puritanismo na América do Norte, que estabelece as bases do sistema educacional americano. Entretanto, o propósito deste trabalho não é de forma alguma ser exaustivo, mas sim de argumentar um ponto.
 
 Voltando à pergunta inicial: o que sobra de puro na educação ao se retirar as relações sociais de exploracão e poder? Este estudante, ao inciar a leitura para este capítulo, tinha como hipótese e espera encontrar evidências de que a educação pré-capitalista tinha em seu cerne a curiosidade e o espírito humano, com foco nas artes. Entretanto, a história nos mostra que o elemento em comum que aparecem em todas as sociedades é a normalização moral do indivíduo e de reprodução das relações sociais vigentes, através da transmissão de valores e normas sociais e da formação dos filhos das classes dominantes para ocupar determinados postos na sociedade.
 
-## Educação sob a superestrutura capitalista
+## EDUCAÇÃO SOBRE A SUPERESTRUTURA CAPITALISTA
 
 Então, qual a mudança profunda que ocorre na educação a partir da segunda metade do século XVIII, com a revolução francesa e revolução industrial, e advento do capitalismo?
 
 Nas sociedades pré-capitalistas, a educação "resumia-se a ajudar a criança a ajustar-se à ordem social tradicionalmente estabelecida", de forma que se tratava de um processo inconsciente de assimilação, por parte das crianças, do modelo da ordem vigente \apud{mannheim_essays_2013}{rodrigues_sociologia_2018}. E essa ordem era justificada por um poder divino ou natural. Quando o indivíduo não se ajustava a essa ordem, era excluído: na Grécia antiga, mulheres, estrangeiros e aqueles que não tinham propriedade eram excluídos da educação; em Roma, os plebeus; na educação monástica, os não cristãos. As instituições pré-capitalistas eram moldadas para a exclusão. Foucault ilustra esse processo de exclusão com o exemplo do hospital psiquiátrico:
 
 \begin{citacao}
-Quando alguém era internado, tratava-se sempre de um indivíduo marginalizado em relação à família, ao grupo social, à comunidade local a que pertencia; alguém que não estava dentro da regra e que se tornara marginal por sua conduta, sua desordem, a irregularidade da sua vida. O internamento respondia a essa marginalização de fato, com uma espécie de marginalização de segundo grau, de punição. Era como se se dissesse ao indivíduo: "Já que você se separou do seu grupo, vamos separá-lo definitiva e provisoriamente da sociedade". \cite[p.~113]{foucault_verdade_2013}
+Quando alguém era internado, tratava-se sempre de um indivíduo marginalizado em relação à família, ao grupo social, à comunidade local a que pertencia; alguém que não estava dentro da regra e que se tornara marginal por sua conduta, sua desordem, a irregularidade da sua vida. O internamento respondia a essa marginalização de fato, com uma espécie de marginalização de segundo grau, de punição. Era como se se dissesse ao indivíduo: "Já que você se separou do seu grupo, vamos separá-lo definitiva e provisoriamente da sociedade" \cite[p.~113]{foucault_verdade_2013}.
 \end{citacao}
 
 Quando a classe burguesa assume o poder, a partir da revolução francesa, a existência de uma classe dominante deixa de ser explicada por um poder divino ou natural, mas econômico e político, e se faz necessário construir um mecanismo para perpetuação desse poder. Este toma forma de uma superestrutura ideológica que tem na educação, ao lado das dimensões moral e jurídica da sociedade, um de seus pilares. Segundo @gramsci_selections_2012, é preciso conquistar a consciência da população, "ganhar a batalha das ideias", para vencer a disputa pelo o que ele chamou de hegemonia.
@@ -760,22 +910,29 @@ Sob as necessidades do capital de formação da mão de obra para as empresas, o
 
 Assim, não sobra espaço para, como diz @gramsci_selections_2012, uma escola formativa para a população geral. Para esta, o discurso hegemônico é de _"difundir cada vez mais as escolas profissionais especializadas, nas quais o destino do aluno e sua futura atividade são predeterminados"_. Para a elite, reserva-se um reduzido exemplar do modelo de educação da cultura humanista, que lhe permite a formação de seus próprios intelectuais orgânicos, que trabalharão para manter a disputa pela batalha das ideias pendendo para o lado do mais forte.
 
-E é exatamente essa hegemonia intelectual que dá força à classe dominante para a manutenção do _status quo_. Acerca da questão colocada na introdução deste trabalho, motivada pelo professor Rômulo Lins, _por que é tão difícul fazer com que o sistema se coloque em rota de mudança?_, Florestan Fernandes descreve bem as consequências da hegemonia intelectual pela elite:
+E é exatamente essa hegemonia intelectual que dá força à classe dominante para a manutenção do _status quo_. Acerca da questão colocada na introdução deste trabalho, motivada pelo professor Romulo Lins, _por que é tão difícul fazer com que o sistema se coloque em rota de mudança?_, Florestan Fernandes descreve bem as consequências da hegemonia intelectual pela elite:
 
 \begin{citacao}
-Tanto os "interesses univocamente econômicos" quanto o "conflito de classe" só podem manifestar-se como fatores de integração e de mudanças da ordem social quando eles encontram suporte em formas de consenso e de solidariedade (de alcance grupal ou nacional). \textbf{Uma fraca integração da solidariedade moral em nível nacional, por exemplo, aumenta o teor egoístico de comportamentos econômicos individualistas (podendo inclusive polarizá-los em direções anti-sociais) e concorre para manter estados de apatia ou de conformismo diante da perpetuação de formas iníquas de exploração econômica, de privilégios sociais aberrantes e perigosos ou da monopolização do poder por elites mais ou menos indiferentes ao destino da coletividade}. Além disso, \textbf{a persistência, em bloco, de estruturas arcaicas e a intensidade sociopática da resistência à mudança} são, em si mesmas, sintomáticas. \cite{fernandes_sociedade_2021}
+Tanto os "interesses univocamente econômicos" quanto o "conflito de classe" só podem manifestar-se como fatores de integração e de mudanças da ordem social quando eles encontram suporte em formas de consenso e de solidariedade (de alcance grupal ou nacional). Uma fraca integração da solidariedade moral em nível nacional, por exemplo, aumenta o teor egoístico de comportamentos econômicos individualistas (podendo inclusive polarizá-los em direções anti-sociais) e concorre para manter estados de apatia ou de conformismo diante da perpetuação de formas iníquas de exploração econômica, de privilégios sociais aberrantes e perigosos ou da monopolização do poder por elites mais ou menos indiferentes ao destino da coletividade. Além disso, a persistência, em bloco, de estruturas arcaicas e a intensidade sociopática da resistência à mudança são, em si mesmas, sintomáticas \cite{fernandes_sociedade_2021}.
 \end{citacao}
 
 Em outras palavras, sob uma disfarce de expurgo da integração moral em benefício de uma suposta neutralidade, adota-se um sistema educacional que acaba por gerar uma fraca integração moral em nível nacional, mantendo a apatia e conformismo diante da perpetuação da exploração econômica, de privilégios sociais e manutenção da ordem política vigente. Essa suposta neutralidade também se faz presente no discurso hegemônico, que defendem uma escola puramente técnica, igualitária, neutra, "para todos". Bourdieu, entretanto, evidencia que por trás dessa aparente neutralidade, a escola dissimula justamente a reprodução das relações sociais de poder vigentes: "Encobertos sob as aparências de critérios puramente escolares, estão critérios sociais de triagem e de seleção dos indivíduos para ocupar determinados postos na vida" [@rodrigues_sociologia_2018]. Isso é um tipo de manifestação do fenômeno ao qual Bourdieu chamou de violência simbólica, que se manifesta numa imposição arbitrária mas que é apresentada àquele que sofre a violência de um modo dissimulado, como se fosse natural e legítima.
 
 A educação, antes um instrumento de reprodução da ordem social e moral, passa a ser _também_ um instrumento de reprodução da ordem econômica e política. A cadeia causal desse fenômeno está resumido na @fig-reproducao. Quanto maior a educação, maior é a produtividade (passo 1). O que o discurso hegemônico internalizou na sociedade é que produtores (trabalhadores) e donos dos meios de produção (capitalistas) estão em pé de igualdade, com o salário real pago a cada trabalhador igual à produtividade marginal do trabalho, e o rendimento real pago aos proprietários do capital a produtividade marginal do capital [@mankiw_macroeconomics_2013]. Entretanto, a remuneração do trabalho não cresce na mesma proporção que o lucro [@stansbury_productivity_2017], gerando maiores ganhos para o capitalista (passo 2) e, consequentemente, concentração de renda na classe dominante (passo 3).
 
-![Esquema de reprodução capitalista via educação.](img/reproducao.excalidraw.png){#fig-reproducao}
+::: {#fig-reproducao}
+
+![](img/reproducao.excalidraw.png)
+
+`\legenda{Fonte: Elaborado pelo Autor (2024).}`{=latex}
+
+Esquema de reprodução capitalista via educação.
+:::
 
 Agora, como a educação, sendo uma educação para o trabalho, pode ser emancipadora se, a nível da superestrutura, ela é um instrumento de reprodução da ordem econômica e política vigente? Numa sociedade capitalista, o trabalhador, como classe, deve se incorporar-se continuamente ao capital e isso acaba por expandi-lo; não pode livrar-se dele [@marx_o_1998]. E essa expansão do capital, sua reprodução, está instrinsecamente associada à intensificação da exploração da classe trabalhadora (passo 4), em um esquema identificado desde os primeiros passos do capitalismo, ainda no séc. XVIII:
 
 \begin{citacao}
-Nos países onde a propriedade está bem protegida, é mais fácil viver sem dinheiro do que sem os pobres, pois quem faria o trabalho? (...) Se não se deve deixar os pobres morrerem de fome, não se lhes deve dar coisa alguma que lhes permita economizarem. Se esporadicamente um indivíduo, à custa de trabalho e de privações, se eleva acima das condições em que nasceu, ninguém lhe deve criar obstáculos: é inegável que, para todo indivíduo, para toda família, o mais sábio é praticar a frugalidade; mas é interesse de todas as nações ticas que a maior parte dos pobres nunca fique desocupada e que, ao mesmo tempo, gaste sempre tudo o que ganha. (...) Os que ganham sua vida com o trabalho quotidiano só têm um estímulo, para prestar seus serviços, suas necessidades. Por isso, é prudente mitigá-las, mas seria loucura curá-las. A única coisa que pode tornar ativo o trabalhador é um salário moderado. Um salário demasiadamente pequeno, segundo o temperamento do trabalhador, deprime-o ou desespera-o; um demasiadamente grande torna-o insolente e preguiçoso. (...) Numa nação livre onde se proíbe a escravatura, a riqueza mais segura é constituída por um grande número de pobres laboriosos. Constituem fonte inesgotável para o recrutamento da marinha e do exército; sem eles, nada se poderia fruir nem poderiam ser explorados os produtos de um páís. Para tornar feliz a sociedade --- isto é, os que não trabalham ---, e para que o povo viva contente, mesmo em condições miseráveis, é necessário que a maioria permaneça ignorante e pobres. O saber aumenta e multiplica nossos desejos, e, quanto menos um homem deseje, mais fácil é satisfazer suas necessidades. \apud{mandeville_fable_1989}{marx_o_1998}
+Nos países onde a propriedade está bem protegida, é mais fácil viver sem dinheiro do que sem os pobres, pois quem faria o trabalho? (...) Se não se deve deixar os pobres morrerem de fome, não se lhes deve dar coisa alguma que lhes permita economizarem. Se esporadicamente um indivíduo, à custa de trabalho e de privações, se eleva acima das condições em que nasceu, ninguém lhe deve criar obstáculos: é inegável que, para todo indivíduo, para toda família, o mais sábio é praticar a frugalidade; mas é interesse de todas as nações ticas que a maior parte dos pobres nunca fique desocupada e que, ao mesmo tempo, gaste sempre tudo o que ganha. (...) Os que ganham sua vida com o trabalho quotidiano só têm um estímulo, para prestar seus serviços, suas necessidades. Por isso, é prudente mitigá-las, mas seria loucura curá-las. A única coisa que pode tornar ativo o trabalhador é um salário moderado. Um salário demasiadamente pequeno, segundo o temperamento do trabalhador, deprime-o ou desespera-o; um demasiadamente grande torna-o insolente e preguiçoso. (...) Numa nação livre onde se proíbe a escravatura, a riqueza mais segura é constituída por um grande número de pobres laboriosos. Constituem fonte inesgotável para o recrutamento da marinha e do exército; sem eles, nada se poderia fruir nem poderiam ser explorados os produtos de um páís. Para tornar feliz a sociedade --- isto é, os que não trabalham ---, e para que o povo viva contente, mesmo em condições miseráveis, é necessário que a maioria permaneça ignorante e pobres. O saber aumenta e multiplica nossos desejos, e, quanto menos um homem deseje, mais fácil é satisfazer suas necessidades \apud{mandeville_fable_1989}{marx_o_1998}.
 \end{citacao}
 
 Uma vez nesse estado de apatia, atado moral, econômica e politicamente, a classe trabalhadora, em sua ação, apenas reproduz as orientações determinadas pela estrutura social vigente. O sujeito, então, está "simplesmente submetido aos desígnios da sociedade, faz o que suas estruturas determinam, não sabe disso e ainda é iludido pelos discursos dominantes, que o fazem pensar que sua ação é resultante de vontade própria" [@rodrigues_sociologia_2018].
@@ -783,13 +940,13 @@ Uma vez nesse estado de apatia, atado moral, econômica e politicamente, a class
 E qual o papel da escola nesse processo? @bourdieu_economia_2011 coloca o sistema educacional como um dos instrumentos mais eficazes de integração moral e lógica da sociedade, que tem como produto o indivíduo "programado" — homogêneo em percepção, pensamento e ação:
 
 \begin{citacao}
-Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua qualidade de código comum é o que permite a todos os detentores deste código associar o mesmo sentido às mesmas obras e, de maneira recíproca, de exprimir a mesma intenção significante por intermédio das mesmas palavras, dos mesmos comportamentos e das mesmas obras, pode-se compreender por que \textbf{a Escola, incumbida de transmitir esta cultura, constitui o fator fundamental do consenso cultural} nos termos de uma participação de um senso comum entendido como condição da comunicação. \cite{bourdieu_economia_2011}
+Caso se admita que a cultura e, neste caso particular, a cultura erudita em sua qualidade de código comum é o que permite a todos os detentores deste código associar o mesmo sentido às mesmas obras e, de maneira recíproca, de exprimir a mesma intenção significante por intermédio das mesmas palavras, dos mesmos comportamentos e das mesmas obras, pode-se compreender por que a Escola, incumbida de transmitir esta cultura, constitui o fator fundamental do consenso cultural nos termos de uma participação de um senso comum entendido como condição da comunicação \cite{bourdieu_economia_2011}.
 \end{citacao}
 
 A nível institucional, @foucault_verdade_2013 trabalha esse aspecto de normalização cultural e moral. Ele coloca a escola como um exemplo de instituição panóptica (ou de sequestro). Esse tipo de instituição exerce poder sobre os indivíduos em uma sociedade de três formas características: *vigilância* individual e contínua; *controle* através de punição e recompensa e; formação e transformação dos indivíduos em função de certas normas, o que Foucault chamou de *correção*. Podemos associar esse consenso cultural que Bourdieu trata ao tríplice aspecto das instituições panópticas na definição de Foucault, especificamente a *correção*.
 
 \begin{citacao}
-Na época atual, todas essas instituições --- fábrica, escola, hospital psiquiátrico, hospital, prisão --- têm por finalidade não excluir, mas, ao contrário, fixar os indivíduos. A fábrica não exclui os indivíduos; liga-os a um aparelho de produção. \textbf{A escola não exclui os indivíduos; mesmo fechando-os; ela os fixa a um aparelho de transmissão do saber}. O hospital psiquiátrico não exclui os indivíduos; liga-os a um aparelho de correção, a um aparelho de normalização dos indivíduos. O mesmo acontece com a casa de correção ou com a prisão. Mesmo se os efeitos dessas instituições são a exclusão do indivíduo, elas têm como finalidade primeira fixar os indivíduos em um aparelho de normalização dos homens. A fábrica, \textbf{a escola}, a prisão ou os hospitais \textbf{têm por objetivo ligar o indivíduo a um processo de produção, de formação ou de correção dos produtores. Trata-se de garantir a produção ou os produtores em função de uma determinada norma}. \cite[p.~114]{foucault_verdade_2013}
+Na época atual, todas essas instituições --- fábrica, escola, hospital psiquiátrico, hospital, prisão --- têm por finalidade não excluir, mas, ao contrário, fixar os indivíduos. A fábrica não exclui os indivíduos; liga-os a um aparelho de produção. A escola não exclui os indivíduos; mesmo fechando-os; ela os fixa a um aparelho de transmissão do saber. O hospital psiquiátrico não exclui os indivíduos; liga-os a um aparelho de correção, a um aparelho de normalização dos indivíduos. O mesmo acontece com a casa de correção ou com a prisão. Mesmo se os efeitos dessas instituições são a exclusão do indivíduo, elas têm como finalidade primeira fixar os indivíduos em um aparelho de normalização dos homens. A fábrica, a escola, a prisão ou os hospitais têm por objetivo ligar o indivíduo a um processo de produção, de formação ou de correção dos produtores. Trata-se de garantir a produção ou os produtores em função de uma determinada norma \cite[p.~114]{foucault_verdade_2013}.
 \end{citacao}
 
 A primeira função da instituição panóptica é a extração da totalidade do tempo do indivíduo. É preciso que todo o tempo da existência humana esteja disponível ao trabalho, suas exigências ou sua preparação --- aí incluindo a educação, que os economistas chamam frequentemente de capital humano. Ao sequestrar o tempo do homem, ela transforma seu tempo de vida em tempo de trabalho. A segunda função é controlar seus corpos, fazendo com que o corpo do indivíduo se torne força de trabalho. Aqui o corpo humano deve ser formado, reformado, corrigido. Deve "adquirir aptidões, receber um certo número de qualidades, qualificar-se como um corpo capaz de trabalhar". 
@@ -797,27 +954,27 @@ A primeira função da instituição panóptica é a extração da totalidade do
 A terceira função é a criação de um micro-poder político, econômico e judiciário. A instituição panóptica se outorga o direito de decidir, comandar, punir, recompensar e julgar. E a escola não passa desapercebida:
 
 \begin{citacao}
-O sistema escolar também é inteiramente baseado em uma espécie de poder judiciário. A todo poder se pune e recompensa, se avalia, se classifica, se diz quem é o melhor, quem é o pior. [...] Por que, para ensinar alguma coisa a alguém, se deve punir e recompensar? Esse sistema parece evidente, mas, se refletirmos, vemos que a evidência se dissolve. \cite[p.~120]{foucault_verdade_2013}
+O sistema escolar também é inteiramente baseado em uma espécie de poder judiciário. A todo poder se pune e recompensa, se avalia, se classifica, se diz quem é o melhor, quem é o pior. [...] Por que, para ensinar alguma coisa a alguém, se deve punir e recompensar? Esse sistema parece evidente, mas, se refletirmos, vemos que a evidência se dissolve \cite[p.~120]{foucault_verdade_2013}.
 \end{citacao}
 
 Por fim, a quarta função é a extração do saber, tanto a partir da apropriação do conhecimento técnico e tecnológico produzido durante o labor, quanto da observação do comportamento dos indivíduos vigiados e controlados. Da mesma forma que as anteriores, essa função não é restrita às relações sociais do capitalismo moderno:
 
 \begin{citacao}
-A pedagogia se formou a partir das próprias adaptações da criança às tarefas escolares, adaptações observadas e extraídas do seu comportamento para tornarem-se em seguida leis de funcionamento das instituições e forma de poder exercido sobre a criança. \cite[p.~122]{foucault_verdade_2013}
+A pedagogia se formou a partir das próprias adaptações da criança às tarefas escolares, adaptações observadas e extraídas do seu comportamento para tornarem-se em seguida leis de funcionamento das instituições e forma de poder exercido sobre a criança \cite[p.~122]{foucault_verdade_2013}.
 \end{citacao}
 
 Esse conjunto de características tem como objetivo principal a *transformação dos homens em força produtiva*. É através desse micro-poder entranhado nas relações sociais de uma sociedade panóptica que o indivíduo é fixado ao aparelho de produção, e a escola é um instrumento essencial para a formação desse micro-poder.
 
 Em total consonância, Bourdieu conclui que "todo sistema de ensino institucionalizado visa em alguma medida realizar de modo organizadoe  sistemático a inculcação dos valores dominantes e reproduzir as condições de dominação social que estão por trás de sua ação pedagógica" [@rodrigues_sociologia_2018].
 
-## Omnilateralidade e o nível pedagógico
+## OMNILATERALIDADE E O NÍVEL PEDAGÓGICO
 
 Lançando luz agora sobre a esfera micro, para o sucesso desse abritrário cultural e moral, é necessário uma autoridade pedagógica, como Bourdieu chamou, por parte das instituições de ensino --- dotado do micro-poder político, econômico e judiciário que Foucault descreve. E uma vez que o aluno interioriza esses valores culturais e morais que lhe são impostos pelo sistema de ensino, de forma que mesmo depois de sair da escola, ele continua a agir de acordo com esses valores, tendo-os incorporado junto de seus próprios a ponto de não conseguir dinstinguí-los, ele adquire o que Bourdieu chamou de _habitus_ [@rodrigues_sociologia_2018].
 
 Adquirido esse _habitus_, Bourdieu nega qualquer possibilidade de rompimento com as estruturas de reprodução, sendo as teorias pedagógicas nada mais que uma cortina de fumaça que oculta o micro-poder do sistema de ensino:
 
 \begin{citacao}
-Simplesmente não há saída: o sistema de ensino filtra os alunos sem que eles se deem conta e, com isso, reproduz as relações vigentes. Não há possibilidade de mudança. A própria revolta estudantil, para eles (Bourdieu e Passeron), não faz mais que reforçar o sistema. Pois ela é absovida e serve como aprendizado para as estruturas melhor se comportarem no sentido de reproduzir as relações. A revolta contra as normas vigentes é apresentada por eles como um reforço da interiorizaçãod a própria norma. \cite{rodrigues_sociologia_2018}
+Simplesmente não há saída: o sistema de ensino filtra os alunos sem que eles se deem conta e, com isso, reproduz as relações vigentes. Não há possibilidade de mudança. A própria revolta estudantil, para eles (Bourdieu e Passeron), não faz mais que reforçar o sistema. Pois ela é absovida e serve como aprendizado para as estruturas melhor se comportarem no sentido de reproduzir as relações. A revolta contra as normas vigentes é apresentada por eles como um reforço da interiorizaçãod a própria norma \cite{rodrigues_sociologia_2018}.
 \end{citacao}
 
 Nesse sentido, tendências pedagógicas como a pedagogia crítica tem o objetivo de agir no processo formativo para impedir a interiorização desse _habitus_ por parte dos alunos. De um lado, temos a sociologia da educação, munida de visões de Marx, Bourdieu e Foucault; de outro, temos, no nosso caso, todo um corpo de produção acadêmica categorizado nas chamadas tendências em educação matemática. Essas categorizações buscam identificar e descrever as diferentes abordagens e perspectivas que norteiam a pesquisa e o ensino da matemática [@mello_tendencias_2007]. De acordo com a primeira, a segunda não é capaz de romper com as estruturas de reprodução, apenas reforçando-as.
@@ -862,7 +1019,7 @@ A educação matemática crítica é contraditória em sua essência, porque o p
 
 Assim, podemos argumentar que a educação matemática no seu sentido estrito, como disciplina, mesmo utilizando diversas abordagens como interdisciplinaridade, educação matemática crítica e etnomatemática, não é capaz de alcançar seu objetivo sem uma mudança profunda na superestrutura. Para tanto, deve-se estabelecer um sistema educacional voltado para a educação omnilateral, visando a formação integral do ser humano, que envolve o desenvolvimento de todas as suas potencialidades, incluindo a intelectual, a física, a artística, a moral e a ética. Esse objetivo é alcançado apenas a partir da ruptura do mecanismo de reprodução da hegemonia intelectual, através do desenvolvimento de "processos pedagógicos que garantam, ao final do processo educativo, o acesso efetivamente democrático ao conhecimento na sua mais elevada universalidade", que se dão em oposição ao tipo de educação presente no seio das sociedades capitalistas [@maciel_educacao_2015; apud @frigotto_trabalho_2012].
 
-## Conclusão
+## CONCLUSÃO
 
 Neste capítulo, argumentei que a educação matemática, enquanto inserida na superestrutura capitalista, atua como um instrumento de reprodução das relações sociais de poder. A análise histórica e teórica demonstrou que a educação, desde suas formas pré-capitalistas, sempre serviu à normalização moral e à perpetuação das estruturas de poder vigentes. No contexto capitalista, essa função se expande para incluir a reprodução da ordem econômica e política.
 
@@ -872,7 +1029,7 @@ Portanto, para que a educação matemática possa realmente contribuir para a tr
 
 # CONCLUSÕES
 
-## Conclusões da monografia
+## CONCLUSÕES DA MONOGRAFIA
 
 Esta monografia investigou a relação entre escolaridade e renda no estado do Espírito Santo, destacando as desigualdades de gênero e raça, e analisou o papel do sistema educacional na reprodução das relações sociais de poder sob a hegemonia capitalista.
 
@@ -882,7 +1039,7 @@ No segundo ensaio, argumentou-se que o sistema educacional, enquanto inserido na
 
 Portanto, para que a educação matemática possa realmente contribuir para a transformação social, é necessário um sistema educacional voltado para a educação omnilateral, que promova o desenvolvimento integral do ser humano e rompa com os mecanismos de reprodução da hegemonia intelectual presentes nas sociedades capitalistas.
 
-## Pesquisa futura
+## PESQUISA FUTURA
 
 O conteúdo deste trabalho é apenas introdutório e pode ser expandido em diversas direções. Algumas sugestões para pesquisas futuras incluem:
 
